@@ -76,6 +76,11 @@ export const profileConfig: ProfileConfig = {
 			url: "https://github.com/imjinglan",
 		},
 		{
+			name: "Telegram",
+			icon: "fa6-brands:telegram",
+			url: "https://t.me/xisyphus",
+		},
+		{
 			name: "开往",
 			icon: "fa6-solid:train-subway",
 			url: "https://www.travellings.cn/go.html",

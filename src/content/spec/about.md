@@ -35,19 +35,19 @@
 
 - 当然了，如果这些都被注册了的话就会写作 `Yuri` 、 `Howie` 或 `XiHu` ...
 
-- 比较迷**血灵**，有时会把姓氏写作`拉萨姆博`(`Lasambo`) ...
+- 有时会把社交媒体姓氏写作`拉萨姆博`(`Lasambo`) ...
 
-- 一般大家都叫我`景蓝`，当然你叫我`祐袔`也可以
+- 一般大家都叫我`景蓝`，当然你叫我`汐琥`也可以
 
 - 是个接受过义务教育的苦逼高中生
 
 - INFP-T
 
-- 大概碰过: `PHP`, `HTML`, `JavaScript`, `C`, `C++`, `C#`, `Python`, `易语言`都很菜就是了（~~退役~~ ~~现役~~ 最后还是退役 OIer）
+- 大概碰过: `PHP`, `HTML`, `JavaScript`, `C`, `C++`, `C#`, `Python`, `Vue`都很菜就是了（~~退役~~ ~~现役~~ 最后还是退役 OIer）
 
 - 常用软件：Premiere Pro, Photoshop, Fl Studio, Studio One 6, After Effect
 
-- `EN-us` 、 `zh-CN` 、 `jp`
+- `en-US` 、 `zh-CN` 、 `jp`
 
 - 目前使用的设备：
 

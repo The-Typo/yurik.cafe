@@ -17,7 +17,7 @@
 >
 > 而我,想让这世间所有温柔都住进你眼里
 
-> 我的邮箱 [i#yurik.cafe](mailto:i@yurik.cafe)
+> 我的邮箱 `echo 'eGlzeXBodUBnbWFpbC5jb20=' | base64 -d`
 
 > [This is a Typo Site.](https://github.com/The-Typo)
 
@@ -39,7 +39,7 @@
 
 - 一般大家都叫我`景蓝`，当然你叫我`汐琥`也可以
 
-- 是个接受过义务教育的苦逼高中生
+- ZUST 在读
 
 - INFP-T
 
@@ -65,23 +65,23 @@
 
 - 2025 年
 
-拥有独立服务器且完成网络空间备案，站点程序切换为 Astro。
+拥有独立服务器啦。
 
 - 2024 年
 
-使用 Github Actions 渲染页面。
+使用 Github Actions 渲染并托管在 Netlify 上。
 
 - 2023 年
 
-采用 Hexo 啦！
+使用 Hexo 部署静态站点
 
 - 2022 年
 
-由于~~穷~~，换用 Hugo 静态页面系统，托管在~~Github~~ Vercel 上。
+由于~~穷~~，换用 Hugo 部署，托管在~~Github~~ Vercel 上。
 
 - 2021 年
 
-有了一台服务器，采用 Typecho 系统。
+有了一台服务器，使用 Typecho 部署。
 
 ## 关于博客
 
@@ -90,3 +90,5 @@
 本博客所有文章在 **未特殊声明** 的前提下均采用[知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议](http://creativecommons.org/licenses/by-nc-sa/4.0/)。
 
 本站部分内容参考自互联网。
+
+

@@ -1,0 +1,38 @@
+[
+	{
+		"siteTitle": "Norphin`s Yard",
+		"siteDesc": "Norph1n的后花园",
+		"siteUrl": "https://norph1n.top/",
+		"siteIcon": "https://norph1n.top/img/headphoto.jpg"
+	},
+	{
+		"siteTitle": "Azure Zeng's Blog",
+		"siteDesc": "Azure Zeng 的小窝",
+		"siteUrl": "https://blog.azurezeng.com/",
+		"siteIcon": "https://azurezeng.com/friendly-link-image.png"
+	},
+	{
+		"siteTitle": "Nero978 的日记",
+		"siteDesc": "Brave yourself, brave the world.",
+		"siteUrl": "https://nero978.top",
+		"siteIcon": "https://nero978.top/wp-content/uploads/2023/07/logo.jpg"
+	},
+	{
+		"siteTitle": "極客死亡計劃",
+		"siteDesc": "这里没有零散的学习笔记和生活琐事，而是专注编写有价值的文章。",
+		"siteUrl": "https://www.geedea.pro/",
+		"siteIcon": "https://www.geedea.pro/favicon.ico"
+	},
+	{
+		"siteTitle": "初之音",
+		"siteDesc": "聆听心中最初的声音",
+		"siteUrl": "https://www.himiku.com/",
+		"siteIcon": "https://cravatar.cn/avatar/2fc4cf3560ff5a1cc64ea029896ab235?s=400"
+	},
+	{
+		"siteTitle": "雪萌天文台",
+		"siteDesc": "发现巷子里的那颗星星",
+		"siteUrl": "https://blog.snowy.moe",
+		"siteIcon": "https://img.snowy.moe/head.png"
+	}
+]

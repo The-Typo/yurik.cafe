@@ -46,8 +46,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Check Codes
+        run: pnpm run check
+
       - name: Run Astro Build
-        run: pnpm astro build
+        run: pnpm run build
 
       - name: 部署到 Deploy 分支
         uses: JamesIves/github-pages-deploy-action@v4

@@ -34,7 +34,7 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 9.14.4
+          version: 10.17.1
           run_install: false # Disable auto-install
 
       - uses: actions/setup-node@v4

@@ -13,9 +13,11 @@ lang: ''
 
 最近把博客从 Vercel 迁移到了 Netlify 了，这两家都是 ServerLess 部署平台，属于完全的无痛迁移了。
 
-无论是 Vercel 还是 Netlify，都对于应用的部署时长有限制，但相对与 Vercel 免费的每月 6000 分钟来说，Netlify 的 300 分钟就略显寒酸了。但自从去年国庆我的网站挂在 Vercel 被墙外加最近 Vercel 访问不畅之后我就在研究 Netlify 了。
+无论是 Vercel 还是 Netlify，都对于应用的部署时长有限制，但相对与 Vercel 免费的每月 6000 分钟来说，Netlify 的 300
+分钟就略显寒酸了。但自从去年国庆我的网站挂在 Vercel 被墙外加最近 Vercel 访问不畅之后我就在研究 Netlify 了。
 
-因为直接上传 NPM 包到 Netlify 上部署相比上传静态的 HTML 页面更耗时间，而我最近学习了 Github Actions，Github Actions 提供了每月 3000 分钟的部署时长，因此决定使用 Github Actions 来构建静态页面，之后仅同步静态页面到 Netlify 就完成了。
+因为直接上传 NPM 包到 Netlify 上部署相比上传静态的 HTML 页面更耗时间，而我最近学习了 Github Actions，Github Actions 提供了每月
+3000 分钟的部署时长，因此决定使用 Github Actions 来构建静态页面，之后仅同步静态页面到 Netlify 就完成了。
 
 ## 教程
 

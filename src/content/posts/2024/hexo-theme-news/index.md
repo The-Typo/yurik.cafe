@@ -11,11 +11,15 @@ lang: ''
 
 如你所见，我给博客换上了一个新主题。
 
-与别的主题不同的是，这个主题是我从 1 开始制作的。为什么是从 1 开始？因为这个主题我参考了 [Apple 公司的 Newsroom 页面](https://www.apple.com.cn/newsroom/)，也使用了部分 Apple 的 CSS 样式表（主要是文字相关部分），因此这个主题也被我命名为**News「新闻中心」**。这篇博文是制作 **News「新闻中心」** 主题的记录。
+与别的主题不同的是，这个主题是我从 1 开始制作的。为什么是从 1
+开始？因为这个主题我参考了 [Apple 公司的 Newsroom 页面](https://www.apple.com.cn/newsroom/)，也使用了部分 Apple 的 CSS
+样式表（主要是文字相关部分），因此这个主题也被我命名为**News「新闻中心」**。这篇博文是制作 **News「新闻中心」** 主题的记录。
 
 # 灵感
 
-最开始的想法是在给班级网站写新闻中心页面。当时给网站主页使用的 Bootstrap 5 的 Jumbotron 模板，想着设计一个和他向契合的新闻页面，突然我想到了之前看到的 Apple Newsroom 我十分喜欢，于是便用 Bootstrap 的 Card 放置了一个差不多的页面出来，这可以称为是 **News「新闻中心」** 的 **α1** 测试版本。
+最开始的想法是在给班级网站写新闻中心页面。当时给网站主页使用的 Bootstrap 5 的 Jumbotron 模板，想着设计一个和他向契合的新闻页面，突然我想到了之前看到的
+Apple Newsroom 我十分喜欢，于是便用 Bootstrap 的 Card 放置了一个差不多的页面出来，这可以称为是 **News「新闻中心」** 的 **α1
+** 测试版本。
 
 > 此处因保护隐私原因不放出参考网址
 
@@ -25,7 +29,9 @@ lang: ''
 
 # 过程
 
-我使用的是 [YO(Yeoman generators) 生成器](https://www.npmjs.com/package/yo)来创建的 Hexo 主题模板，使用的 EJS 模板语言和 CSS 样式表，具体的技术细节就不再文中赘述了。我感觉主题的开发就和使用 PHP 写程序一样，要注重代码的**“复用”**，即模块化编程，将不同的组件单独编写，按需调用，省去了重复造轮子的麻烦。
+我使用的是 [YO(Yeoman generators) 生成器](https://www.npmjs.com/package/yo)来创建的 Hexo 主题模板，使用的 EJS 模板语言和
+CSS 样式表，具体的技术细节就不再文中赘述了。我感觉主题的开发就和使用 PHP 写程序一样，要注重代码的**“复用”**
+，即模块化编程，将不同的组件单独编写，按需调用，省去了重复造轮子的麻烦。
 
 目前，**News「新闻中心」**已经实现了以下功能：
 
@@ -62,4 +68,5 @@ lang: ''
   警告：<b>News「新闻中心」</b>因个人原因无限期停止开发。
 </div>
 
-<a href="https://github.com/ImJingLan/hexo-theme-news" target="_blank" type="button" class="btn btn-outline-dark btn-lg w-100" ><i class="bi bi-github"></i> ImJingLan/hexo-theme-news</a>
+<a href="https://github.com/ImJingLan/hexo-theme-news" target="_blank" type="button" class="btn btn-outline-dark btn-lg w-100" ><i class="bi bi-github"></i>
+ImJingLan/hexo-theme-news</a>

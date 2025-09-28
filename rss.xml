@@ -1,4 +1,29 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>景蓝的小屋</title><description>鲸落于海，星沉于洼</description><link>https://yurik.cafe/</link><language>zh_CN</language><item><title>Steam 上手指北</title><link>https://yurik.cafe/2025/steam-usage/</link><guid isPermaLink="true">https://yurik.cafe/2025/steam-usage/</guid><pubDate>Fri, 27 Jun 2025 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;什么是 &lt;strong&gt;Steam&lt;/strong&gt;&lt;/h2&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>景蓝的小屋</title><description>鲸落于海，星沉于洼</description><link>https://yurik.cafe/</link><language>zh_CN</language><item><title>N100 小主机上手体验</title><link>https://yurik.cafe/2025/n100-mini-pc/</link><guid isPermaLink="true">https://yurik.cafe/2025/n100-mini-pc/</guid><pubDate>Sat, 27 Sep 2025 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;为什么要买一台 N100&lt;/h2&gt;
+&lt;p&gt;博主终于结束了高中生活步入令人期待的高中了。由于博主的大学属于开学晚的那一批，在别的同学都开学后博主便找他们咨询大学的一些注意事项
+&lt;s&gt;抄作业&lt;/s&gt;。很多人提到了他们学校的校园网有很多限制，比如&lt;strong&gt;限制设备数&lt;/strong&gt;，&lt;strong&gt;要求 Web 登录&lt;/strong&gt;等等······&lt;/p&gt;
+&lt;p&gt;对我这种设备多且杂的人来说是绝对不能忍的，于是我决定买一台运行 OpenWRT 的软路由配合脚本来绕过这些限制。&lt;/p&gt;
+&lt;p&gt;我选择了一台带有 2 个 10Gbps 的 SFP 光口和 4 个 搭载 i226-V 的 2.5Gbps 电口的 N100 机器作为软路由，还花了博主 1600 块钱。&lt;/p&gt;
+&lt;p&gt;可当我收到软路由后我却傻眼了，学校的宽带竟是直接从运营商拨号并且不做任何限制的，这便意味着一台硬路由便可解决这个问题。&lt;/p&gt;
+&lt;p&gt;在又买了一个硬路由 (Cudy TR3000) 后，我陷入了对 N100 的思考，究竟拿他来做些什么呢？&lt;/p&gt;
+&lt;h2&gt;伪开箱&lt;/h2&gt;
+&lt;p&gt;让我们再做一个伪开箱吧。&lt;/p&gt;
+&lt;p&gt;这台机器搭载了两个 82599ES 的 SFP 10G 光口以及四个 i226-V 的 2.5G 电口，可以说是天生软路由圣体。&lt;/p&gt;
+&lt;p&gt;我选购的是成品机器，自带一条8GB DDR4 3200 的笔记本内存和一块 256GB 的 Nvme
+SSD，都是杂牌。&lt;/p&gt;
+&lt;p&gt;机身除了顶部的亚克力盖子外均是哑光的 CNC 铝合金外壳，质感很好。&lt;/p&gt;
+&lt;p&gt;除了上文提供的网络接口外，机器还提供了 2 个 Type-C 接口，其中一个支持 PD 协议给机器供电；三个USB-A 的 USB 3.0 接口； 1 个
+HDMI 和 1 个 DP 接口。&lt;/p&gt;
+&lt;h2&gt;折腾&lt;/h2&gt;
+&lt;p&gt;机器一到手我就给他加装了一块 MT7922，这是一块支持 Wifi 6E 的无线网卡，只可惜后来发现只支持单频发射，如果使用软路由直接当作AP的话只能在
+5G 和 2.5G 中做出取舍&lt;/p&gt;
+&lt;p&gt;系统方面我选择了 iStoreOS ，这是一个基于 OpenWRT 的免费系统，优点是可以快速地配置网络。我们学校可以直接拨号，就直接使用
+PPPoE 模式就可以了。&lt;/p&gt;
+&lt;p&gt;原装的杂牌内存在经历了一周不到便暴毙了，之后我自己更换了光威的同规格内存。&lt;/p&gt;
+&lt;h2&gt;软路由后&lt;/h2&gt;
+&lt;p&gt;目前我给 N100 安装了 Arch Linux 当作我的 Linux 主机使用，这样便完成了在宿舍中同时拥有 macOS 、 Windows 和 Arch Linux 的成就。&lt;/p&gt;
+&lt;p&gt;因为机器支持 PD 通电，我可以把他当作一个可以随时带出去的 Linux 工作站。等放假回家了就把一些服务迁移到这台机器上，防止别的服务破坏
+家里 NAS 的稳定性。（从 AIO 到 AIB）&lt;/p&gt;
+</content:encoded></item><item><title>Steam 上手指北</title><link>https://yurik.cafe/2025/steam-usage/</link><guid isPermaLink="true">https://yurik.cafe/2025/steam-usage/</guid><pubDate>Fri, 27 Jun 2025 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;什么是 &lt;strong&gt;Steam&lt;/strong&gt;&lt;/h2&gt;
 &lt;p&gt;Steam 是 Valve 推出的电子游戏数字分发平台。Steam 集合了多种功能，如数字版权管理、游戏服务器匹配和反作弊系统，以及社交网络和游戏流媒体服务。Steam 还为用户提供自动更新游戏、游戏存档云存储，以及包括好友列表和游戏内聊天在内的社区功能。根据 CompareCamp2020 年统计，Steam 平台是全球最大的电脑游戏数字分发平台，占全球 50%-70%的电脑游戏下载量。 2003 年 9 月， Valve 将其作为一款软件客户端推出，提供自动更新游戏的功能，这一功能在 2005 年末扩展到了第三方游戏发行商发行的作品。&lt;/p&gt;
 &lt;h2&gt;下载与安装&lt;/h2&gt;
 &lt;p&gt;使用搜索引擎搜索 Steam 并进入域名为 &lt;a href=&quot;https://store.steampowered.com/&quot;&gt;&lt;code&gt;https://store.steampowered.com/&lt;/code&gt;&lt;/a&gt; 的网站&lt;/p&gt;

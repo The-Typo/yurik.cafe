@@ -15,7 +15,9 @@ lang: ''
 
 # Hexo 是什么
 
-Hexo 是一款基于 Node.js 的静态博客框架，它具有轻量、快速、简洁且高效的特点。它可以将 Markdown 语法转换为 HTML，方便用户编写博客文档。Hexo 支持使用 node 命令进行一键部署到 GitHub Pages、Heroku 或其他平台，非常适合个人博客的搭建。此外，Hexo 还具有丰富的插件和主题，可以满足用户的不同需求。
+Hexo 是一款基于 Node.js 的静态博客框架，它具有轻量、快速、简洁且高效的特点。它可以将 Markdown 语法转换为
+HTML，方便用户编写博客文档。Hexo 支持使用 node 命令进行一键部署到 GitHub Pages、Heroku 或其他平台，非常适合个人博客的搭建。此外，Hexo
+还具有丰富的插件和主题，可以满足用户的不同需求。
 
 # 安装 Hexo
 
@@ -183,7 +185,8 @@ post_asset_folder: true
 
 当在 `post_asset_folder` 为 `true` 时，Hexo 会在你创建新文章时自动生成一个与文章同名的文件夹。
 
-在 Markdown 文件中引用图片时，你可以使用相对路径来指向这个文件夹中的图片文件。例如，如果你有一张名为 `image.jpg` 的图片放在 `my-article` 文件夹中，你可以在 `my-article.md` 文件中使用 `![](image.jpg)` 的语法来引用这张图片。
+在 Markdown 文件中引用图片时，你可以使用相对路径来指向这个文件夹中的图片文件。例如，如果你有一张名为 `image.jpg` 的图片放在
+`my-article` 文件夹中，你可以在 `my-article.md` 文件中使用 `![](image.jpg)` 的语法来引用这张图片。
 
 通过使用 `post_asset_folder` 功能，你可以更好地组织和管理 Hexo 博客中的文章和资源，提高写作和发布的效率。
 

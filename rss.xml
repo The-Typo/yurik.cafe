@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>景蓝的小屋</title><description>鲸落于海，星沉于洼</description><link>https://yurik.cafe/</link><language>zh_CN</language><item><title>N100 小主机上手体验</title><link>https://yurik.cafe/2025/n100-mini-pc/</link><guid isPermaLink="true">https://yurik.cafe/2025/n100-mini-pc/</guid><pubDate>Sat, 27 Sep 2025 00:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;为什么要买一台 N100&lt;/h2&gt;
 &lt;p&gt;博主终于结束了高中生活步入令人期待的高中了。由于博主的大学属于开学晚的那一批，在别的同学都开学后博主便找他们咨询大学的一些注意事项
-&lt;s&gt;抄作业&lt;/s&gt;。很多人提到了他们学校的校园网有很多限制，比如&lt;strong&gt;限制设备数&lt;/strong&gt;，&lt;strong&gt;要求 Web 登录&lt;/strong&gt;等等······&lt;/p&gt;
+:spoiler[&lt;s&gt;抄作业&lt;/s&gt;]。很多人提到了他们学校的校园网有很多限制，比如&lt;strong&gt;限制设备数&lt;/strong&gt;，&lt;strong&gt;要求 Web 登录&lt;/strong&gt;等等······&lt;/p&gt;
 &lt;p&gt;对我这种设备多且杂的人来说是绝对不能忍的，于是我决定买一台运行 OpenWRT 的软路由配合脚本来绕过这些限制。&lt;/p&gt;
 &lt;p&gt;我选择了一台带有 2 个 10Gbps 的 SFP 光口和 4 个 搭载 i226-V 的 2.5Gbps 电口的 N100 机器作为软路由，还花了博主 1600 块钱。&lt;/p&gt;
 &lt;p&gt;可当我收到软路由后我却傻眼了，学校的宽带竟是直接从运营商拨号并且不做任何限制的，这便意味着一台硬路由便可解决这个问题。&lt;/p&gt;
@@ -876,7 +876,7 @@ Paste 呢？&lt;/p&gt;
 &lt;p&gt;&lt;s&gt;Farbic 主题还重新修改了部分页面的配置方式，使配置方式更加直观&lt;/s&gt;&lt;/p&gt;
 &lt;p&gt;&lt;s&gt;只是还没来得及编写文档，可能安装后会出现无法使用的情况&lt;/s&gt;&lt;/p&gt;
 &lt;p&gt;2023.09.14 : 由于技术原因，暂时不单独提供修改的主题，您可以前往本博客仓库自行克隆后提取&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;修改后的主题仍遵循 GPL 协议公开！&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;修改后的主题仍遵循 GPL 协议公开。&lt;/strong&gt;&lt;/p&gt;
 </content:encoded></item><item><title>Raft 木筏 - 你也想在海上捡垃圾吗</title><link>https://yurik.cafe/2023/ygr-raft/</link><guid isPermaLink="true">https://yurik.cafe/2023/ygr-raft/</guid><pubDate>Sun, 10 Sep 2023 12:33:46 GMT</pubDate><content:encoded>&lt;p&gt;&lt;img src=&quot;cover.webp&quot; alt=&quot;《Raft木筏》&quot; /&gt;&lt;/p&gt;
 &lt;h1&gt;有趣的物资收集系统&lt;/h1&gt;
 &lt;p&gt;在木筏中，玩家出生时将会获得一个塑料勾。通过塑料勾你可以勾取到漂在洋面的材料：木板、塑料、棕榈叶等等，海面上还会刷新出包含隐藏物资的木桶，里面包含着较为丰富的奖励（当然这也取决于你是否幸运）&lt;/p&gt;

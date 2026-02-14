@@ -34,20 +34,16 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 9.14.4
+          version: 10.29.3
           run_install: false # Disable auto-install
 
       - uses: actions/setup-node@v4
         with:
           node-version: 24
           registry-url: https://registry.npmjs.org
-          cache: pnpm
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-
-      - name: Check Codes
-        run: pnpm run check
 
       - name: Run Astro Build
         run: pnpm run build

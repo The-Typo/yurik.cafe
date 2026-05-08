@@ -57,14 +57,14 @@ export const profileConfig: ProfileConfig = {
 	avatar: "/favicon/v2/icon@2048px.jpg", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
 	name: "景蓝 Yurik",
 	bio: "在中中国人，在读大学生",
-	links: [
+	links: [/*
 		{
 			name: "Twitter",
 			icon: "fa6-brands:twitter", // Visit https://icones.js.org/ for icon codes
 			// You will need to install the corresponding icon set if it's not already included
 			// `pnpm add @iconify-json/<icon-set-name>`
 			url: "https://twitter.com/imjinglan",
-		},
+		},*/
 		{
 			name: "Steam",
 			icon: "fa6-brands:steam",
@@ -74,12 +74,12 @@ export const profileConfig: ProfileConfig = {
 			name: "GitHub",
 			icon: "fa6-brands:github",
 			url: "https://github.com/imjinglan",
-		},
+		},/*
 		{
 			name: "Telegram",
 			icon: "fa6-brands:telegram",
 			url: "https://t.me/xisyphus",
-		},
+		},*/
 		{
 			name: "开往",
 			icon: "fa6-solid:train-subway",

@@ -1,6 +1,6 @@
 # 关于
 
-<div style="padding-bottom:3rem; text-align:center">
+<div style="btext-align:center; border-radius: 10px; /* 圆角半径10px */">
 <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 184 51">
         <style>
             @keyframes draw {

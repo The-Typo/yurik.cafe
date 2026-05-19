@@ -6,7 +6,7 @@
     <description>鲸落于海，星沉于洼</description>
     <language>zh-CN</language>
     <copyright>All rights reserved 2026, 景蓝Yurik</copyright>
-    <lastBuildDate>Tue, 19 May 2026 11:09:36 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 19 May 2026 11:24:56 GMT</lastBuildDate>
     <generator>Hexo</generator>
     <atom:link href="https://yurik.cafe/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
@@ -19,9 +19,27 @@
       <category domain="https://yurik.cafe/categories/reviews/">开箱</category>
       <category domain="https://yurik.cafe/tags/%E5%B0%8F%E4%B8%BB%E6%9C%BA/">小主机</category>
       <category domain="https://yurik.cafe/tags/%E8%BD%AF%E8%B7%AF%E7%94%B1/">软路由</category>
-      <pubDate>Tue, 19 May 2026 11:09:36 GMT</pubDate>
+      <pubDate>Tue, 19 May 2026 11:24:56 GMT</pubDate>
       <content:encoded>
         <![CDATA[<h2 id="为什么要买一台-N100"><a href="#为什么要买一台-N100" class="headerlink" title="为什么要买一台 N100"></a>为什么要买一台 N100</h2><p>博主终于结束了高中生活步入令人期待的高中了。由于博主的大学属于开学晚的那一批，在别的同学都开学后博主便找他们咨询大学的一些注意事项<br>:spoiler[<del>抄作业</del>]。很多人提到了他们学校的校园网有很多限制，比如<strong>限制设备数</strong>，<strong>要求 Web 登录</strong>等等······</p><p>对我这种设备多且杂的人来说是绝对不能忍的，于是我决定买一台运行 OpenWRT 的软路由配合脚本来绕过这些限制。</p><p>我选择了一台带有 2 个 10Gbps 的 SFP 光口和 4 个 搭载 i226-V 的 2.5Gbps 电口的 N100 机器作为软路由，还花了博主 1600 块钱。</p><p>可当我收到软路由后我却傻眼了，学校的宽带竟是直接从运营商拨号并且不做任何限制的，这便意味着一台硬路由便可解决这个问题。</p><p>在又买了一个硬路由 (Cudy TR3000) 后，我陷入了对 N100 的思考，究竟拿他来做些什么呢？</p><h2 id="伪开箱"><a href="#伪开箱" class="headerlink" title="伪开箱"></a>伪开箱</h2><p>让我们再做一个伪开箱吧。</p><p>这台机器搭载了两个 82599ES 的 SFP 10G 光口以及四个 i226-V 的 2.5G 电口，可以说是天生软路由圣体。</p><p>我选购的是成品机器，自带一条8GB DDR4 3200 的笔记本内存和一块 256GB 的 Nvme<br>SSD，都是杂牌。</p><p>机身除了顶部的亚克力盖子外均是哑光的 CNC 铝合金外壳，质感很好。</p><p>除了上文提供的网络接口外，机器还提供了 2 个 Type-C 接口，其中一个支持 PD 协议给机器供电；三个USB-A 的 USB 3.0 接口； 1 个<br>HDMI 和 1 个 DP 接口。</p><h2 id="折腾"><a href="#折腾" class="headerlink" title="折腾"></a>折腾</h2><p>机器一到手我就给他加装了一块 MT7922，这是一块支持 Wifi 6E 的无线网卡，只可惜后来发现只支持单频发射，如果使用软路由直接当作AP的话只能在<br>5G 和 2.5G 中做出取舍</p><p>系统方面我选择了 iStoreOS ，这是一个基于 OpenWRT 的免费系统，优点是可以快速地配置网络。我们学校可以直接拨号，就直接使用<br>PPPoE 模式就可以了。</p><p>原装的杂牌内存在经历了一周不到便暴毙了，之后我自己更换了光威的同规格内存。</p><h2 id="软路由后"><a href="#软路由后" class="headerlink" title="软路由后"></a>软路由后</h2><p>目前我给 N100 安装了 Arch Linux 当作我的 Linux 主机使用，这样便完成了在宿舍中同时拥有 macOS 、 Windows 和 Arch Linux 的成就。</p><p>因为机器支持 PD 通电，我可以把他当作一个可以随时带出去的 Linux 工作站。等放假回家了就把一些服务迁移到这台机器上，防止别的服务破坏<br>家里 NAS 的稳定性。（从 AIO 到 AIB）</p>]]>
+      </content:encoded>
+    </item>
+    <item>
+      <title>我集齐了 Apple 全家桶</title>
+      <link>https://yurik.cafe/2026/i-got-full-apple-ecosystem/</link>
+      <description>
+        <![CDATA[<p>如你所见，站点自我介绍里的设备清单，已经悄悄换过一轮。</p>
+<p><img src="/2026/i-got-full-apple-ecosystem/doc_diffs.webp"></p>
+<p>这篇文章发出的今天，我终于收到了 Apple Watch Series]]>
+      </description>
+      <author>景蓝Yurik</author>
+      <category domain="https://yurik.cafe/categories/reviews/">开箱</category>
+      <category domain="https://yurik.cafe/tags/%E7%94%9F%E6%B4%BB/">生活</category>
+      <category domain="https://yurik.cafe/tags/%E6%80%9D%E8%80%83/">思考</category>
+      <category domain="https://yurik.cafe/tags/Apple/">Apple</category>
+      <pubDate>Sun, 17 May 2026 16:00:00 GMT</pubDate>
+      <content:encoded>
+        <![CDATA[<p>如你所见，站点自我介绍里的设备清单，已经悄悄换过一轮。</p><p><img src="/2026/i-got-full-apple-ecosystem/doc_diffs.webp"></p><p>这篇文章发出的今天，我终于收到了 Apple Watch Series 11。电脑、手机、平板、耳机、手表——Apple 生态里所有成熟的个人产品，第一次在我手边凑齐。</p><p>哥哥从美国游学带回一台 iPhone 4s，我满眼羡慕；声乐老师第一次用 AssistiveTouch，我觉得那手势像魔术；眼巴巴看哥哥用 iPad 2 在 Minecraft 里搭出一座金字塔；后来自己终于有了第一台 iPad mini；为了激活 iPhone 5s，央求妈妈去营业厅剪卡；第一次熬夜，只为等 iPhone X 的发布会……那时，iPhone 是年少的我最渴望拥有的手机。可对于一个生在普通工薪家庭的孩子来说，Apple 的定价还是略显奢侈。</p><p>高二时，朋友让我代卖一台 iPad Pro，我检查机况感觉不错便自己留着了，那时可能我也没想到将是重新集齐 Apple 生态的第一块拼图。</p><p>高二时，朋友托我代卖一台 iPad Pro。我检查完机况，觉得不错，就自己留了下来。当时并没想到，这块平板会是重新集齐 Apple 生态的第一块拼图。</p><p>时间转到十八岁。刚刚拿到压岁钱和生日红包，我背着父母，偷偷在网上拍下一台二手的 M3 MacBook Pro。再后来，靠着慢慢攒下的零花钱，买了 AirPods Pro，买了 iPhone，戴上了 Apple Watch。</p><p>就这样，Apple 所有个人产品，我好像集齐了。</p><p>集齐 Apple 全家桶有什么感觉？</p><p>可真要问集齐 Apple 全家桶是什么感觉——</p><p>从重新拿起 iPhone，到戴上 Apple Watch，各种 Bug 和别扭的设计，让我和朋友几乎每天都在骂：现在的 Apple，设计得稀烂。如果换作小时候的我，大概会视若珍宝，爱不释手吧？可这些年我用过形形色色的设备，眼光早已不同。如今手上的东西，更像纯粹的工具，工具一旦不顺手，使用体验就打了很大的折扣。Apple 也不再是小时候眼里那家很酷的科技公司了，更多是在商业考量与用户体验之间做着妥协。</p><p>儿时的憧憬散了。</p><p>我也不再是小孩子了。</p>]]>
       </content:encoded>
     </item>
     <item>
@@ -305,26 +323,6 @@
       <pubDate>Sat, 09 Sep 2023 05:22:49 GMT</pubDate>
       <content:encoded>
         <![CDATA[<h2 id="什么是-YGR"><a href="#什么是-YGR" class="headerlink" title="什么是 YGR"></a>什么是 YGR</h2><p><strong>Yurik’s Game Rating</strong> 是由 景蓝 Yurik 发起的游戏评分测评栏目</p><p>在 <strong>YGR</strong> 中，我们将会对我们玩过的进行评测并通过特定的标准进行评分</p><p>我们将通过普通玩家视角带你了解这款游戏</p><blockquote><p>评分仅代表 <strong>景蓝 Yurik</strong> 及 参与评测的成员 的观点</p></blockquote><h2 id="为什么创办-Yurik’s-Game-Rating"><a href="#为什么创办-Yurik’s-Game-Rating" class="headerlink" title="为什么创办 Yurik’s Game Rating ?"></a>为什么创办 <strong>Yurik’s Game Rating</strong> ?</h2><p>诚然，已经有类似于 IGN | GS | 游民评测 等知名打牌的测评团队，但我任希望在自己的博客中开一个评测栏目。由此表达我游玩该游戏的感受与思考</p><h2 id="怎么访问-Yurik’s-Game-Rating"><a href="#怎么访问-Yurik’s-Game-Rating" class="headerlink" title="怎么访问 Yurik’s Game Rating ?"></a>怎么访问 <strong>Yurik’s Game Rating</strong> ?</h2><p>你可以访问 <a href="/categories/ygr/"><strong>分类-Yurik’s Game Rating</strong></a> 来获取关于<strong>Yurik’s Game Rating</strong>的有关内容</p>]]>
-      </content:encoded>
-    </item>
-    <item>
-      <title>「随笔」记于 17 岁生日前</title>
-      <link>https://yurik.cafe/2023/miscellanies-1/</link>
-      <description>
-        <![CDATA[<p>记于 17 岁生日前 3 天</p>
-<blockquote>
-<p>这世界有那么个人 活在我飞扬的青春</p>
-<p>在泪水里浸湿过的长吻</p>
-<p>常让我想啊想出神。</p>
-<p>—— 这世界有那么多人</p>
-</blockquote>
-<p>琐记，为了保持行文]]>
-      </description>
-      <author>景蓝Yurik</author>
-      <category domain="https://yurik.cafe/categories/thoughts/">随笔</category>
-      <pubDate>Fri, 03 Mar 2023 16:00:00 GMT</pubDate>
-      <content:encoded>
-        <![CDATA[<p>记于 17 岁生日前 3 天</p><blockquote><p>这世界有那么个人 活在我飞扬的青春</p><p>在泪水里浸湿过的长吻</p><p>常让我想啊想出神。</p><p>—— 这世界有那么多人</p></blockquote><p>琐记，为了保持行文的统一，我还是称它为杂记吧</p><p>有很多东西，在记忆中，用空间发出感到矫情，憋在心里略显可惜，写一篇博客，在这片互联网孤岛中保留痕迹······</p><p>行文混乱，只供一笑尔</p><h2 id="笔"><a href="#笔" class="headerlink" title="笔"></a>笔</h2><p>第一个故事，要从笔开始 我不是一个文具控，甚至在初中（准确来说是初三）前对文具一无所知。对笔的态度更是能写就行</p><p>一支按动中性笔，晨光的 AGPH8004，.38mm 的 ST 笔尖，是我那时最喜欢的一支.38mm 笔，来自我的同桌，这大概是我第一次对笔有深入的认识吧。虽然后面都没有找到我心心念念的 ST 笔尖的笔了 OWO。</p><p>后来换同桌后又向新同桌<del>借用</del>买了一支 Pilot 的 Juice 黑色，喜欢上了日产笔尖在顺滑与阻尼之间的平衡。<del>就是太贵了</del>上高中前都没在用了。</p><p>上了高中后，手头富裕了（<del>家里给钱了</del>），便买了一些牌子的笔，有百乐的 Juice, Juice Up,斑马的 SARASA，KACO 的 ROCKET,现在还是使用 JUICE UP 作为主力笔，因为 ST 笔尖吧（</p><p>为什么想要写这么一段，可能是对老友的思念，对时光的感慨。这真的是令人怀念过去的一年。</p>]]>
       </content:encoded>
     </item>
   </channel>

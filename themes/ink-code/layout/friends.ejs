@@ -13,10 +13,10 @@ var friends = site.data.friends || [];
     <% friends.forEach(function(friend) { %>
     <a href="<%= friend.url %>" target="_blank" rel="noopener" class="friend-card">
       <div class="friend-card__avatar" style="background:<%= friend.color || 'oklch(0.7 0.15 200)' %>;display:flex;align-items:center;justify-content:center;color:white;font-family:var(--font-display);font-size:var(--text-xl);">
-        <% if (friend.avatar) { %><img src="<%= friend.avatar %>" alt="<%= friend.name %>" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"><% } else { %><%= friend.name.charAt(0) %><% } %>
+        <% if (friend.avatar) { %><img src="<%= friend.avatar %>" alt="<%= friend.title %>" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"><% } else { %><%= friend.title.charAt(0) %><% } %>
       </div>
       <div>
-        <div class="friend-card__name"><%= friend.name %></div>
+        <div class="friend-card__name"><%= friend.title %></div>
         <div class="friend-card__desc"><%= friend.description %></div>
       </div>
     </a>

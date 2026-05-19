@@ -6,7 +6,7 @@
     <description>鲸落于海，星沉于洼</description>
     <language>zh-CN</language>
     <copyright>All rights reserved 2026, 景蓝Yurik</copyright>
-    <lastBuildDate>Tue, 19 May 2026 10:28:43 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 19 May 2026 10:42:17 GMT</lastBuildDate>
     <generator>Hexo</generator>
     <atom:link href="https://yurik.cafe/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
@@ -19,7 +19,7 @@
       <category domain="https://yurik.cafe/categories/reviews/">开箱</category>
       <category domain="https://yurik.cafe/tags/%E5%B0%8F%E4%B8%BB%E6%9C%BA/">小主机</category>
       <category domain="https://yurik.cafe/tags/%E8%BD%AF%E8%B7%AF%E7%94%B1/">软路由</category>
-      <pubDate>Tue, 19 May 2026 10:28:43 GMT</pubDate>
+      <pubDate>Tue, 19 May 2026 10:42:17 GMT</pubDate>
       <content:encoded>
         <![CDATA[<h2 id="为什么要买一台-N100"><a href="#为什么要买一台-N100" class="headerlink" title="为什么要买一台 N100"></a>为什么要买一台 N100</h2><p>博主终于结束了高中生活步入令人期待的高中了。由于博主的大学属于开学晚的那一批，在别的同学都开学后博主便找他们咨询大学的一些注意事项<br>:spoiler[<del>抄作业</del>]。很多人提到了他们学校的校园网有很多限制，比如<strong>限制设备数</strong>，<strong>要求 Web 登录</strong>等等······</p><p>对我这种设备多且杂的人来说是绝对不能忍的，于是我决定买一台运行 OpenWRT 的软路由配合脚本来绕过这些限制。</p><p>我选择了一台带有 2 个 10Gbps 的 SFP 光口和 4 个 搭载 i226-V 的 2.5Gbps 电口的 N100 机器作为软路由，还花了博主 1600 块钱。</p><p>可当我收到软路由后我却傻眼了，学校的宽带竟是直接从运营商拨号并且不做任何限制的，这便意味着一台硬路由便可解决这个问题。</p><p>在又买了一个硬路由 (Cudy TR3000) 后，我陷入了对 N100 的思考，究竟拿他来做些什么呢？</p><h2 id="伪开箱"><a href="#伪开箱" class="headerlink" title="伪开箱"></a>伪开箱</h2><p>让我们再做一个伪开箱吧。</p><p>这台机器搭载了两个 82599ES 的 SFP 10G 光口以及四个 i226-V 的 2.5G 电口，可以说是天生软路由圣体。</p><p>我选购的是成品机器，自带一条8GB DDR4 3200 的笔记本内存和一块 256GB 的 Nvme<br>SSD，都是杂牌。</p><p>机身除了顶部的亚克力盖子外均是哑光的 CNC 铝合金外壳，质感很好。</p><p>除了上文提供的网络接口外，机器还提供了 2 个 Type-C 接口，其中一个支持 PD 协议给机器供电；三个USB-A 的 USB 3.0 接口； 1 个<br>HDMI 和 1 个 DP 接口。</p><h2 id="折腾"><a href="#折腾" class="headerlink" title="折腾"></a>折腾</h2><p>机器一到手我就给他加装了一块 MT7922，这是一块支持 Wifi 6E 的无线网卡，只可惜后来发现只支持单频发射，如果使用软路由直接当作AP的话只能在<br>5G 和 2.5G 中做出取舍</p><p>系统方面我选择了 iStoreOS ，这是一个基于 OpenWRT 的免费系统，优点是可以快速地配置网络。我们学校可以直接拨号，就直接使用<br>PPPoE 模式就可以了。</p><p>原装的杂牌内存在经历了一周不到便暴毙了，之后我自己更换了光威的同规格内存。</p><h2 id="软路由后"><a href="#软路由后" class="headerlink" title="软路由后"></a>软路由后</h2><p>目前我给 N100 安装了 Arch Linux 当作我的 Linux 主机使用，这样便完成了在宿舍中同时拥有 macOS 、 Windows 和 Arch Linux 的成就。</p><p>因为机器支持 PD 通电，我可以把他当作一个可以随时带出去的 Linux 工作站。等放假回家了就把一些服务迁移到这台机器上，防止别的服务破坏<br>家里 NAS 的稳定性。（从 AIO 到 AIB）</p>]]>
       </content:encoded>

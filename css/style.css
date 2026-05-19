@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Outfit:wght@100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Plus+Jakarta+Sans:wght@200..800&display=swap");
+@import url("./fonts.css");
 :root {
   --color-bg: oklch(0.985 0.003 85);
   --color-surface: oklch(0.965 0.006 80);
@@ -16,10 +16,10 @@
   --color-code-inline-bg: oklch(0.93 0.015 80);
   --color-tag-bg: oklch(0.92 0.02 80);
   --color-tag-text: oklch(0.48 0.02 75);
-  --font-display: 'Newsreader', 'Georgia', 'Times New Roman', serif;
-  --font-body: 'Outfit', 'Segoe UI', system-ui, sans-serif;
-  --font-ui: 'Plus Jakarta Sans', 'Segoe UI', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  --font-display: 'Newsreader', 'Noto Serif SC', 'Georgia', 'Times New Roman', 'Source Han Serif SC', 'STSong', 'Songti SC', serif;
+  --font-body: 'Outfit', 'Noto Sans SC', 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  --font-ui: 'Plus Jakarta Sans', 'Noto Sans SC', 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', monospace;
   --text-xs: clamp(0.625rem, 1.5vw, 0.7rem);
   --text-sm: clamp(0.75rem, 1.5vw, 0.833rem);
   --text-base: clamp(0.95rem, 2vw, 1.063rem);

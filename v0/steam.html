@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>在代码与文字之间找到平衡 — INK & CODE</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav class="site-nav">
+    <div class="site-nav__inner">
+      <a href="index.html" class="site-nav__brand">INK &amp; CODE</a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="site-nav__links">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="about.html">关于</a></li>
+        <li><a href="archive.html">归档</a></li>
+        <li><a href="friends.html">友链</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="nav-overlay"></div>
+
+  <header class="article-header">
+    <div class="article-header__date">2026 年 5 月 15 日</div>
+    <h1 class="article-header__title">在代码与文字之间找到平衡</h1>
+    <div class="article-header__meta">
+      <span class="tag">随笔</span>
+      <span class="tag">设计</span>
+      <span class="tag">CSS</span>
+    </div>
+  </header>
+
+  <figure class="article-featured-image">
+    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=minimalist%20writing%20desk%20with%20ink%20pen%20and%20paper%2C%20warm%20lighting%2C%20cream%20background%2C%20editorial%20style&image_size=landscape_16_9" alt="一张温暖灯光下的书桌，笔墨纸砚，编辑风氛围">
+    <figcaption>拍摄于 2026 年春天的工作台 — 一切的起点</figcaption>
+  </figure>
+
+  <div class="article-layout">
+    <aside class="toc">
+      <div class="toc__title">目录</div>
+      <ul>
+        <li><a href="#intro">出发点：两种语言的同一种渴望</a></li>
+        <li><a href="#design-system">设计系统：从 oklch 到 Newsreader</a></li>
+        <li><a href="#colors">色彩：告别 HSL 的不均匀</a></li>
+        <li><a href="#typography">排版：四套字体的职责分工</a></li>
+        <li><a href="#code-style">代码：深色背景中的理性之光</a></li>
+        <li><a href="#implementation">实现：CSS 自定义属性的力量</a></li>
+        <li><a href="#testing">测试：一个纯 CSS 按钮的设计</a></li>
+        <li><a href="#conclusion">结语：好设计是透明的</a></li>
+      </ul>
+    </aside>
+
+    <div class="article-body">
+      <section><h2 id="什么是-steam">什么是 <strong>Steam</strong><a class="anchor" href="#什么是-steam"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h2><p>Steam 是 Valve 推出的电子游戏数字分发平台。Steam 集合了多种功能，如数字版权管理、游戏服务器匹配和反作弊系统，以及社交网络和游戏流媒体服务。Steam 还为用户提供自动更新游戏、游戏存档云存储，以及包括好友列表和游戏内聊天在内的社区功能。根据 CompareCamp2020 年统计，Steam 平台是全球最大的电脑游戏数字分发平台，占全球 50%-70%的电脑游戏下载量。 2003 年 9 月， Valve 将其作为一款软件客户端推出，提供自动更新游戏的功能，这一功能在 2005 年末扩展到了第三方游戏发行商发行的作品。</p></section>
+<section><h2 id="下载与安装">下载与安装<a class="anchor" href="#下载与安装"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h2><p>使用搜索引擎搜索 Steam 并进入域名为 <a href="https://store.steampowered.com/"><code>https://store.steampowered.com/</code></a> 的网站</p><blockquote>
+<p>请不要进入类似 <strong>Steam 管家</strong> 、 <strong>Steam 助手</strong> 之类的站点并认准官方域名</p>
+<p>请务必检查站点域名，它一般在浏览器窗口的上方。</p>
+</blockquote><blockquote>
+<p>注：商城页面所显示语言可能与您计算机的语言与所在地区有关，请以实际情况为准</p>
+</blockquote><p>点击右上角绿色的 <strong><span style="color:#5c7e10">安装 Steam<span></span></span></strong> 按钮以前往 Steam 安装程序下载页面</p><p><img alt="Steam 商城页面截图" loading="lazy" decoding="async" fetchpriority="auto" width="1705" height="1045" src="/_astro/steam-index.DH-O5_Iq_QkTq2.webp"></p><p>点击蓝色的 <strong><span style="color:#1899ff">安装 STEAM</span></strong> 按钮以下载安装程序</p><p><img loading="lazy" decoding="async" fetchpriority="auto" width="1705" height="1045" src="/_astro/steam-download.B7ai0U6l_1IyPPi.webp"></p><p>你应该可以在下载器的下载记录中找到名为 <code>SteamSetup.exe</code> 的可执行文件，运行这个可执行文件并按照提示进行相应的设置。</p><p><img loading="lazy" decoding="async" fetchpriority="auto" width="622" height="450" src="/_astro/install-package.DgmUfE-W_ZqrsXE.webp"></p><p>当安装程序提示 <code>Steam 已安装在你的操作系统</code>时，点击完成便可退出安装程序并完成安装。</p><blockquote>
+<p>请检查 Steam 的安装路径中是否带有中文。若有，请将其修改为不包含中文的路径。</p>
+<p><strong>错误</strong>格式：<code>D:\软件\Steam\</code></p>
+<p><strong>正确</strong>格式：<code>D:\Software\Steam\</code></p>
+</blockquote><blockquote>
+<p>通常软件会安装在系统盘符的 <code>Program Files</code> 或 <code>Program Files (x86)</code> 中，你一般可以放心地相信安装程序的默认路径。</p>
+</blockquote><p><img loading="lazy" decoding="async" fetchpriority="auto" width="622" height="450" src="/_astro/finish-install.HeFKkcM5_1fzIaE.webp"></p></section>
+<section><h2 id="运行并注册">运行并注册<a class="anchor" href="#运行并注册"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h2><p>安装完毕后，你可以在 <strong>桌面</strong> 或 <strong>“开始”菜单</strong> 中找到 Steam 的快捷方式，运行快捷方式即可启动 Steam。</p><blockquote>
+<p>若你点击完成前没有取消默认 <strong>“运行 Steam”</strong> 的复选框，安装程序会在关闭后自动打开 Steam。</p>
+</blockquote><p>运行后你可能要等待 Steam 进行更新。更新完毕后你就会进入 Steam 的登陆页面。</p><p><img loading="lazy" decoding="async" fetchpriority="auto" width="881" height="550" src="/_astro/steam-login.CZRXruff_4O6LL.webp"></p><p>若你拥有 Steam 账户，你可以直接在其中登陆。（当然如果你有的话大概率也用不到这篇文章吧）。如果没有，你可以点击右下角 <code>创建免费账户</code> 来进入浏览器注册界面。</p><p>在注册页面根据提示填入你的<strong>电子邮件地址</strong>并重复以确认，在选择地区后进行人机验证，随后勾选 <strong><code>我已年满 13 周岁并同意《Steam 订户协议》和《Valve 隐私政策》的条款</code></strong>，点击 <span style="color:#1899ff"><b>继续</b></span> 进入下一步。</p><p><img loading="lazy" decoding="async" fetchpriority="auto" width="1892" height="1692" src="/_astro/register-page.DJBKeB7s_SX0HD.webp"></p><p>随后页面会提示你查看你的邮箱来完成验证，你需要进入你的邮箱来查看来自 Steam 的验证邮件。</p><p><img loading="lazy" decoding="async" fetchpriority="auto" width="1892" height="1692" src="/_astro/waiting-verify.DOa7VNIp_Z1C3w6N.webp"></p><p>登录你先前填写的电子邮箱，在<strong>收件箱</strong>中找到来自 Steam 的验证邮件，点击其中的点击 <span style="color:#1899ff"><b>验证我的电子邮件</b></span> 进行电子邮件验证。</p><blockquote>
+<p>Steam 通常会使用域名为 <code>steampowered.com</code> 的邮箱给你发送地址，其他的地址均为假冒！</p>
+<p><strong>错误</strong>格式：<code>noreply@steamguanfang.com</code></p>
+<p><strong>正确</strong>格式：<code>noreply@steampowered.com</code></p>
+</blockquote><blockquote>
+<p>这一步通常需要你在浏览器中进行。</p>
+</blockquote><p><img loading="lazy" decoding="async" fetchpriority="auto" width="1542" height="1074" src="/_astro/verify-email.DtVut3ri_1M1Iu5.webp"></p><p>等待页面提示 <strong>电子邮件已验证</strong> 后返回 Steam 窗口中，并填写账户名称和密码。</p><p><img loading="lazy" decoding="async" fetchpriority="auto" width="1892" height="1692" src="/_astro/account-info.CdVw53CI_nvzbk.webp"></p><blockquote>
+<p>账户名称为此后登录 Steam 时重要凭证，不可更改或与他人重复。</p>
+</blockquote><blockquote>
+<p>两次输入的密码需相同。</p>
+</blockquote><p>随后点击 <span style="color:#1899ff"><b>完成</b></span> 即可结束 Steam 账户注册。</p><p><img loading="lazy" decoding="async" fetchpriority="auto" width="976" height="284" src="/_astro/create-success.B168M3_Y_1WgJQ3.webp"></p></section>
+<section><h2 id="登录桌面客户端">登录桌面客户端<a class="anchor" href="#登录桌面客户端"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h2><p>在登录界面键入你注册时填写的用户名与密码，点击登录。若初次登陆 Steam 可能会要你输入验证码以验证账户所有权。</p><p><img loading="lazy" decoding="async" fetchpriority="auto" width="1502" height="972" src="/_astro/verify-code.R8E-8fBN_Z2oMhq8.webp"></p><p>登录你的电子邮件，将获取的验证码填入验证窗口即可完成登录。</p><p><img loading="lazy" decoding="async" fetchpriority="auto" width="480" height="392" src="/_astro/email-code.azqof4G3_Z1RE861.webp"></p></section>
+<section><h2 id="qa">Q&amp;A<a class="anchor" href="#qa"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h2><section><h3 id="q1-连接-steam-登录或注册时提示网络错误">Q1: 连接 Steam 登录或注册时提示网络错误<a class="anchor" href="#q1-连接-steam-登录或注册时提示网络错误"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>你可下载 <a href="https://steampp.net/">Watt Toolkit（原 Steam++）</a> 或 <a href="https://uu.163.com/">UU 加速器</a> 来修复部分地区无法连接 Steam 服务器的问题。</p></section><section><h3 id="q2-新账号无法添加-steam-好友">Q2: 新账号无法添加 Steam 好友<a class="anchor" href="#q2-新账号无法添加-steam-好友"><span class="anchor-icon" data-pagefind-ignore="">#</span></a></h3><p>你需要在 Steam 商店中消费满 5 美元才可解锁好友功能。</p></section></section> 
+    </div>
+  </div>
+
+  <div class="content-container" style="padding: 0 var(--space-2xl);">
+    <nav class="article-nav" style="max-width: var(--content-width); margin-left: auto; margin-right: auto;">
+      <a href="#" class="article-nav__item">
+        <span class="article-nav__label">上一篇</span>
+        <span class="article-nav__title">TypeScript 5.5 新特性速览</span>
+      </a>
+      <a href="#" class="article-nav__item article-nav__item--next">
+        <span class="article-nav__label">下一篇</span>
+        <span class="article-nav__title">CSS 排版之美：打造杂志级网页设计</span>
+      </a>
+    </nav>
+  </div>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <ul class="site-footer__links">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="about.html">关于</a></li>
+        <li><a href="archive.html">归档</a></li>
+        <li><a href="friends.html">友链</a></li>
+      </ul>
+      <p class="site-footer__text">&copy; 2026 INK &amp; CODE — "一本会写代码的杂志"</p>
+    </div>
+  </footer>
+
+  <button class="back-to-top" aria-label="Back to top">&uarr;</button>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

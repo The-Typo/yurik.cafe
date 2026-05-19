@@ -1,0 +1,23 @@
+[
+  {
+    "year": 2024,
+    "title": "使用 Github Actions 渲染页面",
+    "description": "自动化部署流程，推送即发布。"
+  },
+  {
+    "year": 2023,
+    "title": "采用 Hexo 啦！",
+    "description": "迁移到 Hexo 静态博客系统，享受 Node.js 生态的丰富主题与插件。"
+  },
+  {
+    "year": 2022,
+    "title": "换用 Hugo 静态页面系统",
+    "description": "由于服务器成本，改用 Hugo 生成静态页面，托管在 Vercel 上。"
+  },
+  {
+    "year": 2021,
+    "title": "拥有了一台服务器",
+    "description": "采用 Typecho 动态博客系统，第一次拥有属于自己的独立博客。"
+  }
+]
+

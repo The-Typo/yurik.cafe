@@ -1,0 +1,63 @@
+# INK & CODE — Hexo Theme
+# "一本会写代码的杂志"
+
+# Navigation
+menu:
+  Home: /
+  About: /about/
+  Archive: /archives/
+  Friends: /friends/
+  Travelling: 
+    name: 开往
+    url: https://www.travellings.cn/go.html
+
+# Author (optional — falls back to site config.author / config.subtitle)
+author:
+subtitle:
+
+# Avatar image path (optional)
+avatar: /favicon/v2/icon@2048px.jpg
+
+# Hero (optional — title_line1/2 and subtitle fall back to site config.title/subtitle/description)
+hero:
+  enabled: true
+  issue: "ISSUE NO. 05 · 2026"
+  title_line1: Yurik·Cafe
+  title_line2: 景蓝的小屋
+  subtitle: 鲸落于海，星沉于洼
+  background_image: /images/banner.webp
+
+# Social links
+social:
+  - name: GitHub
+    url: https://github.com/imjinglan
+  - name: Steam
+    url: https://steamcommunity.com/profiles/76561198384023297
+  - name: Email
+    url: mailto:xisyphu@gmail.com
+
+favicon: /favicon/v2/favicon.ico
+
+# Featured image for posts without explicit cover
+default_featured_image:
+
+# Code blocks
+code_block:
+  enable_language_label: true
+
+# Table of Contents
+toc:
+  max_depth: 3
+
+# Footer copyright override (optional — leave empty to use i18n default)
+footer_copyright: > 
+  <div>
+  © <span id="copyright-year">2026</span> 景蓝 Yurik. All Rights Reserved. /
+  <a target="_blank" href="/feed.xml">RSS</a> /
+  <a target="_blank" href="/sitemap.xml">Sitemap</a><br>
+  Git Version: {{GITVERSION}}<br>
+  <a target="_blank" href="https://beian.miit.gov.cn">桂ICP备2025057334号</a>
+  </div>
+
+# Date format override (optional — leave empty to use i18n default)
+date_format:

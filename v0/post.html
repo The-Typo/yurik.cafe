@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>在代码与文字之间找到平衡 — INK & CODE</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav class="site-nav">
+    <div class="site-nav__inner">
+      <a href="index.html" class="site-nav__brand">INK &amp; CODE</a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="site-nav__links">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="about.html">关于</a></li>
+        <li><a href="archive.html">归档</a></li>
+        <li><a href="friends.html">友链</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="nav-overlay"></div>
+
+  <header class="article-header">
+    <div class="article-header__date">2026 年 5 月 15 日</div>
+    <h1 class="article-header__title">在代码与文字之间找到平衡</h1>
+    <div class="article-header__meta">
+      <span class="tag">随笔</span>
+      <span class="tag">设计</span>
+      <span class="tag">CSS</span>
+    </div>
+  </header>
+
+  <figure class="article-featured-image">
+    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=minimalist%20writing%20desk%20with%20ink%20pen%20and%20paper%2C%20warm%20lighting%2C%20cream%20background%2C%20editorial%20style&image_size=landscape_16_9" alt="一张温暖灯光下的书桌，笔墨纸砚，编辑风氛围">
+    <figcaption>拍摄于 2026 年春天的工作台 — 一切的起点</figcaption>
+  </figure>
+
+  <div class="article-layout">
+    <aside class="toc">
+      <div class="toc__title">目录</div>
+      <ul>
+        <li><a href="#intro">出发点：两种语言的同一种渴望</a></li>
+        <li><a href="#design-system">设计系统：从 oklch 到 Newsreader</a></li>
+        <li><a href="#colors">色彩：告别 HSL 的不均匀</a></li>
+        <li><a href="#typography">排版：四套字体的职责分工</a></li>
+        <li><a href="#code-style">代码：深色背景中的理性之光</a></li>
+        <li><a href="#implementation">实现：CSS 自定义属性的力量</a></li>
+        <li><a href="#testing">测试：一个纯 CSS 按钮的设计</a></li>
+        <li><a href="#conclusion">结语：好设计是透明的</a></li>
+      </ul>
+    </aside>
+
+    <div class="article-body">
+      <section id="intro">
+        <h2>出发点：两种语言的同一种渴望</h2>
+        <p>
+          我是一个既写代码又写文章的人。白天，我用 <code>TypeScript</code> 和 <code>Rust</code> 构建软件；晚上，我用中文记录思考。
+          很长一段时间里，这两件事被放在完全不同的"容器"里——技术文档用 GitHub Pages 默认主题，文学作品发在公众号。
+        </p>
+        <p>
+          直到有一天我问自己：<strong>为什么不能有一个博客，既适合呈现一首诗的节奏，也适合展示一段代码的优雅？</strong>
+        </p>
+        <p>
+          这个问题的答案，就是 <em>INK &amp; CODE</em>——"一本会写代码的杂志"。
+        </p>
+        <blockquote>
+          <p>好的设计是显而易见的，伟大的设计是透明的。好的排版让阅读成为一种享受，而不是一种任务。</p>
+          <cite>— 设计哲学</cite>
+        </blockquote>
+
+        <figure>
+          <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=vintage%20writing%20desk%20with%20notebook%20and%20coffee,%20warm%20morning%20light,%20cozy%20editorial%20atmosphere,%20cream%20tones&image_size=landscape_16_9" alt="一张老式书桌上的笔记本和咖啡" loading="lazy" style="height: 220px; object-fit: cover;">
+          <figcaption>清晨的书桌：这里是代码与文字交汇的地方</figcaption>
+        </figure>
+      </section>
+
+      <hr>
+
+      <section id="design-system">
+        <h2>设计系统：从 oklch 到 Newsreader</h2>
+        <p>
+          设计一个博客的主题比想象中复杂。你不仅要决定"好看"，还要决定"在什么情境下好看"。
+          一个技术文章的读者和一个文学作品的读者，他们的审美期待完全不同。
+        </p>
+        <p>我最终确立的设计理念是：</p>
+        <ul>
+          <li><strong>文学的温度</strong>：暖白纸色背景 + Newsreader 衬线体，像一本精心排版的杂志</li>
+          <li><strong>代码的理性</strong>：JetBrains Mono + 深色代码块，在浅色正文中自然区分但不突兀</li>
+          <li><strong>统一的节奏</strong>：oklch 色彩空间 + 8px 网格间距 + Major Third 字号比例</li>
+        </ul>
+
+        <table>
+          <thead>
+            <tr><th>设计维度</th><th>选择</th><th>理由</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>色彩空间</td><td>oklch</td><td>感知均匀，Lightness 一致性远超 HSL</td></tr>
+            <tr><td>Display 字体</td><td>Newsreader</td><td>现代衬线体，编辑气质但不过时</td></tr>
+            <tr><td>Body 字体</td><td>Outfit</td><td>几何无衬线，清晰可读</td></tr>
+            <tr><td>UI 字体</td><td>Plus Jakarta Sans</td><td>人文无衬线，导航和标签专用</td></tr>
+            <tr><td>代码字体</td><td>JetBrains Mono</td><td>编程专用，连字支持，字形清晰</td></tr>
+            <tr><td>间距系统</td><td>8px Grid</td><td>从 4px 到 160px 共 15 级</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <hr>
+
+      <section id="colors">
+        <h2>色彩：告别 HSL 的不均匀</h2>
+        <p>
+          如果你曾经被 <code>hsl(240, 100%, 50%)</code> 和 <code>hsl(60, 100%, 50%)</code> 之间的亮度差异困扰过，
+          你就能立刻理解为什么 <strong>oklch</strong> 是一个更好的选择。
+        </p>
+        <p>
+          在 HSL 中，相同 <code>Lightness</code> 值的黄色和蓝色看起来亮度完全不同——因为 HSL 的 Lightness
+          不是基于人眼感知的。而 oklch（以及它的前身 oklab）是<strong>感知均匀</strong>的：
+          相同 <code>Lightness</code> 在任何色相下，人眼看到的亮度是一致的。
+        </p>
+        <details>
+          <summary>展开查看：oklch vs HSL 的视觉对比原理</summary>
+          <p style="margin-top: var(--space-md);">
+            人眼对不同波长的光敏感度不同。我们对绿色最敏感，对红色次之，对蓝色最不敏感。
+            HSL 在计算 Lightness 时没有考虑这种差异，而 oklch 通过一个基于人眼视觉模型的变换矩阵来实现感知均匀。
+            这意味着设计师可以真正用 Lightness 来控制视觉层级，而不用担心色相的影响。
+          </p>
+        </details>
+
+        <figure style="margin-top: var(--space-xl);">
+          <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=color%20spectrum%20in%20warm%20amber%20and%20cream%20tones,%20abstract%20paint%20texture,%20Swiss%20design%20poster%20style,%20minimalist&image_size=landscape_16_9" alt="琥珀色与奶油色调的抽象色板" loading="lazy" style="height: 220px; object-fit: cover;">
+          <figcaption>oklch 色域中选取的暖棕琥珀色调，感知均匀地分布在视觉层级中</figcaption>
+        </figure>
+      </section>
+
+      <hr>
+
+      <section id="typography">
+        <h2>排版：四套字体的职责分工</h2>
+        <p>
+          一个常见的误区是"网站用两套字体就够了，一套衬线一套无衬线"。
+          但对于一个同时承载文学和代码的博客来说，这个分工不够精确。
+        </p>
+        <p>我的做法是使用<strong>四套字体，各司其职</strong>：</p>
+        <ol>
+          <li><strong>Newsreader</strong>（Display）：标题专用。现代衬线体有编辑气质，但字形不过于传统。支持可变字重和意大利体。</li>
+          <li><strong>Outfit</strong>（Body）：正文专用。几何无衬线，<code>x-height</code> 较大，适合长时间阅读。</li>
+          <li><strong>Plus Jakarta Sans</strong>（UI）：导航、标签、日期等 UI 元素的专用字体。人文主义无衬线体，在小字号下依然清晰。</li>
+          <li><strong>JetBrains Mono</strong>（Code）：所有代码的专用等宽字体，连字支持好，<code>0</code> 和 <code>O</code> 区分清晰。</li>
+        </ol>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-wrapper__lang">css</div>
+          <pre><code>/* 字体系统 CSS 变量 */
+:root {
+  --font-display: 'Newsreader', 'Georgia', serif;
+  --font-body:    'Outfit', 'Segoe UI', sans-serif;
+  --font-ui:      'Plus Jakarta Sans', sans-serif;
+  --font-mono:    'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* 字号采用 Major Third 比例，base 18px */
+:root {
+  --text-xs:   clamp(0.625rem, 1.5vw, 0.7rem);
+  --text-sm:   clamp(0.75rem, 1.5vw, 0.833rem);
+  --text-base: clamp(0.95rem, 2vw, 1.063rem);
+  --text-lg:   clamp(1.1rem, 2.5vw, 1.25rem);
+  --text-xl:   clamp(1.3rem, 3vw, 1.5rem);
+  --text-2xl:  clamp(1.6rem, 3.5vw, 1.875rem);
+  --text-3xl:  clamp(2rem, 4vw, 2.375rem);
+  --text-4xl:  clamp(2.4rem, 5vw, 3rem);
+  --text-5xl:  clamp(3rem, 6vw, 3.75rem);
+}</code></pre>
+        </div>
+      </section>
+
+      <hr>
+
+      <section id="code-style">
+        <h2>代码：深色背景中的理性之光</h2>
+        <p>
+          代码的呈现是这个博客最关键的挑战之一。如果处理不好，深色代码块在浅色背景中会像一个刺眼的补丁。
+          如果浅色代码与正文太接近，又会失去层次感。
+        </p>
+        <p>我的方案是：</p>
+        <ul>
+          <li><strong>行内代码</strong>：使用浅驼色背景 <code>oklch(0.93 0.015 80)</code>，保留正文的暖色调，但明确区分</li>
+          <li><strong>代码块</strong>：使用深蓝黑背景 <code>oklch(0.18 0.01 265)</code>，文字浅灰白，对比足够但不刺眼</li>
+          <li><strong>语言标签</strong>：代码块右上角显示语言，<code>.code-block-wrapper__lang</code></li>
+        </ul>
+
+        <p>下面是一个 JavaScript 示例，展示代码块在文章中的展示效果：</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-wrapper__lang">javascript</div>
+          <pre><code>// 一个简单但实用的阅读时间估算函数
+function estimateReadingTime(text, wpm = 225) {
+  const words = text.trim().split(/\s+/).length;
+  const minutes = Math.ceil(words / wpm);
+  return minutes === 1 ? '1 min read' : `${minutes} min read`;
+}
+
+// 中英文混合文本也可以粗略估算
+const article = `作为一个既写代码又写文章的人...`;
+console.log(estimateReadingTime(article));
+// → "6 min read"</code></pre>
+        </div>
+
+        <p>再看一个 Rust 示例——展示类型定义和模式匹配：</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-wrapper__lang">rust</div>
+          <pre><code>/// 文章类型枚举：技术文章 vs 文学作品
+#[derive(Debug, Clone)]
+enum ArticleKind {
+    Tech { language: String, difficulty: u8 },
+    Literature { genre: String, mood: String },
+    Hybrid { tags: Vec&lt;String&gt; },
+}
+
+impl ArticleKind {
+    fn reading_time(&self) -> &str {
+        match self {
+            ArticleKind::Tech { difficulty, .. } if *difficulty >= 7 => "12 min read",
+            ArticleKind::Tech { .. } => "6 min read",
+            ArticleKind::Literature { .. } => "8 min read",
+            ArticleKind::Hybrid { .. } => "10 min read",
+        }
+    }
+}
+
+let post = ArticleKind::Hybrid {
+    tags: vec!["设计".into(), "编程".into(), "写作".into()],
+};
+println!("{}", post.reading_time()); // → "10 min read"</code></pre>
+        </div>
+
+        <figure style="margin-top: var(--space-xl);">
+          <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=dark%20code%20editor%20screen%20with%20syntax%20highlighting,%20warm%20ambient%20light,%20minimalist%20desk%20setup,%20night%20coding%20aesthetic&image_size=landscape_16_9" alt="深色代码编辑器截图，温暖的氛围光" loading="lazy" style="height: 220px; object-fit: cover;">
+          <figcaption>深夜写代码的时刻：JetBrains Mono 在深蓝黑背景上发出的理性之光</figcaption>
+        </figure>
+      </section>
+
+      <hr>
+
+      <section id="implementation">
+        <h2>实现：CSS 自定义属性的力量</h2>
+        <p>
+          整个设计系统通过 CSS 自定义属性（CSS Variables）驱动。所有颜色、字体、间距都是变量，
+          这意味着更换主题只需要在一处修改。
+        </p>
+
+        <blockquote>
+          <p>Any application that can be written in JavaScript, will eventually be written in JavaScript.</p>
+          <cite>— Atwood's Law</cite>
+        </blockquote>
+
+        <p>同理，任何可以用变量表示的视觉属性，最终都应该用变量表示。</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-wrapper__lang">css</div>
+          <pre><code>/* 一个示例：按钮组件完全由变量驱动 */
+.btn--primary {
+  background: var(--color-accent);
+  color: var(--color-bg);
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  padding: var(--space-sm) var(--space-xl);
+  border-radius: var(--radius-sm);
+  transition: background var(--duration-fast) var(--ease-out);
+}
+
+.btn--primary:hover {
+  background: var(--color-accent-hover);
+}
+
+/* 如果要换主题色，只需改一个变量 */
+:root {
+  --color-accent: oklch(0.62 0.16 75); /* 琥珀金 */
+}
+
+/* 深色模式也可以是一套变量覆写 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: oklch(0.15 0.01 85);
+    --color-text-primary: oklch(0.9 0.005 85);
+    /* ... */
+  }
+}</code></pre>
+        </div>
+      </section>
+
+      <hr>
+
+      <section id="testing">
+        <h2>测试：一个纯 CSS 按钮的设计</h2>
+        <p>
+          这是本博客按钮组件的完整设计过程。分为三个变体：Primary、Outline、Ghost，加上三个尺寸。
+        </p>
+
+        <h3>按钮变体一览</h3>
+        <div style="display: flex; flex-wrap: wrap; gap: var(--space-md); align-items: center; margin: var(--space-xl) 0;">
+          <button class="btn btn--primary">Primary</button>
+          <button class="btn btn--outline">Outline</button>
+          <button class="btn btn--ghost">Ghost</button>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; gap: var(--space-md); align-items: center; margin: var(--space-xl) 0;">
+          <button class="btn btn--primary btn--sm">Small</button>
+          <button class="btn btn--primary">Default</button>
+          <button class="btn btn--primary btn--lg">Large</button>
+        </div>
+
+        <h3>任务清单（设计待办）</h3>
+        <ul class="task-list">
+          <li class="task-list-item"><input type="checkbox" checked> 确立设计理念——"一本会写代码的杂志"</li>
+          <li class="task-list-item"><input type="checkbox" checked> oklch 色彩系统（15 个 Token）</li>
+          <li class="task-list-item"><input type="checkbox" checked> 四套字体 + Major Third 字号比例</li>
+          <li class="task-list-item"><input type="checkbox" checked> 8px Grid 间距系统</li>
+          <li class="task-list-item"><input type="checkbox" checked> 组件库（Button、Card、Tag、Badge、Divider）</li>
+          <li class="task-list-item"><input type="checkbox" checked> Markdown 元素全覆盖</li>
+          <li class="task-list-item"><input type="checkbox" checked> 首页杂志式网格 + Hero</li>
+          <li class="task-list-item"><input type="checkbox" checked> 文章页 TOC 侧栏布局</li>
+          <li class="task-list-item"><input type="checkbox"> 深色模式适配</li>
+          <li class="task-list-item"><input type="checkbox"> RSS Feed</li>
+        </ul>
+
+        <figure>
+          <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=modern%20design%20system%20architecture%20diagram,%20clean%20UI%20components,%20warm%20cream%20background,%20editorial%20design%20studio&image_size=landscape_16_9" alt="设计系统架构示意图" loading="lazy" style="height: 220px; object-fit: cover;">
+          <figcaption>INK &amp; CODE 设计系统架构示意：CSS Variables → Components → Pages</figcaption>
+        </figure>
+      </section>
+
+      <hr>
+
+      <section id="conclusion">
+        <h2>结语：好设计是透明的</h2>
+        <p>
+          做这个博客的设计过程中，我最大的感悟是：<mark>好的设计不应该被注意到。</mark>
+          当读者沉浸在一篇文章中时，他们不应该意识到字体、间距、颜色的存在——这些东西应该像空气一样自然。
+        </p>
+        <p>
+          但是如果他们<em>停下来想一想</em>，他们会发现这个阅读体验是经过精心设计的。
+          每一处留白、每一个字号选择、每一个色彩 Token，都在为内容服务。
+        </p>
+        <p>
+          这大概就是"编辑风"博客的终极追求：<strong>让技术文章有杂志的质感，让文学作品有代码的精确。</strong>
+        </p>
+        <p>
+          <abbr title="Cascading Style Sheets">CSS</abbr> 不是一个简单的"美化工具"——它是一个排版引擎，而网页是它的画布。
+        </p>
+
+        <div class="divider divider--short"></div>
+
+        <p style="color: var(--color-text-muted); font-size: var(--text-sm);">
+          感谢阅读。如果你对这个设计系统有任何想法或建议，欢迎通过
+          <a href="#">邮件</a> 与我交流。
+          <sup class="footnote-ref"><a href="#thanks">*</a></sup>
+        </p>
+
+        <div class="footnotes">
+          <ol>
+            <li id="thanks">特别感谢 oklch 色彩空间的提出者 Björn Ottosson，以及 Newsreader 字体的设计师。</li>
+          </ol>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div class="content-container" style="padding: 0 var(--space-2xl);">
+    <nav class="article-nav" style="max-width: var(--content-width); margin-left: auto; margin-right: auto;">
+      <a href="#" class="article-nav__item">
+        <span class="article-nav__label">上一篇</span>
+        <span class="article-nav__title">TypeScript 5.5 新特性速览</span>
+      </a>
+      <a href="#" class="article-nav__item article-nav__item--next">
+        <span class="article-nav__label">下一篇</span>
+        <span class="article-nav__title">CSS 排版之美：打造杂志级网页设计</span>
+      </a>
+    </nav>
+  </div>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <ul class="site-footer__links">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="about.html">关于</a></li>
+        <li><a href="archive.html">归档</a></li>
+        <li><a href="friends.html">友链</a></li>
+      </ul>
+      <p class="site-footer__text">&copy; 2026 INK &amp; CODE — "一本会写代码的杂志"</p>
+    </div>
+  </footer>
+
+  <button class="back-to-top" aria-label="Back to top">&uarr;</button>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

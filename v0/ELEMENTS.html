@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design Elements — "一本会写代码的杂志"</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav class="site-nav">
+    <div class="site-nav__inner">
+      <a href="index.html" class="site-nav__brand">INK & CODE</a>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="site-nav__links">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="about.html">关于</a></li>
+        <li><a href="archive.html">归档</a></li>
+        <li><a href="friends.html">友链</a></li>
+        <li><a href="ELEMENTS.html" class="active">Elements</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="nav-overlay"></div>
+
+  <header class="page-header">
+    <h1 class="page-header__title">Design Elements</h1>
+    <p class="page-header__subtitle">"一本会写代码的杂志" — 完整设计系统参考。所有视觉元件、排版、组件和 Markdown 渲染样式均在此展示。</p>
+  </header>
+
+  <main class="content-container content-container--wide">
+
+    <!-- ============ 01. Design Philosophy ============ -->
+    <section class="elements-section">
+      <h2 class="elements-section__heading">01 设计理念</h2>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-lg);">
+        <div class="card">
+          <h3 style="font-size: var(--text-lg); margin-bottom: var(--space-sm);">📖 文学的温度</h3>
+          <p style="font-size: var(--text-sm); color: var(--color-text-secondary); margin-bottom: 0;">
+            Newsreader 衬线体 × 暖白纸色背景，让每篇文章都像一本精心排版的杂志。阅读体验温暖、沉浸。
+          </p>
+        </div>
+        <div class="card">
+          <h3 style="font-size: var(--text-lg); margin-bottom: var(--space-sm);">💻 代码的理性</h3>
+          <p style="font-size: var(--text-sm); color: var(--color-text-secondary); margin-bottom: 0;">
+            JetBrains Mono × 深色代码块，在浅色正文中自然区分。所有 Markdown 渲染后的 &lt;pre&gt;&lt;code&gt; 结构完美兼容。
+          </p>
+        </div>
+        <div class="card">
+          <h3 style="font-size: var(--text-lg); margin-bottom: var(--space-sm);">🎨 oklch 色域</h3>
+          <p style="font-size: var(--text-sm); color: var(--color-text-secondary); margin-bottom: 0;">
+            基于感知均匀的 oklch 色彩空间推导，相同 Lightness 值在视觉上感知亮度一致。告别 HSL 的视觉不均。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 02. Color System ============ -->
+    <section class="elements-section">
+      <h2 class="elements-section__heading">02 色彩系统 · oklch</h2>
+
+      <div class="elements-subsection">
+        <h3 class="elements-subsection__title">Backgrounds</h3>
+        <div class="color-grid">
+          <div class="color-swatch">
+            <div class="color-swatch__preview" style="background: var(--color-bg);"></div>
+            <div class="color-swatch__info">
+              <div class="color-swatch__name">--color-bg</div>
+              <div class="color-swatch__value">oklch(0.985 0.003 85)</div>
+              <div style="font-size: var(--text-xs); color: var(--color-text-muted);">页面背景 / 暖白纸色</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch__preview" style="background: var(--color-surface);"></div>
+            <div class="color-swatch__info">
+              <div class="color-swatch__name">--color-surface</div>
+              <div class="color-swatch__value">oklch(0.965 0.006 80)</div>
+              <div style="font-size: var(--text-xs); color: var(--color-text-muted);">卡片 / 区块背景</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch__preview" style="background: var(--color-surface-hover);"></div>
+            <div class="color-swatch__info">
+              <div class="color-swatch__name">--color-surface-hover</div>
+              <div class="color-swatch__value">oklch(0.95 0.008 80)</div>
+              <div style="font-size: var(--text-xs); color: var(--color-text-muted);">悬停态</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="elements-subsection">
+        <h3 class="elements-subsection__title">Text</h3>
+        <div class="color-grid">
+          <div class="color-swatch">
+            <div class="color-swatch__preview" style="background: var(--color-text-primary);"></div>
+            <div class="color-swatch__info">
+              <div class="color-swatch__name">--color-text-primary</div>
+              <div class="color-swatch__value">oklch(0.22 0.02 85)</div>
+              <div style="font-size: var(--text-xs); color: var(--color-text-muted);">正文主色</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch__preview" style="background: var(--color-text-secondary);"></div>
+            <div class="color-swatch__info">
+              <div class="color-swatch__name">--color-text-secondary</div>
+              <div class="color-swatch__value">oklch(0.48 0.01 80)</div>
+              <div style="font-size: var(--text-xs); color: var(--color-text-muted);">次级文字</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch__preview" style="background: var(--color-text-muted);"></div>
+            <div class="color-swatch__info">
+              <div class="color-swatch__name">--color-text-muted</div>
+              <div class="color-swatch__value">oklch(0.6 0.01 80)</div>
+              <div style="font-size: var(--text-xs); color: var(--color-text-muted);">日期 / 辅助</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="elements-subsection">
+        <h3 class="elements-subsection__title">Accent</h3>
+        <div class="color-grid">
+          <div class="color-swatch">
+            <div class="color-swatch__preview" style="background: var(--color-accent);"></div>
+            <div class="color-swatch__info">
+              <div class="color-swatch__name">--color-accent</div>
+              <div class="color-swatch__value">oklch(0.62 0.16 75)</div>
+              <div style="font-size: var(--text-xs); color: var(--color-text-muted);">链接 / 强调</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch__preview" style="background: var(--color-accent-hover);"></div>
+            <div class="color-swatch__info">
+              <div class="color-swatch__name">--color-accent-hover</div>
+              <div class="color-swatch__value">oklch(0.55 0.17 72)</div>
+              <div style="font-size: var(--text-xs); color: var(--color-text-muted);">悬停态</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch__preview" style="background: var(--color-accent-subtle);"></div>
+            <div class="color-swatch__info">
+              <div class="color-swatch__name">--color-accent-subtle</div>
+              <div class="color-swatch__value">oklch(0.92 0.04 80)</div>
+              <div style="font-size: var(--text-xs); color: var(--color-text-muted);">淡底色</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="elements-subsection">
+        <h3 class="elements-subsection__title">Borders</h3>
+        <div class="color-grid">
+          <div class="color-swatch">
+            <div class="color-swatch__preview" style="background: var(--color-border);"></div>
+            <div class="color-swatch__info">
+              <div class="color-swatch__name">--color-border</div>
+              <div class="color-swatch__value">oklch(0.88 0.01 80)</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch__preview" style="background: var(--color-border-strong);"></div>
+            <div class="color-swatch__info">
+              <div class="color-swatch__name">--color-border-strong</div>
+              <div class="color-swatch__value">oklch(0.78 0.02 80)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="elements-subsection">
+        <h3 class="elements-subsection__title">Code</h3>
+        <div class="color-grid">
+          <div class="color-swatch">
+            <div class="color-swatch__preview" style="background: var(--color-code-bg);"></div>
+            <div class="color-swatch__info">
+              <div class="color-swatch__name">--color-code-bg</div>
+              <div class="color-swatch__value">oklch(0.18 0.01 265)</div>
+              <div style="font-size: var(--text-xs); color: var(--color-text-muted);">代码块背景</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch__preview" style="background: var(--color-code-text);"></div>
+            <div class="color-swatch__info">
+              <div class="color-swatch__name">--color-code-text</div>
+              <div class="color-swatch__value">oklch(0.88 0.005 85)</div>
+              <div style="font-size: var(--text-xs); color: var(--color-text-muted);">代码块文字</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch__preview" style="background: var(--color-code-inline-bg);"></div>
+            <div class="color-swatch__info">
+              <div class="color-swatch__name">--color-code-inline-bg</div>
+              <div class="color-swatch__value">oklch(0.93 0.015 80)</div>
+              <div style="font-size: var(--text-xs); color: var(--color-text-muted);">行内代码背景</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="elements-subsection">
+        <h3 class="elements-subsection__title">Tags</h3>
+        <div class="color-grid">
+          <div class="color-swatch">
+            <div class="color-swatch__preview" style="background: var(--color-tag-bg);"></div>
+            <div class="color-swatch__info">
+              <div class="color-swatch__name">--color-tag-bg</div>
+              <div class="color-swatch__value">oklch(0.92 0.02 80)</div>
+            </div>
+          </div>
+          <div class="color-swatch">
+            <div class="color-swatch__preview" style="background: var(--color-tag-text);"></div>
+            <div class="color-swatch__info">
+              <div class="color-swatch__name">--color-tag-text</div>
+              <div class="color-swatch__value">oklch(0.48 0.02 75)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 03. Typography ============ -->
+    <section class="elements-section">
+      <h2 class="elements-section__heading">03 字体系统</h2>
+
+      <div class="elements-subsection">
+        <h3 class="elements-subsection__title">Font Stack</h3>
+        <table>
+          <thead>
+            <tr><th>层级</th><th>字体</th><th>CSS Variable</th><th>用途</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-weight:600;">Display</td>
+              <td style="font-family: var(--font-display); font-size: var(--text-xl);">Newsreader</td>
+              <td><code>--font-display</code></td>
+              <td>大标题 / 文章标题</td>
+            </tr>
+            <tr>
+              <td style="font-weight:600;">Body</td>
+              <td style="font-family: var(--font-body); font-size: var(--text-lg);">Outfit</td>
+              <td><code>--font-body</code></td>
+              <td>正文段落</td>
+            </tr>
+            <tr>
+              <td style="font-weight:600;">UI</td>
+              <td style="font-family: var(--font-ui); font-size: var(--text-lg);">Plus Jakarta Sans</td>
+              <td><code>--font-ui</code></td>
+              <td>导航 / 标签 / 日期</td>
+            </tr>
+            <tr>
+              <td style="font-weight:600;">Code</td>
+              <td style="font-family: var(--font-mono); font-size: var(--text-lg);">JetBrains Mono</td>
+              <td><code>--font-mono</code></td>
+              <td>代码块 / 行内代码</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="elements-subsection">
+        <h3 class="elements-subsection__title">Type Scale (Major Third, base 18px)</h3>
+        <div class="type-sample">
+          <div class="type-sample__label">--text-5xl / H1 </div>
+          <h1>一本会写代码的杂志</h1>
+        </div>
+        <div class="type-sample">
+          <div class="type-sample__label">--text-4xl / H1  </div>
+          <h1>优雅编辑风博客设计</h1>
+        </div>
+        <div class="type-sample">
+          <div class="type-sample__label">--text-3xl / H2  </div>
+          <h2>文学的温度与代码的理性</h2>
+        </div>
+        <div class="type-sample">
+          <div class="type-sample__label">--text-2xl / H3  </div>
+          <h3>在字里行间找到平衡</h3>
+        </div>
+        <div class="type-sample">
+          <div class="type-sample__label">--text-xl / H4  </div>
+          <h4>杂志式排版的艺术</h4>
+        </div>
+        <div class="type-sample">
+          <div class="type-sample__label">--text-lg / H5  </div>
+          <h5>做一名会写作的程序员</h5>
+        </div>
+        <div class="type-sample">
+          <div class="type-sample__label">--text-base / H6  </div>
+          <h6>也做一名会编程的作家</h6>
+        </div>
+        <div class="type-sample">
+          <div class="type-sample__label">--text-base / Paragraph</div>
+          <p style="margin-bottom: 0;">正文使用 Outfit 无衬线字体，行高 1.75，最大阅读宽度 720px。这是为长时间阅读优化的排版设置——既适合文学作品的情感表达，也适合技术文章的清晰传达。每一个字都需要呼吸的空间。</p>
+        </div>
+        <div class="type-sample">
+          <div class="type-sample__label">--text-sm / Secondary</div>
+          <p style="font-size: var(--text-sm); color: var(--color-text-secondary); margin-bottom: 0;">
+            辅助文本使用较小的字号和次级颜色。适合用于文章摘要、元数据、图片说明等。在视觉层级上低于正文，但不失可读性。
+          </p>
+        </div>
+        <div class="type-sample">
+          <div class="type-sample__label">--text-xs / Meta</div>
+          <p style="font-size: var(--text-xs); color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0;">
+            META INFORMATION · 日期与标签
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 04. Spacing Scale ============ -->
+    <section class="elements-section">
+      <h2 class="elements-section__heading">04 间距系统 · 8px Grid</h2>
+      <div class="elements-subsection">
+        <div class="space-row"><span class="space-row__label">4xs · 4px</span><span class="space-row__bar" style="width: 4px;"></span></div>
+        <div class="space-row"><span class="space-row__label">3xs · 6px</span><span class="space-row__bar" style="width: 6px;"></span></div>
+        <div class="space-row"><span class="space-row__label">2xs · 8px</span><span class="space-row__bar" style="width: 8px;"></span></div>
+        <div class="space-row"><span class="space-row__label">xs · 12px</span><span class="space-row__bar" style="width: 12px;"></span></div>
+        <div class="space-row"><span class="space-row__label">sm · 16px</span><span class="space-row__bar" style="width: 16px;"></span></div>
+        <div class="space-row"><span class="space-row__label">md · 20px</span><span class="space-row__bar" style="width: 20px;"></span></div>
+        <div class="space-row"><span class="space-row__label">lg · 24px</span><span class="space-row__bar" style="width: 24px;"></span></div>
+        <div class="space-row"><span class="space-row__label">xl · 32px</span><span class="space-row__bar" style="width: 32px;"></span></div>
+        <div class="space-row"><span class="space-row__label">2xl · 40px</span><span class="space-row__bar" style="width: 40px;"></span></div>
+        <div class="space-row"><span class="space-row__label">3xl · 48px</span><span class="space-row__bar" style="width: 48px;"></span></div>
+        <div class="space-row"><span class="space-row__label">4xl · 64px</span><span class="space-row__bar" style="width: 64px;"></span></div>
+        <div class="space-row"><span class="space-row__label">5xl · 80px</span><span class="space-row__bar" style="width: 80px;"></span></div>
+        <div class="space-row"><span class="space-row__label">6xl · 96px</span><span class="space-row__bar" style="width: 96px;"></span></div>
+        <div class="space-row"><span class="space-row__label">7xl · 120px</span><span class="space-row__bar" style="width: 120px;"></span></div>
+        <div class="space-row"><span class="space-row__label">8xl · 160px</span><span class="space-row__bar" style="width: 160px;"></span></div>
+      </div>
+    </section>
+
+    <!-- ============ 05. Components ============ -->
+    <section class="elements-section">
+      <h2 class="elements-section__heading">05 组件库</h2>
+
+      <!-- Buttons -->
+      <div class="elements-subsection">
+        <h3 class="elements-subsection__title">Buttons</h3>
+        <div class="components-row" style="margin-bottom: var(--space-lg);">
+          <button class="btn btn--primary">Primary Button</button>
+          <button class="btn btn--outline">Outline Button</button>
+          <button class="btn btn--ghost">Ghost Button</button>
+        </div>
+        <div class="components-row">
+          <button class="btn btn--primary btn--sm">Small Primary</button>
+          <button class="btn btn--primary">Default</button>
+          <button class="btn btn--primary btn--lg">Large Primary</button>
+        </div>
+      </div>
+
+      <!-- Tags -->
+      <div class="elements-subsection">
+        <h3 class="elements-subsection__title">Tags</h3>
+        <div class="components-row">
+          <span class="tag">JavaScript</span>
+          <span class="tag">CSS</span>
+          <span class="tag">设计</span>
+          <span class="tag">文学</span>
+          <a href="#" class="tag">可点击标签</a>
+          <span class="tag">TypeScript</span>
+          <span class="tag">React</span>
+        </div>
+      </div>
+
+      <!-- Badges -->
+      <div class="elements-subsection">
+        <h3 class="elements-subsection__title">Badges</h3>
+        <div class="components-row">
+          <span class="badge">NEW</span>
+          <span class="badge">12 篇</span>
+          <span class="badge">置顶</span>
+        </div>
+      </div>
+
+      <!-- Article Cards -->
+      <div class="elements-subsection">
+        <h3 class="elements-subsection__title">Article Cards</h3>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--space-lg); margin-bottom: var(--space-xl);">
+          <article class="card">
+            <div class="card__date">2026 年 5 月 15 日</div>
+            <h3 class="card__title"><a href="#">在代码与文字之间找到平衡</a></h3>
+            <p class="card__excerpt">作为一个既写代码又写文章的人，我一直在寻找一种能让两种表达方式和谐共存的博客设计。这篇文章记录了我构建"一本会写代码的杂志"的设计思考过程。</p>
+            <div class="card__meta">
+              <span class="tag">随笔</span>
+              <span class="tag">设计</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card__date">2026 年 5 月 12 日</div>
+            <h3 class="card__title"><a href="#">TypeScript 5.5 新特性速览</a></h3>
+            <p class="card__excerpt">Inferred Type Predicates、Isolated Declarations、以及更好的 JSDoc 支持——来看看 TypeScript 5.5 为开发者带来了哪些惊喜。</p>
+            <div class="card__meta">
+              <span class="tag">TypeScript</span>
+              <span class="tag">技术</span>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Dividers -->
+      <div class="elements-subsection">
+        <h3 class="elements-subsection__title">Dividers</h3>
+        <hr class="divider">
+        <hr class="divider divider--short">
+        <div class="divider divider--ornament">§</div>
+      </div>
+
+      <!-- Friend Cards -->
+      <div class="elements-subsection">
+        <h3 class="elements-subsection__title">Friend Cards</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--space-lg);">
+          <a href="#" class="friend-card">
+            <div class="friend-card__avatar" style="background: oklch(0.7 0.15 200); display: flex; align-items: center; justify-content: center; color: white; font-family: var(--font-display); font-size: var(--text-xl);">A</div>
+            <div>
+              <div class="friend-card__name">Alex 的代码笔记</div>
+              <div class="friend-card__desc">全栈开发者，热爱开源</div>
+            </div>
+          </a>
+          <a href="#" class="friend-card">
+            <div class="friend-card__avatar" style="background: oklch(0.65 0.16 30); display: flex; align-items: center; justify-content: center; color: white; font-family: var(--font-display); font-size: var(--text-xl);">S</div>
+            <div>
+              <div class="friend-card__name">南山书屋</div>
+              <div class="friend-card__desc">读书 · 写作 · 生活</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 06. Markdown Elements ============ -->
+    <section class="elements-section">
+      <h2 class="elements-section__heading">06 Markdown 渲染元素</h2>
+
+      <!-- Inline Code -->
+      <div class="elements-subsection">
+        <h3 class="elements-subsection__title">Inline Code</h3>
+        <p>
+          在段落中使用 <code>const greeting = "Hello World"</code> 来展示行内代码样式。
+          CSS 中定义 <code>--color-accent</code> 变量时使用了 <code>oklch(0.62 0.16 75)</code>。
+          优雅编辑风博客使用 <code>Newsreader</code> + <code>Outfit</code> 字体组合。
+        </p>
+      </div>
+
+      <!-- Code Blocks -->
+      <div class="elements-subsection">
+        <h3 class="elements-subsection__title">Code Blocks</h3>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-wrapper__lang">javascript</div>
+          <pre><code>// A recursive Fibonacci with memoization
+function fibonacci(n, memo = {}) {
+  if (n <= 1) return n;
+  if (memo[n]) return memo[n];
+
+  memo[n] = fibonacci(n - 1, memo) + fibonacci(n - 2, memo);
+  return memo[n];
+}
+
+// The beauty of recursion meets
+// the efficiency of dynamic programming
+console.log(fibonacci(50)); // 12586269025</code></pre>
+        </div>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-wrapper__lang">css</div>
+          <pre><code>/* A perfectly balanced typography scale */
+:root {
+  --font-display: 'Newsreader', serif;
+  --font-body: 'Outfit', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --text-4xl: clamp(2.4rem, 5vw, 3rem);
+}
+
+h1 {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}</code></pre>
+        </div>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-wrapper__lang">python</div>
+          <pre><code>from dataclasses import dataclass
+from typing import Optional
+
+@dataclass
+class Article:
+    title: str
+    content: str
+    tags: list[str]
+    published_at: Optional[str] = None
+
+    def word_count(self) -> int:
+        return len(self.content.split())
+
+# "一本会写代码的杂志"
+article = Article(
+    title="在代码与文字之间",
+    content="...",
+    tags=["设计", "写作", "编程"],
+)
+print(article.word_count())</code></pre>
+        </div>
+      </div>
+
+      <!-- Blockquote -->
+      <div class="elements-subsection">
+        <h3 class="elements-subsection__title">Blockquote</h3>
+        <blockquote>
+          <p>好的设计是显而易见的，伟大的设计是透明的。好的排版让阅读成为一种享受，而不是一种任务。</p>
+          <cite>— 设计哲学</cite>
+        </blockquote>
+        <blockquote>
+          <p>Any application that can be written in JavaScript, will eventually be written in JavaScript.</p>
+          <cite>— Atwood's Law</cite>
+        </blockquote>
+      </div>
+
+      <!-- Tables -->
+      <div class="elements-subsection">
+        <h3 class="elements-subsection__title">Tables</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>属性</th>
+              <th>值</th>
+              <th>说明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>line-height</code></td>
+              <td>1.75</td>
+              <td>正文字号行高，为长时间阅读优化</td>
+            </tr>
+            <tr>
+              <td><code>max-width</code></td>
+              <td>720px</td>
+              <td>文章内容区最大宽度（45rem）</td>
+            </tr>
+            <tr>
+              <td><code>font-size</code></td>
+              <td>clamp(0.95rem, 2vw, 1.063rem)</td>
+              <td>响应式基础字号</td>
+            </tr>
+            <tr>
+              <td><code>letter-spacing</code></td>
+              <td>-0.02em</td>
+              <td>大标题字间距，微调视觉密度</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Lists -->
+      <div class="elements-subsection">
+        <h3 class="elements-subsection__title">Lists</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-2xl);">
+          <div>
+            <div class="type-sample__label" style="margin-bottom: var(--space-sm);">Unordered List</div>
+            <ul>
+              <li>设计系统的色彩 Token</li>
+              <li>字体层级与排版节奏</li>
+              <li>组件库与变体
+                <ul>
+                  <li>Button: primary, outline, ghost</li>
+                  <li>Card: default, hero</li>
+                  <li>Tag: static, clickable</li>
+                </ul>
+              </li>
+              <li>Markdown 元素样式覆盖</li>
+            </ul>
+          </div>
+          <div>
+            <div class="type-sample__label" style="margin-bottom: var(--space-sm);">Ordered List</div>
+            <ol>
+              <li>理解需求 &amp; 收集设计语境</li>
+              <li>声明设计系统（色彩 · 字体 · 间距 · 动效）</li>
+              <li>先出 v0 草稿让用户审阅方向</li>
+              <li>完整构建所有页面与组件</li>
+              <li>最终验证 &amp; 交付</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <!-- Task List -->
+      <div class="elements-subsection">
+        <h3 class="elements-subsection__title">Task List</h3>
+        <ul class="task-list">
+          <li class="task-list-item"><input type="checkbox" checked> 色彩系统 (oklch)</li>
+          <li class="task-list-item"><input type="checkbox" checked> 字体系统 (4 套字体)</li>
+          <li class="task-list-item"><input type="checkbox" checked> 间距 Scale (8px grid)</li>
+          <li class="task-list-item"><input type="checkbox" checked> 组件库 (Buttons, Cards, Tags...)</li>
+          <li class="task-list-item"><input type="checkbox" checked> Markdown 样式覆盖</li>
+          <li class="task-list-item"><input type="checkbox"> 图片 Lightbox</li>
+          <li class="task-list-item"><input type="checkbox"> 搜索功能</li>
+        </ul>
+      </div>
+
+      <!-- hr -->
+      <div class="elements-subsection">
+        <h3 class="elements-subsection__title">Horizontal Rule</h3>
+        <p>上方是一条分割线：</p>
+        <hr>
+        <p>下方也是。</p>
+      </div>
+
+      <!-- Details / Summary -->
+      <div class="elements-subsection">
+        <h3 class="elements-subsection__title">Details / Summary (折叠)</h3>
+        <details>
+          <summary>点击展开：关于 oklch 色彩空间</summary>
+          <p style="margin-top: var(--space-md);">oklch 是 CSS Color Level 4 中引入的感知均匀色彩空间。与 HSL 不同，oklch 中相同 Lightness 值的颜色在人眼中感知亮度是一致的。这意味着设计师可以更精确地控制视觉层级——一个 0.6 亮度的黄色和一个 0.6 亮度的蓝色，看起来确实是同等亮度的。</p>
+        </details>
+        <details open>
+          <summary>默认展开：设计理念</summary>
+          <p style="margin-top: var(--space-md);">"一本会写代码的杂志"——在有温度的纸质感中阅读文学，在理性的深色背景中阅读代码。两种气质在一本"杂志"里和谐共存。</p>
+        </details>
+      </div>
+
+      <!-- Figure -->
+      <div class="elements-subsection">
+        <h3 class="elements-subsection__title">Figure / Figcaption</h3>
+        <figure>
+          <div style="background: var(--color-surface); height: 200px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-md);">
+            <span style="font-family: var(--font-display); font-size: var(--text-2xl); color: var(--color-text-muted);">[ 图片占位符 ]</span>
+          </div>
+          <figcaption>图片说明文字：使用 figcaption 元素，居中、小号、灰色。</figcaption>
+        </figure>
+      </div>
+
+      <!-- Mark & Abbr -->
+      <div class="elements-subsection">
+        <h3 class="elements-subsection__title">Mark (高亮) &amp; Abbr (缩写)</h3>
+        <p>
+          这段文字中有一个 <mark>需要特别注意的重点</mark>，使用了 mark 标签。
+          另外这里有一个 <abbr title="Cascading Style Sheets">CSS</abbr> 缩写示例，
+          以及 <abbr title="HyperText Markup Language">HTML</abbr> 缩写——鼠标悬停查看完整形式。
+        </p>
+      </div>
+
+      <!-- Footnotes -->
+      <div class="elements-subsection">
+        <h3 class="elements-subsection__title">Footnotes 注脚</h3>
+        <p>
+          这里有一个脚注引用<sup class="footnote-ref"><a href="#fn1">1</a></sup>，点击可以跳转到脚注区域。
+          第二个脚注引用<sup class="footnote-ref"><a href="#fn2">2</a></sup>。
+        </p>
+        <div class="footnotes">
+          <ol>
+            <li id="fn1">这是第一个脚注的内容，通常用于补充说明或引用来源。</li>
+            <li id="fn2">这是第二个脚注，展示多个脚注时的样式。</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 07. Layout Primitives ============ -->
+    <section class="elements-section">
+      <h2 class="elements-section__heading">07 布局原语</h2>
+
+      <div class="elements-subsection">
+        <h3 class="elements-subsection__title">Content Container (Narrow)</h3>
+        <div style="background: var(--color-surface); padding: var(--space-xl); border-radius: var(--radius-md);">
+          <code>--content-width: 45rem (720px)</code> — 适合文章正文阅读。
+        </div>
+      </div>
+
+      <div class="elements-subsection" style="margin-top: var(--space-xl);">
+        <h3 class="elements-subsection__title">Content Container (Wide)</h3>
+        <div style="background: var(--color-surface); padding: var(--space-xl); border-radius: var(--radius-md);">
+          <code>--content-wide: 75rem (1200px)</code> — 适合首页网格等宽版布局。
+        </div>
+      </div>
+
+      <div class="elements-subsection" style="margin-top: var(--space-xl);">
+        <h3 class="elements-subsection__title">Page Header</h3>
+        <div style="background: var(--color-surface); padding: var(--space-xl); border-radius: var(--radius-md); text-align: center;">
+          <p style="font-size: var(--text-sm); color: var(--color-text-muted); margin-bottom: var(--space-sm);">.page-header</p>
+          <h2 style="font-size: var(--text-2xl);">页面标题</h2>
+          <p style="font-size: var(--text-sm); color: var(--color-text-secondary);">这是 .page-header__subtitle 副标题区域，用于描述页面内容。</p>
+        </div>
+      </div>
+
+      <div class="elements-subsection" style="margin-top: var(--space-xl);">
+        <h3 class="elements-subsection__title">Timeline</h3>
+        <ul class="timeline">
+          <li class="timeline__item">
+            <div class="timeline__year">2026</div>
+            <div class="timeline__title">博客上线</div>
+            <div class="timeline__desc">"一本会写代码的杂志"正式上线，融合文学排版与代码展示。</div>
+          </li>
+          <li class="timeline__item">
+            <div class="timeline__year">2024</div>
+            <div class="timeline__title">开始写作</div>
+            <div class="timeline__desc">在 GitHub Pages 上开始撰写技术博客。</div>
+          </li>
+          <li class="timeline__item">
+            <div class="timeline__year">2022</div>
+            <div class="timeline__title">学习前端开发</div>
+            <div class="timeline__desc">从 HTML/CSS 起步，逐步掌握全栈开发技能。</div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ 08. Hero Background Image ============ -->
+    <section class="elements-section">
+      <h2 class="elements-section__heading">08 Hero 背景图</h2>
+
+      <div class="elements-subsection">
+        <h3 class="elements-subsection__title">全屏背景图 + 左下角标题</h3>
+        <p style="margin-bottom: var(--space-lg);">Hero 使用全屏 <code>background-image</code>，通过两层暗色渐变遮罩确保文字可读性。标题和副标题使用衬线体，位于左下角，营造杂志封面般的艺术气息。</p>
+
+        <div style="background-color: var(--color-surface); border-radius: var(--radius-md); overflow: hidden;">
+          <div class="hero" style="min-height: 50vh; padding: var(--space-3xl); background-image: url('https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=abstract%20warm%20toned%20artistic%20background,%20ink%20wash%20texture,%20cream%20and%20amber%20tones,%20editorial%20magazine%20aesthetic&image_size=landscape_16_9');">
+            <div class="hero__content">
+              <div class="hero__issue">ISSUE NO. 01 · 2026</div>
+              <h1 class="hero__title" style="font-size: clamp(1.5rem, 4vw, 3rem);">
+                <span class="hero__title-line">Ink &amp; Code</span>
+                <span class="hero__title-line">一本会写代码的杂志</span>
+              </h1>
+              <p class="hero__subtitle" style="font-size: var(--text-sm);">全屏背景图 + 左下角衬线体标题的艺术表达</p>
+            </div>
+          </div>
+        </div>
+
+        <p style="margin-top: var(--space-lg); font-size: var(--text-sm); color: var(--color-text-muted);">
+          背景图 URL 通过 <code>https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image</code> API 生成。hero 元素使用 <code>::before</code> 叠加对角线暗色渐变，<code>::after</code> 叠加左侧到中心的水平渐变，确保左下角文字始终在深色背景上方。
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ 09. Card Images ============ -->
+    <section class="elements-section">
+      <h2 class="elements-section__heading">09 文章卡片头图</h2>
+
+      <div class="elements-subsection">
+        <h3 class="elements-subsection__title">有头图的卡片</h3>
+        <p style="margin-bottom: var(--space-lg);">卡片顶部使用 <code>.card__image</code>（<code>img</code> 标签），通过负边距延伸到卡片边缘。图片 <code>object-fit: cover</code>，高 200px，圆角仅作用于顶部。</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--space-lg);">
+          <article class="card">
+            <img class="card__image" src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=minimalist%20writing%20desk%20with%20ink%20pen,%20warm%20lighting,%20editorial%20style&image_size=landscape_16_9" alt="" loading="lazy">
+            <div class="card__date">2026 年 5 月 15 日</div>
+            <h3 class="card__title"><a href="#">带图片的文章卡片</a></h3>
+            <p class="card__excerpt">这张卡片使用 .card__image 展示头图。图片从卡片边缘延伸到边缘，顶部圆角匹配。</p>
+            <div class="card__meta">
+              <span class="tag">设计</span>
+              <span class="tag">组件</span>
+            </div>
+          </article>
+          <article class="card">
+            <img class="card__image" src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=abstract%20blue%20code%20visualization,%20minimalist%20tech%20art&image_size=landscape_16_9" alt="" loading="lazy">
+            <div class="card__date">2026 年 5 月 12 日</div>
+            <h3 class="card__title"><a href="#">技术类文章卡片</a></h3>
+            <p class="card__excerpt">技术文章也可以用抽象图形作为头图，增强视觉层次感。</p>
+            <div class="card__meta">
+              <span class="tag">TypeScript</span>
+              <span class="tag">技术</span>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="elements-subsection" style="margin-top: var(--space-2xl);">
+        <h3 class="elements-subsection__title">无头图的卡片</h3>
+        <p style="margin-bottom: var(--space-lg);">没有 <code>&lt;img class="card__image"&gt;</code> 的卡片自动使用标准内边距布局，无需额外类名。添加 <code>.card--no-image</code> 为可选语义标记。</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--space-lg);">
+          <article class="card card--no-image">
+            <div class="card__date">2026 年 4 月 28 日</div>
+            <h3 class="card__title"><a href="#">无图片的纯文字卡片</a></h3>
+            <p class="card__excerpt">没有 img 标签时，卡片自动回退到纯文字布局。适用于不需要配图的技术文章或短随笔。</p>
+            <div class="card__meta">
+              <span class="tag">React</span>
+              <span class="tag">全栈</span>
+            </div>
+          </article>
+          <article class="card card--no-image">
+            <div class="card__date">2026 年 4 月 10 日</div>
+            <h3 class="card__title"><a href="#">另一种无图卡片</a></h3>
+            <p class="card__excerpt">两种模式可以混合使用。主页网格中既有带图的卡片也有纯文字卡片，形成杂志式的视觉节奏。</p>
+            <div class="card__meta">
+              <span class="tag">随笔</span>
+              <span class="tag">写作</span>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="elements-subsection" style="margin-top: var(--space-2xl);">
+        <h3 class="elements-subsection__title">CSS 实现要点</h3>
+        <div class="code-block-wrapper">
+          <div class="code-block-wrapper__lang">css</div>
+          <pre><code>/* 卡片头图：通过负边距延伸到卡片边缘 */
+.card__image {
+  width: calc(100% + var(--space-xl) * 2);
+  margin: calc(var(--space-xl) * -1) var(--space-xl)
+          var(--space-lg) calc(var(--space-xl) * -1);
+  height: 200px;
+  object-fit: cover;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+/* 无图模式：隐式 — 没有 img.card__image 就自然回退 */</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 10. Article Images ============ -->
+    <section class="elements-section">
+      <h2 class="elements-section__heading">10 文章图片</h2>
+
+      <div class="elements-subsection">
+        <h3 class="elements-subsection__title">文章头图</h3>
+        <p style="margin-bottom: var(--space-lg);">文章页使用 <code>.article-header__image</code> 全宽头图，响应式高度 <code>clamp(240px, 40vh, 480px)</code>。头图存在时，<code>.article-header</code> 需添加 <code>.article-header--with-image</code> 修饰类以移除顶部内边距。</p>
+
+        <div style="background: var(--color-surface); border-radius: var(--radius-md); overflow: hidden;">
+          <header class="article-header article-header--with-image" style="padding-bottom: var(--space-lg);">
+            <img class="article-header__image" src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=warm%20paper%20texture%20with%20ink,%20editorial%20magazine%20header,%20minimalist%20typography%20background&image_size=landscape_16_9" alt="" style="height: 200px; margin-bottom: var(--space-xl);">
+            <div class="article-header__date">2026 年 5 月 15 日</div>
+            <h2 class="article-header__title" style="font-size: var(--text-2xl);">文章头图示范</h2>
+            <div class="article-header__meta">
+              <span class="tag">示范</span>
+              <span class="tag">图片</span>
+            </div>
+          </header>
+        </div>
+
+        <p style="margin-top: var(--space-lg); font-size: var(--text-sm); color: var(--color-text-muted);">
+          头图下方的日期、标题、标签区域正常居中显示。<code>.article-header--with-image</code> 只在有头图时使用。
+        </p>
+      </div>
+
+      <div class="elements-subsection" style="margin-top: var(--space-2xl);">
+        <h3 class="elements-subsection__title">文内图片</h3>
+        <p style="margin-bottom: var(--space-lg);">正文中的 <code>&lt;img&gt;</code> 自动应用 <code>.article-body img</code> 样式：100% 宽度、圆角、上下间距。支持 <code>&lt;figure&gt;</code> + <code>&lt;figcaption&gt;</code> 的 Markdown 渲染结构。</p>
+
+        <div style="max-width: var(--content-width); margin: 0 auto;">
+          <figure>
+            <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=soft%20abstract%20warm%20texture,%20paper%20fiber,%20cream%20background,%20subtle%20art%20minimalist&image_size=landscape_16_9" alt="" loading="lazy" style="height: 200px; object-fit: cover;">
+            <figcaption>figcaption 居中显示，小号 UI 字体，次级文字颜色</figcaption>
+          </figure>
+
+          <p>上方是一个带 <code>&lt;figcaption&gt;</code> 的 <code>&lt;figure&gt;</code> 结构。下方是一个直接使用 <code>&lt;img&gt;</code> 标签的示例：</p>
+
+          <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=ink%20wash%20abstract%20painting,%20warm%20beige%20tones,%20Japanese%20sumi-e%20style%20minimal&image_size=landscape_16_9" alt="" loading="lazy" style="height: 200px; object-fit: cover;">
+
+          <p style="font-size: var(--text-sm); color: var(--color-text-muted); margin-top: var(--space-lg);">
+            两种方式都使用 <code>.article-body img</code> 的统一样式，Markdown 渲染后的 <code>&lt;img&gt;</code> 无需额外处理即可获得一致的视觉效果。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 11. Motion ============ -->
+    <section class="elements-section">
+      <h2 class="elements-section__heading">11 动效 Token</h2>
+      <table>
+        <thead>
+          <tr><th>Token</th><th>值</th><th>用途</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>--ease-out</code></td>
+            <td><code>cubic-bezier(0.16, 1, 0.3, 1)</code></td>
+            <td>出场动效 / 组件过渡</td>
+          </tr>
+          <tr>
+            <td><code>--ease-in-out</code></td>
+            <td><code>cubic-bezier(0.65, 0, 0.35, 1)</code></td>
+            <td>弹性对称动效</td>
+          </tr>
+          <tr>
+            <td><code>--duration-fast</code></td>
+            <td><code>150ms</code></td>
+            <td>微交互 (hover, focus)</td>
+          </tr>
+          <tr>
+            <td><code>--duration-normal</code></td>
+            <td><code>250ms</code></td>
+            <td>组件切换 (show/hide)</td>
+          </tr>
+          <tr>
+            <td><code>--duration-slow</code></td>
+            <td><code>400ms</code></td>
+            <td>页面级动效 (scroll reveal)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="elements-subsection" style="margin-top: var(--space-xl);">
+        <h3 class="elements-subsection__title">Card Hover Effect</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: var(--space-lg);">
+          <article class="card">
+            <div class="card__date">悬停我试试</div>
+            <h3 class="card__title">上浮 + 阴影展开</h3>
+            <p class="card__excerpt">卡片悬停时 translateY(-4px) 配合 shadow-card-hover，过渡使用 ease-out 250ms。</p>
+            <div class="card__meta"><span class="tag">动效示范</span></div>
+          </article>
+          <article class="card">
+            <div class="card__date">按钮也试试</div>
+            <h3 class="card__title">点按缩放反馈</h3>
+            <p class="card__excerpt">按钮 :active 状态下 scale(0.97)，给用户清晰的点击确认感。</p>
+            <div class="card__meta">
+              <button class="btn btn--primary btn--sm">点我试试</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 12. CSS Variable Reference ============ -->
+    <section class="elements-section">
+      <h2 class="elements-section__heading">12 CSS Variable 速查表</h2>
+      <table>
+        <thead>
+          <tr><th>类别</th><th>Variable</th><th>oklch 基准值</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>BG</td><td><code>--color-bg</code></td><td><code>oklch(0.985 0.003 85)</code></td></tr>
+          <tr><td>BG</td><td><code>--color-surface</code></td><td><code>oklch(0.965 0.006 80)</code></td></tr>
+          <tr><td>Text</td><td><code>--color-text-primary</code></td><td><code>oklch(0.22 0.02 85)</code></td></tr>
+          <tr><td>Text</td><td><code>--color-text-secondary</code></td><td><code>oklch(0.48 0.01 80)</code></td></tr>
+          <tr><td>Text</td><td><code>--color-text-muted</code></td><td><code>oklch(0.6 0.01 80)</code></td></tr>
+          <tr><td>Accent</td><td><code>--color-accent</code></td><td><code>oklch(0.62 0.16 75)</code></td></tr>
+          <tr><td>Accent</td><td><code>--color-accent-hover</code></td><td><code>oklch(0.55 0.17 72)</code></td></tr>
+          <tr><td>Accent</td><td><code>--color-accent-subtle</code></td><td><code>oklch(0.92 0.04 80)</code></td></tr>
+          <tr><td>Border</td><td><code>--color-border</code></td><td><code>oklch(0.88 0.01 80)</code></td></tr>
+          <tr><td>Border</td><td><code>--color-border-strong</code></td><td><code>oklch(0.78 0.02 80)</code></td></tr>
+          <tr><td>Code</td><td><code>--color-code-bg</code></td><td><code>oklch(0.18 0.01 265)</code></td></tr>
+          <tr><td>Code</td><td><code>--color-code-text</code></td><td><code>oklch(0.88 0.005 85)</code></td></tr>
+          <tr><td>Code</td><td><code>--color-code-inline-bg</code></td><td><code>oklch(0.93 0.015 80)</code></td></tr>
+          <tr><td>Tag</td><td><code>--color-tag-bg</code></td><td><code>oklch(0.92 0.02 80)</code></td></tr>
+          <tr><td>Tag</td><td><code>--color-tag-text</code></td><td><code>oklch(0.48 0.02 75)</code></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <ul class="site-footer__links">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="about.html">关于</a></li>
+        <li><a href="archive.html">归档</a></li>
+        <li><a href="friends.html">友链</a></li>
+        <li><a href="ELEMENTS.html">Elements</a></li>
+      </ul>
+      <p class="site-footer__text">&copy; 2026 INK &amp; CODE — "一本会写代码的杂志"</p>
+    </div>
+  </footer>
+
+  <button class="back-to-top" aria-label="Back to top">↑</button>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

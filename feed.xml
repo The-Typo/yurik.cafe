@@ -6,7 +6,7 @@
     <description>鲸落于海，星沉于洼</description>
     <language>zh-CN</language>
     <copyright>All rights reserved 2026, 景蓝Yurik</copyright>
-    <lastBuildDate>Tue, 19 May 2026 10:42:17 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 19 May 2026 10:59:46 GMT</lastBuildDate>
     <generator>Hexo</generator>
     <atom:link href="https://yurik.cafe/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
@@ -19,7 +19,7 @@
       <category domain="https://yurik.cafe/categories/reviews/">开箱</category>
       <category domain="https://yurik.cafe/tags/%E5%B0%8F%E4%B8%BB%E6%9C%BA/">小主机</category>
       <category domain="https://yurik.cafe/tags/%E8%BD%AF%E8%B7%AF%E7%94%B1/">软路由</category>
-      <pubDate>Tue, 19 May 2026 10:42:17 GMT</pubDate>
+      <pubDate>Tue, 19 May 2026 10:59:46 GMT</pubDate>
       <content:encoded>
         <![CDATA[<h2 id="为什么要买一台-N100"><a href="#为什么要买一台-N100" class="headerlink" title="为什么要买一台 N100"></a>为什么要买一台 N100</h2><p>博主终于结束了高中生活步入令人期待的高中了。由于博主的大学属于开学晚的那一批，在别的同学都开学后博主便找他们咨询大学的一些注意事项<br>:spoiler[<del>抄作业</del>]。很多人提到了他们学校的校园网有很多限制，比如<strong>限制设备数</strong>，<strong>要求 Web 登录</strong>等等······</p><p>对我这种设备多且杂的人来说是绝对不能忍的，于是我决定买一台运行 OpenWRT 的软路由配合脚本来绕过这些限制。</p><p>我选择了一台带有 2 个 10Gbps 的 SFP 光口和 4 个 搭载 i226-V 的 2.5Gbps 电口的 N100 机器作为软路由，还花了博主 1600 块钱。</p><p>可当我收到软路由后我却傻眼了，学校的宽带竟是直接从运营商拨号并且不做任何限制的，这便意味着一台硬路由便可解决这个问题。</p><p>在又买了一个硬路由 (Cudy TR3000) 后，我陷入了对 N100 的思考，究竟拿他来做些什么呢？</p><h2 id="伪开箱"><a href="#伪开箱" class="headerlink" title="伪开箱"></a>伪开箱</h2><p>让我们再做一个伪开箱吧。</p><p>这台机器搭载了两个 82599ES 的 SFP 10G 光口以及四个 i226-V 的 2.5G 电口，可以说是天生软路由圣体。</p><p>我选购的是成品机器，自带一条8GB DDR4 3200 的笔记本内存和一块 256GB 的 Nvme<br>SSD，都是杂牌。</p><p>机身除了顶部的亚克力盖子外均是哑光的 CNC 铝合金外壳，质感很好。</p><p>除了上文提供的网络接口外，机器还提供了 2 个 Type-C 接口，其中一个支持 PD 协议给机器供电；三个USB-A 的 USB 3.0 接口； 1 个<br>HDMI 和 1 个 DP 接口。</p><h2 id="折腾"><a href="#折腾" class="headerlink" title="折腾"></a>折腾</h2><p>机器一到手我就给他加装了一块 MT7922，这是一块支持 Wifi 6E 的无线网卡，只可惜后来发现只支持单频发射，如果使用软路由直接当作AP的话只能在<br>5G 和 2.5G 中做出取舍</p><p>系统方面我选择了 iStoreOS ，这是一个基于 OpenWRT 的免费系统，优点是可以快速地配置网络。我们学校可以直接拨号，就直接使用<br>PPPoE 模式就可以了。</p><p>原装的杂牌内存在经历了一周不到便暴毙了，之后我自己更换了光威的同规格内存。</p><h2 id="软路由后"><a href="#软路由后" class="headerlink" title="软路由后"></a>软路由后</h2><p>目前我给 N100 安装了 Arch Linux 当作我的 Linux 主机使用，这样便完成了在宿舍中同时拥有 macOS 、 Windows 和 Arch Linux 的成就。</p><p>因为机器支持 PD 通电，我可以把他当作一个可以随时带出去的 Linux 工作站。等放假回家了就把一些服务迁移到这台机器上，防止别的服务破坏<br>家里 NAS 的稳定性。（从 AIO 到 AIB）</p>]]>
       </content:encoded>
@@ -178,8 +178,8 @@
       </description>
       <author>景蓝Yurik</author>
       <category domain="https://yurik.cafe/categories/projects/">项目</category>
-      <category domain="https://yurik.cafe/tags/Hexo/">Hexo</category>
       <category domain="https://yurik.cafe/tags/Hexo-%E4%B8%BB%E9%A2%98/">Hexo 主题</category>
+      <category domain="https://yurik.cafe/tags/Hexo/">Hexo</category>
       <pubDate>Wed, 31 Jan 2024 16:00:00 GMT</pubDate>
       <content:encoded>
         <![CDATA[<p><img src="/2024/hexo-theme-news/banner.webp"></p><p>如你所见，我给博客换上了一个新主题。</p><p>与别的主题不同的是，这个主题是我从 1 开始制作的。为什么是从 1 开始？因为这个主题我参考了 <a href="https://www.apple.com.cn/newsroom/">Apple 公司的 Newsroom 页面</a>，也使用了部分 Apple 的 CSS 样式表（主要是文字相关部分），因此这个主题也被我命名为<strong>News「新闻中心」</strong>。这篇博文是制作**News「新闻中心」**主题的记录。</p><h2 id="灵感"><a href="#灵感" class="headerlink" title="灵感"></a>灵感</h2><p>最开始的想法是在给班级网站写新闻中心页面。当时给网站主页使用的 Bootstrap 5 的 Jumbotron 模板，想着设计一个和他向契合的新闻页面，突然我想到了之前看到的 Apple Newsroom 我十分喜欢，于是便用 Bootstrap 的 Card 放置了一个差不多的页面出来，这可以称为是**News「新闻中心」**的 <strong>α1</strong> 测试版本。</p><blockquote><p>此处因保护隐私原因不放出参考网址</p></blockquote><p>之后这个站点便因为准备期考而暂停了更新，但我仍时不时的对他的样式表做一点细微的调整，直到期考结束。期考结束的这个寒假，我按照计划维护着博客，突发奇想要不把之前写的「新闻中心」改成主题吧！</p><p><strong>说干就干</strong></p><h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><p>我使用的是 <a href="https://www.npmjs.com/package/yo">YO(Yeoman generators) 生成器</a>来创建的 Hexo 主题模板，使用的 EJS 模板语言和 CSS 样式表，具体的技术细节就不再文中赘述了。我感觉主题的开发就和使用 PHP 写程序一样，要注重代码的**“复用”**，即模块化编程，将不同的组件单独编写，按需调用，省去了重复造轮子的麻烦。</p><p>目前，**News「新闻中心」**已经实现了以下功能：</p><ul><li>基础文章的渲染</li><li>友情链接页面</li></ul><p>计划实现的功能：</p><ul><li>灯箱 Fancybox</li><li>完善配置文件</li><li>代码高亮</li></ul><h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><p>**News「新闻中心」**具有以下特性：</p><ul><li>使用了最新的 Bootstrap 5 作为框架，「新闻中心」支持其全部组件和特性</li></ul><h2 id="鸣谢"><a href="#鸣谢" class="headerlink" title="鸣谢"></a>鸣谢</h2><p>以下项目在 Newsroom 开发时提供了无可取代的帮助，特在此表达诚挚的谢意（排名不分先后）</p><ul><li><p>设计灵感和部分 CSS 代码来自：<a href="//apple.com.cn">Apple Inc.</a></p></li><li><p>导航栏动画来自：<a href="https://nero978.top/">Nero978</a> | <a href="https://github.com/Miracle-Town/mt-web">Miracal Town&#x2F;mt-web</a></p></li><li><p>Hexo 主题启蒙，提供了部分样式和脚本代码：<a href="https://github.com/fluid-dev/hexo-theme-fluid">Fluid 主题</a></p></li><li><p>默认随机封面图来自我使用的第一个博客主题：<a href="https://github.com/BigCoke233/miracles">BigCoke233&#x2F;Miracles</a></p></li></ul><h2 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h2><div class="alert alert-danger" role="alert">  警告：<b>News「新闻中心」</b>因个人原因无限期停止开发。</div><a href="https://github.com/ImJingLan/hexo-theme-news" target="_blank" type="button" class="btn btn-outline-dark btn-lg w-100" ><i class="bi bi-github"></i> ImJingLan/hexo-theme-news</a>]]>

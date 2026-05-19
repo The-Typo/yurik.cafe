@@ -1,0 +1,55 @@
+name: 同步至 Deploy 分支
+on:
+  workflow_dispatch: null
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 迁出代码
+        uses: actions/checkout@master
+      - name: 获取提交版本号
+        id: get_version
+        run: |
+          version=$(git rev-parse --short HEAD)
+          echo "VERSION=$version" >> $GITHUB_ENV
+          echo "Latest commit version: $version"
+      - name: 查询所有主题配置文件
+        run: |
+          find . -type f -name "_config.ink-code.yml" > footer_files.txt
+          cat footer_files.txt # 输出查找到的 HTML 文件列表
+      - name: 更新 footer 的版本号
+        run: |
+          version=${{ env.VERSION }}
+          while IFS= read -r file; do
+            sed -i "s/{{GITVERSION}}/$version/g" "$file"
+            echo "Updated version in $file"
+          done < footer_files.txt
+      - name: 输出遭到修改的文件列表
+        run: |
+          cat footer_files.txt # 输出修改后的 HTML 文件列表
+      - name: 设置Node环境
+        uses: actions/setup-node@master
+      - name: 安装Hexo Cli 和 其他 环境
+        run: |
+          npm install hexo-cli -g
+          npm install
+      - name: 渲染博客界面
+        run: |
+          npm run g
+      - name: 部署到 Deploy 分支
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: hexo-deploy
+          folder: public
+
+#      - name: 发布到服务器
+#        uses: easingthemes/ssh-deploy@main
+#        env:
+#          SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+#          ARGS: "-rltgoDzvO --delete"
+#          EXCLUDE: /.git/, /.github/, /README.md, /LICENSE, /html_files.txt
+#          SOURCE: "public"
+#          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+#          REMOTE_USER: root
+#          REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
+#          TARGET: /opt/1panel/www/sites/yurik.cafe/index

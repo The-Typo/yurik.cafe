@@ -2,15 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://yurik.cafe/friends/index.html</loc>
-    
-    <lastmod>2026-05-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://yurik.cafe/links/index.html</loc>
     
     <lastmod>2026-05-19</lastmod>
@@ -21,6 +12,15 @@
   
   <url>
     <loc>https://yurik.cafe/tags/index.html</loc>
+    
+    <lastmod>2026-05-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://yurik.cafe/friends/index.html</loc>
     
     <lastmod>2026-05-19</lastmod>
     
@@ -47,7 +47,7 @@
   </url>
   
   <url>
-    <loc>https://yurik.cafe/about/index.html</loc>
+    <loc>https://yurik.cafe/categories/index.html</loc>
     
     <lastmod>2026-05-19</lastmod>
     
@@ -56,7 +56,7 @@
   </url>
   
   <url>
-    <loc>https://yurik.cafe/categories/index.html</loc>
+    <loc>https://yurik.cafe/about/index.html</loc>
     
     <lastmod>2026-05-19</lastmod>
     
@@ -92,15 +92,6 @@
   </url>
   
   <url>
-    <loc>https://yurik.cafe/2024/nas-hardware-guide/</loc>
-    
-    <lastmod>2026-05-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://yurik.cafe/2025/macbook-pro-review/</loc>
     
     <lastmod>2026-05-19</lastmod>
@@ -128,6 +119,24 @@
   </url>
   
   <url>
+    <loc>https://yurik.cafe/2024/nas-hardware-guide/</loc>
+    
+    <lastmod>2026-05-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://yurik.cafe/2024/hexo-theme-news/</loc>
+    
+    <lastmod>2026-05-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://yurik.cafe/2024/new-avatar/</loc>
     
     <lastmod>2026-05-19</lastmod>
@@ -147,15 +156,6 @@
   
   <url>
     <loc>https://yurik.cafe/2024/hexo-guidebook-1/</loc>
-    
-    <lastmod>2026-05-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://yurik.cafe/2024/hexo-theme-news/</loc>
     
     <lastmod>2026-05-19</lastmod>
     
@@ -308,7 +308,7 @@
   </url>
   
   <url>
-    <loc>https://yurik.cafe/2022/hugo-blog/</loc>
+    <loc>https://yurik.cafe/2022/hello-world/</loc>
     
     <lastmod>2026-05-19</lastmod>
     
@@ -317,7 +317,7 @@
   </url>
   
   <url>
-    <loc>https://yurik.cafe/2022/hello-world/</loc>
+    <loc>https://yurik.cafe/2022/hugo-blog/</loc>
     
     <lastmod>2026-05-19</lastmod>
     

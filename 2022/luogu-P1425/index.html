@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon shortcut" href="/favicon/v2/favicon.ico">
+<title>「信竞」P1425 - 小鱼的游泳时间 — 景蓝的小屋</title>
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/feed.xml" title="景蓝的小屋" type="application/rss+xml">
+</head>
+<body class="">
+  
+<nav class="site-nav">
+  <div class="site-nav__inner">
+    <a href="/" class="site-nav__brand">景蓝的小屋</a>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="site-nav__links">
+      
+        <li><a href="/">首页</a></li>
+      
+        <li><a href="/about/">关于我</a></li>
+      
+        <li><a href="/archives/">归档</a></li>
+      
+        <li><a href="/friends/">友链</a></li>
+      
+        <li><a target="_blank" rel="noopener" href="https://www.travellings.cn/go.html">开往</a></li>
+      
+    </ul>
+  </div>
+</nav>
+<div class="nav-overlay"></div>
+
+  <script>
+  if (document.querySelector('.hero')) {
+    document.body.classList.add('has-hero');
+  }
+</script>
+
+
+<header class="article-header">
+  <time class="article-header__date" datetime="2022-04-01">2022 年 4 月 1 日</time>
+  <h1 class="article-header__title">「信竞」P1425 - 小鱼的游泳时间</h1>
+  <div class="article-header__meta">
+    
+      
+        <span class="badge">信竞</span>
+      
+    
+    
+  </div>
+</header>
+
+
+
+<figure class="article-featured-image">
+  <img src="/2022/luogu-P1425/banner.png" alt="「信竞」P1425 - 小鱼的游泳时间">
+  
+</figure>
+
+
+<div class="article-layout article-layout--with-toc">
+  
+  <aside class="toc-sidebar">
+    <div class="toc-sidebar__title">目录</div>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE"><span class="toc-text">题目</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F"><span class="toc-text">输入格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F"><span class="toc-text">输出格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%A0%B7%E4%BE%8B"><span class="toc-text">输入输出样例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B4%E6%98%8E-%E6%8F%90%E7%A4%BA"><span class="toc-text">说明&#x2F;提示</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98"><span class="toc-text">解题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#AC-%E4%BB%A3%E7%A0%81"><span class="toc-text">AC 代码</span></a></li></ol></li></ol>
+  </aside>
+  
+  <div class="article-body">
+    <p>好久没碰过 C++了，也好久没碰竞赛了</p>
+<p>今天突然想起来去洛谷注册了个账号（（（</p>
+<p>从入门题库中看到了这道入门题</p>
+<p>觉得蛮有意思的，就记一下过程</p>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p><strong>原题</strong>：洛谷 - <a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1425">P1425 小鱼的游泳时间</a></p>
+<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>伦敦奥运会要到了，小鱼在拼命练习游泳准备参加游泳比赛，可怜的小鱼并不知道鱼类是不能参加人类的奥运会的。</p>
+<p>这一天，小鱼给自己的游泳时间做了精确的计时（本题中的计时都按 24 小时制计算），它发现自己从 a 时 b 分一直游泳到当天的 c 时 d 分，请你帮小鱼计算一下，它这天一共游了多少时间呢？</p>
+<p>小鱼游的好辛苦呀，你可不要算错了哦。</p>
+<h3 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h3><p>一行内输入 4 个整数，分别表示 a, b, c, d。</p>
+<h3 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h3><p>一行内输出 2 个整数 e 和 f，用空格间隔，依次表示小鱼这天一共游了多少小时多少分钟。其中表示分钟的整数 f 应该小于 60。</p>
+<h3 id="输入输出样例"><a href="#输入输出样例" class="headerlink" title="输入输出样例"></a>输入输出样例</h3><p><strong>输入 #1</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">12 50 19 10</span><br></pre></td></tr></table></figure>
+
+<p><strong>输出 #1</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">6 20</span><br></pre></td></tr></table></figure>
+
+<h3 id="说明-提示"><a href="#说明-提示" class="headerlink" title="说明&#x2F;提示"></a>说明&#x2F;提示</h3><p>对于全部测试数据，0 ≤ <em>a</em>,*c *≤ 24，0 ≤ b,d ≤ 600 ≤ <em>b</em>,<em>d</em> ≤ 60，且结束时间一定晚于开始时间。</p>
+<h2 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h2><p>很显然，这就是一个数学问题：怎么通过时间格式计算间隔</p>
+<p>1.通过计算将时间统一到所需最小单位 - minute</p>
+<p>2.通过取整，取余计算获得结果</p>
+<h3 id="AC-代码"><a href="#AC-代码" class="headerlink" title="AC 代码"></a>AC 代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> a,b,c,d;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	cin&gt;&gt;a&gt;&gt;b&gt;&gt;c&gt;&gt;d;</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> allminute = <span class="number">60</span>*(c-a<span class="number">-1</span>)+(<span class="number">60</span>-b)+d;</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> hours = allminute / <span class="number">60</span>;</span><br><span class="line"></span><br><span class="line">	cout&lt;&lt;hours;</span><br><span class="line"></span><br><span class="line">	cout&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;allminute %<span class="number">60</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+  </div>
+</div>
+
+
+<div class="content-container" style="padding: 0 var(--space-2xl);">
+  <nav class="article-nav" style="max-width: var(--content-width); margin-left: auto; margin-right: auto;">
+    
+    <a href="/2022/dell-poweredge-r720-review/" class="article-nav__item">
+      <span class="article-nav__label">上一篇</span>
+      <span class="article-nav__title">「开箱」戴尔 PowerEdge R720 上手 : 年轻人的第一台家庭服务器</span>
+    </a>
+    
+    
+    <a href="/2022/hugo-blog/" class="article-nav__item article-nav__item--next">
+      <span class="article-nav__label">下一篇</span>
+      <span class="article-nav__title">「技术」使用Hugo搭建个人博客</span>
+    </a>
+    
+  </nav>
+</div>
+
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <ul class="site-footer__links">
+      
+        <li><a href="/">首页</a></li>
+      
+        <li><a href="/about/">关于我</a></li>
+      
+        <li><a href="/archives/">归档</a></li>
+      
+        <li><a href="/friends/">友链</a></li>
+      
+        <li><a target="_blank" rel="noopener" href="https://www.travellings.cn/go.html">开往</a></li>
+      
+    </ul>
+    <p class="site-footer__text"><div> © <span id="copyright-year">2026</span> 景蓝 Yurik. All Rights Reserved. / <a target="_blank" href="/feed.xml">RSS</a> / <a target="_blank" href="/sitemap.xml">Sitemap</a><br> Git Version: 92ae5e5<br> <a target="_blank" href="https://beian.miit.gov.cn">桂ICP备2025057334号</a> </div>
+</p>
+  </div>
+</footer>
+
+<button class="back-to-top" aria-label="Back to top">&uarr;</button>
+
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>

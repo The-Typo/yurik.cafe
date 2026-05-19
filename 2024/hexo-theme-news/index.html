@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon shortcut" href="/favicon/v2/favicon.ico">
+<title>「项目」Hexo 主题 News 现已上线 — 景蓝的小屋</title>
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/feed.xml" title="景蓝的小屋" type="application/rss+xml">
+</head>
+<body class="">
+  
+<nav class="site-nav">
+  <div class="site-nav__inner">
+    <a href="/" class="site-nav__brand">景蓝的小屋</a>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="site-nav__links">
+      
+        <li><a href="/">首页</a></li>
+      
+        <li><a href="/about/">关于我</a></li>
+      
+        <li><a href="/archives/">归档</a></li>
+      
+        <li><a href="/friends/">友链</a></li>
+      
+        <li><a target="_blank" rel="noopener" href="https://www.travellings.cn/go.html">开往</a></li>
+      
+    </ul>
+  </div>
+</nav>
+<div class="nav-overlay"></div>
+
+  <script>
+  if (document.querySelector('.hero')) {
+    document.body.classList.add('has-hero');
+  }
+</script>
+
+
+<header class="article-header">
+  <time class="article-header__date" datetime="2024-02-01">2024 年 2 月 1 日</time>
+  <h1 class="article-header__title">「项目」Hexo 主题 News 现已上线</h1>
+  <div class="article-header__meta">
+    
+      
+        <span class="badge">项目</span>
+      
+    
+    
+      
+        <span class="tag">Hexo</span>
+      
+        <span class="tag">Hexo 主题</span>
+      
+    
+  </div>
+</header>
+
+
+
+<figure class="article-featured-image">
+  <img src="/2024/hexo-theme-news/banner.webp" alt="「项目」Hexo 主题 News 现已上线">
+  
+</figure>
+
+
+<div class="article-layout article-layout--with-toc">
+  
+  <aside class="toc-sidebar">
+    <div class="toc-sidebar__title">目录</div>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%81%B5%E6%84%9F"><span class="toc-text">灵感</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%87%E7%A8%8B"><span class="toc-text">过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%B9%E6%80%A7"><span class="toc-text">特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%B8%A3%E8%B0%A2"><span class="toc-text">鸣谢</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80"><span class="toc-text">下载地址</span></a></li></ol>
+  </aside>
+  
+  <div class="article-body">
+    <p><img src="/2024/hexo-theme-news/banner.webp"></p>
+<p>如你所见，我给博客换上了一个新主题。</p>
+<p>与别的主题不同的是，这个主题是我从 1 开始制作的。为什么是从 1 开始？因为这个主题我参考了 <a target="_blank" rel="noopener" href="https://www.apple.com.cn/newsroom/">Apple 公司的 Newsroom 页面</a>，也使用了部分 Apple 的 CSS 样式表（主要是文字相关部分），因此这个主题也被我命名为<strong>News「新闻中心」</strong>。这篇博文是制作**News「新闻中心」**主题的记录。</p>
+<h2 id="灵感"><a href="#灵感" class="headerlink" title="灵感"></a>灵感</h2><p>最开始的想法是在给班级网站写新闻中心页面。当时给网站主页使用的 Bootstrap 5 的 Jumbotron 模板，想着设计一个和他向契合的新闻页面，突然我想到了之前看到的 Apple Newsroom 我十分喜欢，于是便用 Bootstrap 的 Card 放置了一个差不多的页面出来，这可以称为是**News「新闻中心」**的 <strong>α1</strong> 测试版本。</p>
+<blockquote>
+<p>此处因保护隐私原因不放出参考网址</p>
+</blockquote>
+<p>之后这个站点便因为准备期考而暂停了更新，但我仍时不时的对他的样式表做一点细微的调整，直到期考结束。期考结束的这个寒假，我按照计划维护着博客，突发奇想要不把之前写的「新闻中心」改成主题吧！</p>
+<p><strong>说干就干</strong></p>
+<h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><p>我使用的是 <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/yo">YO(Yeoman generators) 生成器</a>来创建的 Hexo 主题模板，使用的 EJS 模板语言和 CSS 样式表，具体的技术细节就不再文中赘述了。我感觉主题的开发就和使用 PHP 写程序一样，要注重代码的**“复用”**，即模块化编程，将不同的组件单独编写，按需调用，省去了重复造轮子的麻烦。</p>
+<p>目前，**News「新闻中心」**已经实现了以下功能：</p>
+<ul>
+<li>基础文章的渲染</li>
+<li>友情链接页面</li>
+</ul>
+<p>计划实现的功能：</p>
+<ul>
+<li>灯箱 Fancybox</li>
+<li>完善配置文件</li>
+<li>代码高亮</li>
+</ul>
+<h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><p>**News「新闻中心」**具有以下特性：</p>
+<ul>
+<li>使用了最新的 Bootstrap 5 作为框架，「新闻中心」支持其全部组件和特性</li>
+</ul>
+<h2 id="鸣谢"><a href="#鸣谢" class="headerlink" title="鸣谢"></a>鸣谢</h2><p>以下项目在 Newsroom 开发时提供了无可取代的帮助，特在此表达诚挚的谢意（排名不分先后）</p>
+<ul>
+<li><p>设计灵感和部分 CSS 代码来自：<a target="_blank" rel="noopener" href="//apple.com.cn">Apple Inc.</a></p>
+</li>
+<li><p>导航栏动画来自：<a target="_blank" rel="noopener" href="https://nero978.top/">Nero978</a> | <a target="_blank" rel="noopener" href="https://github.com/Miracle-Town/mt-web">Miracal Town&#x2F;mt-web</a></p>
+</li>
+<li><p>Hexo 主题启蒙，提供了部分样式和脚本代码：<a target="_blank" rel="noopener" href="https://github.com/fluid-dev/hexo-theme-fluid">Fluid 主题</a></p>
+</li>
+<li><p>默认随机封面图来自我使用的第一个博客主题：<a target="_blank" rel="noopener" href="https://github.com/BigCoke233/miracles">BigCoke233&#x2F;Miracles</a></p>
+</li>
+</ul>
+<h2 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h2>
+
+<div class="alert alert-danger" role="alert">
+  警告：<b>News「新闻中心」</b>因个人原因无限期停止开发。
+</div>
+
+<a href="https://github.com/ImJingLan/hexo-theme-news" target="_blank" type="button" class="btn btn-outline-dark btn-lg w-100" ><i class="bi bi-github"></i> ImJingLan/hexo-theme-news</a>
+
+
+  </div>
+</div>
+
+
+<div class="content-container" style="padding: 0 var(--space-2xl);">
+  <nav class="article-nav" style="max-width: var(--content-width); margin-left: auto; margin-right: auto;">
+    
+    <a href="/2024/hexo-guidebook-1/" class="article-nav__item">
+      <span class="article-nav__label">上一篇</span>
+      <span class="article-nav__title">「技术」使用 Hexo 搭建静态博客</span>
+    </a>
+    
+    
+    <a href="/2024/github-action-depoly-hexo/" class="article-nav__item article-nav__item--next">
+      <span class="article-nav__label">下一篇</span>
+      <span class="article-nav__title">「技术」使用 GitHub Actions 部署 Hexo</span>
+    </a>
+    
+  </nav>
+</div>
+
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <ul class="site-footer__links">
+      
+        <li><a href="/">首页</a></li>
+      
+        <li><a href="/about/">关于我</a></li>
+      
+        <li><a href="/archives/">归档</a></li>
+      
+        <li><a href="/friends/">友链</a></li>
+      
+        <li><a target="_blank" rel="noopener" href="https://www.travellings.cn/go.html">开往</a></li>
+      
+    </ul>
+    <p class="site-footer__text"><div> © <span id="copyright-year">2026</span> 景蓝 Yurik. All Rights Reserved. / <a target="_blank" href="/feed.xml">RSS</a> / <a target="_blank" href="/sitemap.xml">Sitemap</a><br> Git Version: 92ae5e5<br> <a target="_blank" href="https://beian.miit.gov.cn">桂ICP备2025057334号</a> </div>
+</p>
+  </div>
+</footer>
+
+<button class="back-to-top" aria-label="Back to top">&uarr;</button>
+
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>

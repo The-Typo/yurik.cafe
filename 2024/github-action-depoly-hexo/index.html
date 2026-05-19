@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon shortcut" href="/favicon/v2/favicon.ico">
+<title>「技术」使用 GitHub Actions 部署 Hexo — 景蓝的小屋</title>
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/feed.xml" title="景蓝的小屋" type="application/rss+xml">
+</head>
+<body class="">
+  
+<nav class="site-nav">
+  <div class="site-nav__inner">
+    <a href="/" class="site-nav__brand">景蓝的小屋</a>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="site-nav__links">
+      
+        <li><a href="/">首页</a></li>
+      
+        <li><a href="/about/">关于我</a></li>
+      
+        <li><a href="/archives/">归档</a></li>
+      
+        <li><a href="/friends/">友链</a></li>
+      
+        <li><a target="_blank" rel="noopener" href="https://www.travellings.cn/go.html">开往</a></li>
+      
+    </ul>
+  </div>
+</nav>
+<div class="nav-overlay"></div>
+
+  <script>
+  if (document.querySelector('.hero')) {
+    document.body.classList.add('has-hero');
+  }
+</script>
+
+
+<header class="article-header">
+  <time class="article-header__date" datetime="2024-01-15">2024 年 1 月 15 日</time>
+  <h1 class="article-header__title">「技术」使用 GitHub Actions 部署 Hexo</h1>
+  <div class="article-header__meta">
+    
+      
+        <span class="badge">技术</span>
+      
+    
+    
+  </div>
+</header>
+
+
+
+
+<div class="article-layout article-layout--with-toc">
+  
+  <aside class="toc-sidebar">
+    <div class="toc-sidebar__title">目录</div>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%99%E7%A8%8B"><span class="toc-text">教程</span></a></li></ol>
+  </aside>
+  
+  <div class="article-body">
+    <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近把博客从 Vercel 迁移到了 Netlify 了，这两家都是 ServerLess 部署平台，属于完全的无痛迁移了。</p>
+<p>无论是 Vercel 还是 Netlify，都对于应用的部署时长有限制，但相对与 Vercel 免费的每月 6000 分钟来说，Netlify 的 300 分钟就略显寒酸了。但自从去年国庆我的网站挂在 Vercel 被墙外加最近 Vercel 访问不畅之后我就在研究 Netlify 了。</p>
+<p>因为直接上传 NPM 包到 Netlify 上部署相比上传静态的 HTML 页面更耗时间，而我最近学习了 Github Actions，Github Actions 提供了每月 3000 分钟的部署时长，因此决定使用 Github Actions 来构建静态页面，之后仅同步静态页面到 Netlify 就完成了。</p>
+<h2 id="教程"><a href="#教程" class="headerlink" title="教程"></a>教程</h2><p>首先在仓库中新建一个 deploy 分支用于存放构建完成的静态页面。</p>
+<p>别忘了在 <strong>Setting - Actions - General - Workflow permissions</strong> 中将权限设置为 <code>Read and write permissions</code></p>
+<p>在仓库主分支下的<code>.github/workflows/</code>文件夹新建一个 yml 文件，名称随意，如<code>deploy.yml</code></p>
+<p>随后在 yml 文件下写入以下代码</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">部署静态页面到</span> <span class="string">Deploy</span> <span class="string">分支</span></span><br><span class="line"></span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">branches:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">main</span></span><br><span class="line">  <span class="comment">#手动触发</span></span><br><span class="line">  <span class="attr">workflow_dispatch:</span></span><br><span class="line"></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">build:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="comment"># 获取源码</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">迁出代码</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/checkout@master</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">安装node.js环境</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/setup-node@master</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">安装Hexo-cli</span> <span class="string">和</span> <span class="string">其他</span> <span class="string">node</span> <span class="string">环境</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          npm install hexo-cli -g</span></span><br><span class="line"><span class="string">          npm install</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">构建静态页面</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          npm run g</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">你也可以在这里执行更多Linux命令</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          echo Example</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">推送到</span> <span class="string">deploy</span> <span class="string">分支</span> <span class="comment"># 部署</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">JamesIves/github-pages-deploy-action@v4.3.3</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">branch:</span> <span class="string">deploy</span> <span class="comment"># 部署后提交到的分支</span></span><br><span class="line">          <span class="attr">folder:</span> <span class="string">public</span> <span class="comment"># 打包好的目录名称</span></span><br></pre></td></tr></table></figure>
+
+<p>最后 Push 到 Github 就好啦</p>
+<p>别忘了把 Netlify 中的链接仓库重新绑定到 deploy 分支噢</p>
+
+  </div>
+</div>
+
+
+<div class="content-container" style="padding: 0 var(--space-2xl);">
+  <nav class="article-nav" style="max-width: var(--content-width); margin-left: auto; margin-right: auto;">
+    
+    <a href="/2024/hexo-theme-news/" class="article-nav__item">
+      <span class="article-nav__label">上一篇</span>
+      <span class="article-nav__title">「项目」Hexo 主题 News 现已上线</span>
+    </a>
+    
+    
+    <a href="/2024/my-way-to-php/" class="article-nav__item article-nav__item--next">
+      <span class="article-nav__label">下一篇</span>
+      <span class="article-nav__title">「随笔」我的PHP开发之路</span>
+    </a>
+    
+  </nav>
+</div>
+
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <ul class="site-footer__links">
+      
+        <li><a href="/">首页</a></li>
+      
+        <li><a href="/about/">关于我</a></li>
+      
+        <li><a href="/archives/">归档</a></li>
+      
+        <li><a href="/friends/">友链</a></li>
+      
+        <li><a target="_blank" rel="noopener" href="https://www.travellings.cn/go.html">开往</a></li>
+      
+    </ul>
+    <p class="site-footer__text"><div> © <span id="copyright-year">2026</span> 景蓝 Yurik. All Rights Reserved. / <a target="_blank" href="/feed.xml">RSS</a> / <a target="_blank" href="/sitemap.xml">Sitemap</a><br> Git Version: 92ae5e5<br> <a target="_blank" href="https://beian.miit.gov.cn">桂ICP备2025057334号</a> </div>
+</p>
+  </div>
+</footer>
+
+<button class="back-to-top" aria-label="Back to top">&uarr;</button>
+
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>

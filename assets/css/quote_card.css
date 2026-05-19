@@ -1,0 +1,29 @@
+@import url("https://fonts.font.im/css2?family=Noto+Sans+SC:wght@100..900&family=Noto+Serif+SC:wght@200..900&display=swap");
+.quote-card {
+    --card-bg: rgba(255,255,255,0.25);
+    --card-bg-lighter: rgba(255,255,255,0.1);
+    --card-noise: rgba(255,255,255,0.04);
+    font-size: 1.5rem;
+    font-style: italic;
+    text-align: center;
+    margin: 0 auto;
+    
+    padding: 2rem 2rem;
+    border: 1px solid #d0d7de;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px 3px rgba(0,0,0,0.102), 0 2px 4px -2px rgba(0,0,0,0.102);
+    transform: rotate(0);
+    background-color: rgba(255,255,255,0.35);
+    background: linear-gradient(var(--card-bg-lighter), var(--card-bg-lighter)), repeating-radial-gradient(var(--card-bg) 0 0.0001%, var(--card-noise) 0 0.0002%) 50% 0/2500px 2500px, repeating-conic-gradient(var(--card-bg) 0 0.0001%, var(--card-noise) 0 0.0002%) 60% 60%/2500px 2500px;
+    background-blend-mode: normal, difference;
+    max-width: 65%;
+  }
+.quote-card p {
+    font-size: 1.3rem;
+    font-weight: 500;
+    line-height: 1.75;
+    margin-block-start: 0.25rem;
+    margin-block-end: 0.25rem;
+    font-family: "Noto Serif SC", "Source Han Serif", "STSong", "Hiragino Mincho Pro", "SimSun", serif;
+
+  }

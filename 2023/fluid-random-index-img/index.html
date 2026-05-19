@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon shortcut" href="/favicon/v2/favicon.ico">
+<title>「技术」将博客主页封面修改为随机图片 — 景蓝的小屋</title>
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/feed.xml" title="景蓝的小屋" type="application/rss+xml">
+</head>
+<body class="">
+  
+<nav class="site-nav">
+  <div class="site-nav__inner">
+    <a href="/" class="site-nav__brand">景蓝的小屋</a>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="site-nav__links">
+      
+        <li><a href="/">首页</a></li>
+      
+        <li><a href="/about/">关于我</a></li>
+      
+        <li><a href="/archives/">归档</a></li>
+      
+        <li><a href="/friends/">友链</a></li>
+      
+        <li><a target="_blank" rel="noopener" href="https://www.travellings.cn/go.html">开往</a></li>
+      
+    </ul>
+  </div>
+</nav>
+<div class="nav-overlay"></div>
+
+  <script>
+  if (document.querySelector('.hero')) {
+    document.body.classList.add('has-hero');
+  }
+</script>
+
+
+<header class="article-header">
+  <time class="article-header__date" datetime="2023-09-12">2023 年 9 月 12 日</time>
+  <h1 class="article-header__title">「技术」将博客主页封面修改为随机图片</h1>
+  <div class="article-header__meta">
+    
+      
+        <span class="badge">技术</span>
+      
+    
+    
+  </div>
+</header>
+
+
+
+
+<div class="article-layout article-layout--with-toc">
+  
+  <aside class="toc-sidebar">
+    <div class="toc-sidebar__title">目录</div>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9"><span class="toc-text">修改</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E8%AE%B0"><span class="toc-text">后记</span></a></li></ol>
+  </aside>
+  
+  <div class="article-body">
+    <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Fluid 是一款很好用的 Hexo 主题，但他默认的主页封面并不能做到多张图片随机。于是我决定魔改他</p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>通过查看 <code>layout/index.ejs</code> 文件可以看出 index_img 的定义为<code>index_img = post.cover || theme.post.default_cover</code></p>
+<p>我们只需要将 <code>theme.post.default_cover</code> 改为数字外加随机数取出就好了</p>
+<p>而 ejs 支持 js 的 Math.random 语法，稍微学习 Javascript 就可以修改了</p>
+<h2 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h2><p>进入 <code>主题文件夹/layout</code>，打开<code>index.ejs</code></p>
+<p>搜索 <code>theme.post.default_cover</code></p>
+<p>将其修改成 <code>theme.post.default_cover[Math.floor(Math.random() * (theme.post.default_cover.length))]</code></p>
+<p>修改 Fluid 的配置文件 <strong>_config.fluid.yml</strong></p>
+<p>将 <strong>default_index_img</strong> 配置项修改为这样</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">default_index_img:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">此处为图片链接</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">此处为图片链接</span></span><br></pre></td></tr></table></figure>
+
+<p>重新部署就好啦！</p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>我同时也修改了 Fluid 的封面命名规则，这样子只需要设置一次封面属性就可以同时应用到 index_img 和 banner_img 啦</p>
+<p><del>我也将修改后的主题改名为 Farbic 开源在 Github 仓库中 <strong>Rabbit-Clan&#x2F;hexo-theme-farbic</strong>，欢迎 Star + Fork</del></p>
+<p><del>Farbic 主题还重新修改了部分页面的配置方式，使配置方式更加直观</del></p>
+<p><del>只是还没来得及编写文档，可能安装后会出现无法使用的情况</del></p>
+<p>2023.09.14 : 由于技术原因，暂时不单独提供修改的主题，您可以前往本博客仓库自行克隆后提取</p>
+<p><strong>修改后的主题仍遵循 GPL 协议公开！</strong></p>
+
+  </div>
+</div>
+
+
+<div class="content-container" style="padding: 0 var(--space-2xl);">
+  <nav class="article-nav" style="max-width: var(--content-width); margin-left: auto; margin-right: auto;">
+    
+    <a href="/2023/ipod-classic-review/" class="article-nav__item">
+      <span class="article-nav__label">上一篇</span>
+      <span class="article-nav__title">「开箱」iPod Classic 上手 : 优雅永不过时</span>
+    </a>
+    
+    
+    <a href="/2023/YGR-Raft/" class="article-nav__item article-nav__item--next">
+      <span class="article-nav__label">下一篇</span>
+      <span class="article-nav__title">「YGR」Raft 木筏 - 你也想在海上捡垃圾吗</span>
+    </a>
+    
+  </nav>
+</div>
+
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <ul class="site-footer__links">
+      
+        <li><a href="/">首页</a></li>
+      
+        <li><a href="/about/">关于我</a></li>
+      
+        <li><a href="/archives/">归档</a></li>
+      
+        <li><a href="/friends/">友链</a></li>
+      
+        <li><a target="_blank" rel="noopener" href="https://www.travellings.cn/go.html">开往</a></li>
+      
+    </ul>
+    <p class="site-footer__text"><div> © <span id="copyright-year">2026</span> 景蓝 Yurik. All Rights Reserved. / <a target="_blank" href="/feed.xml">RSS</a> / <a target="_blank" href="/sitemap.xml">Sitemap</a><br> Git Version: 92ae5e5<br> <a target="_blank" href="https://beian.miit.gov.cn">桂ICP备2025057334号</a> </div>
+</p>
+  </div>
+</footer>
+
+<button class="back-to-top" aria-label="Back to top">&uarr;</button>
+
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>

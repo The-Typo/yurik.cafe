@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon shortcut" href="/favicon/v2/favicon.ico">
+<title>「技术」使用Hugo搭建个人博客 — 景蓝的小屋</title>
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/feed.xml" title="景蓝的小屋" type="application/rss+xml">
+</head>
+<body class="">
+  
+<nav class="site-nav">
+  <div class="site-nav__inner">
+    <a href="/" class="site-nav__brand">景蓝的小屋</a>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="site-nav__links">
+      
+        <li><a href="/">首页</a></li>
+      
+        <li><a href="/about/">关于我</a></li>
+      
+        <li><a href="/archives/">归档</a></li>
+      
+        <li><a href="/friends/">友链</a></li>
+      
+        <li><a target="_blank" rel="noopener" href="https://www.travellings.cn/go.html">开往</a></li>
+      
+    </ul>
+  </div>
+</nav>
+<div class="nav-overlay"></div>
+
+  <script>
+  if (document.querySelector('.hero')) {
+    document.body.classList.add('has-hero');
+  }
+</script>
+
+
+<header class="article-header">
+  <time class="article-header__date" datetime="2022-02-13">2022 年 2 月 13 日</time>
+  <h1 class="article-header__title">「技术」使用Hugo搭建个人博客</h1>
+  <div class="article-header__meta">
+    
+      
+        <span class="badge">技术</span>
+      
+    
+    
+  </div>
+</header>
+
+
+
+<figure class="article-featured-image">
+  <img src="/2022/hugo-blog/banner.png" alt="「技术」使用Hugo搭建个人博客">
+  
+</figure>
+
+
+<div class="article-layout article-layout--with-toc">
+  
+  <aside class="toc-sidebar">
+    <div class="toc-sidebar__title">目录</div>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9-Hugo"><span class="toc-text">我为什么选择 Hugo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E9%A1%B5%E6%89%98%E7%AE%A1"><span class="toc-text">网页托管</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-text">准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-Hugo"><span class="toc-text">安装 Hugo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%AB%99%E7%82%B9"><span class="toc-text">创建站点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2"><span class="toc-text">部署</span></a></li></ol>
+  </aside>
+  
+  <div class="article-body">
+    <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><h3 id="我为什么选择-Hugo"><a href="#我为什么选择-Hugo" class="headerlink" title="我为什么选择 Hugo"></a>我为什么选择 Hugo</h3><p>Hugo 是一个使用<strong>Go</strong>语言编写的静态网站生成器。<br>长期续费一个稳定的虚拟主机的费用是昂贵的，因此我放弃了原先的<strong>Typecho</strong>系统，转而寻找静态博客系统。在尝试了<strong>Hexo</strong>、<strong>Jekyll</strong>后，我选择了<strong>Hugo</strong>，原因首先是它支持 Markdown 语法，这使得我将文章从 Typecho 迁移至 Hugo 变得容易，其次是<a target="_blank" rel="noopener" href="https://github.com/CaiJimmy/hugo-theme-stack"><strong>Stack</strong></a>主题仅适用于 Hugo (搭建博客第一要领：好看)</p>
+<h3 id="网页托管"><a href="#网页托管" class="headerlink" title="网页托管"></a>网页托管</h3><p>说起网页托管，大家第一想到的大概都是<a target="_blank" rel="noopener" href="https://pages.github.com/"><strong>Github Pages</strong></a>吧，最初我也是使用 gh 来对生成的动态页面进行托管，可长期使用下来我发现 gh pages 存在一些问题：</p>
+<ol>
+<li>github pages 会对绑定的域名进行 cname 验证，而 Cloudflare 默认将主域名的 CNAME 拉平成 A 解析，这导致我的域名一周多了还没有通过验证</li>
+<li>Github Pages 默认给每个域名申请免费的 SSL 证书，而我的一个域名出现了 SSL 证书出错的情况 😓，最后也没排查出是域名还是 gh pages 的问题</li>
+<li>可能会有 DNS 污染导致 github.io 无法访问</li>
+<li>不支持 PHP，导致我原先的一些脚本无法使用</li>
+</ol>
+<p>为了解决这些问题，我在知乎游了一圈，发现了一个宝藏部署服务：<a target="_blank" rel="noopener" href="https://vercel.com/"><strong>Vercel</strong></a></p>
+<p>Vercel 有以下优点：</p>
+<ol>
+<li><p>访问速度比 Github Pages 快</p>
+</li>
+<li><p>比 Github Pages 稳定</p>
+</li>
+<li><p>自带 SSL 证书</p>
+</li>
+<li><p>支持将域名 DNS 服务器迁移至 Vercel</p>
+</li>
+</ol>
+<p><img src="/2022/hugo-blog/vercel.png" alt="Vercel主页"></p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="安装-Hugo"><a href="#安装-Hugo" class="headerlink" title="安装 Hugo"></a>安装 Hugo</h3><blockquote>
+<p>本文仅展示使用 Windows 安装 Hugo</p>
+<p>本教程中使用 <a target="_blank" rel="noopener" href="https://scoop.sh/"><strong>scoop</strong>软件包管理器</a> 安装</p>
+<p>其余方法大同小异，请自行使用搜索引擎搜索</p>
+<p>安装 scoop，请看这篇文章：<a href="/p/install-scoop/">Scoop - 一款强大的 Windows 包管理工具</a></p>
+</blockquote>
+<p><code>win</code> + <code>r</code> 打开运行窗口</p>
+<p><img src="/2022/hugo-blog/run-windows.png" alt="运行"></p>
+<p>输入<code>Powershell</code></p>
+<p>在打开的窗口中输入</p>
+<p><code>scoop install hugo</code></p>
+<p>或者用以下方式安装扩展版本</p>
+<p><code>scoop install hugo-extended</code></p>
+<p>当控制台显示<code>&#39;hugo&#39; (0.92.2) was installed successfully!</code>时代表安装已完成</p>
+<blockquote>
+<p>若选择安装拓展版本，则当显示<code>&#39;hugo&#39; (0.92.2) was installed successfully!</code>时代表安装已完成</p>
+</blockquote>
+<blockquote>
+<p>括号内版本号以最新版本为准</p>
+</blockquote>
+<h3 id="创建站点"><a href="#创建站点" class="headerlink" title="创建站点"></a>创建站点</h3><h4 id="初始化站点"><a href="#初始化站点" class="headerlink" title="初始化站点"></a>初始化站点</h4><p>在控制台中输入<code>hugo new site 路径</code>新建一个站点</p>
+<p>如<code>hugo new site E:\myblog</code></p>
+<p>这个命令将在 E 盘中创建一个名为 myblog 的目录并在此中创建一个新的 hugo 站点</p>
+<h4 id="安装主题"><a href="#安装主题" class="headerlink" title="安装主题"></a>安装主题</h4><p>由于新站点中无主题，因此无法渲染，所以我们需要安装一个新主题</p>
+<p>在本文中选择从 hexo 移植的<a target="_blank" rel="noopener" href="https://github.com/elkan1788/hugo-theme-next">Next 主题</a></p>
+<p>进入站点根目录后，使用 git 获取主题</p>
+<p><code>git clone https://github.com/elkan1788/hugo-theme-next.git themes/hugo-theme-next</code></p>
+<p>复制站点根目录&#x2F;theme&#x2F;hugo-theme-next&#x2F;exampleSite 中的文件并粘贴至站点根目录后覆盖</p>
+<p>运行<code>hugo server</code></p>
+<p>恭喜你，你的 hugo 博客已成功运行</p>
+<h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><p>参见新博文 <a href="https://yurik.cafe/2023/use-vercel-introduction/">使用 Vercel 托管静态网页</a></p>
+
+  </div>
+</div>
+
+
+<div class="content-container" style="padding: 0 var(--space-2xl);">
+  <nav class="article-nav" style="max-width: var(--content-width); margin-left: auto; margin-right: auto;">
+    
+    <a href="/2022/luogu-P1425/" class="article-nav__item">
+      <span class="article-nav__label">上一篇</span>
+      <span class="article-nav__title">「信竞」P1425 - 小鱼的游泳时间</span>
+    </a>
+    
+    
+    <a href="/2022/minecraft-yggdrasil-api-third-party-implementation/" class="article-nav__item article-nav__item--next">
+      <span class="article-nav__label">下一篇</span>
+      <span class="article-nav__title">「转载」又是一种 Minecraft 外置登录解决方案：自行实现 Yggdrasil API</span>
+    </a>
+    
+  </nav>
+</div>
+
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <ul class="site-footer__links">
+      
+        <li><a href="/">首页</a></li>
+      
+        <li><a href="/about/">关于我</a></li>
+      
+        <li><a href="/archives/">归档</a></li>
+      
+        <li><a href="/friends/">友链</a></li>
+      
+        <li><a target="_blank" rel="noopener" href="https://www.travellings.cn/go.html">开往</a></li>
+      
+    </ul>
+    <p class="site-footer__text"><div> © <span id="copyright-year">2026</span> 景蓝 Yurik. All Rights Reserved. / <a target="_blank" href="/feed.xml">RSS</a> / <a target="_blank" href="/sitemap.xml">Sitemap</a><br> Git Version: 92ae5e5<br> <a target="_blank" href="https://beian.miit.gov.cn">桂ICP备2025057334号</a> </div>
+</p>
+  </div>
+</footer>
+
+<button class="back-to-top" aria-label="Back to top">&uarr;</button>
+
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>

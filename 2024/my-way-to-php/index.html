@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon shortcut" href="/favicon/v2/favicon.ico">
+<title>「随笔」我的PHP开发之路 — 景蓝的小屋</title>
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/feed.xml" title="景蓝的小屋" type="application/rss+xml">
+</head>
+<body class="">
+  
+<nav class="site-nav">
+  <div class="site-nav__inner">
+    <a href="/" class="site-nav__brand">景蓝的小屋</a>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="site-nav__links">
+      
+        <li><a href="/">首页</a></li>
+      
+        <li><a href="/about/">关于我</a></li>
+      
+        <li><a href="/archives/">归档</a></li>
+      
+        <li><a href="/friends/">友链</a></li>
+      
+        <li><a target="_blank" rel="noopener" href="https://www.travellings.cn/go.html">开往</a></li>
+      
+    </ul>
+  </div>
+</nav>
+<div class="nav-overlay"></div>
+
+  <script>
+  if (document.querySelector('.hero')) {
+    document.body.classList.add('has-hero');
+  }
+</script>
+
+
+<header class="article-header">
+  <time class="article-header__date" datetime="2024-01-10">2024 年 1 月 10 日</time>
+  <h1 class="article-header__title">「随笔」我的PHP开发之路</h1>
+  <div class="article-header__meta">
+    
+      
+        <span class="badge">随笔</span>
+      
+    
+    
+  </div>
+</header>
+
+
+
+
+<div class="article-layout article-layout--with-toc">
+  
+  <aside class="toc-sidebar">
+    <div class="toc-sidebar__title">目录</div>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9D%E8%AF%86-PHP"><span class="toc-text">初识 PHP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%A0%E5%A5%BD-MySQL"><span class="toc-text">你好, MySQL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%84%9F%E6%83%B3"><span class="toc-text">感想</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A5%E4%B8%8A"><span class="toc-text">以上</span></a></li></ol>
+  </aside>
+  
+  <div class="article-body">
+    <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>新年已至，自然少不了元旦 Party，今年是我们在高中的第一个元旦派对，当然要做一些不一样的。</p>
+<p>作为班上的网管，我做了一个在线的新年祝福页面，让同学们可以在上面填写自己的新年祝福，并在新年时随机分发到每个人的手中（账号上）。</p>
+<p>这一套站点拥有完善的登录、鉴权和还在开发（咕）中的后台管理面板和现代化的前台。</p>
+<p>如这篇文章的标题所示，这次开发的技术栈便是 MySQL 和 PHP。当然，我并不想在这里赘述该系统的开发过程，而是记录一下我的 PHP 开发 &amp; 学习过程。</p>
+<p><img src="/2024/my-way-to-php/1.webp" alt="新年祝福页面"></p>
+<h2 id="初识-PHP"><a href="#初识-PHP" class="headerlink" title="初识 PHP"></a>初识 PHP</h2><p>我的第一个 PHP 小程序至今还躺在我的 Gitee 仓库中（虽然现在已经不用 Gitee 了&#x3D;V&#x3D;），那是一个简单的文件上传程序。当时还是初中，作为网管（对的，我一直是网管），老师让我负责收集同学们的假期实践作业。改作业要求使用 Word 软件进行排版和上传。</p>
+<p>当时的我，刚刚有了一台虚拟主机，出于 QQ 接收文件可能会遗漏且不好统计的想法，我从网上复制&amp;&amp;修改了一段上传&amp;保存文件的 PHP 代码，并上传到了虚拟主机上，当时这个程序使我收集的工作更加便捷，当然虚拟主机的龟速也引来不少同学的友好反馈（笑）。</p>
+<p>作为第一个 PHP 程序，大部分代码都是从网上 Copy &amp; Paste 下来的。因为 PHP 的大部分语法和之前为 NOIP 学习的 C++十分相像，我对程序做了一点修改，添加了格式校验和提交检测功能。</p>
+<p>这便是我的 PHP 基础。</p>
+<p><img src="/2024/my-way-to-php/2.webp" alt="作业提交系统的Commit"></p>
+<h2 id="你好-MySQL"><a href="#你好-MySQL" class="headerlink" title="你好, MySQL"></a>你好, MySQL</h2><p>在我早期的观念中，PHP 和数据库一定密不可分，只是当时偷懒外加没有需求，在作业收集网站后我就再也没有写过 PHP 代码了。而一个站点的出现，让我重拾 PHP 并完成了第一个大项目，那就是<a target="_blank" rel="noopener" href="https://zigzagk.top/OIerdictum/">机房大佬语录</a>。</p>
+<p>受到<a target="_blank" rel="noopener" href="https://hitokoto.cn/">一言</a> 和 <a target="_blank" rel="noopener" href="https://zigzagk.top/OIerdictum/">机房大佬语录</a>的影响，我也想自己搭建一个所谓的“一句话站点”，但苦于没有找到合适的开源项目，于是我决定：</p>
+<p><strong>自己写！</strong></p>
+<p>于是我通过<a target="_blank" rel="noopener" href="https://www.runoob.com/php/php-tutorial.html">PHP 教程 | 菜鸟教程</a>照猫画虎地学习了 MySQL 创建表，插入语句，更新语句等操作，经过几个月地努力，写出了一个还算像点样地随机语句程序 『一句』 <a target="_blank" rel="noopener" href="https://github.com/ImJingLan/Sentence">ImJingLan&#x2F;Sentence</a></p>
+<p><img src="/2024/my-way-to-php/3.webp" alt="一句 Logo"></p>
+<h2 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h2><p>学习一种新技术主要来自于你对他的需求，只有有了需求，你才有往下学的动力。多看看开源社区，多看看别人的代码，多看文档，哪怕 Copy Paste 呢？</p>
+<p>我的 PHP 代码风格主要受到 Sakura Panle 的影响，这种模块的思路贯彻在了我的所有站点中。</p>
+<h2 id="以上"><a href="#以上" class="headerlink" title="以上"></a>以上</h2>
+  </div>
+</div>
+
+
+<div class="content-container" style="padding: 0 var(--space-2xl);">
+  <nav class="article-nav" style="max-width: var(--content-width); margin-left: auto; margin-right: auto;">
+    
+    <a href="/2024/github-action-depoly-hexo/" class="article-nav__item">
+      <span class="article-nav__label">上一篇</span>
+      <span class="article-nav__title">「技术」使用 GitHub Actions 部署 Hexo</span>
+    </a>
+    
+    
+    <a href="/2023/hello-counter-strike-2/" class="article-nav__item article-nav__item--next">
+      <span class="article-nav__label">下一篇</span>
+      <span class="article-nav__title">「杂谈」Counter-Strike 2 : 未来已来，时不我待</span>
+    </a>
+    
+  </nav>
+</div>
+
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <ul class="site-footer__links">
+      
+        <li><a href="/">首页</a></li>
+      
+        <li><a href="/about/">关于我</a></li>
+      
+        <li><a href="/archives/">归档</a></li>
+      
+        <li><a href="/friends/">友链</a></li>
+      
+        <li><a target="_blank" rel="noopener" href="https://www.travellings.cn/go.html">开往</a></li>
+      
+    </ul>
+    <p class="site-footer__text"><div> © <span id="copyright-year">2026</span> 景蓝 Yurik. All Rights Reserved. / <a target="_blank" href="/feed.xml">RSS</a> / <a target="_blank" href="/sitemap.xml">Sitemap</a><br> Git Version: 92ae5e5<br> <a target="_blank" href="https://beian.miit.gov.cn">桂ICP备2025057334号</a> </div>
+</p>
+  </div>
+</footer>
+
+<button class="back-to-top" aria-label="Back to top">&uarr;</button>
+
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>

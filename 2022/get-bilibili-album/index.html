@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon shortcut" href="/favicon/v2/favicon.ico">
+<title>「技术」获取B站视频封面 — 景蓝的小屋</title>
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/feed.xml" title="景蓝的小屋" type="application/rss+xml">
+</head>
+<body class="">
+  
+<nav class="site-nav">
+  <div class="site-nav__inner">
+    <a href="/" class="site-nav__brand">景蓝的小屋</a>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="site-nav__links">
+      
+        <li><a href="/">首页</a></li>
+      
+        <li><a href="/about/">关于我</a></li>
+      
+        <li><a href="/archives/">归档</a></li>
+      
+        <li><a href="/friends/">友链</a></li>
+      
+        <li><a target="_blank" rel="noopener" href="https://www.travellings.cn/go.html">开往</a></li>
+      
+    </ul>
+  </div>
+</nav>
+<div class="nav-overlay"></div>
+
+  <script>
+  if (document.querySelector('.hero')) {
+    document.body.classList.add('has-hero');
+  }
+</script>
+
+
+<header class="article-header">
+  <time class="article-header__date" datetime="2022-10-23">2022 年 10 月 23 日</time>
+  <h1 class="article-header__title">「技术」获取B站视频封面</h1>
+  <div class="article-header__meta">
+    
+      
+        <span class="badge">技术</span>
+      
+    
+    
+  </div>
+</header>
+
+
+
+<figure class="article-featured-image">
+  <img src="/2022/get-bilibili-album/banner.png" alt="「技术」获取B站视频封面">
+  
+</figure>
+
+
+<div class="article-layout article-layout--with-toc">
+  
+  <aside class="toc-sidebar">
+    <div class="toc-sidebar__title">目录</div>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-text">准备工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python-%E5%AE%9E%E7%8E%B0"><span class="toc-text">Python 实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E4%B8%8B%E6%9D%A5%E5%86%99%E8%BE%93%E5%87%BA"><span class="toc-text">接下来写输出</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E8%AE%B0"><span class="toc-text">后记</span></a></li></ol>
+  </aside>
+  
+  <div class="article-body">
+    <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近重装了电脑，然后电脑上整理的 iTunes 资料库全没了。<del>草</del></p>
+<p>在整理的时候发现有一些歌曲是直接从 B 站上下载下来的，专辑封面也是从 B 站封面扒的，全没了（呜呜呜</p>
+<p>虽然在 Bing 上一搜就有很多封面提取的网站</p>
+<p><img src="/2022/get-bilibili-album/1.webp" alt="网站1"></p>
+<p><img src="/2022/get-bilibili-album/2.webp" alt="网站2"></p>
+<p><img src="/2022/get-bilibili-album/3.webp" alt="网站3"></p>
+<p>但是秉承着<strong>用轮子不如造轮子</strong>的理论(<del>其实就是闲着没事</del>)，我决定自己用 Python 写一个提取封面的工具</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>既然是造轮子，那当然要先看 B 站的 API</p>
+<p>搜了一下，发现网上公认的哔哩哔哩官方 API 文档地址是：<strong><a target="_blank" rel="noopener" href="http://docs.bilibili.cn/wiki">http://docs.bilibili.cn/wiki</a></strong></p>
+<p>但是</p>
+<p><img src="/2022/get-bilibili-album/4.webp" alt="网站无法访问"></p>
+<p><img src="https://i.loli.net/2021/07/27/HPiBuzEebg5Zclf.jpg" alt="2017717113835269.jpg"></p>
+<blockquote>
+<p>在 Github 上面找到的野生文档 <a target="_blank" rel="noopener" href="https://github.com/SocialSisterYi/bilibili-API-collect">SocialSisterYi&#x2F;bilibili-API-collect</a></p>
+</blockquote>
+<p>API</p>
+<p>获取视频信息</p>
+<p><code>https://api.bilibili.com/x/web-interface/view?bvid=BV号</code></p>
+<p>丢**<a target="_blank" rel="noopener" href="http://json.cn/">json.cn</a>**解析一下</p>
+<p>找到关于视频封面的<code>pic</code>字段<code>&quot;pic&quot;:&quot;http://i0.hdslb.com/bfs/archive/38ee715cfe85351c790102691d01d05007092c9e.jpg&quot;,</code></p>
+<p>那么，开搞</p>
+<h2 id="Python-实现"><a href="#Python-实现" class="headerlink" title="Python 实现"></a>Python 实现</h2><p>随便写了个代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"> 主程序</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    bvid = <span class="built_in">input</span>(<span class="string">&#x27;视频BV号:&#x27;</span>)<span class="comment">#获取视频BV号</span></span><br><span class="line">    info = requests.get(<span class="string">&#x27;https://api.bilibili.com/x/web-interface/view?bvid=&#x27;</span>+bvid).text</span><br><span class="line">    info = json.loads(info)</span><br><span class="line">    cover = info[<span class="string">&#x27;data&#x27;</span>].get(<span class="string">&#x27;pic&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(cover)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/get-bilibili-album/output.webp" alt="封面输出"></p>
+<p><strong>输出成功</strong></p>
+<blockquote>
+<p>PS:《噬光者与发光体的爱情》真的好听！！！！Meumy 我吹爆！！！！</p>
+</blockquote>
+<h3 id="接下来写输出"><a href="#接下来写输出" class="headerlink" title="接下来写输出"></a>接下来写输出</h3><h4 id="先写了封面文件夹检测"><a href="#先写了封面文件夹检测" class="headerlink" title="先写了封面文件夹检测"></a>先写了封面文件夹检测</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">mkcoverdif</span>():</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> os.path.isdir(<span class="string">&#x27;cover&#x27;</span>):</span><br><span class="line">        os.mkdir(<span class="string">&#x27;cover&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="用-requests-写了图片保存的函数"><a href="#用-requests-写了图片保存的函数" class="headerlink" title="用 requests 写了图片保存的函数"></a>用 requests 写了图片保存的函数</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">imgdownload</span>(<span class="params">url,name</span>):</span><br><span class="line">    cover = requests.get(url)</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;./cover/&#x27;</span>+name+<span class="string">&#x27;.jpg&#x27;</span>, <span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> pic:</span><br><span class="line">        pic.write(cover.content)</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取一些必要信息"><a href="#获取一些必要信息" class="headerlink" title="获取一些必要信息"></a>获取一些必要信息</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cover = info[<span class="string">&#x27;data&#x27;</span>].get(<span class="string">&#x27;pic&#x27;</span>)  封面地址</span><br><span class="line">title = info[<span class="string">&#x27;data&#x27;</span>].get(<span class="string">&#x27;title&#x27;</span>)  视频标题</span><br><span class="line">bvid = info[<span class="string">&#x27;data&#x27;</span>].get(<span class="string">&#x27;bvid&#x27;</span>)  返回的正确格式BV号</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这是直接写入主程序块的</p>
+</blockquote>
+<h4 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> codecs</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">mkcoverdir</span>():</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> os.path.isdir(<span class="string">&#x27;cover&#x27;</span>):</span><br><span class="line">        os.mkdir(<span class="string">&#x27;cover&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">imgdownload</span>(<span class="params">url,name</span>):</span><br><span class="line">    cover = requests.get(url)</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;./cover/&#x27;</span>+name+<span class="string">&#x27;.jpg&#x27;</span>, <span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> pic:</span><br><span class="line">        pic.write(cover.content)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">av2bv</span>(<span class="params">av</span>):</span><br><span class="line">    info = requests.get(<span class="string">&#x27;https://api.bilibili.com/x/web-interface/view?aid=&#x27;</span>+av).text</span><br><span class="line">    info = json.loads(info)</span><br><span class="line">    <span class="keyword">if</span> info.get(<span class="string">&#x27;code&#x27;</span>) == <span class="number">0</span>:</span><br><span class="line">        vid = info[<span class="string">&#x27;data&#x27;</span>].get(<span class="string">&#x27;bvid&#x27;</span>)  返回的正确格式BV号</span><br><span class="line">        <span class="keyword">return</span> vid</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;找不到该AV号&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;CODE:&quot;</span>+<span class="built_in">str</span>(info.get(<span class="string">&#x27;code&#x27;</span>))+<span class="string">&quot; MESSAGE:&quot;</span>+info.get(<span class="string">&#x27;message&#x27;</span>))</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">bvcheck</span>(<span class="params">vid</span>):</span><br><span class="line">    <span class="keyword">if</span> vid.startswith(<span class="string">&#x27;BV&#x27;</span>,<span class="number">0</span>,<span class="number">2</span>) <span class="keyword">or</span> vid.startswith(<span class="string">&#x27;bV&#x27;</span>,<span class="number">0</span>,<span class="number">2</span>) <span class="keyword">or</span> vid.startswith(<span class="string">&#x27;Bv&#x27;</span>,<span class="number">0</span>,<span class="number">2</span>) <span class="keyword">or</span> vid.startswith(<span class="string">&#x27;bv&#x27;</span>,<span class="number">0</span>,<span class="number">2</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(vid) == <span class="number">12</span>:</span><br><span class="line">            info = info = requests.get(<span class="string">&#x27;https://api.bilibili.com/x/web-interface/view?bvid=&#x27;</span>+vid).text</span><br><span class="line">            info = json.loads(info)</span><br><span class="line">            <span class="keyword">if</span> info.get(<span class="string">&#x27;code&#x27;</span>) == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&quot;找不到该BV号&quot;</span>)</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&quot;CODE:&quot;</span>+<span class="built_in">str</span>(info.get(<span class="string">&#x27;code&#x27;</span>))+<span class="string">&quot; MESSAGE:&quot;</span>+info.get(<span class="string">&#x27;message&#x27;</span>))</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;这不是一个合法的BV号, BV号应为12位字符串&#x27;</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;这不是一个合法的BV号，BV号应为 BV 开头&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    valid = <span class="literal">True</span></span><br><span class="line">    mkcoverdir()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;请选择 AV号 / BV号&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;1.AV号     2.BV号&quot;</span>)</span><br><span class="line">    status = <span class="built_in">input</span>()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> status == <span class="string">&#x27;1&#x27;</span>:</span><br><span class="line">        vid = <span class="built_in">input</span>(<span class="string">&#x27;AV号:&#x27;</span>)</span><br><span class="line">        vid = re.sub(<span class="string">&#x27;av&#x27;</span>, <span class="string">&#x27;&#x27;</span>, vid, flags=re.IGNORECASE)</span><br><span class="line">        <span class="keyword">if</span> vid.isdigit():</span><br><span class="line">            vid = av2bv(vid)</span><br><span class="line">            <span class="keyword">if</span> vid == <span class="number">1</span>:</span><br><span class="line">                valid = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;这不是一个合法的AV号&#x27;</span>)</span><br><span class="line">            valid = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> status == <span class="string">&#x27;2&#x27;</span>:</span><br><span class="line">        vid = <span class="built_in">input</span>(<span class="string">&#x27;视频BV号:&#x27;</span>)<span class="comment">#获取视频BV号</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> status == <span class="string">&#x27;1&#x27;</span> <span class="keyword">or</span> status == <span class="string">&#x27;2&#x27;</span>:</span><br><span class="line">        <span class="keyword">if</span> valid:</span><br><span class="line">            <span class="keyword">if</span> bvcheck(vid):</span><br><span class="line">                info = requests.get(<span class="string">&#x27;https://api.bilibili.com/x/web-interface/view?bvid=&#x27;</span>+vid).text</span><br><span class="line">                info = json.loads(info)</span><br><span class="line">                bvid = info[<span class="string">&#x27;data&#x27;</span>].get(<span class="string">&#x27;bvid&#x27;</span>)  返回的正确格式BV号</span><br><span class="line">                cover = info[<span class="string">&#x27;data&#x27;</span>].get(<span class="string">&#x27;pic&#x27;</span>)  封面地址d</span><br><span class="line">                title = info[<span class="string">&#x27;data&#x27;</span>].get(<span class="string">&#x27;title&#x27;</span>)  视频标题</span><br><span class="line">                <span class="keyword">if</span> status == <span class="string">&#x27;1&#x27;</span>:</span><br><span class="line">                    vid = <span class="string">&quot;av&quot;</span>+<span class="built_in">str</span>(info[<span class="string">&#x27;data&#x27;</span>].get(<span class="string">&#x27;aid&#x27;</span>)) <span class="comment">#返回的正确格式AV号</span></span><br><span class="line">                <span class="keyword">if</span> status == <span class="string">&#x27;2&#x27;</span>:</span><br><span class="line">                    vid = info[<span class="string">&#x27;data&#x27;</span>].get(<span class="string">&#x27;bvid&#x27;</span>)  返回的正确格式BV号</span><br><span class="line">               <span class="built_in">print</span>(title+<span class="string">&#x27; - &#x27;</span>+bvid+<span class="string">&quot;: &quot;</span>+cover)</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&#x27;完成!&#x27;</span>)  提示一下</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&quot;保存文件名:&quot;</span>+title+<span class="string">&#x27; - &#x27;</span>+vid+<span class="string">&quot;.jpg&quot;</span>)</span><br><span class="line">                imgdownload(cover,title+<span class="string">&#x27; - &#x27;</span>+vid)  下载</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;这不是一个合法的状态码&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> 主程序</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    main()</span><br><span class="line">    os.system(<span class="string">&#x27;pause&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>自己加了 AV 号与 BV 号的判断，如果是 AV 号就把 AV 转换成 BV 再用 BV 手法去找封面</p>
+<p>然后根据选择的类型进行保存</p>
+</blockquote>
+<h4 id="运行一下"><a href="#运行一下" class="headerlink" title="运行一下"></a>运行一下</h4><p><img src="/2022/get-bilibili-album/6.webp" alt="成功"></p>
+<p><strong>Done！</strong></p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>使用 Python 的 json 库解析了 B 站官方的 API 接口，完成了封面的下载</p>
+
+  </div>
+</div>
+
+
+<div class="content-container" style="padding: 0 var(--space-2xl);">
+  <nav class="article-nav" style="max-width: var(--content-width); margin-left: auto; margin-right: auto;">
+    
+    <a href="/2022/minecraft-server-on-linux-1/" class="article-nav__item">
+      <span class="article-nav__label">上一篇</span>
+      <span class="article-nav__title">「技术」在Linux上搭建MC服务器（一）</span>
+    </a>
+    
+    
+    <a href="/2022/dell-poweredge-r720-review/" class="article-nav__item article-nav__item--next">
+      <span class="article-nav__label">下一篇</span>
+      <span class="article-nav__title">「开箱」戴尔 PowerEdge R720 上手 : 年轻人的第一台家庭服务器</span>
+    </a>
+    
+  </nav>
+</div>
+
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <ul class="site-footer__links">
+      
+        <li><a href="/">首页</a></li>
+      
+        <li><a href="/about/">关于我</a></li>
+      
+        <li><a href="/archives/">归档</a></li>
+      
+        <li><a href="/friends/">友链</a></li>
+      
+        <li><a target="_blank" rel="noopener" href="https://www.travellings.cn/go.html">开往</a></li>
+      
+    </ul>
+    <p class="site-footer__text"><div> © <span id="copyright-year">2026</span> 景蓝 Yurik. All Rights Reserved. / <a target="_blank" href="/feed.xml">RSS</a> / <a target="_blank" href="/sitemap.xml">Sitemap</a><br> Git Version: 92ae5e5<br> <a target="_blank" href="https://beian.miit.gov.cn">桂ICP备2025057334号</a> </div>
+</p>
+  </div>
+</footer>
+
+<button class="back-to-top" aria-label="Back to top">&uarr;</button>
+
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>

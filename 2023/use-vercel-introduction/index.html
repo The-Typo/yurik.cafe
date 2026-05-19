@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon shortcut" href="/favicon/v2/favicon.ico">
+<title>「技术」使用Vercel托管静态网页 — 景蓝的小屋</title>
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+<meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/feed.xml" title="景蓝的小屋" type="application/rss+xml">
+</head>
+<body class="">
+  
+<nav class="site-nav">
+  <div class="site-nav__inner">
+    <a href="/" class="site-nav__brand">景蓝的小屋</a>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="site-nav__links">
+      
+        <li><a href="/">首页</a></li>
+      
+        <li><a href="/about/">关于我</a></li>
+      
+        <li><a href="/archives/">归档</a></li>
+      
+        <li><a href="/friends/">友链</a></li>
+      
+        <li><a target="_blank" rel="noopener" href="https://www.travellings.cn/go.html">开往</a></li>
+      
+    </ul>
+  </div>
+</nav>
+<div class="nav-overlay"></div>
+
+  <script>
+  if (document.querySelector('.hero')) {
+    document.body.classList.add('has-hero');
+  }
+</script>
+
+
+<header class="article-header">
+  <time class="article-header__date" datetime="2023-01-23">2023 年 1 月 23 日</time>
+  <h1 class="article-header__title">「技术」使用Vercel托管静态网页</h1>
+  <div class="article-header__meta">
+    
+      
+        <span class="badge">技术</span>
+      
+    
+    
+  </div>
+</header>
+
+
+
+<figure class="article-featured-image">
+  <img src="/2023/use-vercel-introduction/banner.png" alt="「技术」使用Vercel托管静态网页">
+  
+</figure>
+
+
+<div class="article-layout article-layout--with-toc">
+  
+  <aside class="toc-sidebar">
+    <div class="toc-sidebar__title">目录</div>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E5%86%8C-Vercel"><span class="toc-text">注册 Vercel</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-Vercel"><span class="toc-text">使用 Vercel</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%91%E5%AE%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D"><span class="toc-text">绑定自定义域名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE"><span class="toc-text">访问</span></a></li></ol>
+  </aside>
+  
+  <div class="article-body">
+    <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Vercel 是一个前端页面托管服务网站，用户可以在上面托管部署多个前端框架的项目</p>
+<p>当然，Vercel 也可以直接托管 Html 静态站点，并且 Vercel 的访问速度优于 Github Pages</p>
+<p><img src="/2023/use-vercel-introduction/speed-compair.png" alt="速度对比"></p>
+<p>写这篇文章的想法来源于两个，一是之前发布的 Hugo 博客部署有一半烂尾了（懒.jpg）, 还有一点就是 Norphin 的博客在他自己自定义后使用了一张 3.04Mb 左右的背景图片，由于他使用 frp 服务+香港节点建站，使得整张图片我加载了大约 10s。于是决定教教他怎么使用 vercel 来规避一些流量损耗。</p>
+<blockquote>
+<p>BTW: 他的背景图是 4K 的，其实一般来说 1080p 到 2k 就差不多了，不必要上传那么大的图片的说…</p>
+</blockquote>
+<h2 id="注册-Vercel"><a href="#注册-Vercel" class="headerlink" title="注册 Vercel"></a>注册 Vercel</h2><p>Vercel 的注册过程很简单，你可以直接使用自己的 GitHub、GitLab、BitBucket 账户直接登录，在本文中就不再过多赘述</p>
+<h2 id="使用-Vercel"><a href="#使用-Vercel" class="headerlink" title="使用 Vercel"></a>使用 Vercel</h2><p>首先在 Github 或者 GitLab 账户（下文简称<strong>你的账户</strong>）中新建一个 Git 仓库，随后将自己的静态文件 Git 提交至仓库内</p>
+<p>接着在 Vercel 中点击 <strong>Add New..</strong>，或者访问<a target="_blank" rel="noopener" href="https://vercel.com/new">这个网址</a>。连接你的你的账户，选择先前新建的仓库，点击 Import</p>
+<p>设置你的<strong>Project Name</strong>, 如果你单纯的想要托管 Html 文档和静态资源的话 框架预设(Framework Preset)就选 <strong>Other</strong> 就好了</p>
+<p>点击 部署(Deploy) 后稍等片刻, 你的项目就部署完成</p>
+<h2 id="绑定自定义域名"><a href="#绑定自定义域名" class="headerlink" title="绑定自定义域名"></a>绑定自定义域名</h2><p>Vercel 会在部署项目时提供一个 <strong>.vercel.app</strong> 结尾的二级域名，但由于某些特殊原因，vercel.app 域名可能会无法访问，这时候你就需要一个自己的域名（域名注册方法自行使用搜索引擎搜索）</p>
+<p>在<a target="_blank" rel="noopener" href="https://vercel.com/dashboard">Dashboard</a>中点击进入你刚刚部署的项目，点击上方的 Setting 进入设置页面，在左侧边栏进入<strong>Domains(域名)<strong>页面，在输入框中输入你想要的域名, 点击</strong>Add</strong>后按照提示在 DNS 中设置记录，返回域名管理页面点击**Refresh(刷新)**使其检测记录是否生效并注册 SSL 证书即可。</p>
+<blockquote>
+<p>值得注意的是，如果你添加的是一个 www 或者根域名，如 <a target="_blank" rel="noopener" href="http://www.yurik.cafe/">www.yurik.cafe</a> 或者 yurik.cafe，Vercel 会跳出提示询问你是选择将 www 域名重定向至根域名还是根域名重定向至 www 域名，抑或是单纯添加你输入的域名，你可以根据自身情况选择。</p>
+<p>Vercel 推荐你将 www 域名重定向至根域名</p>
+</blockquote>
+<h2 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h2><p>按照<strong>域名&#x2F;路径&#x2F;文件名</strong>访问即可</p>
+<blockquote>
+<p>Vercel 会自动为域名注册一个免费的 SSL 证书，所以你可以使用 https 访问</p>
+</blockquote>
+
+  </div>
+</div>
+
+
+<div class="content-container" style="padding: 0 var(--space-2xl);">
+  <nav class="article-nav" style="max-width: var(--content-width); margin-left: auto; margin-right: auto;">
+    
+    <a href="/2023/miscellanies-1/" class="article-nav__item">
+      <span class="article-nav__label">上一篇</span>
+      <span class="article-nav__title">「随笔」记于 17 岁生日前</span>
+    </a>
+    
+    
+    <a href="/2023/raspberry-pi-install-centos/" class="article-nav__item article-nav__item--next">
+      <span class="article-nav__label">下一篇</span>
+      <span class="article-nav__title">「技术」树莓派4B烧录CentOS镜像并安装宝塔面板</span>
+    </a>
+    
+  </nav>
+</div>
+
+
+  <footer class="site-footer">
+  <div class="site-footer__inner">
+    <ul class="site-footer__links">
+      
+        <li><a href="/">首页</a></li>
+      
+        <li><a href="/about/">关于我</a></li>
+      
+        <li><a href="/archives/">归档</a></li>
+      
+        <li><a href="/friends/">友链</a></li>
+      
+        <li><a target="_blank" rel="noopener" href="https://www.travellings.cn/go.html">开往</a></li>
+      
+    </ul>
+    <p class="site-footer__text"><div> © <span id="copyright-year">2026</span> 景蓝 Yurik. All Rights Reserved. / <a target="_blank" href="/feed.xml">RSS</a> / <a target="_blank" href="/sitemap.xml">Sitemap</a><br> Git Version: 92ae5e5<br> <a target="_blank" href="https://beian.miit.gov.cn">桂ICP备2025057334号</a> </div>
+</p>
+  </div>
+</footer>
+
+<button class="back-to-top" aria-label="Back to top">&uarr;</button>
+
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>

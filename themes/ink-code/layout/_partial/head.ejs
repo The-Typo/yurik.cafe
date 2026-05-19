@@ -1,0 +1,8 @@
+<%
+var favicon = theme.favicon || '/favicon.ico';
+%>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon shortcut" href="<%= favicon %>">
+<title><%= page.title ? `${page.title} — ` : '' %><%= config.title || __('title.fallback') %></title>
+<%- css('css/style') %>

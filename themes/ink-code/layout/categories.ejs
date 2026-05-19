@@ -1,0 +1,23 @@
+<header class="page-header">
+  <h1 class="page-header__title"><%= page.title || __('categories.title') %></h1>
+  <p class="page-header__subtitle"><%= site.categories.length %><%= __('categories.count_suffix') %></p>
+</header>
+
+<main class="content-container content-container--wide">
+  <% site.categories.sort('name').each(function(category) { %>
+  <section class="category-section reveal">
+    <h2 class="category-section__heading">
+      <a href="<%= url_for(category.path) %>"><%= category.name %></a>
+      <span class="category-section__count"><%= category.length %></span>
+    </h2>
+    <ul class="category-posts">
+      <% category.posts.sort('date', -1).each(function(post) { %>
+      <li class="category-posts__item">
+        <time class="category-posts__date" datetime="<%= date(post.date, 'YYYY-MM-DD') %>"><%= date(post.date, 'YYYY-MM-DD') %></time>
+        <a href="<%= url_for(post.path) %>"><%= post.title %></a>
+      </li>
+      <% }); %>
+    </ul>
+  </section>
+  <% }); %>
+</main>

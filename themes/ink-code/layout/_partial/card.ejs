@@ -1,0 +1,35 @@
+<%
+var dateFormat = theme.date_format || __('date_format');
+var desc = '';
+if (post.description) {
+  desc = post.description;
+} else if (post.excerpt && post.excerpt !== post.content) {
+  desc = strip_html(post.excerpt);
+} else if (post.content) {
+  desc = strip_html(post.content).slice(0, 50).replace(/\s+\S*$/, '') + '…';
+}
+%>
+<a href="<%= url_for(post.path) %>" class="card reveal<%= (!post.cover) ? ' card--no-image' : '' %>">
+  <div class="card__content">
+    <div class="card__date"><%= date(post.date, dateFormat) %></div>
+    <h3 class="card__title"><%= post.title %></h3>
+    <p class="card__excerpt"><%= desc %></p>
+    <div class="card__meta">
+      <% if (post.categories && post.categories.length) { %>
+        <% post.categories.forEach(function(cat) { %>
+          <span class="badge"><%= cat.name %></span>
+        <% }); %>
+      <% } %>
+      <% if (post.tags && post.tags.length) { %>
+        <% post.tags.forEach(function(tag) { %>
+          <span class="tag"><%= tag.name %></span>
+        <% }); %>
+      <% } %>
+    </div>
+  </div>
+  <% if (post.cover) { %>
+  <div class="card__body">
+    <img class="card__image" src="<%= post.cover %>" alt="<%= post.title %>" loading="lazy">
+  </div>
+  <% } %>
+</a>

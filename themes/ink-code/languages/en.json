@@ -1,0 +1,64 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "archive": "Archive",
+    "tags": "Tags",
+    "categories": "Categories",
+    "friends": "Friends",
+    "Travelling": "Travelling"
+  },
+  "title": {
+    "fallback": "INK & CODE"
+  },
+  "hero": {
+    "browse_articles": "Browse Articles",
+    "about_me": "About Me",
+    "scroll_down": "Scroll Down"
+  },
+  "index": {
+    "browse_all": "Browse All Articles"
+  },
+  "archive": {
+    "title": "Archive",
+    "subtitle": "Every article, organized by time"
+  },
+  "about": {
+    "title": "About Me",
+    "subtitle": "Finding balance between code and words",
+    "avatar_placeholder": "[Avatar]"
+  },
+  "friends": {
+    "title": "Friends",
+    "subtitle": "Like-minded friends, welcome to exchange links",
+    "exchange_title": "Exchange Links",
+    "exchange_desc": "If you also run a blog with heart, feel free to exchange links with me.",
+    "exchange_btn": "Send Email"
+  },
+  "tags": {
+    "title": "Tags",
+    "count_suffix": " tags"
+  },
+  "categories": {
+    "title": "Categories",
+    "count_suffix": " categories"
+  },
+  "post": {
+    "toc_title": "Table of Contents",
+    "prev": "Previous",
+    "next": "Next",
+    "posts_count": " articles"
+  },
+  "paginator": {
+    "prev": "← Prev",
+    "next": "Next →"
+  },
+  "footer": {
+    "copyright": "INK &amp; CODE — \"A magazine that writes code\""
+  },
+  "a11y": {
+    "toggle_nav": "Toggle navigation",
+    "back_to_top": "Back to top"
+  },
+  "date_format": "MMM D, YYYY"
+}

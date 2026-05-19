@@ -1,0 +1,47 @@
+<script>
+  if (document.querySelector('.hero')) {
+    document.body.classList.add('has-hero');
+  }
+</script>
+
+<%- partial('_partial/article-header') %>
+
+<% if (page.cover) { %>
+<figure class="article-featured-image">
+  <img src="<%= page.cover %>" alt="<%= page.title %>">
+  <% if (page.featured_caption) { %>
+  <figcaption><%= page.featured_caption %></figcaption>
+  <% } %>
+</figure>
+<% } %>
+
+<div class="article-layout<%= page.toc !== false ? ' article-layout--with-toc' : '' %>">
+  <% if (page.toc !== false) { %>
+  <aside class="toc-sidebar">
+    <div class="toc-sidebar__title"><%= __('post.toc_title') %></div>
+    <%- toc(page.content, { list_number: false, max_depth: (theme.toc && theme.toc.max_depth) || 3 }) %>
+  </aside>
+  <% } %>
+  <div class="article-body">
+    <%- page.content %>
+  </div>
+</div>
+
+<% if (page.prev || page.next) { %>
+<div class="content-container" style="padding: 0 var(--space-2xl);">
+  <nav class="article-nav" style="max-width: var(--content-width); margin-left: auto; margin-right: auto;">
+    <% if (page.prev) { %>
+    <a href="<%= url_for(page.prev.path) %>" class="article-nav__item">
+      <span class="article-nav__label"><%= __('post.prev') %></span>
+      <span class="article-nav__title"><%= page.prev.title %></span>
+    </a>
+    <% } else { %><div></div><% } %>
+    <% if (page.next) { %>
+    <a href="<%= url_for(page.next.path) %>" class="article-nav__item article-nav__item--next">
+      <span class="article-nav__label"><%= __('post.next') %></span>
+      <span class="article-nav__title"><%= page.next.title %></span>
+    </a>
+    <% } %>
+  </nav>
+</div>
+<% } %>

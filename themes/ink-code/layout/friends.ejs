@@ -1,0 +1,31 @@
+<%
+var friends = site.data.friends || [];
+%>
+<header class="page-header">
+  <h1 class="page-header__title"><%= page.title || __('friends.title') %></h1>
+  <% if (page.subtitle) { %>
+  <p class="page-header__subtitle"><%= page.subtitle %></p>
+  <% } %>
+</header>
+
+<main class="content-container content-container--wide">
+  <div class="friends-grid">
+    <% friends.forEach(function(friend) { %>
+    <a href="<%= friend.url %>" target="_blank" rel="noopener" class="friend-card">
+      <div class="friend-card__avatar" style="background:<%= friend.color || 'oklch(0.7 0.15 200)' %>;display:flex;align-items:center;justify-content:center;color:white;font-family:var(--font-display);font-size:var(--text-xl);">
+        <% if (friend.avatar) { %><img src="<%= friend.avatar %>" alt="<%= friend.name %>" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"><% } else { %><%= friend.name.charAt(0) %><% } %>
+      </div>
+      <div>
+        <div class="friend-card__name"><%= friend.name %></div>
+        <div class="friend-card__desc"><%= friend.description %></div>
+      </div>
+    </a>
+    <% }); %>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="article-body">
+    <%- page.content %>
+  </div>
+</main>

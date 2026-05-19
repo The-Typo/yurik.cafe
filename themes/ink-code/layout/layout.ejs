@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="<%= config.language %>">
+<head>
+  <%- partial('_partial/head') %>
+</head>
+<body class="<%= is_home() && page.current === 1 && theme.hero && theme.hero.enabled ? 'has-hero' : '' %>">
+  <%- partial('_partial/header') %>
+  <%- body %>
+  <%- partial('_partial/footer') %>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<%
+var title = theme.title || config.title || '';
+%>
+<nav class="site-nav">
+  <div class="site-nav__inner">
+    <a href="<%= url_for('/') %>" class="site-nav__brand"><%= title %></a>
+    <button class="nav-toggle" aria-label="<%= __('a11y.toggle_nav') %>" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="site-nav__links">
+      <% for (var key in theme.menu) {
+        var item = theme.menu[key];
+        var href, label;
+        if (typeof item === 'object' && item !== null) {
+          href = item.url || '';
+          label = item.name || key;
+        } else {
+          href = String(item);
+          var i18n = __('nav.' + key.toLowerCase());
+          label = (i18n.indexOf('nav.') === 0) ? key : i18n;
+        }
+      %>
+        <li><a href="<%= url_for(href) %>"<%= page.path === href.replace(/^\//,'').replace(/\/$/,'') ? ' class="active"' : '' %>><%= label %></a></li>
+      <% } %>
+    </ul>
+  </div>
+</nav>
+<div class="nav-overlay"></div>

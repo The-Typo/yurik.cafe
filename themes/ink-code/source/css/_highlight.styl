@@ -1,0 +1,163 @@
+// ============================================================
+// MARKDOWN ELEMENTS — Code
+// ============================================================
+
+// Inline code
+code
+  font-family: var(--font-mono)
+  font-size: 0.85em
+  padding: 0.15em 0.4em
+  background: var(--color-code-inline-bg)
+  color: var(--color-text-primary)
+  border-radius: var(--radius-sm)
+  word-break: break-word
+
+// Code Block — <pre><code> (highlight.js)
+// Hexo + highlight.js outputs: <figure class="highlight"><table><tr>
+//   <td class="gutter"><pre>…line numbers…</pre></td>
+//   <td class="code"><pre><code class="hljs …">…</code></pre></td>
+// </tr></table></figure>
+figure.highlight
+  margin: var(--space-xl) 0
+  border-radius: var(--radius-md)
+  background: var(--color-code-bg)
+
+  table
+    display: table
+    width: 100%
+    table-layout: fixed
+    border-collapse: separate
+    border-spacing: 0
+    border-radius: var(--radius-md)
+    overflow: hidden
+
+  td
+    padding: 0
+    vertical-align: top
+
+  // Gutter: line numbers
+  td.gutter
+    width: 2.8rem
+    min-width: 2.8rem
+    padding: var(--space-md) 0 var(--space-md) var(--space-md)
+    user-select: none
+    text-align: right
+    color: oklch(0.5 0.005 265)
+    background: oklch(0.15 0.01 265)
+    font-family: var(--font-mono)
+    font-size: var(--text-xs)
+    line-height: 1.6
+
+    pre
+      margin: 0
+      padding: 0
+      background: none
+      color: inherit
+      border-radius: 0
+      overflow: visible
+
+  // Code column
+  td.code
+    padding: var(--space-md) var(--space-md) var(--space-md) var(--space-sm)
+
+    pre
+      margin: 0
+      padding: 0
+      background: none
+      border-radius: 0
+      overflow-x: auto
+
+      code
+        background: none
+        color: var(--color-code-text)
+        padding: 0
+        font-size: inherit
+        border-radius: 0
+        white-space: pre-wrap
+        word-break: break-all
+        overflow-wrap: break-word
+
+// Fallback: <pre><code> without line numbers (no figure.highlight)
+pre
+  background: var(--color-code-bg)
+  color: var(--color-code-text)
+  font-family: var(--font-mono)
+  font-size: var(--text-sm)
+  line-height: 1.6
+  padding: var(--space-xl)
+  border-radius: var(--radius-md)
+  overflow-x: auto
+  margin: var(--space-xl) 0
+  tab-size: 2
+
+  code
+    background: none
+    color: inherit
+    padding: 0
+    font-size: inherit
+    border-radius: 0
+    white-space: pre-wrap
+    word-break: break-all
+    overflow-wrap: break-word
+
+// highlight.js syntax tokens
+.hljs-keyword
+  color: oklch(0.72 0.15 290)
+.hljs-string
+  color: oklch(0.7 0.14 160)
+.hljs-number
+  color: oklch(0.7 0.1 40)
+.hljs-comment
+  color: oklch(0.45 0.02 85)
+  font-style: italic
+.hljs-function
+  color: oklch(0.75 0.12 95)
+.hljs-built_in
+  color: oklch(0.68 0.13 260)
+.hljs-title
+  color: oklch(0.72 0.14 120)
+.hljs-attr
+  color: oklch(0.66 0.13 80)
+.hljs-params
+  color: oklch(0.75 0.04 85)
+.hljs-literal
+  color: oklch(0.65 0.15 30)
+.hljs-type
+  color: oklch(0.68 0.13 200)
+.hljs-meta
+  color: oklch(0.55 0.02 85)
+.hljs-selector-class
+  color: oklch(0.68 0.13 120)
+.hljs-selector-tag
+  color: oklch(0.68 0.15 290)
+.hljs-variable
+  color: oklch(0.75 0.05 85)
+.hljs-property
+  color: oklch(0.72 0.1 85)
+.hljs-operator
+  color: oklch(0.8 0.02 85)
+.hljs-punctuation
+  color: oklch(0.65 0.01 85)
+.hljs-regexp
+  color: oklch(0.68 0.15 10)
+
+// Code block wrapper with language label
+.code-block-wrapper
+  position: relative
+  margin: var(--space-xl) 0
+
+  pre
+    margin: 0
+
+  &__lang
+    position: absolute
+    top: 0
+    right: var(--space-md)
+    font-family: var(--font-mono)
+    font-size: var(--text-xs)
+    color: oklch(0.55 0.01 265)
+    padding: var(--space-4xs) var(--space-sm)
+    background: oklch(0.25 0.01 265)
+    border-radius: 0 0 var(--radius-sm) var(--radius-sm)
+    text-transform: uppercase
+    letter-spacing: 0.06em

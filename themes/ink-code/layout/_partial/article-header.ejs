@@ -1,0 +1,19 @@
+<%
+var dateFormat = theme.date_format || __('date_format');
+%>
+<header class="article-header">
+  <time class="article-header__date" datetime="<%= date(page.date, 'YYYY-MM-DD') %>"><%= date(page.date, dateFormat) %></time>
+  <h1 class="article-header__title"><%= page.title %></h1>
+  <div class="article-header__meta">
+    <% if (page.categories && page.categories.length) { %>
+      <% page.categories.forEach(function(cat) { %>
+        <span class="badge"><%= cat.name %></span>
+      <% }); %>
+    <% } %>
+    <% if (page.tags && page.tags.length) { %>
+      <% page.tags.forEach(function(tag) { %>
+        <span class="tag"><%= tag.name %></span>
+      <% }); %>
+    <% } %>
+  </div>
+</header>

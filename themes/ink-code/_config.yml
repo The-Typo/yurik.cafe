@@ -1,0 +1,54 @@
+# INK & CODE — Hexo Theme
+# "一本会写代码的杂志"
+
+# Navigation
+menu:
+  Home: /
+  About: /about/
+  Archive: /archives/
+  Friends: /friends/
+
+# Author (optional — falls back to site config.author / config.subtitle)
+author:
+subtitle:
+
+# Avatar image path (optional)
+avatar: /avatar.png
+
+# Hero (optional — title_line1/2 and subtitle fall back to site config.title/subtitle/description)
+hero:
+  enabled: true
+  issue: "ISSUE NO. 05 · 2026"
+  title_line1: 
+  title_line2: 
+  subtitle: 
+  background_image: /images/banner.webp
+
+# Social links (define in _config.ink-code.yml)
+social:
+  - name: GitHub
+    url: https://github.com
+  - name: X
+    url: https://twitter.com
+  - name: Email
+    url: mailto:hello@example.com
+
+favicon: /favicon.ico
+
+# Featured image for posts without explicit cover
+default_featured_image:
+
+# Code blocks
+code_block:
+  enable_language_label: true
+
+# Table of Contents
+toc:
+  max_depth: 3
+
+# Footer copyright override (optional — leave empty to use i18n default)
+footer_copyright: > 
+  © <span id="copyright-year">2026</span> Ink Code. All Rights Reserved. 
+
+# Date format override (optional — leave empty to use i18n default)
+date_format:

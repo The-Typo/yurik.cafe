@@ -1,0 +1,15 @@
+<header class="page-header">
+  <h1 class="page-header__title"><%= __('tags.title') %></h1>
+  <p class="page-header__subtitle"><%= site.tags.length %><%= __('tags.count_suffix') %></p>
+</header>
+
+<main class="content-container content-container--wide">
+  <div class="tag-cloud">
+    <% site.tags.sort('name').each(function(tag) { %>
+    <a href="<%= url_for(tag.path) %>" class="tag-cloud__item" style="font-size:<%= Math.min(1 + tag.length * 0.08, 2) %>em">
+      <span class="tag"><%= tag.name %></span>
+      <span class="tag-cloud__count"><%= tag.length %></span>
+    </a>
+    <% }); %>
+  </div>
+</main>

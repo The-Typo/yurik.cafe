@@ -1,0 +1,20 @@
+<%
+var hero_title_l1 = theme.hero.title_line1 || config.title || __('title.fallback');
+var hero_title_l2 = theme.hero.title_line2 || config.subtitle || '';
+var hero_subtitle = theme.hero.subtitle || config.description || '';
+%>
+<section class="hero" style="background-image: url('<%= theme.hero.background_image %>');">
+  <div class="hero__content">
+    <div class="hero__issue hero__line" style="animation-delay: 0.1s"><%= theme.hero.issue %></div>
+    <h1 class="hero__title">
+      <span class="hero__title-line hero__line" style="animation-delay: 0.25s"><%= hero_title_l1 %></span>
+      <span class="hero__title-line hero__line" style="animation-delay: 0.35s"><%= hero_title_l2 %></span>
+    </h1>
+    <p class="hero__subtitle hero__line" style="animation-delay: 0.5s"><%= hero_subtitle %></p>
+   <!--<div class="hero__actions">
+      <a href="<%= url_for('/archives/') %>" class="btn btn--primary btn--lg"><%= __('hero.browse_articles') %></a>
+      <a href="<%= url_for('/about/') %>" class="btn btn--outline btn--lg"><%= __('hero.about_me') %></a>
+   </div>-->
+  </div>
+  <div class="hero__scroll-hint"><%= __('hero.scroll_down') %></div>
+</section>

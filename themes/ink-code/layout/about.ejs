@@ -1,0 +1,39 @@
+<%
+var author = theme.author || config.author || __('about.avatar_placeholder');
+var subtitle = theme.subtitle || config.subtitle || '';
+%>
+<header class="page-header">
+  <h1 class="page-header__title"><%= page.title || __('about.title') %></h1>
+  <% if (page.subtitle) { %>
+  <p class="page-header__subtitle"><%= page.subtitle %></p>
+  <% } %>
+</header>
+
+<main class="content-container content-container--wide">
+  <div class="about-layout reveal">
+    <aside class="about-sidebar">
+      <div class="about-avatar" style="background: var(--color-surface); display: flex; align-items: center; justify-content: center; color: var(--color-text-muted); font-family: var(--font-display); font-size: var(--text-5xl); user-select: none;">
+        <% if (theme.avatar && theme.avatar !== '/img/avatar.png') { %>
+          <img src="<%= url_for(theme.avatar) %>" alt="<%= author %>" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+        <% } else { %>
+          <span><%= __('about.avatar_placeholder') %></span>
+        <% } %>
+      </div>
+      <h2 class="about-name"><%= author %></h2>
+      <p class="about-role"><%= subtitle %></p>
+      <ul class="about-social">
+        <% if (theme.social) { %>
+          <% for (var key in theme.social) { %>
+            <li><a href="<%= theme.social[key].url %>" target="_blank" rel="noopener"><%= theme.social[key].name %></a></li>
+          <% } %>
+        <% } %>
+      </ul>
+    </aside>
+
+    <div>
+      <section class="section" style="padding-top: 0;">
+        <%- page.content %>
+      </section>
+    </div>
+  </div>
+</main>

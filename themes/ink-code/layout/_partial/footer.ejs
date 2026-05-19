@@ -1,0 +1,25 @@
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <ul class="site-footer__links">
+      <% for (var key in theme.menu) {
+        var item = theme.menu[key];
+        var href, label;
+        if (typeof item === 'object' && item !== null) {
+          href = item.url || '';
+          label = item.name || key;
+        } else {
+          href = String(item);
+          var i18n = __('nav.' + key.toLowerCase());
+          label = (i18n.indexOf('nav.') === 0) ? key : i18n;
+        }
+      %>
+        <li><a href="<%= url_for(href) %>"><%= label %></a></li>
+      <% } %>
+    </ul>
+    <p class="site-footer__text"><% if (theme.footer_copyright) { %><%- theme.footer_copyright %><% } else { %>&copy; <%= new Date().getFullYear() %> <%- __('footer.copyright') %><% } %></p>
+  </div>
+</footer>
+
+<button class="back-to-top" aria-label="<%= __('a11y.back_to_top') %>">&uarr;</button>
+
+<%- js('js/main') %>

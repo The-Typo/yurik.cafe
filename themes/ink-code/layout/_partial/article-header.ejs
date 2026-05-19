@@ -7,12 +7,12 @@ var dateFormat = theme.date_format || __('date_format');
   <div class="article-header__meta">
     <% if (page.categories && page.categories.length) { %>
       <% page.categories.forEach(function(cat) { %>
-        <span class="badge"><%= cat.name %></span>
+        <a href="<%= url_for(cat.path) %>" class="badge category"><%= cat.name %></a>
       <% }); %>
     <% } %>
     <% if (page.tags && page.tags.length) { %>
       <% page.tags.forEach(function(tag) { %>
-        <span class="tag"><%= tag.name %></span>
+        <a href="<%= url_for(tag.path) %>" class="tag"><%= tag.name %></a>
       <% }); %>
     <% } %>
   </div>

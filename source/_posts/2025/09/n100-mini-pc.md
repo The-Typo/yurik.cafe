@@ -1,11 +1,11 @@
 ---
 title: N100 小主机上手体验
-published: 2025-09-27
+date: 2025-09-27
 description: ''
 tags: [小主机, 软路由]
 categories: '开箱'
 draft: false
-cover: '/2026/n100-mini-pc/body-1.webp'
+cover: '/2025/n100-mini-pc/body-1.webp'
 lang: ''
 ---
 

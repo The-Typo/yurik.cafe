@@ -71,7 +71,7 @@ layout: about
 
 ## 关于博客
 
-`Powered By Astro & Fuwari`
+`Powered By Hexo & Ink Code`
 
 本博客所有文章在 **未特殊声明** 的前提下均采用[知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议](http://creativecommons.org/licenses/by-nc-sa/4.0/)。
 

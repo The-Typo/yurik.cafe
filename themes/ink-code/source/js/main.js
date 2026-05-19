@@ -55,10 +55,21 @@
           }
         });
       },
-      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+      { threshold: 0.05, rootMargin: '0px 0px 0px 0px' }
     );
 
     revealEls.forEach(function(el) { observer.observe(el); });
+
+    // Immediately reveal elements already in viewport on initial load
+    requestAnimationFrame(function() {
+      revealEls.forEach(function(el) {
+        var rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          el.classList.add('visible');
+          observer.unobserve(el);
+        }
+      });
+    });
   }
 
   window.addEventListener('scroll', handleScroll, { passive: true });

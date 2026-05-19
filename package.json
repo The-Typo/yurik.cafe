@@ -7,7 +7,7 @@
   },
   "scripts": {
     "clean": "hexo clean",
-    "generate": "hexo clean && hexo generate",
+    "g": "hexo clean && hexo generate",
     "server": "hexo clean && hexo generate && hexo server"
   },
   "dependencies": {

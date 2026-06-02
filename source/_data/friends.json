@@ -1,22 +1,4 @@
 [
-  {
-      "title": "Wiki@LitLUG",
-      "description": "柳州铁树 Linux 用户协会官方 Wiki 站点",
-      "link": "https://litlug.wiki/",
-      "avatar": "https://litlug.wiki/assets/img/irontree.svg"
-    },
-    {
-      "title": "繁星山",
-      "description": "一个充满文字的站点，无序、随意、充满想象。",
-      "link": "https://ink.yurik.cafe/",
-      "avatar": "https://ink.yurik.cafe/favicon/v1/apple-touch-icon.png"
-    },
-    {
-      "title": "Norphin`s Yard",
-      "description": "Norph1n的后花园",
-      "link": "https://norph1n.top/",
-      "avatar": "https://norph1n.top/favicon/v1/avatar.jpg"
-    },
     {
       "title": "Azure Zeng's Blog",
       "description": "Azure Zeng 的小窝",
@@ -45,6 +27,6 @@
       "title": "初之音",
       "description": "聆听心中最初的声音",
       "link": "https://www.himiku.com/",
-      "avatar": "https://cravatar.cn/avatar/2fc4cf3560ff5a1cc64ea029896ab235?s=400"
+      "avatar": "https://gravatar.com/avatar/2fc4cf3560ff5a1cc64ea029896ab235?s=400"
     }
 ]

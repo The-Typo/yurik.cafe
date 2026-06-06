@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://yurik.cafe/tags/index.html</loc>
+    <loc>https://yurik.cafe/links/index.html</loc>
     
     <lastmod>2026-06-06</lastmod>
     
@@ -11,7 +11,7 @@
   </url>
   
   <url>
-    <loc>https://yurik.cafe/links/index.html</loc>
+    <loc>https://yurik.cafe/tags/index.html</loc>
     
     <lastmod>2026-06-06</lastmod>
     
@@ -110,6 +110,15 @@
   </url>
   
   <url>
+    <loc>https://yurik.cafe/2024/thought-memories/</loc>
+    
+    <lastmod>2026-06-06</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://yurik.cafe/2024/nas-hardware-guide/</loc>
     
     <lastmod>2026-06-06</lastmod>
@@ -120,15 +129,6 @@
   
   <url>
     <loc>https://yurik.cafe/2024/nanshan-south-beiqiu-sad/</loc>
-    
-    <lastmod>2026-06-06</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://yurik.cafe/2024/thought-memories/</loc>
     
     <lastmod>2026-06-06</lastmod>
     
@@ -209,7 +209,7 @@
   </url>
   
   <url>
-    <loc>https://yurik.cafe/2023/hello-counter-strike-2/</loc>
+    <loc>https://yurik.cafe/2023/fluid-random-index-img/</loc>
     
     <lastmod>2026-06-06</lastmod>
     
@@ -218,7 +218,7 @@
   </url>
   
   <url>
-    <loc>https://yurik.cafe/2023/fluid-random-index-img/</loc>
+    <loc>https://yurik.cafe/2023/hello-counter-strike-2/</loc>
     
     <lastmod>2026-06-06</lastmod>
     
@@ -254,7 +254,7 @@
   </url>
   
   <url>
-    <loc>https://yurik.cafe/2023/raspberry-pi-install-centos/</loc>
+    <loc>https://yurik.cafe/2023/use-vercel-introduction/</loc>
     
     <lastmod>2026-06-06</lastmod>
     
@@ -263,7 +263,7 @@
   </url>
   
   <url>
-    <loc>https://yurik.cafe/2023/use-vercel-introduction/</loc>
+    <loc>https://yurik.cafe/2023/raspberry-pi-install-centos/</loc>
     
     <lastmod>2026-06-06</lastmod>
     
@@ -317,7 +317,7 @@
   </url>
   
   <url>
-    <loc>https://yurik.cafe/2022/hugo-blog/</loc>
+    <loc>https://yurik.cafe/2022/hello-world/</loc>
     
     <lastmod>2026-06-06</lastmod>
     
@@ -326,7 +326,7 @@
   </url>
   
   <url>
-    <loc>https://yurik.cafe/2022/hello-world/</loc>
+    <loc>https://yurik.cafe/2022/hugo-blog/</loc>
     
     <lastmod>2026-06-06</lastmod>
     
@@ -472,20 +472,6 @@
 
   
   <url>
-    <loc>https://yurik.cafe/categories/%E6%8A%80%E6%9C%AF/</loc>
-    <lastmod>2026-06-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://yurik.cafe/categories/reviews/</loc>
-    <lastmod>2026-06-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://yurik.cafe/categories/thoughts/</loc>
     <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
@@ -493,7 +479,21 @@
   </url>
   
   <url>
+    <loc>https://yurik.cafe/categories/%E6%8A%80%E6%9C%AF/</loc>
+    <lastmod>2026-06-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://yurik.cafe/categories/%E4%BF%A1%E7%AB%9E/</loc>
+    <lastmod>2026-06-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://yurik.cafe/categories/reviews/</loc>
     <lastmod>2026-06-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

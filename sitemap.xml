@@ -65,15 +65,6 @@
   </url>
   
   <url>
-    <loc>https://yurik.cafe/2026/i-got-full-apple-ecosystem/</loc>
-    
-    <lastmod>2026-08-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://yurik.cafe/2026/rp2350-passkey/</loc>
     
     <lastmod>2026-08-11</lastmod>
@@ -83,7 +74,25 @@
   </url>
   
   <url>
+    <loc>https://yurik.cafe/2026/i-got-full-apple-ecosystem/</loc>
+    
+    <lastmod>2026-08-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://yurik.cafe/2025/n100-mini-pc/</loc>
+    
+    <lastmod>2026-08-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://yurik.cafe/2025/i-am-always-a-kid/</loc>
     
     <lastmod>2026-08-11</lastmod>
     
@@ -110,16 +119,7 @@
   </url>
   
   <url>
-    <loc>https://yurik.cafe/2025/i-am-always-a-kid/</loc>
-    
-    <lastmod>2026-08-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://yurik.cafe/2024/thought-memories/</loc>
+    <loc>https://yurik.cafe/2024/nas-hardware-guide/</loc>
     
     <lastmod>2026-08-11</lastmod>
     
@@ -137,16 +137,7 @@
   </url>
   
   <url>
-    <loc>https://yurik.cafe/2024/nas-hardware-guide/</loc>
-    
-    <lastmod>2026-08-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://yurik.cafe/2024/warma-shark-unity/</loc>
+    <loc>https://yurik.cafe/2024/thought-memories/</loc>
     
     <lastmod>2026-08-11</lastmod>
     
@@ -164,6 +155,15 @@
   </url>
   
   <url>
+    <loc>https://yurik.cafe/2024/warma-shark-unity/</loc>
+    
+    <lastmod>2026-08-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://yurik.cafe/2024/hexo-theme-news/</loc>
     
     <lastmod>2026-08-11</lastmod>
@@ -173,7 +173,7 @@
   </url>
   
   <url>
-    <loc>https://yurik.cafe/2024/my-way-to-php/</loc>
+    <loc>https://yurik.cafe/2024/github-action-depoly-hexo/</loc>
     
     <lastmod>2026-08-11</lastmod>
     
@@ -182,7 +182,7 @@
   </url>
   
   <url>
-    <loc>https://yurik.cafe/2024/github-action-depoly-hexo/</loc>
+    <loc>https://yurik.cafe/2024/my-way-to-php/</loc>
     
     <lastmod>2026-08-11</lastmod>
     
@@ -245,15 +245,6 @@
   </url>
   
   <url>
-    <loc>https://yurik.cafe/2023/miscellanies-1/</loc>
-    
-    <lastmod>2026-08-11</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://yurik.cafe/2023/YGM-Introduce/</loc>
     
     <lastmod>2026-08-11</lastmod>
@@ -263,7 +254,7 @@
   </url>
   
   <url>
-    <loc>https://yurik.cafe/2023/use-vercel-introduction/</loc>
+    <loc>https://yurik.cafe/2023/miscellanies-1/</loc>
     
     <lastmod>2026-08-11</lastmod>
     
@@ -273,6 +264,15 @@
   
   <url>
     <loc>https://yurik.cafe/2023/raspberry-pi-install-centos/</loc>
+    
+    <lastmod>2026-08-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://yurik.cafe/2023/use-vercel-introduction/</loc>
     
     <lastmod>2026-08-11</lastmod>
     
@@ -326,7 +326,7 @@
   </url>
   
   <url>
-    <loc>https://yurik.cafe/2022/hello-world/</loc>
+    <loc>https://yurik.cafe/2022/hugo-blog/</loc>
     
     <lastmod>2026-08-11</lastmod>
     
@@ -335,7 +335,7 @@
   </url>
   
   <url>
-    <loc>https://yurik.cafe/2022/hugo-blog/</loc>
+    <loc>https://yurik.cafe/2022/hello-world/</loc>
     
     <lastmod>2026-08-11</lastmod>
     
@@ -437,13 +437,6 @@
   </url>
   
   <url>
-    <loc>https://yurik.cafe/tags/Steam/</loc>
-    <lastmod>2026-08-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://yurik.cafe/tags/%E5%B0%8F%E4%B8%BB%E6%9C%BA/</loc>
     <lastmod>2026-08-11</lastmod>
     <changefreq>weekly</changefreq>
@@ -452,27 +445,6 @@
   
   <url>
     <loc>https://yurik.cafe/tags/%E8%BD%AF%E8%B7%AF%E7%94%B1/</loc>
-    <lastmod>2026-08-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://yurik.cafe/tags/%E7%94%9F%E6%B4%BB/</loc>
-    <lastmod>2026-08-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://yurik.cafe/tags/%E6%80%9D%E8%80%83/</loc>
-    <lastmod>2026-08-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://yurik.cafe/tags/Apple/</loc>
     <lastmod>2026-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -527,6 +499,34 @@
     <priority>0.2</priority>
   </url>
   
+  <url>
+    <loc>https://yurik.cafe/tags/%E7%94%9F%E6%B4%BB/</loc>
+    <lastmod>2026-08-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://yurik.cafe/tags/%E6%80%9D%E8%80%83/</loc>
+    <lastmod>2026-08-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://yurik.cafe/tags/Apple/</loc>
+    <lastmod>2026-08-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://yurik.cafe/tags/Steam/</loc>
+    <lastmod>2026-08-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
 
   
   <url>
@@ -544,14 +544,14 @@
   </url>
   
   <url>
-    <loc>https://yurik.cafe/categories/reviews/</loc>
+    <loc>https://yurik.cafe/categories/%E4%BF%A1%E7%AB%9E/</loc>
     <lastmod>2026-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://yurik.cafe/categories/%E4%BF%A1%E7%AB%9E/</loc>
+    <loc>https://yurik.cafe/categories/reviews/</loc>
     <lastmod>2026-08-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

@@ -1,4 +1,4 @@
-name: 同步至 Deploy 分支
+name: Render & Push
 on:
   push:
     branches:
@@ -53,6 +53,6 @@ jobs:
           EXCLUDE: /.git/, /.github/, /README.md, /LICENSE, /html_files.txt
           SOURCE: "public"
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          REMOTE_USER: root
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
           REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
           TARGET: ${{ secrets.SITE_ADDR }}

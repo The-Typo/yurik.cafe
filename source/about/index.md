@@ -55,15 +55,15 @@ layout: about
 
 - 目前使用的设备：
 
-  手机：iPhone 14 Pro 、iQOO 13 16 + 1TB
+  手机：iPhone Pro 、iQOO 13 16 + 1TB
 
   电脑： MacBook Pro 深空黑 (14-inch, M3 Pro)、ROG STRIX SCAR 17
 
-  手表：Apple Watch Series 11 GPS, 46mm Jet Black Aluminum (MEUX4LW/A)
+  手表：~~Apple Watch Series 11 GPS, 46mm Jet Black Aluminum (MEUX4LW/A)~~
 
-  耳机：Airpods Pro 2、Sony MDR-7506 、 水月雨「竹 II」
+  耳机：Airpods Pro 2、Sony MDR-7506 、水月雨「竹 II」
 
-  鼠标：ATK Duckbill Ultra
+  鼠标：~~被摔坏的~~ ATK Duckbill Ultra
 
 ## 博客历史
 

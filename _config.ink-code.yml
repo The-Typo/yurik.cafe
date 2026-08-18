@@ -56,7 +56,7 @@ footer_copyright: >
   <a target="_blank" href="/feed.xml">RSS</a> /
   <a target="_blank" href="/sitemap.xml">Sitemap</a><br>
   Git Version: {{GITVERSION}}<br>
-  <a target="_blank" href="https://beian.miit.gov.cn">桂ICP备2025057334号</a>
+  <a target="_blank" href="https://beian.miit.gov.cn">桂ICP备2025057334号</a><br>
   <a href="https://nonbot.org/pledged/view/a2887a35-bf54-46d3-98b4-829284eff51e" target="_blank">
 	<img style="height:128px;margin-top:10px;margin-bottom:10px;" src="https://nonbot.org/images/nonbot_pledged_logo.svg" alt="Human-made Content">
   </a>

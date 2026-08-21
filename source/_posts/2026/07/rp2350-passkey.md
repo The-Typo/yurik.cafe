@@ -10,7 +10,7 @@ lang: ''
 
 ## 前言
 
-最近和扫扫([@DevDawn](https://github.com/DevDawn))交换了 OpenPGP 公钥，就开始研究怎么安全的保存密钥。
+最近和扫扫([@Ray-Powered](https://github.com/Ray-Powered))交换了 OpenPGP 公钥，就开始研究怎么安全的保存密钥。
 
 本来想趁着假期去德国游学的机会去德亚采购一个 Yubikey 5 的，奈何全新价格确实有些高，从德亚买还不能保证是最新的固件版本，有被解密的风险，在高价格和安全性都不能保障下不如自己 DIY 一个支持 FIDO2 的密钥。
 

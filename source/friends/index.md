@@ -1,6 +1,6 @@
 ---
 title: 友人帐
-date: 2023-09-10 16:01:03
+date: 2026-09-18 02:25:37
 layout: friends
 ---
 
@@ -16,7 +16,7 @@ layout: friends
 
 - 请不要使用免费域名；
 
-在 Github 提交 [Issues](https://github.com/ImJingLan/FriendLink/issues/new/choose) 或 [腾讯问卷](https://wj.qq.com/s2/13028516/7438/) 申请加入我的友链：
+请编辑本站的友链文件并提交 PR (https://github.com/The-Typo/yurik.cafe/blob/main/source/_data/friends.json) 来加入我的友链 ~
 
 ----
 
@@ -32,3 +32,5 @@ layout: friends
   [/favicon/v2/icon-circle@1024px.png](/favicon/v2/icon-circle@1024px.png)
 
 - 更多图标可以访问 [`站点 Favicon 目录`](/favicon/v2/)
+
+- 烦请先将本站加入贵站的友链列表 ~

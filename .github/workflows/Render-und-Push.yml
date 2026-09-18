@@ -42,7 +42,7 @@ jobs:
       - name: 部署到 Deploy 分支
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: hexo-deploy
+          branch: deploy
           folder: public
 
       - name: 发布到服务器

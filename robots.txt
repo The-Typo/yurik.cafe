@@ -1,4 +1,0 @@
-User-agent: *
-Disallow: /_astro/
-
-Sitemap: https://yurik.cafe/sitemap-index.xml

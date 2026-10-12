@@ -101,7 +101,7 @@
   </url>
   
   <url>
-    <loc>https://yurik.cafe/2025/macbook-pro-review/</loc>
+    <loc>https://yurik.cafe/2025/i-am-always-a-kid/</loc>
     
     <lastmod>2026-10-12</lastmod>
     
@@ -119,16 +119,7 @@
   </url>
   
   <url>
-    <loc>https://yurik.cafe/2025/i-am-always-a-kid/</loc>
-    
-    <lastmod>2026-10-12</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://yurik.cafe/2024/thought-memories/</loc>
+    <loc>https://yurik.cafe/2025/macbook-pro-review/</loc>
     
     <lastmod>2026-10-12</lastmod>
     
@@ -155,16 +146,7 @@
   </url>
   
   <url>
-    <loc>https://yurik.cafe/2024/hexo-guidebook-1/</loc>
-    
-    <lastmod>2026-10-12</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://yurik.cafe/2024/new-avatar/</loc>
+    <loc>https://yurik.cafe/2024/thought-memories/</loc>
     
     <lastmod>2026-10-12</lastmod>
     
@@ -182,7 +164,7 @@
   </url>
   
   <url>
-    <loc>https://yurik.cafe/2024/hexo-theme-news/</loc>
+    <loc>https://yurik.cafe/2024/new-avatar/</loc>
     
     <lastmod>2026-10-12</lastmod>
     
@@ -191,7 +173,7 @@
   </url>
   
   <url>
-    <loc>https://yurik.cafe/2023/miscellanies-2/</loc>
+    <loc>https://yurik.cafe/2024/hexo-theme-news/</loc>
     
     <lastmod>2026-10-12</lastmod>
     
@@ -209,7 +191,25 @@
   </url>
   
   <url>
+    <loc>https://yurik.cafe/2024/hexo-guidebook-1/</loc>
+    
+    <lastmod>2026-10-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://yurik.cafe/2024/my-way-to-php/</loc>
+    
+    <lastmod>2026-10-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://yurik.cafe/2023/miscellanies-2/</loc>
     
     <lastmod>2026-10-12</lastmod>
     
@@ -254,6 +254,15 @@
   </url>
   
   <url>
+    <loc>https://yurik.cafe/2023/miscellanies-1/</loc>
+    
+    <lastmod>2026-10-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://yurik.cafe/2023/YGM-Introduce/</loc>
     
     <lastmod>2026-10-12</lastmod>
@@ -264,15 +273,6 @@
   
   <url>
     <loc>https://yurik.cafe/2023/use-vercel-introduction/</loc>
-    
-    <lastmod>2026-10-12</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://yurik.cafe/2023/miscellanies-1/</loc>
     
     <lastmod>2026-10-12</lastmod>
     
@@ -411,6 +411,13 @@
   </url>
   
   <url>
+    <loc>https://yurik.cafe/tags/Hexo-%E4%B8%BB%E9%A2%98/</loc>
+    <lastmod>2026-10-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://yurik.cafe/tags/Unity/</loc>
     <lastmod>2026-10-12</lastmod>
     <changefreq>weekly</changefreq>
@@ -433,13 +440,6 @@
   
   <url>
     <loc>https://yurik.cafe/tags/NAS/</loc>
-    <lastmod>2026-10-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://yurik.cafe/tags/Hexo-%E4%B8%BB%E9%A2%98/</loc>
     <lastmod>2026-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -546,14 +546,14 @@
   </url>
   
   <url>
-    <loc>https://yurik.cafe/categories/%E6%8A%80%E6%9C%AF/</loc>
+    <loc>https://yurik.cafe/categories/%E4%BF%A1%E7%AB%9E/</loc>
     <lastmod>2026-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://yurik.cafe/categories/%E4%BF%A1%E7%AB%9E/</loc>
+    <loc>https://yurik.cafe/categories/%E6%8A%80%E6%9C%AF/</loc>
     <lastmod>2026-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -567,13 +567,6 @@
   </url>
   
   <url>
-    <loc>https://yurik.cafe/categories/ygr/</loc>
-    <lastmod>2026-10-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://yurik.cafe/categories/%E6%9D%82%E8%B0%88/</loc>
     <lastmod>2026-10-12</lastmod>
     <changefreq>weekly</changefreq>
@@ -581,7 +574,7 @@
   </url>
   
   <url>
-    <loc>https://yurik.cafe/categories/announces/</loc>
+    <loc>https://yurik.cafe/categories/ygr/</loc>
     <lastmod>2026-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -589,6 +582,13 @@
   
   <url>
     <loc>https://yurik.cafe/categories/projects/</loc>
+    <lastmod>2026-10-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://yurik.cafe/categories/announces/</loc>
     <lastmod>2026-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

@@ -13,3 +13,9 @@ dist
 
 # 迁移前的原始 Hexo 目录（_posts/YYYY/MM/slug.md + 同名图片目录）
 src/content/_posts/
+
+# 部署配置（Nginx、Cloudflare 规则）由服务器维护，不进仓库
+deploy/
+*.nginx.conf
+nginx.conf
+

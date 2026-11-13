@@ -8,11 +8,11 @@
  * 改写，astro:build:done 是唯一能保证这一点的钩子。
  *
  * 只处理 /assets/ 下的本地图片，外链与 data URI 原样保留。
+ * 没装 sharp 时静默跳过，不阻塞构建。
  */
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import sharp from 'sharp';
 
 /** 正文栏 700；移动端满宽 390，2x 屏需要 780，所以 800 这一档很关键 */
 const WIDTHS = [400, 600, 800, 1000, 1400];
@@ -39,6 +39,15 @@ export default function responsiveImages(options = {}) {
     name: 'responsive-images',
     hooks: {
       'astro:build:done': async ({ dir, logger }) => {
+        // sharp 是可选依赖：没装就跳过，构建照常完成
+        let sharp;
+        try {
+          ({ default: sharp } = await import('sharp'));
+        } catch {
+          logger.warn('sharp not installed, body images keep their source size');
+          return;
+        }
+
         const outDir = fileURLToPath(dir);
         if (!fs.existsSync(outDir)) return;
 

@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import swup from '@swup/astro';
 import contentAssets from './src/plugins/content-assets.mjs';
+import responsiveImages from './src/plugins/responsive-images.mjs';
 
 // https://astro.build/config
 export default defineConfig({
@@ -15,6 +16,8 @@ export default defineConfig({
     inlineStylesheets: 'always',
   },
   integrations: [
+    // 正文图片按显示宽度生成 srcset（需在资源落盘后跑）
+    responsiveImages(),
     swup({
       // 不用内置主题，动画全部写在 global.css 里
       theme: false,

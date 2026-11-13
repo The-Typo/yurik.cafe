@@ -5,6 +5,7 @@ categories: 随笔
 date: 2024-09-22 23:21:56
 tags:
 cover:
+draft: true
 ---
 
 好久没更新随笔了，突然想写点什么了。

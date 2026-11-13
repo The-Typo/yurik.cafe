@@ -8,7 +8,12 @@ export default defineConfig({
   site: 'https://yurik.cafe',
   // 原博客的链接都带尾斜杠，保持一致
   trailingSlash: 'ignore',
-  build: { format: 'directory', assets: 'assets' },
+  build: {
+    format: 'directory',
+    assets: 'assets',
+    // 样式内联进 <head>，去掉两次阻塞往返
+    inlineStylesheets: 'always',
+  },
   integrations: [
     swup({
       // 不用内置主题，动画全部写在 global.css 里

@@ -16,7 +16,7 @@
 <p>查了一些资料后发现主流的方案都是使用 RP2350 来实现密钥，网上的别的文章都有些过时了，于是在踩了一些坑后决定写一篇文章来记录一下制作过程。</p>
 <h2 id="材料">材料</h2>
 <p>我选择了微雪的 RP2350-One</p>
-<p><img alt="RP2350 One" loading="lazy" decoding="async" width="1080" height="581" src="/assets/rp2350-passkey-1.CXV5rnW5_Z2rCKl7.webp"></p>
+<p><img srcset="/assets/rp2350-passkey-1.CXV5rnW5_Z2rCKl7-400w.webp 400w, /assets/rp2350-passkey-1.CXV5rnW5_Z2rCKl7-600w.webp 600w, /assets/rp2350-passkey-1.CXV5rnW5_Z2rCKl7-800w.webp 800w, /assets/rp2350-passkey-1.CXV5rnW5_Z2rCKl7-1000w.webp 1000w, /assets/rp2350-passkey-1.CXV5rnW5_Z2rCKl7.webp 1080w" sizes="(min-width: 740px) 700px, calc(100vw - 44px)" alt="RP2350 One" loading="lazy" decoding="async" width="1080" height="581" src="/assets/rp2350-passkey-1.CXV5rnW5_Z2rCKl7.webp"></p>
 <h2 id="安装与配置">安装与配置</h2>
 <p>网上别的关于使用 RP2350 制作 Yubikey 的文章都不约而同地指向了一个名叫 <a href="https://github.com/polhenarejos/pico-fido">PicoKeys</a> 的项目。</p>
 <p>可在我进入他的项目主页后发现，在最近的一次更新中 PickKeys 移除了免费的 Pico Commissioner 配置工具，转而推出了收费的 <a href="https://www.picokey.com/">PicoKey App</a>。</p>
@@ -38,11 +38,11 @@
 <p>给 RP2350 烧录固件: 按住 RP2350 上的 <strong>BOOT</strong> 按钮，将其连接到电脑，电脑会将 RP2350 自动识别为一个可移动磁盘，将下载好的 <strong>.uf2</strong> 结尾的固件直接复制到 RP2350 上，复制完成后 RP2350 将会自动重启。</p>
 </li>
 </ol>
-<p><img alt="RP2350 目录结构" loading="lazy" decoding="async" width="1495" height="895" src="/assets/rp2350-passkey-3.PSvACM1o_1cwhMX.webp"></p>
+<p><img srcset="/assets/rp2350-passkey-3.PSvACM1o_1cwhMX-400w.webp 400w, /assets/rp2350-passkey-3.PSvACM1o_1cwhMX-600w.webp 600w, /assets/rp2350-passkey-3.PSvACM1o_1cwhMX-800w.webp 800w, /assets/rp2350-passkey-3.PSvACM1o_1cwhMX-1000w.webp 1000w, /assets/rp2350-passkey-3.PSvACM1o_1cwhMX-1400w.webp 1400w, /assets/rp2350-passkey-3.PSvACM1o_1cwhMX.webp 1495w" sizes="(min-width: 740px) 700px, calc(100vw - 44px)" alt="RP2350 目录结构" loading="lazy" decoding="async" width="1495" height="895" src="/assets/rp2350-passkey-3.PSvACM1o_1cwhMX.webp"></p>
 <ol start="4">
 <li>打开 PicoForge 或者点击 PicoForge 左侧栏下的 <strong>Refresh</strong> 按钮，此时若识别到设备则代表烧录成功。</li>
 </ol>
-<p><img alt="PicoForge 识别到设备" loading="lazy" decoding="async" width="2020" height="1534" src="/assets/rp2350-passkey-4.D4FY9k_R_1AWRb1.webp"></p>
+<p><img srcset="/assets/rp2350-passkey-4.D4FY9k_R_1AWRb1-400w.webp 400w, /assets/rp2350-passkey-4.D4FY9k_R_1AWRb1-600w.webp 600w, /assets/rp2350-passkey-4.D4FY9k_R_1AWRb1-800w.webp 800w, /assets/rp2350-passkey-4.D4FY9k_R_1AWRb1-1000w.webp 1000w, /assets/rp2350-passkey-4.D4FY9k_R_1AWRb1-1400w.webp 1400w, /assets/rp2350-passkey-4.D4FY9k_R_1AWRb1.webp 2020w" sizes="(min-width: 740px) 700px, calc(100vw - 44px)" alt="PicoForge 识别到设备" loading="lazy" decoding="async" width="2020" height="1534" src="/assets/rp2350-passkey-4.D4FY9k_R_1AWRb1.webp"></p>
 <ol start="5">
 <li>点击左侧栏的 <strong>Configuration</strong> 进入配置界面，配置如下:
 <ul>
@@ -76,26 +76,26 @@
 </ul>
 </li>
 </ol>
-<p><img alt="配置Picokeys" loading="lazy" decoding="async" width="2020" height="1534" src="/assets/rp2350-passkey-5.DeLleuRn_Z2ysCm.webp"></p>
+<p><img srcset="/assets/rp2350-passkey-5.DeLleuRn_Z2ysCm-400w.webp 400w, /assets/rp2350-passkey-5.DeLleuRn_Z2ysCm-600w.webp 600w, /assets/rp2350-passkey-5.DeLleuRn_Z2ysCm-800w.webp 800w, /assets/rp2350-passkey-5.DeLleuRn_Z2ysCm-1000w.webp 1000w, /assets/rp2350-passkey-5.DeLleuRn_Z2ysCm-1400w.webp 1400w, /assets/rp2350-passkey-5.DeLleuRn_Z2ysCm.webp 2020w" sizes="(min-width: 740px) 700px, calc(100vw - 44px)" alt="配置Picokeys" loading="lazy" decoding="async" width="2020" height="1534" src="/assets/rp2350-passkey-5.DeLleuRn_Z2ysCm.webp"></p>
 <ol start="6">
 <li>点击 <strong>Apply Changes</strong>，等待页面提示 <strong>Configuration applied successfully</strong> 。打开 <strong>Yubico
 Authenticator</strong> 发现已经将我们的 RP2350 识别为一个 Yubikey 设备。</li>
 </ol>
-<p><img alt="Yubico Authenticator 识别到设备" loading="lazy" decoding="async" width="1566" height="1041" src="/assets/rp2350-passkey-6.Bt7nMU_2_ZL3D7c.webp"></p>
+<p><img srcset="/assets/rp2350-passkey-6.Bt7nMU_2_ZL3D7c-400w.webp 400w, /assets/rp2350-passkey-6.Bt7nMU_2_ZL3D7c-600w.webp 600w, /assets/rp2350-passkey-6.Bt7nMU_2_ZL3D7c-800w.webp 800w, /assets/rp2350-passkey-6.Bt7nMU_2_ZL3D7c-1000w.webp 1000w, /assets/rp2350-passkey-6.Bt7nMU_2_ZL3D7c-1400w.webp 1400w, /assets/rp2350-passkey-6.Bt7nMU_2_ZL3D7c.webp 1566w" sizes="(min-width: 740px) 700px, calc(100vw - 44px)" alt="Yubico Authenticator 识别到设备" loading="lazy" decoding="async" width="1566" height="1041" src="/assets/rp2350-passkey-6.Bt7nMU_2_ZL3D7c.webp"></p>
 <ol start="7">
 <li>进入<strong>通行密钥</strong>页面，点击左侧的<strong>设置 PIN</strong> ，设置好通行密钥 PIN 后即刻将其作为实体通行密钥。</li>
 </ol>
   <blockquote style="border-left: 3px solid #d42517;">
     <p><strong style="color:#AB3B3A">警告：</strong>请务必牢记设置的 PIN，默认情况下 PIN 只能尝试 8 次，每尝试 3 次会临时锁定密钥, 需要重新插拔后才能继续尝试, 总计试满 8 次后密钥永久被锁定, 此时只能并丢失所有存储的密钥。</p>
   </blockquote>
-<p><img alt="设置通行密钥 PIN" loading="lazy" decoding="async" width="1566" height="1041" src="/assets/rp2350-passkey-7.BPnsz4rI_aVAbN.webp"></p>
+<p><img srcset="/assets/rp2350-passkey-7.BPnsz4rI_aVAbN-400w.webp 400w, /assets/rp2350-passkey-7.BPnsz4rI_aVAbN-600w.webp 600w, /assets/rp2350-passkey-7.BPnsz4rI_aVAbN-800w.webp 800w, /assets/rp2350-passkey-7.BPnsz4rI_aVAbN-1000w.webp 1000w, /assets/rp2350-passkey-7.BPnsz4rI_aVAbN-1400w.webp 1400w, /assets/rp2350-passkey-7.BPnsz4rI_aVAbN.webp 1566w" sizes="(min-width: 740px) 700px, calc(100vw - 44px)" alt="设置通行密钥 PIN" loading="lazy" decoding="async" width="1566" height="1041" src="/assets/rp2350-passkey-7.BPnsz4rI_aVAbN.webp"></p>
 <h2 id="使用教程">使用教程</h2>
 <h3 id="用作通行密钥以-windows-与-webauthnio-为例">用作通行密钥（以 Windows 与 WebAuthn.io 为例）</h3>
 <h4 id="注册">注册</h4>
 <p>当我们访问支持通行密钥登陆的站点，我们可以前往账号设置中配置通行密钥。</p>
 <ol>
 <li>当我们启动通行密钥注册流程后，会弹出一个对话框，询问我们将保存通行密钥的位置，我们选择实体的通行密钥。
-<img alt="注册通行密钥" loading="lazy" decoding="async" width="684" height="457" src="/assets/passkey-1.-Q8VlnL0_1IEMuz.webp"></li>
+<img srcset="/assets/passkey-1.-Q8VlnL0_1IEMuz-400w.webp 400w, /assets/passkey-1.-Q8VlnL0_1IEMuz-600w.webp 600w, /assets/passkey-1.-Q8VlnL0_1IEMuz.webp 684w" sizes="(min-width: 740px) 700px, calc(100vw - 44px)" alt="注册通行密钥" loading="lazy" decoding="async" width="684" height="457" src="/assets/passkey-1.-Q8VlnL0_1IEMuz.webp"></li>
 </ol>
 <blockquote>
 <p><a href="https://webauthn.io/">WebAuthn.io</a> 是一个允许用户测试 WebAuthn 与通行密钥的网站，我们可以使用它来测试通行密钥是否正常。</p>
@@ -103,11 +103,11 @@ Authenticator</strong> 发现已经将我们的 RP2350 识别为一个 Yubikey �
 <ol start="2">
 <li>
 <p>输入你的通行密钥 PIN
-<img alt="输入通行密钥 PIN" loading="lazy" decoding="async" width="684" height="658" src="/assets/passkey-2.D--si2bL_Z1sIg0o.webp"></p>
+<img srcset="/assets/passkey-2.D--si2bL_Z1sIg0o-400w.webp 400w, /assets/passkey-2.D--si2bL_Z1sIg0o-600w.webp 600w, /assets/passkey-2.D--si2bL_Z1sIg0o.webp 684w" sizes="(min-width: 740px) 700px, calc(100vw - 44px)" alt="输入通行密钥 PIN" loading="lazy" decoding="async" width="684" height="658" src="/assets/passkey-2.D--si2bL_Z1sIg0o.webp"></p>
 </li>
 <li>
 <p>如果你在上文配置了 <code>Touch Timeout</code>，你需要在超时前按下 RP2350 上的 <strong>BOOT</strong> 按钮
-<img alt="按下 BOOT 按钮" loading="lazy" decoding="async" width="684" height="691" src="/assets/passkey-3.hVqp0cm2_1fUHoS.webp"></p>
+<img srcset="/assets/passkey-3.hVqp0cm2_1fUHoS-400w.webp 400w, /assets/passkey-3.hVqp0cm2_1fUHoS-600w.webp 600w, /assets/passkey-3.hVqp0cm2_1fUHoS.webp 684w" sizes="(min-width: 740px) 700px, calc(100vw - 44px)" alt="按下 BOOT 按钮" loading="lazy" decoding="async" width="684" height="691" src="/assets/passkey-3.hVqp0cm2_1fUHoS.webp"></p>
 </li>
 <li>
 <p>若站点提示添加成功，说明通行密钥注册成功，你以后就可以使用通行密钥登录。</p>
@@ -118,11 +118,11 @@ Authenticator</strong> 发现已经将我们的 RP2350 识别为一个 Yubikey �
 <ol>
 <li>
 <p>选择实体通行密钥并输入 PIN 码（通常能够自动选择）。
-<img alt="登录通行密钥" loading="lazy" decoding="async" width="684" height="561" src="/assets/passkey-4.CMuLREtF_v8AFR.webp"></p>
+<img srcset="/assets/passkey-4.CMuLREtF_v8AFR-400w.webp 400w, /assets/passkey-4.CMuLREtF_v8AFR-600w.webp 600w, /assets/passkey-4.CMuLREtF_v8AFR.webp 684w" sizes="(min-width: 740px) 700px, calc(100vw - 44px)" alt="登录通行密钥" loading="lazy" decoding="async" width="684" height="561" src="/assets/passkey-4.CMuLREtF_v8AFR.webp"></p>
 </li>
 <li>
 <p>如果你在上文配置了 <code>Touch Timeout</code>，你需要在超时前按下 RP2350 上的 <strong>BOOT</strong> 按钮。
-<img alt="按下 BOOT 按钮" loading="lazy" decoding="async" width="684" height="592" src="/assets/passkey-5.BGep0Yu8_BaHBL.webp"></p>
+<img srcset="/assets/passkey-5.BGep0Yu8_BaHBL-400w.webp 400w, /assets/passkey-5.BGep0Yu8_BaHBL-600w.webp 600w, /assets/passkey-5.BGep0Yu8_BaHBL.webp 684w" sizes="(min-width: 740px) 700px, calc(100vw - 44px)" alt="按下 BOOT 按钮" loading="lazy" decoding="async" width="684" height="592" src="/assets/passkey-5.BGep0Yu8_BaHBL.webp"></p>
 </li>
 <li>
 <p>若你先前已经注册通行密钥，此时通常能登录成功。</p>
@@ -140,7 +140,7 @@ Authenticator</strong> 发现已经将我们的 RP2350 识别为一个 Yubikey �
 <ol>
 <li>
 <p>启动 <strong>Kleopatra</strong> 后点击“智能卡”，如果出现了智能卡信息则代表智能卡正常工作。
-<img alt="智能卡信息" loading="lazy" decoding="async" width="1540" height="796" src="/assets/openpgp-1.nhvXwpQn_17uywT.webp"></p>
+<img srcset="/assets/openpgp-1.nhvXwpQn_17uywT-400w.webp 400w, /assets/openpgp-1.nhvXwpQn_17uywT-600w.webp 600w, /assets/openpgp-1.nhvXwpQn_17uywT-800w.webp 800w, /assets/openpgp-1.nhvXwpQn_17uywT-1000w.webp 1000w, /assets/openpgp-1.nhvXwpQn_17uywT-1400w.webp 1400w, /assets/openpgp-1.nhvXwpQn_17uywT.webp 1540w" sizes="(min-width: 740px) 700px, calc(100vw - 44px)" alt="智能卡信息" loading="lazy" decoding="async" width="1540" height="796" src="/assets/openpgp-1.nhvXwpQn_17uywT.webp"></p>
 </li>
 <li>
 <p>点击 <strong>卡片操作</strong>，分别点击 “更改 PIN”, “更改管理员 PIN” 和 “修改解锁码”。</p>
@@ -152,15 +152,15 @@ Authenticator</strong> 发现已经将我们的 RP2350 识别为一个 Yubikey �
 </li>
 <li>
 <p>进入私钥管理界面，右键在机器上的子密钥，选择 <strong>“转移到智能卡”</strong>。随后输入一次密钥短语和两次管理员 PIN 即可将密钥转移至智能卡。
-<img alt="将密钥转移到智能卡" loading="lazy" decoding="async" width="997" height="552" src="/assets/openpgp-3.tuAoNSVH_1ncP8Y.webp"></p>
+<img srcset="/assets/openpgp-3.tuAoNSVH_1ncP8Y-400w.webp 400w, /assets/openpgp-3.tuAoNSVH_1ncP8Y-600w.webp 600w, /assets/openpgp-3.tuAoNSVH_1ncP8Y-800w.webp 800w, /assets/openpgp-3.tuAoNSVH_1ncP8Y.webp 997w" sizes="(min-width: 740px) 700px, calc(100vw - 44px)" alt="将密钥转移到智能卡" loading="lazy" decoding="async" width="997" height="552" src="/assets/openpgp-3.tuAoNSVH_1ncP8Y.webp"></p>
 </li>
 <li>
 <p>之后选择 <strong>“删除磁盘上的副本”</strong>，即可保证密钥仅存在于智能卡中。
-<img alt="删除磁盘上的副本" loading="lazy" decoding="async" width="1002" height="557" src="/assets/openpgp-4.Ck3PxYCH_1r5AcE.webp"></p>
+<img srcset="/assets/openpgp-4.Ck3PxYCH_1r5AcE-400w.webp 400w, /assets/openpgp-4.Ck3PxYCH_1r5AcE-600w.webp 600w, /assets/openpgp-4.Ck3PxYCH_1r5AcE-800w.webp 800w, /assets/openpgp-4.Ck3PxYCH_1r5AcE.webp 1002w" sizes="(min-width: 740px) 700px, calc(100vw - 44px)" alt="删除磁盘上的副本" loading="lazy" decoding="async" width="1002" height="557" src="/assets/openpgp-4.Ck3PxYCH_1r5AcE.webp"></p>
 </li>
 <li>
 <p>重新进入<strong>智能卡</strong>页面，如果看见已经配置好的密钥则代表转移成功
-<img alt="转移成功" loading="lazy" decoding="async" width="1026" height="530" src="/assets/openpgp-5.DlVLjPUu_2v0M57.webp"></p>
+<img srcset="/assets/openpgp-5.DlVLjPUu_2v0M57-400w.webp 400w, /assets/openpgp-5.DlVLjPUu_2v0M57-600w.webp 600w, /assets/openpgp-5.DlVLjPUu_2v0M57-800w.webp 800w, /assets/openpgp-5.DlVLjPUu_2v0M57.webp 1026w" sizes="(min-width: 740px) 700px, calc(100vw - 44px)" alt="转移成功" loading="lazy" decoding="async" width="1026" height="530" src="/assets/openpgp-5.DlVLjPUu_2v0M57.webp"></p>
 </li>
 </ol>
 <p>完成后可以使用 <strong>Kleopatra</strong> 的<strong>记事本</strong>功能来测试智能卡是否正常工作。</p>
@@ -176,4 +176,4 @@ Authenticator</strong> 发现已经将我们的 RP2350 识别为一个 Yubikey �
               href={`mailto:?subject=${encodeURIComponent(data.title)}&body=${encodeURIComponent(postHref(post))}`}
             >
               邮件
-            </a>--><button type="button" class="cta-pill !px-4 !py-2 !text-[13px]" data-copy-link data-url="/2026/rp2350-passkey/">复制链接</button><a class="cta-pill !px-4 !py-2 !text-[13px]" href="/rss.xml">RSS</a></div></footer></div></div></article><section class="bg-fog py-16"><div class="shell"><h2 class="section-head mb-6">相关文章</h2><ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"><li><a href="/2025/steam-usage/" class="tile group h-full tile--3up flex flex-col rounded-[24px]"><div class="tile__media"><img src="/assets/cover.B3ByLsxd_Z2bjAy1.webp" srcset="/assets/cover.B3ByLsxd_1QiLA3.webp 280w, /assets/cover.B3ByLsxd_QcedS.webp 360w, /assets/cover.B3ByLsxd_Z1TLdL7.webp 480w" alt="Steam 上手指北" sizes="(min-width: 1069px) 300px, (min-width: 735px) 30vw, 100vw" loading="lazy" decoding="async" width="7680" height="4320" class="size-full object-cover"></div><div class="tile__body flex flex-1 flex-col justify-between gap-4 bg-canvas p-5 sm:p-6"><div><p class="eyebrow">技术</p><h3 class="tile-headline mt-3 line-clamp-3 text-[19px] leading-[1.45] tracking-[0.012em]">Steam 上手指北</h3></div><div class="flex items-end justify-between gap-4"><time class="tile-timestamp" datetime="2025-06-27">2025/06/27</time><span class="truncate text-[12px] tracking-[0.01em] text-slate">Steam</span></div></div></a></li><li><a href="/2024/nas-hardware-guide/" class="tile group h-full tile--3up flex flex-col rounded-[24px]"><div class="tile__media"><img src="/assets/1.CdltsLCk_Z123aTH.webp" srcset="/assets/1.CdltsLCk_ZjBUYN.webp 280w, /assets/1.CdltsLCk_Z2mxE62.webp 360w, /assets/1.CdltsLCk_Z27guWd.webp 480w" alt="「转载」硬件篇 | NAS硬件选购DIY指南：不同价位的硬件搭配建议及心得" sizes="(min-width: 1069px) 300px, (min-width: 735px) 30vw, 100vw" loading="lazy" decoding="async" width="2596" height="2160" class="size-full object-cover"></div><div class="tile__body flex flex-1 flex-col justify-between gap-4 bg-canvas p-5 sm:p-6"><div><p class="eyebrow">技术</p><h3 class="tile-headline mt-3 line-clamp-3 text-[19px] leading-[1.45] tracking-[0.012em]">「转载」硬件篇 | NAS硬件选购DIY指南：不同价位的硬件搭配建议及心得</h3></div><div class="flex items-end justify-between gap-4"><time class="tile-timestamp" datetime="2024-07-28">2024/07/28</time><span class="truncate text-[12px] tracking-[0.01em] text-slate">转载</span></div></div></a></li><li><a href="/2024/hexo-guidebook-1/" class="tile group h-full tile--3up flex flex-col rounded-[24px]"><div class="tile__media"><img src="/assets/banner.YlAo4e7j_ZPdP6x.webp" srcset="/assets/banner.YlAo4e7j_Z4bNXu.webp 280w, /assets/banner.YlAo4e7j_Z17cXSe.webp 360w, /assets/banner.YlAo4e7j_1FqQfX.webp 480w" alt="「技术」使用 Hexo 搭建静态博客" sizes="(min-width: 1069px) 300px, (min-width: 735px) 30vw, 100vw" loading="lazy" decoding="async" width="1920" height="1080" class="size-full object-cover"></div><div class="tile__body flex flex-1 flex-col justify-between gap-4 bg-canvas p-5 sm:p-6"><div><p class="eyebrow">技术</p><h3 class="tile-headline mt-3 line-clamp-3 text-[19px] leading-[1.45] tracking-[0.012em]">「技术」使用 Hexo 搭建静态博客</h3></div><div class="flex items-end justify-between gap-4"><time class="tile-timestamp" datetime="2024-02-18">2024/02/18</time><span class="truncate text-[12px] tracking-[0.01em] text-slate">Hexo</span></div></div></a></li></ul></div></section><section class="shell py-14"><div class="flex items-center justify-between gap-4"><a href="/archive/" class="cta-pill">返回归档</a><a href="/" class="cta-link">回到首页 →</a></div></section></main><footer class="bg-fog text-ink"><div class="shell py-10"><nav class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3" aria-label="页脚"><a href="/rss.xml" class="text-[12px] tracking-[-0.01em] text-ink-72 transition-colors hover:text-link">RSS</a><a href="https://github.com/ImJingLan" class="text-[12px] tracking-[-0.01em] text-ink-72 transition-colors hover:text-link" target="_blank" rel="noopener noreferrer">GitHub</a><a href="mailto:xisyphu@gmail.com" class="text-[12px] tracking-[-0.01em] text-ink-72 transition-colors hover:text-link">邮箱</a></nav><div class="mt-6 flex flex-col gap-2 border-t border-hairline pt-4 sm:flex-row sm:items-center sm:justify-between"><p class="text-[12px] tracking-[-0.01em] text-slate">Copyright © 2026 景蓝 Yurik. All rights reserved. <a href="https://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-link">桂ICP备2025057334号</a></p><p class="text-[12px] tracking-[-0.01em] text-slate">Built with Astro | 20ac8c9</p></div></div></footer><script type="module">var e=`swup-scroll`,t=()=>{try{return JSON.parse(sessionStorage.getItem(e)||`{}`)}catch{return{}}},n=t=>sessionStorage.setItem(e,JSON.stringify(t)),r=null;document.addEventListener(`swup:history:popstate`,()=>{r=t()[location.pathname]??0}),document.addEventListener(`swup:visit:start`,()=>{if(r!==null)return;let e=t();e[location.pathname]=Math.round(window.scrollY),n(e)}),document.addEventListener(`swup:page:view`,()=>{if(r!==null){let e=r;r=null,requestAnimationFrame(()=>{requestAnimationFrame(()=>window.scrollTo({top:e,behavior:`instant`}))})}else window.scrollTo({top:0,behavior:`instant`})}),window.addEventListener(`pagehide`,()=>{let e=t();e[location.pathname]=Math.round(window.scrollY),n(e)});</script></body></html><script type="module">var e=()=>{document.querySelectorAll(`[data-copy-link]`).forEach(e=>{e.dataset.copied!==`1`&&(e.dataset.copied=`1`,e.addEventListener(`click`,async()=>{let n=new URL(e.dataset.url??``,location.origin).toString(),r=e.textContent;try{await navigator.clipboard.writeText(n),e.textContent=t.common.copied}catch{e.textContent=t.common.copyFailed}setTimeout(()=>{e.textContent=r},1600)}))})};e(),document.addEventListener(`astro:page-load`,e);</script>
+            </a>--><button type="button" class="cta-pill !px-4 !py-2 !text-[13px]" data-copy-link data-url="/2026/rp2350-passkey/">复制链接</button><a class="cta-pill !px-4 !py-2 !text-[13px]" href="/rss.xml">RSS</a></div></footer></div></div></article><section class="bg-fog py-16"><div class="shell"><h2 class="section-head mb-6">相关文章</h2><ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"><li><a href="/2025/steam-usage/" class="tile group h-full tile--3up flex flex-col rounded-[24px]"><div class="tile__media"><img src="/assets/cover.B3ByLsxd_Z2bjAy1.webp" srcset="/assets/cover.B3ByLsxd_1QiLA3.webp 280w, /assets/cover.B3ByLsxd_QcedS.webp 360w, /assets/cover.B3ByLsxd_Z1TLdL7.webp 480w" alt="Steam 上手指北" sizes="(min-width: 1069px) 300px, (min-width: 735px) 30vw, 100vw" loading="lazy" decoding="async" width="7680" height="4320" class="size-full object-cover"></div><div class="tile__body flex flex-1 flex-col justify-between gap-4 bg-canvas p-5 sm:p-6"><div><p class="eyebrow">技术</p><h3 class="tile-headline mt-3 line-clamp-3 text-[19px] leading-[1.45] tracking-[0.012em]">Steam 上手指北</h3></div><div class="flex items-end justify-between gap-4"><time class="tile-timestamp" datetime="2025-06-27">2025/06/27</time><span class="truncate text-[12px] tracking-[0.01em] text-slate">Steam</span></div></div></a></li><li><a href="/2024/nas-hardware-guide/" class="tile group h-full tile--3up flex flex-col rounded-[24px]"><div class="tile__media"><img src="/assets/1.CdltsLCk_Z123aTH.webp" srcset="/assets/1.CdltsLCk_ZjBUYN.webp 280w, /assets/1.CdltsLCk_Z2mxE62.webp 360w, /assets/1.CdltsLCk_Z27guWd.webp 480w" alt="「转载」硬件篇 | NAS硬件选购DIY指南：不同价位的硬件搭配建议及心得" sizes="(min-width: 1069px) 300px, (min-width: 735px) 30vw, 100vw" loading="lazy" decoding="async" width="2596" height="2160" class="size-full object-cover"></div><div class="tile__body flex flex-1 flex-col justify-between gap-4 bg-canvas p-5 sm:p-6"><div><p class="eyebrow">技术</p><h3 class="tile-headline mt-3 line-clamp-3 text-[19px] leading-[1.45] tracking-[0.012em]">「转载」硬件篇 | NAS硬件选购DIY指南：不同价位的硬件搭配建议及心得</h3></div><div class="flex items-end justify-between gap-4"><time class="tile-timestamp" datetime="2024-07-28">2024/07/28</time><span class="truncate text-[12px] tracking-[0.01em] text-slate">转载</span></div></div></a></li><li><a href="/2024/hexo-guidebook-1/" class="tile group h-full tile--3up flex flex-col rounded-[24px]"><div class="tile__media"><img src="/assets/banner.YlAo4e7j_ZPdP6x.webp" srcset="/assets/banner.YlAo4e7j_Z4bNXu.webp 280w, /assets/banner.YlAo4e7j_Z17cXSe.webp 360w, /assets/banner.YlAo4e7j_1FqQfX.webp 480w" alt="「技术」使用 Hexo 搭建静态博客" sizes="(min-width: 1069px) 300px, (min-width: 735px) 30vw, 100vw" loading="lazy" decoding="async" width="1920" height="1080" class="size-full object-cover"></div><div class="tile__body flex flex-1 flex-col justify-between gap-4 bg-canvas p-5 sm:p-6"><div><p class="eyebrow">技术</p><h3 class="tile-headline mt-3 line-clamp-3 text-[19px] leading-[1.45] tracking-[0.012em]">「技术」使用 Hexo 搭建静态博客</h3></div><div class="flex items-end justify-between gap-4"><time class="tile-timestamp" datetime="2024-02-18">2024/02/18</time><span class="truncate text-[12px] tracking-[0.01em] text-slate">Hexo</span></div></div></a></li></ul></div></section><section class="shell py-14"><div class="flex items-center justify-between gap-4"><a href="/archive/" class="cta-pill">返回归档</a><a href="/" class="cta-link">回到首页 →</a></div></section></main><footer class="bg-fog text-ink"><div class="shell py-10"><nav class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3" aria-label="页脚"><a href="/rss.xml" class="text-[12px] tracking-[-0.01em] text-ink-72 transition-colors hover:text-link">RSS</a><a href="https://github.com/ImJingLan" class="text-[12px] tracking-[-0.01em] text-ink-72 transition-colors hover:text-link" target="_blank" rel="noopener noreferrer">GitHub</a><a href="mailto:xisyphu@gmail.com" class="text-[12px] tracking-[-0.01em] text-ink-72 transition-colors hover:text-link">邮箱</a></nav><div class="mt-6 flex flex-col gap-2 border-t border-hairline pt-4 sm:flex-row sm:items-center sm:justify-between"><p class="text-[12px] tracking-[-0.01em] text-slate">Copyright © 2026 景蓝 Yurik. All rights reserved. <a href="https://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-link">桂ICP备2025057334号</a></p><p class="text-[12px] tracking-[-0.01em] text-slate">Built with Astro | 939bdda</p></div></div></footer><script type="module">var e=`swup-scroll`,t=()=>{try{return JSON.parse(sessionStorage.getItem(e)||`{}`)}catch{return{}}},n=t=>sessionStorage.setItem(e,JSON.stringify(t)),r=null;document.addEventListener(`swup:history:popstate`,()=>{r=t()[location.pathname]??0}),document.addEventListener(`swup:visit:start`,()=>{if(r!==null)return;let e=t();e[location.pathname]=Math.round(window.scrollY),n(e)}),document.addEventListener(`swup:page:view`,()=>{if(r!==null){let e=r;r=null,requestAnimationFrame(()=>{requestAnimationFrame(()=>window.scrollTo({top:e,behavior:`instant`}))})}else window.scrollTo({top:0,behavior:`instant`})}),window.addEventListener(`pagehide`,()=>{let e=t();e[location.pathname]=Math.round(window.scrollY),n(e)});</script></body></html><script type="module">var e=()=>{document.querySelectorAll(`[data-copy-link]`).forEach(e=>{e.dataset.copied!==`1`&&(e.dataset.copied=`1`,e.addEventListener(`click`,async()=>{let n=new URL(e.dataset.url??``,location.origin).toString(),r=e.textContent;try{await navigator.clipboard.writeText(n),e.textContent=t.common.copied}catch{e.textContent=t.common.copyFailed}setTimeout(()=>{e.textContent=r},1600)}))})};e(),document.addEventListener(`astro:page-load`,e);</script>

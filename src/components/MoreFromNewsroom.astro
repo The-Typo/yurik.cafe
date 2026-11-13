@@ -1,6 +1,7 @@
 ---
 /** 列表式更多文章 */
 import { t } from '../i18n';
+import { Image } from 'astro:assets';
 import CoverArt from './CoverArt.astro';
 import { formatCardDate, formatCardDateISO } from '../lib/format';
 import { postHref, type Post } from '../lib/posts';
@@ -39,7 +40,17 @@ const {
           <li class="mfr-item">
             <a href={postHref(post)} class="mfr-tile group">
               <div class="mfr-media">
-                {cover ? (
+                {cover?.meta ? (
+                  <Image
+                    src={cover.meta}
+                    alt={post.data.title}
+                    widths={[96, 144, 192]}
+                    sizes="(min-width: 1069px) 96px, 72px"
+                    loading="lazy"
+                    format="webp"
+                    quality={78}
+                  />
+                ) : cover ? (
                   <img
                     src={cover.src}
                     width={cover.width}

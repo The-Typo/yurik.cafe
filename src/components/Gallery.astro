@@ -1,6 +1,7 @@
 ---
 /** 横向滚动画廊 */
 import { t } from '../i18n';
+import { Image } from 'astro:assets';
 import CoverArt from './CoverArt.astro';
 import { formatCardDate, formatCardDateISO } from '../lib/format';
 import { postHref, type Post } from '../lib/posts';
@@ -82,7 +83,18 @@ const overlayArrowClass =
               data-index={index}
             >
               <div class="tile__media aspect-[16/9]">
-                {cover ? (
+                {cover?.meta ? (
+                  <Image
+                    src={cover.meta}
+                    alt={post.data.title}
+                    widths={[320, 480, 640]}
+                    sizes="(min-width: 1069px) 320px, (min-width: 735px) 45vw, 80vw"
+                    loading="lazy"
+                    format="webp"
+                    quality={78}
+                    class="size-full object-cover"
+                  />
+                ) : cover ? (
                   <img
                     src={cover.src}
                     width={cover.width}

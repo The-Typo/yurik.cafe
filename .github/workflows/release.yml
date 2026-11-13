@@ -1,0 +1,165 @@
+name: Create Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: '版本号（例如 v1.2.0）'
+        required: true
+        type: string
+      base_tag:
+        description: '基础标签（可选，默认为上一个正式 Release）'
+        required: false
+        type: string
+
+jobs:
+  # 更新版本号并提交，保证构建产物携带本次版本
+  bump-version:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      new_sha: ${{ steps.commit.outputs.new_sha }}
+      skip_release: ${{ steps.check.outputs.skip_release }}
+      base_tag: ${{ steps.check.outputs.base_tag }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: 解析基础标签
+        id: check
+        env:
+          BASE_TAG_INPUT: ${{ github.event.inputs.base_tag }}
+        run: |
+          # releases/latest 天然排除 prerelease，周快照不会被选为基准
+          if [ -n "$BASE_TAG_INPUT" ]; then
+            BASE_TAG="$BASE_TAG_INPUT"
+          else
+            HTTP_CODE=$(curl -s -o /tmp/latest.json -w "%{http_code}" \
+              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              "https://api.github.com/repos/$GITHUB_REPOSITORY/releases/latest")
+
+            if [ "$HTTP_CODE" = "404" ]; then
+              BASE_TAG=""
+            elif [ "$HTTP_CODE" = "200" ]; then
+              BASE_TAG=$(jq -r '.tag_name // empty' /tmp/latest.json)
+              [ -z "$BASE_TAG" ] && { echo "响应缺少 tag_name"; exit 1; }
+            else
+              echo "查询失败（HTTP $HTTP_CODE）"
+              cat /tmp/latest.json
+              exit 1
+            fi
+          fi
+
+          echo "base_tag=$BASE_TAG" >> $GITHUB_OUTPUT
+
+          if [ -n "$BASE_TAG" ]; then
+            COUNT=$(git rev-list --count "$BASE_TAG..HEAD")
+          else
+            COUNT=$(git rev-list --count HEAD)
+          fi
+
+          echo "新提交数: $COUNT"
+          if [ "$COUNT" -eq 0 ]; then
+            echo "skip_release=true" >> $GITHUB_OUTPUT
+          else
+            echo "skip_release=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: 生成变更日志
+        if: steps.check.outputs.skip_release == 'false'
+        env:
+          RELEASE_VERSION: ${{ github.event.inputs.version }}
+          BASE_TAG: ${{ steps.check.outputs.base_tag }}
+        run: |
+          if [ -n "$BASE_TAG" ]; then
+            node tools/generate-changelog.mjs --tag "$RELEASE_VERSION" --base "$BASE_TAG" --output-only > /dev/null
+          else
+            node tools/generate-changelog.mjs --tag "$RELEASE_VERSION" --all --output-only > /dev/null
+          fi
+
+      - name: 更新版本号
+        if: steps.check.outputs.skip_release == 'false'
+        env:
+          RELEASE_VERSION: ${{ github.event.inputs.version }}
+        run: node tools/update-version.mjs "$RELEASE_VERSION"
+
+      - name: 提交版本更新
+        id: commit
+        if: steps.check.outputs.skip_release == 'false'
+        env:
+          RELEASE_VERSION: ${{ github.event.inputs.version }}
+        run: |
+          VERSION="${RELEASE_VERSION#v}"
+          git config user.name "GitHub Action"
+          git config user.email "action@github.com"
+          git add package.json CHANGELOG.md
+          git commit -m "build: 版本号升级至 ${VERSION}" || echo "无变更"
+          git push
+          echo "new_sha=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+
+  # 构建验证
+  build:
+    needs: bump-version
+    if: needs.bump-version.outputs.skip_release == 'false'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.bump-version.outputs.new_sha }}
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - run: bun install --frozen-lockfile
+      - run: bun run build
+
+  # 构建通过后创建 tag 与 Release
+  create-release:
+    needs: [build, bump-version]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.bump-version.outputs.new_sha }}
+          fetch-depth: 0
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: 生成变更日志
+        id: changelog
+        env:
+          RELEASE_VERSION: ${{ github.event.inputs.version }}
+          BASE_TAG: ${{ needs.bump-version.outputs.base_tag }}
+        run: |
+          if [ -n "$BASE_TAG" ]; then
+            BODY=$(node tools/generate-changelog.mjs --tag "$RELEASE_VERSION" --base "$BASE_TAG" --output-only)
+          else
+            BODY=$(node tools/generate-changelog.mjs --tag "$RELEASE_VERSION" --all --output-only)
+          fi
+
+          echo "body<<EOF" >> $GITHUB_OUTPUT
+          echo "$BODY" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: 创建正式发布
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.event.inputs.version }}
+          name: Release ${{ github.event.inputs.version }}
+          target_commitish: ${{ needs.bump-version.outputs.new_sha }}
+          body: ${{ steps.changelog.outputs.body }}
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

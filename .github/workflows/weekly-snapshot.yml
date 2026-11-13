@@ -1,0 +1,141 @@
+name: Weekly Snapshot
+
+on:
+  # 每周一 UTC 00:00
+  schedule:
+    - cron: '0 0 * * 1'
+  workflow_dispatch:
+    inputs:
+      base_tag:
+        description: '基础标签（可选，默认为最近的 tag）'
+        required: false
+        type: string
+
+jobs:
+  # 计算快照版本号，不产生提交
+  snapshot-version:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      version: ${{ steps.gen.outputs.version }}
+      base_tag: ${{ steps.gen.outputs.base_tag }}
+      skip_release: ${{ steps.gen.outputs.skip_release }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: 生成快照版本号
+        id: gen
+        env:
+          BASE_TAG_INPUT: ${{ github.event.inputs.base_tag }}
+        run: |
+          VERSION=$(node tools/weekly-snapshot.mjs)
+          BASE_TAG=$(node tools/weekly-snapshot.mjs --get-base-tag)
+
+          if [ -n "$BASE_TAG_INPUT" ]; then
+            BASE_TAG="$BASE_TAG_INPUT"
+          fi
+
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "base_tag=$BASE_TAG" >> $GITHUB_OUTPUT
+          echo "周快照版本: $VERSION"
+          echo "基础标签: ${BASE_TAG:-无}"
+
+          if [ -n "$BASE_TAG" ]; then
+            COUNT=$(git rev-list --count "$BASE_TAG..HEAD")
+          else
+            COUNT=$(git rev-list --count HEAD)
+          fi
+
+          echo "新提交数: $COUNT"
+          if [ "$COUNT" -eq 0 ]; then
+            echo "skip_release=true" >> $GITHUB_OUTPUT
+          else
+            echo "skip_release=false" >> $GITHUB_OUTPUT
+          fi
+
+  # 构建验证；快照号只用于产物命名，不写进仓库
+  build:
+    needs: snapshot-version
+    if: needs.snapshot-version.outputs.skip_release == 'false'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - run: bun install --frozen-lockfile
+      - run: bun run build
+
+      - name: 打包产物
+        run: |
+          VERSION=${{ needs.snapshot-version.outputs.version }}
+          cd dist && zip -r "../site-${VERSION}.zip" .
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: site-dist
+          path: site-*.zip
+
+  # 创建 prerelease
+  weekly-snapshot:
+    needs: [build, snapshot-version]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: 生成变更日志
+        id: changelog
+        env:
+          VERSION: ${{ needs.snapshot-version.outputs.version }}
+          BASE_TAG: ${{ needs.snapshot-version.outputs.base_tag }}
+        run: |
+          if [ -n "$BASE_TAG" ]; then
+            BODY=$(node tools/generate-changelog.mjs --tag "$VERSION" --base "$BASE_TAG" --output-only)
+          else
+            BODY=$(node tools/generate-changelog.mjs --tag "$VERSION" --all --output-only)
+          fi
+
+          echo "body<<EOF" >> $GITHUB_OUTPUT
+          echo "$BODY" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: site-dist
+          path: artifacts
+
+      - name: 创建快照发布
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ needs.snapshot-version.outputs.version }}
+          name: Snapshot ${{ needs.snapshot-version.outputs.version }}
+          body: |
+            # 每周快照
+
+            自动生成的快照版本，用于预览最新改动。
+
+            > ⚠️ 预发布版本，可能包含不稳定的内容。
+
+            ${{ steps.changelog.outputs.body }}
+          draft: false
+          prerelease: true
+          files: artifacts/*.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

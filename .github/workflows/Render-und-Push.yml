@@ -1,0 +1,54 @@
+name: Render & Push
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 迁出代码
+        uses: actions/checkout@v4
+
+      - name: 获取提交版本号
+        id: get_version
+        run: |
+          version=$(git rev-parse --short HEAD)
+          echo "VERSION=$version" >> "$GITHUB_ENV"
+          echo "Latest commit version: $version"
+
+      - name: 安装 Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: 安装依赖
+        run: bun install --frozen-lockfile
+
+      # site.ts 里的 {{GIT_VERSION}} 在构建期由 src/lib/site.ts 读取 GIT_VERSION 环境变量替换，
+      # 这里不需要改源文件，环境变量会跟着下一步一起传给 Astro。
+      - name: 渲染博客界面
+        env:
+          GIT_VERSION: ${{ env.VERSION }}
+        run: bun run build
+
+      - name: 部署到 Deploy 分支
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: deploy
+          folder: dist
+
+      - name: 发布到服务器
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          ARGS: "-rltgoDzvO --delete"
+          EXCLUDE: /.git/, /.github/, /README.md, /LICENSE, /html_files.txt
+          SOURCE: "dist"
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
+          TARGET: ${{ secrets.SITE_ADDR }}

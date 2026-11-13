@@ -1,0 +1,260 @@
+---
+/** 列表式更多文章 */
+import { t } from '../i18n';
+import CoverArt from './CoverArt.astro';
+import { formatCardDate, formatCardDateISO } from '../lib/format';
+import { postHref, type Post } from '../lib/posts';
+import { postCover } from '../lib/covers';
+
+interface Props {
+  posts: Post[];
+  title?: string;
+  archiveHref?: string;
+  archiveLabel?: string;
+}
+
+const {
+  posts,
+  title = t.home.morePosts,
+  archiveHref = '/archive/',
+  archiveLabel = t.home.viewAllPosts,
+} = Astro.props;
+---
+
+<section class="bg-fog py-10 sm:py-16 lg:py-20">
+  <div class="shell">
+    {
+      title ? (
+        <div class="mb-6 sm:mb-11 lg:mb-16">
+          <h2 class="section-head !mb-0 text-[24px] sm:text-[28px] lg:text-[32px]">{title}</h2>
+        </div>
+      ) : null
+    }
+
+    <ul role="list" class="mfr-list">
+      {
+        posts.map((post) => {
+          const cover = postCover(post);
+          return (
+          <li class="mfr-item">
+            <a href={postHref(post)} class="mfr-tile group">
+              <div class="mfr-media">
+                {cover ? (
+                  <img
+                    src={cover.src}
+                    width={cover.width}
+                    height={cover.height}
+                    alt={post.data.title}
+                    loading="lazy"
+                  />
+                ) : (
+                  <CoverArt
+                    seed={post.id}
+                    tone={post.data.categories[0]}
+                    scale="square"
+                    glyph={post.data.title}
+                    alt=""
+                  />
+                )}
+              </div>
+
+              <div class="mfr-desc">
+                <div>
+                  <p class="eyebrow mfr-category">{post.data.categories[0] ?? t.common.post}</p>
+                  <h3 class="mfr-headline">{post.data.title}</h3>
+                </div>
+                <time class="mfr-timestamp" datetime={formatCardDateISO(post.data.date)}>
+                  {formatCardDate(post.data.date)}
+                </time>
+              </div>
+            </a>
+          </li>
+          );
+        })
+      }
+    </ul>
+
+    {
+      archiveHref ? (
+        <div class="mt-9 flex justify-center sm:mt-16">
+          <a href={archiveHref} class="cta-pill">
+            {archiveLabel}
+          </a>
+        </div>
+      ) : null
+    }
+  </div>
+</section>
+
+<style>
+  .mfr-list {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (min-width: 1069px) {
+    .mfr-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-right: -56px;
+    }
+  }
+
+  /** 分隔线统一由 ::before 绘制 */
+  .mfr-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    height: 100%;
+    padding: 28px 0;
+  }
+
+  .mfr-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: var(--color-hairline);
+  }
+
+  .mfr-item:first-child::before {
+    display: none;
+  }
+
+  @media (min-width: 735px) {
+    .mfr-item {
+      padding: 32px 0;
+    }
+  }
+
+  @media (min-width: 1069px) {
+    .mfr-item {
+      padding: 44px 0;
+      margin-right: 56px;
+    }
+
+    .mfr-item:nth-child(-n + 2)::before {
+      display: none;
+    }
+
+    .mfr-item:nth-child(odd)::before {
+      right: -56px;
+    }
+  }
+
+  .mfr-tile {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    text-decoration: none;
+    min-width: 0;
+  }
+
+  .mfr-media {
+    flex: 0 0 auto;
+    width: 105px;
+    height: 105px;
+    border-radius: 16px;
+    overflow: hidden;
+    background-color: var(--color-chip);
+  }
+
+  @media (min-width: 1069px) {
+    .mfr-media {
+      width: 132px;
+      height: 132px;
+      border-radius: 20px;
+    }
+  }
+
+  .mfr-media :global(svg),
+  .mfr-media :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s var(--ease-out-soft);
+  }
+
+  .mfr-tile:hover .mfr-media :global(svg),
+  .mfr-tile:hover .mfr-media :global(img) {
+    transform: scale(1.04);
+  }
+
+  .mfr-desc {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+    padding-left: 16px;
+  }
+
+  .mfr-tile {
+    height: 100%;
+  }
+
+  @media (min-width: 1069px) {
+    .mfr-desc {
+      padding-left: 28px;
+    }
+  }
+
+  .mfr-category {
+    margin-bottom: 8px;
+    font-size: 12px;
+  }
+
+  @media (min-width: 1069px) {
+    .mfr-category {
+      font-size: 14px;
+    }
+  }
+
+  /** 标题固定两行 */
+  .mfr-headline {
+    font-family: var(--font-display);
+    font-size: 19px;
+    line-height: 1.4;
+    font-weight: 700;
+    letter-spacing: 0.012em;
+    color: var(--color-ink);
+    transition: color 0.2s ease;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    /* 预留两行高度 */
+    min-height: calc(2 * 1.4em);
+  }
+
+  @media (min-width: 1069px) {
+    .mfr-headline {
+      font-size: 21px;
+      line-height: 1.4;
+      letter-spacing: 0.011em;
+    }
+  }
+
+  .mfr-tile:hover .mfr-headline {
+    color: var(--color-link);
+  }
+
+  .mfr-timestamp {
+    margin-top: 12px;
+    font-size: 14px;
+    color: var(--color-graphite);
+    letter-spacing: 0.01em;
+  }
+
+  @media (min-width: 1069px) {
+    .mfr-timestamp {
+      font-size: 17px;
+    }
+  }
+</style>

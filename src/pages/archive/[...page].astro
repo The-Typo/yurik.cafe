@@ -1,0 +1,414 @@
+---
+/** 归档页：按月分组、分页 */
+import { t } from '../../i18n';
+import { getCollection } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CoverArt from '../../components/CoverArt.astro';
+import { site, pagination, navDescription } from '../../lib/site';
+import { sortPosts, groupByMonth, postHref } from '../../lib/posts';
+import { postCover } from '../../lib/covers';
+
+export const getStaticPaths = (async () => {
+  // getStaticPaths 被提升，配置在运行时可用
+  const perPage = pagination.archivePerPage;
+  const posts = await getCollection('posts', ({ data }) => !data.draft);
+  const total = Math.max(1, Math.ceil(posts.length / perPage));
+
+  // 第 1 页不带页码
+  return Array.from({ length: total }, (_, i) => ({
+    params: { page: i === 0 ? undefined : String(i + 1) },
+    props: { pageNumber: i + 1, totalPages: total },
+  }));
+}) satisfies GetStaticPaths;
+
+const { pageNumber, totalPages } = Astro.props;
+
+const all = sortPosts(await getCollection('posts', ({ data }) => !data.draft));
+const perPage = pagination.archivePerPage;
+const total = Math.max(1, Math.ceil(all.length / perPage));
+
+const start = (pageNumber - 1) * perPage;
+const pagePosts = all.slice(start, start + perPage);
+
+/** 按月分组 */
+const groups = groupByMonth(pagePosts);
+
+const monthLabel = (date: Date) =>
+  `${new Intl.DateTimeFormat('zh-CN', { month: 'long' }).format(date)} ${date.getFullYear()}`;
+
+/** 月日，年份在分组标题里 */
+const dayLabel = (date: Date) => t.date.monthDay(date.getMonth() + 1, date.getDate());
+
+/** 页码序列 */
+function pageNumbers(current: number, count: number): (number | '…')[] {
+  if (count <= 7) return Array.from({ length: count }, (_, i) => i + 1);
+
+  const out: (number | '…')[] = [1];
+  const from = Math.max(2, current - 1);
+  const to = Math.min(count - 1, current + 1);
+
+  if (from > 2) out.push('…');
+  for (let i = from; i <= to; i++) out.push(i);
+  if (to < count - 1) out.push('…');
+  out.push(count);
+
+  return out;
+}
+
+const pages = pageNumbers(pageNumber, total);
+
+/** 页码 → URL */
+const pageHref = (n: number) => (n === 1 ? '/archive/' : `/archive/${n}/`);
+---
+
+<BaseLayout
+  title={pageNumber === 1 ? t.archive.title : `${t.archive.title} · ${pageNumber}`}
+  description={t.archive.description}
+>
+  <section class="shell pt-14 pb-10 sm:pt-16">
+    <p class="eyebrow">{t.archive.title}</p>
+    <h1
+      class="mt-3 font-display text-[36px] leading-[1.25] font-bold tracking-[0.01em] text-ink sm:text-[52px] sm:leading-[1.2]"
+    >
+      {t.archive.heading}
+    </h1>
+    <p class="mt-5 text-[18px] leading-[1.7] text-graphite">
+      {t.taxonomy.postCount(all.length)} · {total} pages
+    </p>
+  </section>
+
+  <section class="shell pb-20">
+    {
+      groups.map((group) => (
+        <div class="archive-group">
+          <h2 class="archive-month">{monthLabel(group.date)}</h2>
+
+          <ul role="list" class="archive-list">
+            {group.posts.map((post) => {
+              const cover = postCover(post);
+              const category = post.data.categories[0] ?? t.common.post;
+              return (
+                <li class="archive-item">
+                  <a href={postHref(post)} class="archive-link group">
+                    <div class="archive-thumb">
+                      {cover ? (
+                        <img
+                          src={cover.src}
+                          width={cover.width}
+                          height={cover.height}
+                          alt=""
+                          loading="lazy"
+                        />
+                      ) : (
+                        <CoverArt
+                          seed={post.id}
+                          tone={category}
+                          scale="wide"
+                          glyph={post.data.title}
+                          alt=""
+                        />
+                      )}
+                    </div>
+
+                    <div class="archive-content">
+                      <p class="archive-category">{category}</p>
+                      <h3 class="archive-headline">{post.data.title}</h3>
+                      <time class="archive-date" datetime={post.data.date.toISOString()}>
+                        {dayLabel(post.data.date)}
+                      </time>
+                    </div>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      ))
+    }
+
+    {
+      total > 1 ? (
+        <nav class="pager" aria-label={t.archive.pagination}>
+          {pageNumber > 1 ? (
+            <a class="pager-btn" href={pageHref(pageNumber - 1)} aria-label={t.archive.previousPage}>
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                <path d="M10 3L5 8l5 5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </a>
+          ) : (
+            <button type="button" class="pager-btn is-disabled" disabled aria-label={t.archive.previousPage}>
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                <path d="M10 3L5 8l5 5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
+          )}
+
+          <ul class="pager-pages">
+            {pages.map((page) =>
+              page === '…' ? (
+                <li class="pager-gap" aria-hidden="true">
+                  …
+                </li>
+              ) : (
+                <li>
+                  <a
+                    class:list={['pager-num', page === pageNumber && 'is-current']}
+                    href={pageHref(page)}
+                    aria-current={page === pageNumber ? 'page' : undefined}
+                  >
+                    {page}
+                  </a>
+                </li>
+              )
+            )}
+          </ul>
+
+          {pageNumber < total ? (
+            <a class="pager-btn" href={pageHref(pageNumber + 1)} aria-label={t.archive.nextPage}>
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                <path d="M6 3l5 5-5 5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </a>
+          ) : (
+            <button type="button" class="pager-btn is-disabled" disabled aria-label={t.archive.nextPage}>
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                <path d="M6 3l5 5-5 5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </button>
+          )}
+        </nav>
+      ) : null
+    }
+  </section>
+</BaseLayout>
+
+<style>
+  /* 月份标题 */
+  .archive-month {
+    margin: 52px 0 16px;
+    font-family: var(--font-display);
+    font-size: 28px;
+    line-height: 1.25;
+    font-weight: 700;
+    letter-spacing: 0.007em;
+    color: var(--color-ink);
+  }
+
+  .archive-group:first-child .archive-month {
+    margin-top: 0;
+  }
+
+  .archive-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* 条目 */
+  .archive-item {
+    border-top: 1px solid var(--color-hairline);
+  }
+
+  .archive-link {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    padding: 40px 0;
+    text-decoration: none;
+  }
+
+  .archive-thumb {
+    flex: 0 0 auto;
+    width: 295px;
+    aspect-ratio: 16 / 9;
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: var(--color-fog);
+  }
+
+  .archive-thumb :global(img),
+  .archive-thumb :global(svg) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s var(--ease-out-soft);
+  }
+
+  .archive-link:hover .archive-thumb :global(img),
+  .archive-link:hover .archive-thumb :global(svg) {
+    transform: scale(1.03);
+  }
+
+  .archive-content {
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+
+  .archive-category {
+    font-size: 14px;
+    line-height: 1.36;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: var(--color-graphite);
+  }
+
+  .archive-headline {
+    margin-top: 8px;
+    font-family: var(--font-display);
+    font-size: 24px;
+    line-height: 1.29;
+    font-weight: 700;
+    letter-spacing: 0.009em;
+    color: var(--color-ink);
+    transition: color 0.2s ease;
+  }
+
+  .archive-link:hover .archive-headline {
+    color: var(--color-link);
+  }
+
+  .archive-date {
+    display: block;
+    margin-top: 12px;
+    font-size: 14px;
+    line-height: 1.5;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: var(--color-graphite);
+  }
+
+  .pager {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 60px;
+    flex-wrap: wrap;
+  }
+
+  .pager-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    border-radius: 44px;
+    background-color: var(--color-fog);
+    color: var(--color-graphite);
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .pager-btn svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .pager-btn:hover:not(.is-disabled) {
+    background-color: var(--color-chip);
+    color: var(--color-ink);
+  }
+
+  .pager-btn.is-disabled {
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  .pager-pages {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .pager-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    height: 36px;
+    padding: 0 8px;
+    border-radius: 36px;
+    font-size: 15px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-graphite);
+    text-decoration: none;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .pager-num:hover {
+    background-color: var(--color-fog);
+    color: var(--color-ink);
+  }
+
+  /* 选中态 */
+  .pager-num.is-current {
+    background-color: var(--color-selected-bg);
+    color: var(--color-selected-fg);
+  }
+
+  .pager-gap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 24px;
+    height: 36px;
+    color: var(--color-slate);
+    font-size: 15px;
+  }
+
+  /* 窄屏 */
+  @media (max-width: 734px) {
+    .archive-link {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 28px 0;
+    }
+
+    .archive-thumb {
+      width: 100%;
+      border-radius: 16px;
+    }
+
+    .archive-headline {
+      font-size: 19px;
+      line-height: 1.4;
+    }
+
+    .archive-month {
+      margin: 40px 0 12px;
+      font-size: 24px;
+    }
+
+    .pager {
+      margin-top: 40px;
+      gap: 8px;
+    }
+
+    .pager-btn {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  @media (min-width: 735px) and (max-width: 1068px) {
+    .archive-thumb {
+      width: 220px;
+    }
+
+    .archive-headline {
+      font-size: 21px;
+    }
+  }
+</style>

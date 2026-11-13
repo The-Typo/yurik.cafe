@@ -1,0 +1,169 @@
+---
+import { t } from '../i18n';
+/** 主题切换 */
+---
+
+<button
+  type="button"
+  class="theme-toggle"
+  data-theme-toggle
+  data-label-light={t.theme.toLight}
+  data-label-dark={t.theme.toDark}
+  aria-label={t.theme.switch}
+  aria-live="polite"
+  title={t.theme.switch}
+>
+  {/* 亮色：太阳 */}
+  <svg class="theme-icon theme-icon--light" viewBox="0 0 20 20" aria-hidden="true">
+    <circle cx="10" cy="10" r="4" fill="none" stroke="currentColor" stroke-width="1.5"></circle>
+    <g stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+      <path d="M10 1.5v2M10 16.5v2M1.5 10h2M16.5 10h2"></path>
+      <path d="M4 4l1.4 1.4M14.6 14.6L16 16M16 4l-1.4 1.4M5.4 14.6L4 16"></path>
+    </g>
+  </svg>
+
+  {/* 暗色：月亮 */}
+  <svg class="theme-icon theme-icon--dark" viewBox="0 0 20 20" aria-hidden="true">
+    <path
+      d="M16.5 12.5A7 7 0 0 1 7.5 3.5a7 7 0 1 0 9 9z"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.5"
+      stroke-linejoin="round"></path>
+  </svg>
+</button>
+
+<script>
+  /** <head> 里的内联脚本负责首屏前设置 data-theme，避免闪白 */
+  type Theme = 'light' | 'dark';
+
+  const STORAGE_KEY = 'theme';
+  const root = document.documentElement;
+
+  /** 页面上所有切换按钮；导航栏在宽窄屏各渲染一个 */
+  const buttons = () => [...document.querySelectorAll<HTMLElement>('[data-theme-toggle]')];
+
+  const apply = (theme: Theme) => {
+    root.dataset.theme = theme;
+
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', theme === 'dark' ? '#1c1c1e' : '#ffffff');
+
+    for (const btn of buttons()) {
+      const label = theme === 'dark' ? btn.dataset.labelLight : btn.dataset.labelDark;
+      if (!label) continue;
+      btn.setAttribute('aria-label', label);
+      btn.setAttribute('title', label);
+    }
+  };
+
+  const current = (): Theme => (root.dataset.theme === 'dark' ? 'dark' : 'light');
+
+  const reduceMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /** 以按钮为圆心铺开新主题 */
+  const circleFrom = (el: HTMLElement) => {
+    const rect = el.getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+    const radius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+    return { x, y, radius };
+  };
+
+  const switchTo = (next: Theme, btn: HTMLElement) => {
+    if (!document.startViewTransition || reduceMotion()) {
+      localStorage.setItem(STORAGE_KEY, next);
+      apply(next);
+      return;
+    }
+
+    const { x, y, radius } = circleFrom(btn);
+
+    const transition = document.startViewTransition(() => {
+      localStorage.setItem(STORAGE_KEY, next);
+      apply(next);
+    });
+
+    transition.ready
+      .then(() => {
+        root.animate(
+          {
+            clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`],
+          },
+          {
+            duration: 520,
+            easing: 'cubic-bezier(0.28, 0.11, 0.32, 1)',
+            pseudoElement: '::view-transition-new(root)',
+          }
+        );
+      })
+      .catch(() => {});
+  };
+
+  const bind = () => {
+    for (const btn of buttons()) {
+      if (btn.dataset.bound === '1') continue;
+      btn.dataset.bound = '1';
+
+      btn.addEventListener('click', () => {
+        switchTo(current() === 'dark' ? 'light' : 'dark', btn);
+      });
+    }
+  };
+
+  apply(current());
+  bind();
+  document.addEventListener('astro:page-load', bind);
+</script>
+
+<style>
+  /* 关掉默认交叉淡入 */
+  :global(::view-transition-old(root)),
+  :global(::view-transition-new(root)) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+
+  :global(::view-transition-new(root)) {
+    z-index: 2;
+  }
+
+  :global(::view-transition-old(root)) {
+    z-index: 1;
+  }
+
+  .theme-toggle {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    flex: none;
+    border-radius: 50%;
+    color: var(--color-graphite);
+    background-color: transparent;
+    transition:
+      color 0.2s ease,
+      background-color 0.2s ease;
+  }
+
+  .theme-toggle:hover {
+    color: var(--color-ink);
+    background-color: var(--color-chip);
+  }
+
+  .theme-toggle:active {
+    scale: 0.92;
+  }
+
+  .theme-icon {
+    width: 18px;
+    height: 18px;
+    display: none;
+  }
+
+  /* 暗色显示太阳，亮色显示月亮 */
+  :global(html[data-theme='dark']) .theme-icon--light,
+  :global(html:not([data-theme='dark'])) .theme-icon--dark {
+    display: block;
+  }
+</style>

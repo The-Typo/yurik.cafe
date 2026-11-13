@@ -1,0 +1,48 @@
+---
+import { t } from '../i18n';
+import { site, footer, socialLinks, copyrightLine, creditLine } from '../lib/site';
+
+const links = socialLinks();
+const icp = footer.icp;
+---
+
+<footer class="bg-fog text-ink">
+  <div class="shell py-10">
+    <nav class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3" aria-label={t.footer.label}>
+      {
+        links.map((item) => (
+          <a
+            href={item.href}
+            class="text-[12px] tracking-[-0.01em] text-ink-72 transition-colors hover:text-link"
+            {...(item.href.startsWith('http')
+              ? { target: '_blank', rel: 'noopener noreferrer' }
+              : {})}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="mt-6 flex flex-col gap-2 border-t border-hairline pt-4 sm:flex-row sm:items-center sm:justify-between">
+      <p class="text-[12px] tracking-[-0.01em] text-slate">
+        {copyrightLine()}
+        {
+          icp.enable ? (
+            <>
+              {' '}
+              <a href={icp.url} target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-link">
+                {icp.text}
+              </a>
+            </>
+          ) : null
+        }
+      </p>
+      {
+        footer.credit ? (
+          <p class="text-[12px] tracking-[-0.01em] text-slate">{creditLine()}</p>
+        ) : null
+      }
+    </div>
+  </div>
+</footer>

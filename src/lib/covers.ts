@@ -1,19 +1,16 @@
 /** 封面解析：cover 字段 → 默认池 → 生成图 */
+import type { ImageMetadata } from 'astro';
 import type { Post } from './posts';
 import { defaultCovers } from './site';
 
-type ImageModule = {
-  default: { src: string; width: number; height: number };
-};
-
 /** 文章目录下的图片 */
-const images = import.meta.glob<ImageModule>('/src/content/posts/**/*.{webp,jpg,jpeg,png,avif,gif,svg}', {
+const images = import.meta.glob<ImageMetadata>('/src/content/posts/**/*.{webp,jpg,jpeg,png,avif,gif,svg}', {
   eager: true,
   import: 'default',
 });
 
 /** 默认封面池 */
-const defaultPool = import.meta.glob<ImageModule>(
+const defaultPool = import.meta.glob<ImageMetadata>(
   '/src/assets/covers/*.{webp,jpg,jpeg,png,avif,gif,svg}',
   { eager: true, import: 'default' }
 );
@@ -27,6 +24,8 @@ export interface CoverInfo {
   src: string;
   width?: number;
   height?: number;
+  /** 本地图片的原图元数据，交给 <Image> 生成合适尺寸 */
+  meta?: ImageMetadata;
 }
 
 /** 拼 glob key */
@@ -46,7 +45,7 @@ function resolveImage(id: string, file: string): CoverInfo | undefined {
 
   const mod = images[candidate];
   if (mod) {
-    return { src: mod.src, width: mod.width, height: mod.height };
+    return { src: mod.src, width: mod.width, height: mod.height, meta: mod };
   }
 
   // 大小写不敏感匹配
@@ -54,7 +53,7 @@ function resolveImage(id: string, file: string): CoverInfo | undefined {
   const hit = Object.keys(images).find((k) => k.toLowerCase() === lower);
   if (hit) {
     const m = images[hit];
-    return { src: m.src, width: m.width, height: m.height };
+    return { src: m.src, width: m.width, height: m.height, meta: m };
   }
 
   return undefined;
@@ -100,7 +99,7 @@ function pickDefaultCover(id: string): CoverInfo | undefined {
   const meta = item.meta;
   if (!meta?.src) return undefined;
 
-  return { src: meta.src, width: meta.width, height: meta.height };
+  return { src: meta.src, width: meta.width, height: meta.height, meta };
 }
 
 /** 只取显式配置的封面，不回退默认池 */

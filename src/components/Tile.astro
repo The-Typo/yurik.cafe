@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import { t } from '../i18n';
 import CoverArt from './CoverArt.astro';
 import { formatCardDate, formatCardDateISO } from '../lib/format';
@@ -24,6 +25,13 @@ const headlineSize = {
 }[variant];
 
 const pad = variant === 'hero' ? 'p-6 sm:p-8' : 'p-5 sm:p-6';
+
+// 磁贴实际显示宽度：hero 满栏，2up 半栏，3up 三分之一
+const WIDTHS = {
+  hero: [640, 960, 1280],
+  '2up': [400, 560, 720],
+  '3up': [280, 360, 480],
+} as const;
 ---
 
 <a
@@ -36,7 +44,18 @@ const pad = variant === 'hero' ? 'p-6 sm:p-8' : 'p-5 sm:p-6';
 >
   <div class="tile__media">
     {
-      cover ? (
+      cover?.meta ? (
+        <Image
+          src={cover.meta}
+          alt={data.coverAlt ?? data.title}
+          widths={WIDTHS[variant]}
+          sizes={variant === 'hero' ? '(min-width: 1069px) 980px, 100vw' : variant === '2up' ? '(min-width: 1069px) 460px, (min-width: 735px) 46vw, 100vw' : '(min-width: 1069px) 300px, (min-width: 735px) 30vw, 100vw'}
+          loading={variant === 'hero' ? 'eager' : 'lazy'}
+          format="webp"
+          quality={78}
+          class="size-full object-cover"
+        />
+      ) : cover ? (
         <img
           src={cover.src}
           width={cover.width}

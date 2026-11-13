@@ -1,92 +1,31 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon shortcut" href="/favicon/v2/favicon.ico">
-<title>「技术」树莓派4B烧录CentOS镜像并安装宝塔面板 — 景蓝的小屋</title>
-
-<link rel="stylesheet" href="/css/style.css">
-
-
-<meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/feed.xml" title="景蓝的小屋" type="application/rss+xml">
-</head>
-<body class="">
-  
-<nav class="site-nav">
-  <div class="site-nav__inner">
-    <a href="/" class="site-nav__brand">景蓝的小屋</a>
-    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-    <ul class="site-nav__links">
-      
-        <li><a href="/">首页</a></li>
-      
-        <li><a href="/about/">关于我</a></li>
-      
-        <li><a href="/archives/">归档</a></li>
-      
-        <li><a href="/friends/">友链</a></li>
-      
-        <li><a target="_blank" rel="noopener" href="https://www.travellings.cn/go.html">开往</a></li>
-      
-    </ul>
-  </div>
-</nav>
-<div class="nav-overlay"></div>
-
-  <script>
-  if (document.querySelector('.hero')) {
-    document.body.classList.add('has-hero');
-  }
-</script>
-
-
-<header class="article-header">
-  <time class="article-header__date" datetime="2023-01-19">2023 年 1 月 19 日</time>
-  <h1 class="article-header__title">「技术」树莓派4B烧录CentOS镜像并安装宝塔面板</h1>
-  <div class="article-header__meta">
-    
-      
-        <a href="/categories/%E6%8A%80%E6%9C%AF/" class="badge category">技术</a>
-      
-    
-    
-  </div>
-</header>
-
-
-
-<figure class="article-featured-image">
-  <img src="/2023/raspberry-pi-install-centos/banner.jpg" alt="「技术」树莓派4B烧录CentOS镜像并安装宝塔面板">
-  
-</figure>
-
-
-<div class="article-layout article-layout--with-toc">
-  
-  <aside class="toc-sidebar">
-    <div class="toc-sidebar__title">目录</div>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-text">准备工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%83%A7%E5%BD%95%E9%95%9C%E5%83%8F"><span class="toc-text">烧录镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E7%B3%BB%E7%BB%9F"><span class="toc-text">配置系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF"><span class="toc-text">安装宝塔面板</span></a></li></ol>
-  </aside>
-  
-  <div class="article-body">
-    <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>很古早的时候我买了一台 树莓派 4B 4GB 版本（怀念当时 4GB 版本 500 块的日子）</p>
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" href="/assets/inter-latin-wght-normal.Dx4kXJAl.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/assets/inter-tight-latin-wght-normal.DX-nOvPD.woff2" as="font" type="font/woff2" crossorigin><title>「技术」树莓派4B烧录CentOS镜像并安装宝塔面板 - 景蓝的小屋</title><meta name="description" content="记录技术、开箱与生活里的碎片。"><meta name="keywords" content="景蓝,Yurik,博客,技术,开箱,随笔"><link rel="canonical" href="https://yurik.cafe/2023/raspberry-pi-install-centos/"><link rel="icon" href="/favicon/v2/favicon.ico"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website"><meta property="og:site_name" content="景蓝的小屋"><meta property="og:locale" content="zh_CN"><meta property="og:title" content="「技术」树莓派4B烧录CentOS镜像并安装宝塔面板 - 景蓝的小屋"><meta property="og:description" content="记录技术、开箱与生活里的碎片。"><meta property="og:url" content="https://yurik.cafe/2023/raspberry-pi-install-centos/"><meta name="twitter:card" content="summary_large_image"><link rel="alternate" type="application/rss+xml" title="景蓝的小屋" href="/rss.xml"><script>
+      (() => {
+        const stored = localStorage.getItem('theme');
+        const theme =
+          stored === 'light' || stored === 'dark'
+            ? stored
+            : window.matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light';
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script><link rel="stylesheet" href="/assets/BaseLayout.Baz7jMKD.css"><script type="module" src="/assets/page.P71UOlAZ.js"></script></head><body class="flex min-h-dvh flex-col bg-canvas text-ink antialiased"><a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-ink focus:px-5 focus:py-2 focus:text-[14px] focus:text-white">Skip to content</a><header class="site-nav sticky top-0 z-50 border-b border-hairline/60 bg-canvas/85 backdrop-blur-xl" data-astro-cid-raghmlda><div class="shell flex h-[56px] items-center justify-between gap-6" data-astro-cid-raghmlda><a href="/" class="flex min-w-0 items-center gap-2.5 text-ink transition-opacity hover:opacity-70" data-astro-cid-raghmlda><img src="/favicon/v2/android-chrome-512x512.png" alt="" width="24" height="24" class="size-[24px] flex-none rounded-[6px] object-cover" loading="eager" data-astro-cid-raghmlda><span class="truncate text-[17px] font-semibold tracking-[0.01em]" data-astro-cid-raghmlda>景蓝的小屋</span></a><div class="hidden items-center gap-5 md:flex" data-astro-cid-raghmlda><nav aria-label="站内导航" data-astro-cid-raghmlda><ul class="flex items-center gap-7" data-astro-cid-raghmlda><li data-astro-cid-raghmlda><a href="/" class="nav-link text-[14px] tracking-[0.01em]" data-astro-cid-raghmlda>首页</a></li><li data-astro-cid-raghmlda><a href="/archive/" class="nav-link text-[14px] tracking-[0.01em]" data-astro-cid-raghmlda>归档</a></li><li data-astro-cid-raghmlda><a href="/tags/" class="nav-link text-[14px] tracking-[0.01em]" data-astro-cid-raghmlda>标签</a></li><li data-astro-cid-raghmlda><a href="/friends/" class="nav-link text-[14px] tracking-[0.01em]" data-astro-cid-raghmlda>友链</a></li><li data-astro-cid-raghmlda><a href="/about/" class="nav-link text-[14px] tracking-[0.01em]" data-astro-cid-raghmlda>关于</a></li><li data-astro-cid-raghmlda><a href="https://www.travellings.cn/go.html" class="nav-link text-[14px] tracking-[0.01em]" data-astro-cid-raghmlda>开往</a></li></ul></nav><button type="button" class="theme-toggle" data-theme-toggle data-label-light="切换到亮色主题" data-label-dark="切换到暗色主题" aria-label="切换主题" aria-live="polite" title="切换主题" data-astro-cid-l6lhmie6><svg class="theme-icon theme-icon--light" viewBox="0 0 20 20" aria-hidden="true" data-astro-cid-l6lhmie6><circle cx="10" cy="10" r="4" fill="none" stroke="currentColor" stroke-width="1.5" data-astro-cid-l6lhmie6></circle><g stroke="currentColor" stroke-width="1.5" stroke-linecap="round" data-astro-cid-l6lhmie6><path d="M10 1.5v2M10 16.5v2M1.5 10h2M16.5 10h2" data-astro-cid-l6lhmie6></path><path d="M4 4l1.4 1.4M14.6 14.6L16 16M16 4l-1.4 1.4M5.4 14.6L4 16" data-astro-cid-l6lhmie6></path></g></svg><svg class="theme-icon theme-icon--dark" viewBox="0 0 20 20" aria-hidden="true" data-astro-cid-l6lhmie6><path d="M16.5 12.5A7 7 0 0 1 7.5 3.5a7 7 0 1 0 9 9z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" data-astro-cid-l6lhmie6></path></svg></button><script type="module">var e=`theme`,t=document.documentElement,n=()=>[...document.querySelectorAll(`[data-theme-toggle]`)],r=e=>{t.dataset.theme=e;let r=document.querySelector(`meta[name="theme-color"]`);r&&r.setAttribute(`content`,e===`dark`?`#1c1c1e`:`#ffffff`);for(let t of n()){let n=e===`dark`?t.dataset.labelLight:t.dataset.labelDark;n&&(t.setAttribute(`aria-label`,n),t.setAttribute(`title`,n))}},i=()=>t.dataset.theme===`dark`?`dark`:`light`,a=()=>window.matchMedia(`(prefers-reduced-motion: reduce)`).matches,o=e=>{let t=e.getBoundingClientRect(),n=t.left+t.width/2,r=t.top+t.height/2;return{x:n,y:r,radius:Math.hypot(Math.max(n,innerWidth-n),Math.max(r,innerHeight-r))}},s=(n,i)=>{if(!document.startViewTransition||a()){localStorage.setItem(e,n),r(n);return}let{x:s,y:c,radius:l}=o(i);document.startViewTransition(()=>{localStorage.setItem(e,n),r(n)}).ready.then(()=>{t.animate({clipPath:[`circle(0px at ${s}px ${c}px)`,`circle(${l}px at ${s}px ${c}px)`]},{duration:520,easing:`cubic-bezier(0.28, 0.11, 0.32, 1)`,pseudoElement:`::view-transition-new(root)`})}).catch(()=>{})},c=()=>{for(let e of n())e.dataset.bound!==`1`&&(e.dataset.bound=`1`,e.addEventListener(`click`,()=>{s(i()===`dark`?`light`:`dark`,e)}))};r(i()),c(),document.addEventListener(`astro:page-load`,c);</script></div><div class="flex items-center gap-2 md:hidden" data-astro-cid-raghmlda><button type="button" class="theme-toggle" data-theme-toggle data-label-light="切换到亮色主题" data-label-dark="切换到暗色主题" aria-label="切换主题" aria-live="polite" title="切换主题" data-astro-cid-l6lhmie6><svg class="theme-icon theme-icon--light" viewBox="0 0 20 20" aria-hidden="true" data-astro-cid-l6lhmie6><circle cx="10" cy="10" r="4" fill="none" stroke="currentColor" stroke-width="1.5" data-astro-cid-l6lhmie6></circle><g stroke="currentColor" stroke-width="1.5" stroke-linecap="round" data-astro-cid-l6lhmie6><path d="M10 1.5v2M10 16.5v2M1.5 10h2M16.5 10h2" data-astro-cid-l6lhmie6></path><path d="M4 4l1.4 1.4M14.6 14.6L16 16M16 4l-1.4 1.4M5.4 14.6L4 16" data-astro-cid-l6lhmie6></path></g></svg><svg class="theme-icon theme-icon--dark" viewBox="0 0 20 20" aria-hidden="true" data-astro-cid-l6lhmie6><path d="M16.5 12.5A7 7 0 0 1 7.5 3.5a7 7 0 1 0 9 9z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" data-astro-cid-l6lhmie6></path></svg></button><button type="button" id="nav-toggle" class="nav-toggle" aria-label="打开菜单" aria-expanded="false" aria-controls="nav-panel" data-astro-cid-raghmlda><span class="nav-toggle-bar" data-astro-cid-raghmlda></span><span class="nav-toggle-bar" data-astro-cid-raghmlda></span></button></div></div><div id="nav-panel" class="nav-panel md:hidden" hidden data-astro-cid-raghmlda><nav aria-label="站内导航" class="shell" data-astro-cid-raghmlda><ul class="nav-panel-list" data-astro-cid-raghmlda><li data-astro-cid-raghmlda><a href="/" class="nav-panel-link" data-astro-cid-raghmlda>首页</a></li><li data-astro-cid-raghmlda><a href="/archive/" class="nav-panel-link" data-astro-cid-raghmlda>归档</a></li><li data-astro-cid-raghmlda><a href="/tags/" class="nav-panel-link" data-astro-cid-raghmlda>标签</a></li><li data-astro-cid-raghmlda><a href="/friends/" class="nav-panel-link" data-astro-cid-raghmlda>友链</a></li><li data-astro-cid-raghmlda><a href="/about/" class="nav-panel-link" data-astro-cid-raghmlda>关于</a></li><li data-astro-cid-raghmlda><a href="https://www.travellings.cn/go.html" class="nav-panel-link" data-astro-cid-raghmlda>开往</a></li></ul></nav></div><span class="route-bar" aria-hidden="true" data-astro-cid-raghmlda></span></header><script type="module">var e=document.querySelector(`.site-nav`),t=document.getElementById(`nav-toggle`),n=document.getElementById(`nav-panel`);if(e&&t&&n){let r=!1,i=i=>{i!==r&&(r=i,t.setAttribute(`aria-expanded`,String(i)),t.setAttribute(`aria-label`,i?`Close menu`:`Open menu`),e.classList.toggle(`is-open`,i),document.body.style.overflow=i?`hidden`:``,i?(n.hidden=!1,requestAnimationFrame(()=>n.classList.add(`is-open`))):(n.classList.remove(`is-open`),setTimeout(()=>{r||(n.hidden=!0)},260)))};t.addEventListener(`click`,()=>i(!r)),n.addEventListener(`click`,e=>{e.target.closest(`a`)&&i(!1)}),document.addEventListener(`keydown`,e=>{e.key===`Escape`&&r&&(i(!1),t.focus())}),window.matchMedia(`(min-width: 768px)`).addEventListener(`change`,e=>{e.matches&&i(!1)})}var r=()=>{let e=location.pathname;for(let t of document.querySelectorAll(`.site-nav nav a[href]`)){let n=t.getAttribute(`href`);n&&!n.startsWith(`http`)&&((n===`/`?e===`/`:e.startsWith(n))?t.setAttribute(`aria-current`,`page`):t.removeAttribute(`aria-current`))}};r(),document.addEventListener(`astro:page-load`,r),document.addEventListener(`swup:page:view`,r),window.addEventListener(`popstate`,r),window.addEventListener(`pageshow`,r);</script><main id="main" class="transition-main flex-1"><article><header class="shell pt-12 sm:pt-16 pb-10"><div class="mx-auto max-w-[700px]"><nav class="mb-6 flex flex-wrap items-center gap-2 text-[13px] text-slate" aria-label="面包屑"><a href="/" class="transition-colors hover:text-link">回到首页</a><span aria-hidden="true">/</span><a href="/categories/%E6%8A%80%E6%9C%AF/" class="transition-colors hover:text-link">技术</a></nav><p class="text-[13px] font-semibold tracking-[0.02em] text-graphite"><time datetime="2023-01-19T00:00:00.000Z">2023年1月19日</time><span class="mx-2 text-slate" aria-hidden="true">·</span><span>4 分钟阅读</span></p><h1 class="mt-4 font-display text-[30px] leading-[1.3] font-bold tracking-[0.01em] text-ink sm:text-[42px] sm:leading-[1.25]">「技术」树莓派4B烧录CentOS镜像并安装宝塔面板</h1></div></header><!-- 头图 --><div class="shell"><figure class="overflow-hidden rounded-[20px] sm:rounded-[28px]"><img src="/assets/banner.DtVtG41G.jpg" width="1706" height="1280" alt="「技术」树莓派4B烧录CentOS镜像并安装宝塔面板" class="w-full object-cover" loading="eager"></figure></div><div class="shell pb-12 sm:pb-16 pt-12 sm:pt-16"><div class="mx-auto max-w-[700px]"><div class="prose-newsroom"><h2 id="前言">前言</h2>
+<p>很古早的时候我买了一台 树莓派 4B 4GB 版本（怀念当时 4GB 版本 500 块的日子）</p>
 <p>由于 Cortex-A72 处理器，树莓派 4B 的性能其实很薄弱，当时我也只是勉强用它跑一跑 QQ 机器人和网站服务器。（宝塔跑 Mariadb 安装 CPU 占用率都能 100%）随后用旧电脑刷服务器后树莓派就闲置了。</p>
 <p>最近有朋友想尝试在家里搭建个人网站，我就把树莓派借给了他，但是尝试了很多个 Linux 发行版（Debian、Ubuntu）后宝塔+LNMP 环境还是无法安装成功，不是宝塔无法运行就是 Mysql 无法安装。</p>
 <p>在查阅了互联网资料后，发现我用的最多的 Centos 也存在 Arm 版本，在使用这个发行版后安装宝塔和 LNMP 环境也变得顺利了，于是打算写一篇博客记录一下安装过程</p>
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>需要准备：</p>
+<h2 id="准备工作">准备工作</h2>
+<p>需要准备：</p>
 <ul>
 <li>一台接入内网树莓派 4B</li>
 <li>至少 16GB 的内存卡 + 读卡器 (USB3.0 最佳)</li>
 <li>一台电脑</li>
 <li>系统镜像</li>
-<li>Raspberry Pi Imager (可前往 <a target="_blank" rel="noopener" href="//www.raspberrypi.com/software/">https://www.raspberrypi.com/software/</a> 下载)</li>
+<li>Raspberry Pi Imager (可前往 <a href="//www.raspberrypi.com/software/">https://www.raspberrypi.com/software/</a> 下载)</li>
 </ul>
-<h2 id="烧录镜像"><a href="#烧录镜像" class="headerlink" title="烧录镜像"></a>烧录镜像</h2><p>其实 CentOS 7 为树莓派提供了专门的系统镜像，在<a target="_blank" rel="noopener" href="https://www.centos.org/download/">CentOS - Download</a>中给 Arm 架构的处理器提供了 <a target="_blank" rel="noopener" href="//isoredirect.centos.org/altarch/7/isos/aarch64/">ARM64(aarch64)</a> 和 <a target="_blank" rel="noopener" href="//isoredirect.centos.org/altarch/7/isos/armhfp/">ARM32(armhfp)</a> ，因为我的树莓派 4B 是 4GB 版本的，所以就选择了 ARM64 的版本</p>
-<p>你可以在对应架构的下载界面中选择官方推荐的镜像下载地址，国内用户可以前往<a target="_blank" rel="noopener" href="http://mirror.nju.edu.cn/centos-altarch/7.9.2009/isos/aarch64/images">NJU Mirror</a>、<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/centos-altarch/7.9.2009/isos/aarch64/images/">清华大学开源软件镜像站</a> 或 <a target="_blank" rel="noopener" href="https://mirrors.bfsu.edu.cn/centos-altarch/7.9.2009/isos/aarch64/images/">北京外国语大学开源软件镜像站</a> 下载</p>
+<h2 id="烧录镜像">烧录镜像</h2>
+<p>其实 CentOS 7 为树莓派提供了专门的系统镜像，在<a href="https://www.centos.org/download/">CentOS - Download</a>中给 Arm 架构的处理器提供了 <a href="//isoredirect.centos.org/altarch/7/isos/aarch64/">ARM64(aarch64)</a> 和 <a href="//isoredirect.centos.org/altarch/7/isos/armhfp/">ARM32(armhfp)</a> ，因为我的树莓派 4B 是 4GB 版本的，所以就选择了 ARM64 的版本</p>
+<p>你可以在对应架构的下载界面中选择官方推荐的镜像下载地址，国内用户可以前往<a href="http://mirror.nju.edu.cn/centos-altarch/7.9.2009/isos/aarch64/images">NJU Mirror</a>、<a href="https://mirrors.tuna.tsinghua.edu.cn/centos-altarch/7.9.2009/isos/aarch64/images/">清华大学开源软件镜像站</a> 或 <a href="https://mirrors.bfsu.edu.cn/centos-altarch/7.9.2009/isos/aarch64/images/">北京外国语大学开源软件镜像站</a> 下载</p>
 <p>下载文件名带 <code>RaspberryPI</code> 的镜像</p>
 <p>下载完毕后使用树莓派官方的烧录工具 Raspberry Pi Imager 烧录</p>
 <p>插入读卡器，启动 Raspberry Pi Imager</p>
@@ -96,21 +35,25 @@
 <p><strong>注意 1</strong>：烧录后内存卡中原存储文件将<strong>永久</strong>丢失，请及时备份！</p>
 <p><strong>注意 2</strong>：烧录无需使用 Imager 的高级设置，若设置永久设置请清空后烧录</p>
 </blockquote>
-<h2 id="配置系统"><a href="#配置系统" class="headerlink" title="配置系统"></a>配置系统</h2><p>等待烧录完成后即可取出内存卡插入树莓派内，插上电源与网线即可启动</p>
+<h2 id="配置系统">配置系统</h2>
+<p>等待烧录完成后即可取出内存卡插入树莓派内，插上电源与网线即可启动</p>
 <p>使用 ssh 登录树莓派，默认用户名为<code>root</code>， 初始密码为<code>centos</code></p>
 <blockquote>
 <p>ssh 连接命令: <code>ssh 用户名@主机IP</code></p>
 <p>登录后可使用<code>passwd</code>修改密码，请牢记修改后密码</p>
-<p>若不清楚树莓派 IP 可进入路由器后台或使用<a target="_blank" rel="noopener" href="https://www.advanced-ip-scanner.com/">Advanced IP Scanner</a>扫描</p>
+<p>若不清楚树莓派 IP 可进入路由器后台或使用<a href="https://www.advanced-ip-scanner.com/">Advanced IP Scanner</a>扫描</p>
 </blockquote>
 <p>进入系统后输入<code>df -h</code>查看各分区大小</p>
 <p>使用<code>rootfs-expand</code>拓展系统空间</p>
 <blockquote>
 <p><strong>警告</strong>：请务必拓展系统空间，否则可能导致空间过下使得宝塔安装失败</p>
 </blockquote>
-<p>新系统启动后推荐将软件源改为国内镜像，具体请参考镜像站帮助文档，如<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/help/centos-altarch/">清华大学镜像站</a>可运行以下命令一键换源</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo sed -e &#x27;s|^mirrorlist=|#mirrorlist=|g&#x27; \</span><br><span class="line">         -e &#x27;s|^#baseurl=http://mirror.centos.org/altarch/|baseurl=https://mirrors.tuna.tsinghua.edu.cn/centos-altarch/|g&#x27; \</span><br><span class="line">         -e &#x27;s|^#baseurl=http://mirror.centos.org/$contentdir/|baseurl=https://mirrors.tuna.tsinghua.edu.cn/centos-altarch/|g&#x27; \</span><br><span class="line">         -i.bak \</span><br><span class="line">         /etc/yum.repos.d/CentOS-*.repo</span><br></pre></td></tr></table></figure>
-
+<p>新系统启动后推荐将软件源改为国内镜像，具体请参考镜像站帮助文档，如<a href="https://mirrors.tuna.tsinghua.edu.cn/help/centos-altarch/">清华大学镜像站</a>可运行以下命令一键换源</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>sudo sed -e 's|^mirrorlist=|#mirrorlist=|g' \</span></span>
+<span class="line"><span>         -e 's|^#baseurl=http://mirror.centos.org/altarch/|baseurl=https://mirrors.tuna.tsinghua.edu.cn/centos-altarch/|g' \</span></span>
+<span class="line"><span>         -e 's|^#baseurl=http://mirror.centos.org/$contentdir/|baseurl=https://mirrors.tuna.tsinghua.edu.cn/centos-altarch/|g' \</span></span>
+<span class="line"><span>         -i.bak \</span></span>
+<span class="line"><span>         /etc/yum.repos.d/CentOS-*.repo</span></span></code></pre>
 <p>最后，更新软件包缓存 <code>sudo yum makecache</code></p>
 <p>你也可以将系统语言设置为中文，设置方式如下：</p>
 <ol>
@@ -123,62 +66,18 @@
 <blockquote>
 <p>修改语言为中文后部分软件<strong>可能存在未知错误</strong>，若错误发生请按照第四步将<strong>LANG</strong>值改为<code>en_US.UTF-8</code></p>
 </blockquote>
-<h2 id="安装宝塔面板"><a href="#安装宝塔面板" class="headerlink" title="安装宝塔面板"></a>安装宝塔面板</h2><p>参考<a target="_blank" rel="noopener" href="https://www.bt.cn/new/download.html">宝塔官网-下载</a>使用 CentOS 安装脚本安装</p>
+<h2 id="安装宝塔面板">安装宝塔面板</h2>
+<p>参考<a href="https://www.bt.cn/new/download.html">宝塔官网-下载</a>使用 CentOS 安装脚本安装</p>
 <p><code>yum install -y wget &amp;&amp; wget -O install.sh https://download.bt.cn/install/install_6.0.sh &amp;&amp; sh install.sh</code></p>
 <blockquote>
 <p>请删除命令末尾 9 位字符串后运行命令</p>
-<p><strong>警告</strong>: 请在纯净环境中安装宝塔面板，若你先前已安装其他 LNMP&#x2F;LAMP 运行环境或先前宝塔面板安装失败请参考<strong>一、烧录镜像</strong>擦除内存卡并重新烧录系统后安装</p>
+<p><strong>警告</strong>: 请在纯净环境中安装宝塔面板，若你先前已安装其他 LNMP/LAMP 运行环境或先前宝塔面板安装失败请参考<strong>一、烧录镜像</strong>擦除内存卡并重新烧录系统后安装</p>
 </blockquote>
 <p>稍等一段时间后宝塔面板将安装完成</p>
-<p><img src="/2023/raspberry-pi-install-centos/console.png" alt="BT-Install-Done"></p>
-
-  </div>
-</div>
-
-
-<div class="content-container" style="padding: 0 var(--space-2xl);">
-  <nav class="article-nav" style="max-width: var(--content-width); margin-left: auto; margin-right: auto;">
-    
-    <a href="/2023/use-vercel-introduction/" class="article-nav__item">
-      <span class="article-nav__label">上一篇</span>
-      <span class="article-nav__title">「技术」使用Vercel托管静态网页</span>
-    </a>
-    
-    
-    <a href="/2022/minecraft-server-on-linux-1/" class="article-nav__item article-nav__item--next">
-      <span class="article-nav__label">下一篇</span>
-      <span class="article-nav__title">「技术」在Linux上搭建MC服务器（一）</span>
-    </a>
-    
-  </nav>
-</div>
-
-
-  <footer class="site-footer">
-  <div class="site-footer__inner">
-    <ul class="site-footer__links">
-      
-        <li><a href="/">首页</a></li>
-      
-        <li><a href="/about/">关于我</a></li>
-      
-        <li><a href="/archives/">归档</a></li>
-      
-        <li><a href="/friends/">友链</a></li>
-      
-        <li><a target="_blank" rel="noopener" href="https://www.travellings.cn/go.html">开往</a></li>
-      
-    </ul>
-    <p class="site-footer__text"><div> © <span id="copyright-year">2026</span> 景蓝 Yurik. All Rights Reserved. / <a target="_blank" href="/feed.xml">RSS</a> / <a target="_blank" href="/sitemap.xml">Sitemap</a><br> Git Version: 4664bc4<br> <a target="_blank" href="https://beian.miit.gov.cn">桂ICP备2025057334号</a><br> <a href="https://nonbot.org/pledged/view/a2887a35-bf54-46d3-98b4-829284eff51e" target="_blank"><img style="height:128px;margin-top:10px;margin-bottom:10px;" src="https://nonbot.org/images/nonbot_pledged_logo.svg" alt="Human-made Content"></a> </div>
-</p>
-  </div>
-</footer>
-
-<button class="back-to-top" aria-label="Back to top">&uarr;</button>
-
-
-<script src="/js/main.js"></script>
-
-
-</body>
-</html>
+<p><img alt="BT-Install-Done" loading="lazy" decoding="async" width="1115" height="609" src="/assets/console.B-ZZayxy_Z15dnXY.webp"></p>
+</div><footer class="mt-16 border-t border-hairline pt-8"><p class="text-[13px] leading-[1.7] text-slate">作者 <span class="text-ink">景蓝 Yurik</span><span class="mx-1.5" aria-hidden="true">·</span> 2023年1月19日</p><div class="mt-4 flex flex-wrap items-center gap-2"><span class="text-[13px] text-graphite">分享:</span><!--<a
+              class="cta-pill !px-4 !py-2 !text-[13px]"
+              href={`mailto:?subject=${encodeURIComponent(data.title)}&body=${encodeURIComponent(postHref(post))}`}
+            >
+              邮件
+            </a>--><button type="button" class="cta-pill !px-4 !py-2 !text-[13px]" data-copy-link data-url="/2023/raspberry-pi-install-centos/">复制链接</button><a class="cta-pill !px-4 !py-2 !text-[13px]" href="/rss.xml">RSS</a></div></footer></div></div></article><section class="bg-fog py-16"><div class="shell"><h2 class="section-head mb-6">相关文章</h2><ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"><li><a href="/2026/rp2350-passkey/" class="tile group h-full tile--3up flex flex-col rounded-[24px]"><div class="tile__media"><img src="/assets/111024784_p1-min.YbhuKAji.webp" width="3240" height="2160" alt="40 元自制开源版 Yubikey (支持 FIDO2 和 OpenPGP 的安全密钥)" loading="lazy" class="size-full object-cover"></div><div class="tile__body flex flex-1 flex-col justify-between gap-4 bg-canvas p-5 sm:p-6"><div><p class="eyebrow">技术</p><h3 class="tile-headline mt-3 line-clamp-3 text-[19px] leading-[1.45] tracking-[0.012em]">40 元自制开源版 Yubikey (支持 FIDO2 和 OpenPGP 的安全密钥)</h3><p class="mt-2 line-clamp-2 text-[14px] leading-[1.6] tracking-[0.01em] text-graphite">本来想趁着假期去德国游学的机会去德亚采购一个 Yubikey 5 的，奈何全新价格确实有些高，从德亚买还不能保证是最新的固件版本，有被解密的风险，在高价格和安全性都不能保障下不如自己 DIY 一个支持 FIDO2 的密钥。查了一些资料后发现主流的方案都是使用 RP2350 来实现密钥，网上的别的文章都有些过时了，于是在踩了一些坑后决定写一篇文章来记录一下制作过程。</p></div><div class="flex items-end justify-between gap-4"><time class="tile-timestamp" datetime="2026-07-03">2026/07/03</time><span class="truncate text-[12px] tracking-[0.01em] text-slate">安全密钥</span></div></div></a></li><li><a href="/2025/steam-usage/" class="tile group h-full tile--3up flex flex-col rounded-[24px]"><div class="tile__media"><img src="/assets/cover.B3ByLsxd.webp" width="7680" height="4320" alt="Steam 上手指北" loading="lazy" class="size-full object-cover"></div><div class="tile__body flex flex-1 flex-col justify-between gap-4 bg-canvas p-5 sm:p-6"><div><p class="eyebrow">技术</p><h3 class="tile-headline mt-3 line-clamp-3 text-[19px] leading-[1.45] tracking-[0.012em]">Steam 上手指北</h3></div><div class="flex items-end justify-between gap-4"><time class="tile-timestamp" datetime="2025-06-27">2025/06/27</time><span class="truncate text-[12px] tracking-[0.01em] text-slate">Steam</span></div></div></a></li><li><a href="/2024/nas-hardware-guide/" class="tile group h-full tile--3up flex flex-col rounded-[24px]"><div class="tile__media"><img src="/assets/1.CdltsLCk.webp" width="2596" height="2160" alt="「转载」硬件篇 | NAS硬件选购DIY指南：不同价位的硬件搭配建议及心得" loading="lazy" class="size-full object-cover"></div><div class="tile__body flex flex-1 flex-col justify-between gap-4 bg-canvas p-5 sm:p-6"><div><p class="eyebrow">技术</p><h3 class="tile-headline mt-3 line-clamp-3 text-[19px] leading-[1.45] tracking-[0.012em]">「转载」硬件篇 | NAS硬件选购DIY指南：不同价位的硬件搭配建议及心得</h3></div><div class="flex items-end justify-between gap-4"><time class="tile-timestamp" datetime="2024-07-28">2024/07/28</time><span class="truncate text-[12px] tracking-[0.01em] text-slate">转载</span></div></div></a></li></ul></div></section><section class="shell py-14"><div class="flex items-center justify-between gap-4"><a href="/archive/" class="cta-pill">返回归档</a><a href="/" class="cta-link">回到首页 →</a></div></section></main><footer class="bg-fog text-ink"><div class="shell py-10"><nav class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3" aria-label="页脚"><a href="/rss.xml" class="text-[12px] tracking-[-0.01em] text-ink-72 transition-colors hover:text-link">RSS</a><a href="https://github.com/ImJingLan" class="text-[12px] tracking-[-0.01em] text-ink-72 transition-colors hover:text-link" target="_blank" rel="noopener noreferrer">GitHub</a><a href="mailto:xisyphu@gmail.com" class="text-[12px] tracking-[-0.01em] text-ink-72 transition-colors hover:text-link">邮箱</a></nav><div class="mt-6 flex flex-col gap-2 border-t border-hairline pt-4 sm:flex-row sm:items-center sm:justify-between"><p class="text-[12px] tracking-[-0.01em] text-slate">Copyright © 2026 景蓝 Yurik. All rights reserved. <a href="https://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-link">桂ICP备2025057334号</a></p><p class="text-[12px] tracking-[-0.01em] text-slate">Built with Astro | 19b7c5c</p></div></div></footer><script type="module">var e=`swup-scroll`,t=()=>{try{return JSON.parse(sessionStorage.getItem(e)||`{}`)}catch{return{}}},n=t=>sessionStorage.setItem(e,JSON.stringify(t)),r=null;document.addEventListener(`swup:history:popstate`,()=>{r=t()[location.pathname]??0}),document.addEventListener(`swup:visit:start`,()=>{if(r!==null)return;let e=t();e[location.pathname]=Math.round(window.scrollY),n(e)}),document.addEventListener(`swup:page:view`,()=>{if(r!==null){let e=r;r=null,requestAnimationFrame(()=>{requestAnimationFrame(()=>window.scrollTo({top:e,behavior:`instant`}))})}else window.scrollTo({top:0,behavior:`instant`})}),window.addEventListener(`pagehide`,()=>{let e=t();e[location.pathname]=Math.round(window.scrollY),n(e)});</script></body></html><script type="module">var e=()=>{document.querySelectorAll(`[data-copy-link]`).forEach(e=>{e.dataset.copied!==`1`&&(e.dataset.copied=`1`,e.addEventListener(`click`,async()=>{let n=new URL(e.dataset.url??``,location.origin).toString(),r=e.textContent;try{await navigator.clipboard.writeText(n),e.textContent=t.common.copied}catch{e.textContent=t.common.copyFailed}setTimeout(()=>{e.textContent=r},1600)}))})};e(),document.addEventListener(`astro:page-load`,e);</script>

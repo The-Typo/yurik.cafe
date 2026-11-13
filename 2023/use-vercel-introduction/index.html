@@ -1,148 +1,44 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon shortcut" href="/favicon/v2/favicon.ico">
-<title>「技术」使用Vercel托管静态网页 — 景蓝的小屋</title>
-
-<link rel="stylesheet" href="/css/style.css">
-
-
-<meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/feed.xml" title="景蓝的小屋" type="application/rss+xml">
-</head>
-<body class="">
-  
-<nav class="site-nav">
-  <div class="site-nav__inner">
-    <a href="/" class="site-nav__brand">景蓝的小屋</a>
-    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-    <ul class="site-nav__links">
-      
-        <li><a href="/">首页</a></li>
-      
-        <li><a href="/about/">关于我</a></li>
-      
-        <li><a href="/archives/">归档</a></li>
-      
-        <li><a href="/friends/">友链</a></li>
-      
-        <li><a target="_blank" rel="noopener" href="https://www.travellings.cn/go.html">开往</a></li>
-      
-    </ul>
-  </div>
-</nav>
-<div class="nav-overlay"></div>
-
-  <script>
-  if (document.querySelector('.hero')) {
-    document.body.classList.add('has-hero');
-  }
-</script>
-
-
-<header class="article-header">
-  <time class="article-header__date" datetime="2023-01-23">2023 年 1 月 23 日</time>
-  <h1 class="article-header__title">「技术」使用Vercel托管静态网页</h1>
-  <div class="article-header__meta">
-    
-      
-        <a href="/categories/%E6%8A%80%E6%9C%AF/" class="badge category">技术</a>
-      
-    
-    
-  </div>
-</header>
-
-
-
-<figure class="article-featured-image">
-  <img src="/2023/use-vercel-introduction/banner.png" alt="「技术」使用Vercel托管静态网页">
-  
-</figure>
-
-
-<div class="article-layout article-layout--with-toc">
-  
-  <aside class="toc-sidebar">
-    <div class="toc-sidebar__title">目录</div>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E5%86%8C-Vercel"><span class="toc-text">注册 Vercel</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-Vercel"><span class="toc-text">使用 Vercel</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%91%E5%AE%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D"><span class="toc-text">绑定自定义域名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE"><span class="toc-text">访问</span></a></li></ol>
-  </aside>
-  
-  <div class="article-body">
-    <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Vercel 是一个前端页面托管服务网站，用户可以在上面托管部署多个前端框架的项目</p>
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" href="/assets/inter-latin-wght-normal.Dx4kXJAl.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/assets/inter-tight-latin-wght-normal.DX-nOvPD.woff2" as="font" type="font/woff2" crossorigin><title>「技术」使用Vercel托管静态网页 - 景蓝的小屋</title><meta name="description" content="记录技术、开箱与生活里的碎片。"><meta name="keywords" content="景蓝,Yurik,博客,技术,开箱,随笔"><link rel="canonical" href="https://yurik.cafe/2023/use-vercel-introduction/"><link rel="icon" href="/favicon/v2/favicon.ico"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website"><meta property="og:site_name" content="景蓝的小屋"><meta property="og:locale" content="zh_CN"><meta property="og:title" content="「技术」使用Vercel托管静态网页 - 景蓝的小屋"><meta property="og:description" content="记录技术、开箱与生活里的碎片。"><meta property="og:url" content="https://yurik.cafe/2023/use-vercel-introduction/"><meta name="twitter:card" content="summary_large_image"><link rel="alternate" type="application/rss+xml" title="景蓝的小屋" href="/rss.xml"><script>
+      (() => {
+        const stored = localStorage.getItem('theme');
+        const theme =
+          stored === 'light' || stored === 'dark'
+            ? stored
+            : window.matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light';
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script><link rel="stylesheet" href="/assets/BaseLayout.Baz7jMKD.css"><script type="module" src="/assets/page.P71UOlAZ.js"></script></head><body class="flex min-h-dvh flex-col bg-canvas text-ink antialiased"><a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-ink focus:px-5 focus:py-2 focus:text-[14px] focus:text-white">Skip to content</a><header class="site-nav sticky top-0 z-50 border-b border-hairline/60 bg-canvas/85 backdrop-blur-xl" data-astro-cid-raghmlda><div class="shell flex h-[56px] items-center justify-between gap-6" data-astro-cid-raghmlda><a href="/" class="flex min-w-0 items-center gap-2.5 text-ink transition-opacity hover:opacity-70" data-astro-cid-raghmlda><img src="/favicon/v2/android-chrome-512x512.png" alt="" width="24" height="24" class="size-[24px] flex-none rounded-[6px] object-cover" loading="eager" data-astro-cid-raghmlda><span class="truncate text-[17px] font-semibold tracking-[0.01em]" data-astro-cid-raghmlda>景蓝的小屋</span></a><div class="hidden items-center gap-5 md:flex" data-astro-cid-raghmlda><nav aria-label="站内导航" data-astro-cid-raghmlda><ul class="flex items-center gap-7" data-astro-cid-raghmlda><li data-astro-cid-raghmlda><a href="/" class="nav-link text-[14px] tracking-[0.01em]" data-astro-cid-raghmlda>首页</a></li><li data-astro-cid-raghmlda><a href="/archive/" class="nav-link text-[14px] tracking-[0.01em]" data-astro-cid-raghmlda>归档</a></li><li data-astro-cid-raghmlda><a href="/tags/" class="nav-link text-[14px] tracking-[0.01em]" data-astro-cid-raghmlda>标签</a></li><li data-astro-cid-raghmlda><a href="/friends/" class="nav-link text-[14px] tracking-[0.01em]" data-astro-cid-raghmlda>友链</a></li><li data-astro-cid-raghmlda><a href="/about/" class="nav-link text-[14px] tracking-[0.01em]" data-astro-cid-raghmlda>关于</a></li><li data-astro-cid-raghmlda><a href="https://www.travellings.cn/go.html" class="nav-link text-[14px] tracking-[0.01em]" data-astro-cid-raghmlda>开往</a></li></ul></nav><button type="button" class="theme-toggle" data-theme-toggle data-label-light="切换到亮色主题" data-label-dark="切换到暗色主题" aria-label="切换主题" aria-live="polite" title="切换主题" data-astro-cid-l6lhmie6><svg class="theme-icon theme-icon--light" viewBox="0 0 20 20" aria-hidden="true" data-astro-cid-l6lhmie6><circle cx="10" cy="10" r="4" fill="none" stroke="currentColor" stroke-width="1.5" data-astro-cid-l6lhmie6></circle><g stroke="currentColor" stroke-width="1.5" stroke-linecap="round" data-astro-cid-l6lhmie6><path d="M10 1.5v2M10 16.5v2M1.5 10h2M16.5 10h2" data-astro-cid-l6lhmie6></path><path d="M4 4l1.4 1.4M14.6 14.6L16 16M16 4l-1.4 1.4M5.4 14.6L4 16" data-astro-cid-l6lhmie6></path></g></svg><svg class="theme-icon theme-icon--dark" viewBox="0 0 20 20" aria-hidden="true" data-astro-cid-l6lhmie6><path d="M16.5 12.5A7 7 0 0 1 7.5 3.5a7 7 0 1 0 9 9z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" data-astro-cid-l6lhmie6></path></svg></button><script type="module">var e=`theme`,t=document.documentElement,n=()=>[...document.querySelectorAll(`[data-theme-toggle]`)],r=e=>{t.dataset.theme=e;let r=document.querySelector(`meta[name="theme-color"]`);r&&r.setAttribute(`content`,e===`dark`?`#1c1c1e`:`#ffffff`);for(let t of n()){let n=e===`dark`?t.dataset.labelLight:t.dataset.labelDark;n&&(t.setAttribute(`aria-label`,n),t.setAttribute(`title`,n))}},i=()=>t.dataset.theme===`dark`?`dark`:`light`,a=()=>window.matchMedia(`(prefers-reduced-motion: reduce)`).matches,o=e=>{let t=e.getBoundingClientRect(),n=t.left+t.width/2,r=t.top+t.height/2;return{x:n,y:r,radius:Math.hypot(Math.max(n,innerWidth-n),Math.max(r,innerHeight-r))}},s=(n,i)=>{if(!document.startViewTransition||a()){localStorage.setItem(e,n),r(n);return}let{x:s,y:c,radius:l}=o(i);document.startViewTransition(()=>{localStorage.setItem(e,n),r(n)}).ready.then(()=>{t.animate({clipPath:[`circle(0px at ${s}px ${c}px)`,`circle(${l}px at ${s}px ${c}px)`]},{duration:520,easing:`cubic-bezier(0.28, 0.11, 0.32, 1)`,pseudoElement:`::view-transition-new(root)`})}).catch(()=>{})},c=()=>{for(let e of n())e.dataset.bound!==`1`&&(e.dataset.bound=`1`,e.addEventListener(`click`,()=>{s(i()===`dark`?`light`:`dark`,e)}))};r(i()),c(),document.addEventListener(`astro:page-load`,c);</script></div><div class="flex items-center gap-2 md:hidden" data-astro-cid-raghmlda><button type="button" class="theme-toggle" data-theme-toggle data-label-light="切换到亮色主题" data-label-dark="切换到暗色主题" aria-label="切换主题" aria-live="polite" title="切换主题" data-astro-cid-l6lhmie6><svg class="theme-icon theme-icon--light" viewBox="0 0 20 20" aria-hidden="true" data-astro-cid-l6lhmie6><circle cx="10" cy="10" r="4" fill="none" stroke="currentColor" stroke-width="1.5" data-astro-cid-l6lhmie6></circle><g stroke="currentColor" stroke-width="1.5" stroke-linecap="round" data-astro-cid-l6lhmie6><path d="M10 1.5v2M10 16.5v2M1.5 10h2M16.5 10h2" data-astro-cid-l6lhmie6></path><path d="M4 4l1.4 1.4M14.6 14.6L16 16M16 4l-1.4 1.4M5.4 14.6L4 16" data-astro-cid-l6lhmie6></path></g></svg><svg class="theme-icon theme-icon--dark" viewBox="0 0 20 20" aria-hidden="true" data-astro-cid-l6lhmie6><path d="M16.5 12.5A7 7 0 0 1 7.5 3.5a7 7 0 1 0 9 9z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" data-astro-cid-l6lhmie6></path></svg></button><button type="button" id="nav-toggle" class="nav-toggle" aria-label="打开菜单" aria-expanded="false" aria-controls="nav-panel" data-astro-cid-raghmlda><span class="nav-toggle-bar" data-astro-cid-raghmlda></span><span class="nav-toggle-bar" data-astro-cid-raghmlda></span></button></div></div><div id="nav-panel" class="nav-panel md:hidden" hidden data-astro-cid-raghmlda><nav aria-label="站内导航" class="shell" data-astro-cid-raghmlda><ul class="nav-panel-list" data-astro-cid-raghmlda><li data-astro-cid-raghmlda><a href="/" class="nav-panel-link" data-astro-cid-raghmlda>首页</a></li><li data-astro-cid-raghmlda><a href="/archive/" class="nav-panel-link" data-astro-cid-raghmlda>归档</a></li><li data-astro-cid-raghmlda><a href="/tags/" class="nav-panel-link" data-astro-cid-raghmlda>标签</a></li><li data-astro-cid-raghmlda><a href="/friends/" class="nav-panel-link" data-astro-cid-raghmlda>友链</a></li><li data-astro-cid-raghmlda><a href="/about/" class="nav-panel-link" data-astro-cid-raghmlda>关于</a></li><li data-astro-cid-raghmlda><a href="https://www.travellings.cn/go.html" class="nav-panel-link" data-astro-cid-raghmlda>开往</a></li></ul></nav></div><span class="route-bar" aria-hidden="true" data-astro-cid-raghmlda></span></header><script type="module">var e=document.querySelector(`.site-nav`),t=document.getElementById(`nav-toggle`),n=document.getElementById(`nav-panel`);if(e&&t&&n){let r=!1,i=i=>{i!==r&&(r=i,t.setAttribute(`aria-expanded`,String(i)),t.setAttribute(`aria-label`,i?`Close menu`:`Open menu`),e.classList.toggle(`is-open`,i),document.body.style.overflow=i?`hidden`:``,i?(n.hidden=!1,requestAnimationFrame(()=>n.classList.add(`is-open`))):(n.classList.remove(`is-open`),setTimeout(()=>{r||(n.hidden=!0)},260)))};t.addEventListener(`click`,()=>i(!r)),n.addEventListener(`click`,e=>{e.target.closest(`a`)&&i(!1)}),document.addEventListener(`keydown`,e=>{e.key===`Escape`&&r&&(i(!1),t.focus())}),window.matchMedia(`(min-width: 768px)`).addEventListener(`change`,e=>{e.matches&&i(!1)})}var r=()=>{let e=location.pathname;for(let t of document.querySelectorAll(`.site-nav nav a[href]`)){let n=t.getAttribute(`href`);n&&!n.startsWith(`http`)&&((n===`/`?e===`/`:e.startsWith(n))?t.setAttribute(`aria-current`,`page`):t.removeAttribute(`aria-current`))}};r(),document.addEventListener(`astro:page-load`,r),document.addEventListener(`swup:page:view`,r),window.addEventListener(`popstate`,r),window.addEventListener(`pageshow`,r);</script><main id="main" class="transition-main flex-1"><article><header class="shell pt-12 sm:pt-16 pb-10"><div class="mx-auto max-w-[700px]"><nav class="mb-6 flex flex-wrap items-center gap-2 text-[13px] text-slate" aria-label="面包屑"><a href="/" class="transition-colors hover:text-link">回到首页</a><span aria-hidden="true">/</span><a href="/categories/%E6%8A%80%E6%9C%AF/" class="transition-colors hover:text-link">技术</a></nav><p class="text-[13px] font-semibold tracking-[0.02em] text-graphite"><time datetime="2023-01-23T00:00:00.000Z">2023年1月23日</time><span class="mx-2 text-slate" aria-hidden="true">·</span><span>2 分钟阅读</span></p><h1 class="mt-4 font-display text-[30px] leading-[1.3] font-bold tracking-[0.01em] text-ink sm:text-[42px] sm:leading-[1.25]">「技术」使用Vercel托管静态网页</h1></div></header><!-- 头图 --><div class="shell"><figure class="overflow-hidden rounded-[20px] sm:rounded-[28px]"><img src="/assets/banner.CajpqiUa.png" width="1234" height="403" alt="「技术」使用Vercel托管静态网页" class="w-full object-cover" loading="eager"></figure></div><div class="shell pb-12 sm:pb-16 pt-12 sm:pt-16"><div class="mx-auto max-w-[700px]"><div class="prose-newsroom"><h2 id="前言">前言</h2>
+<p>Vercel 是一个前端页面托管服务网站，用户可以在上面托管部署多个前端框架的项目</p>
 <p>当然，Vercel 也可以直接托管 Html 静态站点，并且 Vercel 的访问速度优于 Github Pages</p>
-<p><img src="/2023/use-vercel-introduction/speed-compair.png" alt="速度对比"></p>
+<p><img alt="速度对比" loading="lazy" decoding="async" width="1514" height="577" src="/assets/speed-compair.JQLBiJOb_Z38sMh.webp"></p>
 <p>写这篇文章的想法来源于两个，一是之前发布的 Hugo 博客部署有一半烂尾了（懒.jpg）, 还有一点就是 Norphin 的博客在他自己自定义后使用了一张 3.04Mb 左右的背景图片，由于他使用 frp 服务+香港节点建站，使得整张图片我加载了大约 10s。于是决定教教他怎么使用 vercel 来规避一些流量损耗。</p>
 <blockquote>
 <p>BTW: 他的背景图是 4K 的，其实一般来说 1080p 到 2k 就差不多了，不必要上传那么大的图片的说…</p>
 </blockquote>
-<h2 id="注册-Vercel"><a href="#注册-Vercel" class="headerlink" title="注册 Vercel"></a>注册 Vercel</h2><p>Vercel 的注册过程很简单，你可以直接使用自己的 GitHub、GitLab、BitBucket 账户直接登录，在本文中就不再过多赘述</p>
-<h2 id="使用-Vercel"><a href="#使用-Vercel" class="headerlink" title="使用 Vercel"></a>使用 Vercel</h2><p>首先在 Github 或者 GitLab 账户（下文简称<strong>你的账户</strong>）中新建一个 Git 仓库，随后将自己的静态文件 Git 提交至仓库内</p>
-<p>接着在 Vercel 中点击 <strong>Add New..</strong>，或者访问<a target="_blank" rel="noopener" href="https://vercel.com/new">这个网址</a>。连接你的你的账户，选择先前新建的仓库，点击 Import</p>
+<h2 id="注册-vercel">注册 Vercel</h2>
+<p>Vercel 的注册过程很简单，你可以直接使用自己的 GitHub、GitLab、BitBucket 账户直接登录，在本文中就不再过多赘述</p>
+<h2 id="使用-vercel">使用 Vercel</h2>
+<p>首先在 Github 或者 GitLab 账户（下文简称<strong>你的账户</strong>）中新建一个 Git 仓库，随后将自己的静态文件 Git 提交至仓库内</p>
+<p>接着在 Vercel 中点击 <strong>Add New..</strong>，或者访问<a href="https://vercel.com/new">这个网址</a>。连接你的你的账户，选择先前新建的仓库，点击 Import</p>
 <p>设置你的<strong>Project Name</strong>, 如果你单纯的想要托管 Html 文档和静态资源的话 框架预设(Framework Preset)就选 <strong>Other</strong> 就好了</p>
 <p>点击 部署(Deploy) 后稍等片刻, 你的项目就部署完成</p>
-<h2 id="绑定自定义域名"><a href="#绑定自定义域名" class="headerlink" title="绑定自定义域名"></a>绑定自定义域名</h2><p>Vercel 会在部署项目时提供一个 <strong>.vercel.app</strong> 结尾的二级域名，但由于某些特殊原因，vercel.app 域名可能会无法访问，这时候你就需要一个自己的域名（域名注册方法自行使用搜索引擎搜索）</p>
-<p>在<a target="_blank" rel="noopener" href="https://vercel.com/dashboard">Dashboard</a>中点击进入你刚刚部署的项目，点击上方的 Setting 进入设置页面，在左侧边栏进入<strong>Domains(域名)<strong>页面，在输入框中输入你想要的域名, 点击</strong>Add</strong>后按照提示在 DNS 中设置记录，返回域名管理页面点击**Refresh(刷新)**使其检测记录是否生效并注册 SSL 证书即可。</p>
+<h2 id="绑定自定义域名">绑定自定义域名</h2>
+<p>Vercel 会在部署项目时提供一个 <strong>.vercel.app</strong> 结尾的二级域名，但由于某些特殊原因，vercel.app 域名可能会无法访问，这时候你就需要一个自己的域名（域名注册方法自行使用搜索引擎搜索）</p>
+<p>在<a href="https://vercel.com/dashboard">Dashboard</a>中点击进入你刚刚部署的项目，点击上方的 Setting 进入设置页面，在左侧边栏进入<strong>Domains(域名)<strong>页面，在输入框中输入你想要的域名, 点击</strong>Add</strong>后按照提示在 DNS 中设置记录，返回域名管理页面点击**Refresh(刷新)**使其检测记录是否生效并注册 SSL 证书即可。</p>
 <blockquote>
-<p>值得注意的是，如果你添加的是一个 www 或者根域名，如 <a target="_blank" rel="noopener" href="http://www.yurik.cafe/">www.yurik.cafe</a> 或者 yurik.cafe，Vercel 会跳出提示询问你是选择将 www 域名重定向至根域名还是根域名重定向至 www 域名，抑或是单纯添加你输入的域名，你可以根据自身情况选择。</p>
+<p>值得注意的是，如果你添加的是一个 www 或者根域名，如 <a href="http://www.yurik.cafe">www.yurik.cafe</a> 或者 yurik.cafe，Vercel 会跳出提示询问你是选择将 www 域名重定向至根域名还是根域名重定向至 www 域名，抑或是单纯添加你输入的域名，你可以根据自身情况选择。</p>
 <p>Vercel 推荐你将 www 域名重定向至根域名</p>
 </blockquote>
-<h2 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h2><p>按照<strong>域名&#x2F;路径&#x2F;文件名</strong>访问即可</p>
+<h2 id="访问">访问</h2>
+<p>按照<strong>域名/路径/文件名</strong>访问即可</p>
 <blockquote>
 <p>Vercel 会自动为域名注册一个免费的 SSL 证书，所以你可以使用 https 访问</p>
 </blockquote>
-
-  </div>
-</div>
-
-
-<div class="content-container" style="padding: 0 var(--space-2xl);">
-  <nav class="article-nav" style="max-width: var(--content-width); margin-left: auto; margin-right: auto;">
-    
-    <a href="/2023/miscellanies-1/" class="article-nav__item">
-      <span class="article-nav__label">上一篇</span>
-      <span class="article-nav__title">「随笔」记于 17 岁生日前</span>
-    </a>
-    
-    
-    <a href="/2023/raspberry-pi-install-centos/" class="article-nav__item article-nav__item--next">
-      <span class="article-nav__label">下一篇</span>
-      <span class="article-nav__title">「技术」树莓派4B烧录CentOS镜像并安装宝塔面板</span>
-    </a>
-    
-  </nav>
-</div>
-
-
-  <footer class="site-footer">
-  <div class="site-footer__inner">
-    <ul class="site-footer__links">
-      
-        <li><a href="/">首页</a></li>
-      
-        <li><a href="/about/">关于我</a></li>
-      
-        <li><a href="/archives/">归档</a></li>
-      
-        <li><a href="/friends/">友链</a></li>
-      
-        <li><a target="_blank" rel="noopener" href="https://www.travellings.cn/go.html">开往</a></li>
-      
-    </ul>
-    <p class="site-footer__text"><div> © <span id="copyright-year">2026</span> 景蓝 Yurik. All Rights Reserved. / <a target="_blank" href="/feed.xml">RSS</a> / <a target="_blank" href="/sitemap.xml">Sitemap</a><br> Git Version: 4664bc4<br> <a target="_blank" href="https://beian.miit.gov.cn">桂ICP备2025057334号</a><br> <a href="https://nonbot.org/pledged/view/a2887a35-bf54-46d3-98b4-829284eff51e" target="_blank"><img style="height:128px;margin-top:10px;margin-bottom:10px;" src="https://nonbot.org/images/nonbot_pledged_logo.svg" alt="Human-made Content"></a> </div>
-</p>
-  </div>
-</footer>
-
-<button class="back-to-top" aria-label="Back to top">&uarr;</button>
-
-
-<script src="/js/main.js"></script>
-
-
-</body>
-</html>
+</div><footer class="mt-16 border-t border-hairline pt-8"><p class="text-[13px] leading-[1.7] text-slate">作者 <span class="text-ink">景蓝 Yurik</span><span class="mx-1.5" aria-hidden="true">·</span> 2023年1月23日</p><div class="mt-4 flex flex-wrap items-center gap-2"><span class="text-[13px] text-graphite">分享:</span><!--<a
+              class="cta-pill !px-4 !py-2 !text-[13px]"
+              href={`mailto:?subject=${encodeURIComponent(data.title)}&body=${encodeURIComponent(postHref(post))}`}
+            >
+              邮件
+            </a>--><button type="button" class="cta-pill !px-4 !py-2 !text-[13px]" data-copy-link data-url="/2023/use-vercel-introduction/">复制链接</button><a class="cta-pill !px-4 !py-2 !text-[13px]" href="/rss.xml">RSS</a></div></footer></div></div></article><section class="bg-fog py-16"><div class="shell"><h2 class="section-head mb-6">相关文章</h2><ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"><li><a href="/2026/rp2350-passkey/" class="tile group h-full tile--3up flex flex-col rounded-[24px]"><div class="tile__media"><img src="/assets/111024784_p1-min.YbhuKAji.webp" width="3240" height="2160" alt="40 元自制开源版 Yubikey (支持 FIDO2 和 OpenPGP 的安全密钥)" loading="lazy" class="size-full object-cover"></div><div class="tile__body flex flex-1 flex-col justify-between gap-4 bg-canvas p-5 sm:p-6"><div><p class="eyebrow">技术</p><h3 class="tile-headline mt-3 line-clamp-3 text-[19px] leading-[1.45] tracking-[0.012em]">40 元自制开源版 Yubikey (支持 FIDO2 和 OpenPGP 的安全密钥)</h3><p class="mt-2 line-clamp-2 text-[14px] leading-[1.6] tracking-[0.01em] text-graphite">本来想趁着假期去德国游学的机会去德亚采购一个 Yubikey 5 的，奈何全新价格确实有些高，从德亚买还不能保证是最新的固件版本，有被解密的风险，在高价格和安全性都不能保障下不如自己 DIY 一个支持 FIDO2 的密钥。查了一些资料后发现主流的方案都是使用 RP2350 来实现密钥，网上的别的文章都有些过时了，于是在踩了一些坑后决定写一篇文章来记录一下制作过程。</p></div><div class="flex items-end justify-between gap-4"><time class="tile-timestamp" datetime="2026-07-03">2026/07/03</time><span class="truncate text-[12px] tracking-[0.01em] text-slate">安全密钥</span></div></div></a></li><li><a href="/2025/steam-usage/" class="tile group h-full tile--3up flex flex-col rounded-[24px]"><div class="tile__media"><img src="/assets/cover.B3ByLsxd.webp" width="7680" height="4320" alt="Steam 上手指北" loading="lazy" class="size-full object-cover"></div><div class="tile__body flex flex-1 flex-col justify-between gap-4 bg-canvas p-5 sm:p-6"><div><p class="eyebrow">技术</p><h3 class="tile-headline mt-3 line-clamp-3 text-[19px] leading-[1.45] tracking-[0.012em]">Steam 上手指北</h3></div><div class="flex items-end justify-between gap-4"><time class="tile-timestamp" datetime="2025-06-27">2025/06/27</time><span class="truncate text-[12px] tracking-[0.01em] text-slate">Steam</span></div></div></a></li><li><a href="/2024/nas-hardware-guide/" class="tile group h-full tile--3up flex flex-col rounded-[24px]"><div class="tile__media"><img src="/assets/1.CdltsLCk.webp" width="2596" height="2160" alt="「转载」硬件篇 | NAS硬件选购DIY指南：不同价位的硬件搭配建议及心得" loading="lazy" class="size-full object-cover"></div><div class="tile__body flex flex-1 flex-col justify-between gap-4 bg-canvas p-5 sm:p-6"><div><p class="eyebrow">技术</p><h3 class="tile-headline mt-3 line-clamp-3 text-[19px] leading-[1.45] tracking-[0.012em]">「转载」硬件篇 | NAS硬件选购DIY指南：不同价位的硬件搭配建议及心得</h3></div><div class="flex items-end justify-between gap-4"><time class="tile-timestamp" datetime="2024-07-28">2024/07/28</time><span class="truncate text-[12px] tracking-[0.01em] text-slate">转载</span></div></div></a></li></ul></div></section><section class="shell py-14"><div class="flex items-center justify-between gap-4"><a href="/archive/" class="cta-pill">返回归档</a><a href="/" class="cta-link">回到首页 →</a></div></section></main><footer class="bg-fog text-ink"><div class="shell py-10"><nav class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3" aria-label="页脚"><a href="/rss.xml" class="text-[12px] tracking-[-0.01em] text-ink-72 transition-colors hover:text-link">RSS</a><a href="https://github.com/ImJingLan" class="text-[12px] tracking-[-0.01em] text-ink-72 transition-colors hover:text-link" target="_blank" rel="noopener noreferrer">GitHub</a><a href="mailto:xisyphu@gmail.com" class="text-[12px] tracking-[-0.01em] text-ink-72 transition-colors hover:text-link">邮箱</a></nav><div class="mt-6 flex flex-col gap-2 border-t border-hairline pt-4 sm:flex-row sm:items-center sm:justify-between"><p class="text-[12px] tracking-[-0.01em] text-slate">Copyright © 2026 景蓝 Yurik. All rights reserved. <a href="https://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-link">桂ICP备2025057334号</a></p><p class="text-[12px] tracking-[-0.01em] text-slate">Built with Astro | 19b7c5c</p></div></div></footer><script type="module">var e=`swup-scroll`,t=()=>{try{return JSON.parse(sessionStorage.getItem(e)||`{}`)}catch{return{}}},n=t=>sessionStorage.setItem(e,JSON.stringify(t)),r=null;document.addEventListener(`swup:history:popstate`,()=>{r=t()[location.pathname]??0}),document.addEventListener(`swup:visit:start`,()=>{if(r!==null)return;let e=t();e[location.pathname]=Math.round(window.scrollY),n(e)}),document.addEventListener(`swup:page:view`,()=>{if(r!==null){let e=r;r=null,requestAnimationFrame(()=>{requestAnimationFrame(()=>window.scrollTo({top:e,behavior:`instant`}))})}else window.scrollTo({top:0,behavior:`instant`})}),window.addEventListener(`pagehide`,()=>{let e=t();e[location.pathname]=Math.round(window.scrollY),n(e)});</script></body></html><script type="module">var e=()=>{document.querySelectorAll(`[data-copy-link]`).forEach(e=>{e.dataset.copied!==`1`&&(e.dataset.copied=`1`,e.addEventListener(`click`,async()=>{let n=new URL(e.dataset.url??``,location.origin).toString(),r=e.textContent;try{await navigator.clipboard.writeText(n),e.textContent=t.common.copied}catch{e.textContent=t.common.copyFailed}setTimeout(()=>{e.textContent=r},1600)}))})};e(),document.addEventListener(`astro:page-load`,e);</script>

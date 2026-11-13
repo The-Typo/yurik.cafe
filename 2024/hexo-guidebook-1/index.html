@@ -1,197 +1,132 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon shortcut" href="/favicon/v2/favicon.ico">
-<title>「技术」使用 Hexo 搭建静态博客 — 景蓝的小屋</title>
-
-<link rel="stylesheet" href="/css/style.css">
-
-
-<meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/feed.xml" title="景蓝的小屋" type="application/rss+xml">
-</head>
-<body class="">
-  
-<nav class="site-nav">
-  <div class="site-nav__inner">
-    <a href="/" class="site-nav__brand">景蓝的小屋</a>
-    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-    <ul class="site-nav__links">
-      
-        <li><a href="/">首页</a></li>
-      
-        <li><a href="/about/">关于我</a></li>
-      
-        <li><a href="/archives/">归档</a></li>
-      
-        <li><a href="/friends/">友链</a></li>
-      
-        <li><a target="_blank" rel="noopener" href="https://www.travellings.cn/go.html">开往</a></li>
-      
-    </ul>
-  </div>
-</nav>
-<div class="nav-overlay"></div>
-
-  <script>
-  if (document.querySelector('.hero')) {
-    document.body.classList.add('has-hero');
-  }
-</script>
-
-
-<header class="article-header">
-  <time class="article-header__date" datetime="2024-02-18">2024 年 2 月 18 日</time>
-  <h1 class="article-header__title">「技术」使用 Hexo 搭建静态博客</h1>
-  <div class="article-header__meta">
-    
-      
-        <a href="/categories/%E6%8A%80%E6%9C%AF/" class="badge category">技术</a>
-      
-    
-    
-      
-        <a href="/tags/Hexo/" class="tag">Hexo</a>
-      
-        <a href="/tags/%E5%8D%9A%E5%AE%A2/" class="tag">博客</a>
-      
-        <a href="/tags/%E5%BB%BA%E7%AB%99/" class="tag">建站</a>
-      
-    
-  </div>
-</header>
-
-
-
-<figure class="article-featured-image">
-  <img src="/2024/hexo-guidebook-1/banner.png" alt="「技术」使用 Hexo 搭建静态博客">
-  
-</figure>
-
-
-<div class="article-layout article-layout--with-toc">
-  
-  <aside class="toc-sidebar">
-    <div class="toc-sidebar__title">目录</div>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hexo-%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-text">Hexo 是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-Hexo"><span class="toc-text">安装 Hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-Node-js"><span class="toc-text">安装 Node.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-Hexo-%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7"><span class="toc-text">安装 Hexo 命令行工具</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96-Hexo"><span class="toc-text">初始化 Hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E7%AB%99%E7%82%B9%E7%9B%AE%E5%BD%95"><span class="toc-text">生成站点目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96%E5%8C%85"><span class="toc-text">安装依赖包</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-Hexo"><span class="toc-text">配置 Hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#config-yml-%E9%85%8D%E7%BD%AE"><span class="toc-text">_config.yml 配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#package-json-%E9%85%8D%E7%BD%AE"><span class="toc-text">package.json 配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%96%87%E7%AB%A0"><span class="toc-text">创建文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B8%B2%E6%9F%93-HTML-%E6%96%87%E6%A1%A3"><span class="toc-text">渲染 HTML 文档</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A8%E8%8D%90%E9%85%8D%E7%BD%AE"><span class="toc-text">推荐配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%90%AF%E6%96%87%E7%AB%A0%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="toc-text">开启文章资源文件夹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E7%AB%A0%E5%AD%98%E5%82%A8%E8%B7%AF%E5%BE%84"><span class="toc-text">配置文章存储路径</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E9%A2%98"><span class="toc-text">主题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Enjoy-Your-Writing"><span class="toc-text">Enjoy Your Writing</span></a></li></ol>
-  </aside>
-  
-  <div class="article-body">
-    <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>想到年，我曾经写过「<a href="/2022/hugo-blog/">使用 Hugo 搭建个人博客</a>」一文，现在又来转投 Hexo 的怀抱了。</p>
-<h2 id="Hexo-是什么"><a href="#Hexo-是什么" class="headerlink" title="Hexo 是什么"></a>Hexo 是什么</h2><p>Hexo 是一款基于 Node.js 的静态博客框架，它具有轻量、快速、简洁且高效的特点。它可以将 Markdown 语法转换为 HTML，方便用户编写博客文档。Hexo 支持使用 node 命令进行一键部署到 GitHub Pages、Heroku 或其他平台，非常适合个人博客的搭建。此外，Hexo 还具有丰富的插件和主题，可以满足用户的不同需求。</p>
-<h2 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h2><h3 id="安装-Node-js"><a href="#安装-Node-js" class="headerlink" title="安装 Node.js"></a>安装 Node.js</h3><p>Hexo 依赖于 Node.js 环境，因此确保你的计算机已经安装了 Node.js 和 npm (同时你也可以使用 yarn 来管理你的 Node.js 包)</p>
-<h3 id="安装-Hexo-命令行工具"><a href="#安装-Hexo-命令行工具" class="headerlink" title="安装 Hexo 命令行工具"></a>安装 Hexo 命令行工具</h3><p>hexo-cli 是 Hexo 官方的命令行管理工具，它提供了快速新建、发布、部署博客等功能。</p>
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" href="/assets/inter-latin-wght-normal.Dx4kXJAl.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/assets/inter-tight-latin-wght-normal.DX-nOvPD.woff2" as="font" type="font/woff2" crossorigin><title>「技术」使用 Hexo 搭建静态博客 - 景蓝的小屋</title><meta name="description" content="记录技术、开箱与生活里的碎片。"><meta name="keywords" content="景蓝,Yurik,博客,技术,开箱,随笔,Hexo,建站"><link rel="canonical" href="https://yurik.cafe/2024/hexo-guidebook-1/"><link rel="icon" href="/favicon/v2/favicon.ico"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website"><meta property="og:site_name" content="景蓝的小屋"><meta property="og:locale" content="zh_CN"><meta property="og:title" content="「技术」使用 Hexo 搭建静态博客 - 景蓝的小屋"><meta property="og:description" content="记录技术、开箱与生活里的碎片。"><meta property="og:url" content="https://yurik.cafe/2024/hexo-guidebook-1/"><meta name="twitter:card" content="summary_large_image"><link rel="alternate" type="application/rss+xml" title="景蓝的小屋" href="/rss.xml"><script>
+      (() => {
+        const stored = localStorage.getItem('theme');
+        const theme =
+          stored === 'light' || stored === 'dark'
+            ? stored
+            : window.matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light';
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script><link rel="stylesheet" href="/assets/BaseLayout.Baz7jMKD.css"><script type="module" src="/assets/page.P71UOlAZ.js"></script></head><body class="flex min-h-dvh flex-col bg-canvas text-ink antialiased"><a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-ink focus:px-5 focus:py-2 focus:text-[14px] focus:text-white">Skip to content</a><header class="site-nav sticky top-0 z-50 border-b border-hairline/60 bg-canvas/85 backdrop-blur-xl" data-astro-cid-raghmlda><div class="shell flex h-[56px] items-center justify-between gap-6" data-astro-cid-raghmlda><a href="/" class="flex min-w-0 items-center gap-2.5 text-ink transition-opacity hover:opacity-70" data-astro-cid-raghmlda><img src="/favicon/v2/android-chrome-512x512.png" alt="" width="24" height="24" class="size-[24px] flex-none rounded-[6px] object-cover" loading="eager" data-astro-cid-raghmlda><span class="truncate text-[17px] font-semibold tracking-[0.01em]" data-astro-cid-raghmlda>景蓝的小屋</span></a><div class="hidden items-center gap-5 md:flex" data-astro-cid-raghmlda><nav aria-label="站内导航" data-astro-cid-raghmlda><ul class="flex items-center gap-7" data-astro-cid-raghmlda><li data-astro-cid-raghmlda><a href="/" class="nav-link text-[14px] tracking-[0.01em]" data-astro-cid-raghmlda>首页</a></li><li data-astro-cid-raghmlda><a href="/archive/" class="nav-link text-[14px] tracking-[0.01em]" data-astro-cid-raghmlda>归档</a></li><li data-astro-cid-raghmlda><a href="/tags/" class="nav-link text-[14px] tracking-[0.01em]" data-astro-cid-raghmlda>标签</a></li><li data-astro-cid-raghmlda><a href="/friends/" class="nav-link text-[14px] tracking-[0.01em]" data-astro-cid-raghmlda>友链</a></li><li data-astro-cid-raghmlda><a href="/about/" class="nav-link text-[14px] tracking-[0.01em]" data-astro-cid-raghmlda>关于</a></li><li data-astro-cid-raghmlda><a href="https://www.travellings.cn/go.html" class="nav-link text-[14px] tracking-[0.01em]" data-astro-cid-raghmlda>开往</a></li></ul></nav><button type="button" class="theme-toggle" data-theme-toggle data-label-light="切换到亮色主题" data-label-dark="切换到暗色主题" aria-label="切换主题" aria-live="polite" title="切换主题" data-astro-cid-l6lhmie6><svg class="theme-icon theme-icon--light" viewBox="0 0 20 20" aria-hidden="true" data-astro-cid-l6lhmie6><circle cx="10" cy="10" r="4" fill="none" stroke="currentColor" stroke-width="1.5" data-astro-cid-l6lhmie6></circle><g stroke="currentColor" stroke-width="1.5" stroke-linecap="round" data-astro-cid-l6lhmie6><path d="M10 1.5v2M10 16.5v2M1.5 10h2M16.5 10h2" data-astro-cid-l6lhmie6></path><path d="M4 4l1.4 1.4M14.6 14.6L16 16M16 4l-1.4 1.4M5.4 14.6L4 16" data-astro-cid-l6lhmie6></path></g></svg><svg class="theme-icon theme-icon--dark" viewBox="0 0 20 20" aria-hidden="true" data-astro-cid-l6lhmie6><path d="M16.5 12.5A7 7 0 0 1 7.5 3.5a7 7 0 1 0 9 9z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" data-astro-cid-l6lhmie6></path></svg></button><script type="module">var e=`theme`,t=document.documentElement,n=()=>[...document.querySelectorAll(`[data-theme-toggle]`)],r=e=>{t.dataset.theme=e;let r=document.querySelector(`meta[name="theme-color"]`);r&&r.setAttribute(`content`,e===`dark`?`#1c1c1e`:`#ffffff`);for(let t of n()){let n=e===`dark`?t.dataset.labelLight:t.dataset.labelDark;n&&(t.setAttribute(`aria-label`,n),t.setAttribute(`title`,n))}},i=()=>t.dataset.theme===`dark`?`dark`:`light`,a=()=>window.matchMedia(`(prefers-reduced-motion: reduce)`).matches,o=e=>{let t=e.getBoundingClientRect(),n=t.left+t.width/2,r=t.top+t.height/2;return{x:n,y:r,radius:Math.hypot(Math.max(n,innerWidth-n),Math.max(r,innerHeight-r))}},s=(n,i)=>{if(!document.startViewTransition||a()){localStorage.setItem(e,n),r(n);return}let{x:s,y:c,radius:l}=o(i);document.startViewTransition(()=>{localStorage.setItem(e,n),r(n)}).ready.then(()=>{t.animate({clipPath:[`circle(0px at ${s}px ${c}px)`,`circle(${l}px at ${s}px ${c}px)`]},{duration:520,easing:`cubic-bezier(0.28, 0.11, 0.32, 1)`,pseudoElement:`::view-transition-new(root)`})}).catch(()=>{})},c=()=>{for(let e of n())e.dataset.bound!==`1`&&(e.dataset.bound=`1`,e.addEventListener(`click`,()=>{s(i()===`dark`?`light`:`dark`,e)}))};r(i()),c(),document.addEventListener(`astro:page-load`,c);</script></div><div class="flex items-center gap-2 md:hidden" data-astro-cid-raghmlda><button type="button" class="theme-toggle" data-theme-toggle data-label-light="切换到亮色主题" data-label-dark="切换到暗色主题" aria-label="切换主题" aria-live="polite" title="切换主题" data-astro-cid-l6lhmie6><svg class="theme-icon theme-icon--light" viewBox="0 0 20 20" aria-hidden="true" data-astro-cid-l6lhmie6><circle cx="10" cy="10" r="4" fill="none" stroke="currentColor" stroke-width="1.5" data-astro-cid-l6lhmie6></circle><g stroke="currentColor" stroke-width="1.5" stroke-linecap="round" data-astro-cid-l6lhmie6><path d="M10 1.5v2M10 16.5v2M1.5 10h2M16.5 10h2" data-astro-cid-l6lhmie6></path><path d="M4 4l1.4 1.4M14.6 14.6L16 16M16 4l-1.4 1.4M5.4 14.6L4 16" data-astro-cid-l6lhmie6></path></g></svg><svg class="theme-icon theme-icon--dark" viewBox="0 0 20 20" aria-hidden="true" data-astro-cid-l6lhmie6><path d="M16.5 12.5A7 7 0 0 1 7.5 3.5a7 7 0 1 0 9 9z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" data-astro-cid-l6lhmie6></path></svg></button><button type="button" id="nav-toggle" class="nav-toggle" aria-label="打开菜单" aria-expanded="false" aria-controls="nav-panel" data-astro-cid-raghmlda><span class="nav-toggle-bar" data-astro-cid-raghmlda></span><span class="nav-toggle-bar" data-astro-cid-raghmlda></span></button></div></div><div id="nav-panel" class="nav-panel md:hidden" hidden data-astro-cid-raghmlda><nav aria-label="站内导航" class="shell" data-astro-cid-raghmlda><ul class="nav-panel-list" data-astro-cid-raghmlda><li data-astro-cid-raghmlda><a href="/" class="nav-panel-link" data-astro-cid-raghmlda>首页</a></li><li data-astro-cid-raghmlda><a href="/archive/" class="nav-panel-link" data-astro-cid-raghmlda>归档</a></li><li data-astro-cid-raghmlda><a href="/tags/" class="nav-panel-link" data-astro-cid-raghmlda>标签</a></li><li data-astro-cid-raghmlda><a href="/friends/" class="nav-panel-link" data-astro-cid-raghmlda>友链</a></li><li data-astro-cid-raghmlda><a href="/about/" class="nav-panel-link" data-astro-cid-raghmlda>关于</a></li><li data-astro-cid-raghmlda><a href="https://www.travellings.cn/go.html" class="nav-panel-link" data-astro-cid-raghmlda>开往</a></li></ul></nav></div><span class="route-bar" aria-hidden="true" data-astro-cid-raghmlda></span></header><script type="module">var e=document.querySelector(`.site-nav`),t=document.getElementById(`nav-toggle`),n=document.getElementById(`nav-panel`);if(e&&t&&n){let r=!1,i=i=>{i!==r&&(r=i,t.setAttribute(`aria-expanded`,String(i)),t.setAttribute(`aria-label`,i?`Close menu`:`Open menu`),e.classList.toggle(`is-open`,i),document.body.style.overflow=i?`hidden`:``,i?(n.hidden=!1,requestAnimationFrame(()=>n.classList.add(`is-open`))):(n.classList.remove(`is-open`),setTimeout(()=>{r||(n.hidden=!0)},260)))};t.addEventListener(`click`,()=>i(!r)),n.addEventListener(`click`,e=>{e.target.closest(`a`)&&i(!1)}),document.addEventListener(`keydown`,e=>{e.key===`Escape`&&r&&(i(!1),t.focus())}),window.matchMedia(`(min-width: 768px)`).addEventListener(`change`,e=>{e.matches&&i(!1)})}var r=()=>{let e=location.pathname;for(let t of document.querySelectorAll(`.site-nav nav a[href]`)){let n=t.getAttribute(`href`);n&&!n.startsWith(`http`)&&((n===`/`?e===`/`:e.startsWith(n))?t.setAttribute(`aria-current`,`page`):t.removeAttribute(`aria-current`))}};r(),document.addEventListener(`astro:page-load`,r),document.addEventListener(`swup:page:view`,r),window.addEventListener(`popstate`,r),window.addEventListener(`pageshow`,r);</script><main id="main" class="transition-main flex-1"><article><header class="shell pt-12 sm:pt-16 pb-10"><div class="mx-auto max-w-[700px]"><nav class="mb-6 flex flex-wrap items-center gap-2 text-[13px] text-slate" aria-label="面包屑"><a href="/" class="transition-colors hover:text-link">回到首页</a><span aria-hidden="true">/</span><a href="/categories/%E6%8A%80%E6%9C%AF/" class="transition-colors hover:text-link">技术</a></nav><p class="text-[13px] font-semibold tracking-[0.02em] text-graphite"><time datetime="2024-02-18T02:33:21.000Z">2024年2月18日</time><span class="mx-2 text-slate" aria-hidden="true">·</span><span>5 分钟阅读</span></p><h1 class="mt-4 font-display text-[30px] leading-[1.3] font-bold tracking-[0.01em] text-ink sm:text-[42px] sm:leading-[1.25]">「技术」使用 Hexo 搭建静态博客</h1><div class="mt-6 flex flex-wrap gap-2"><a href="/tags/Hexo/" class="rounded-full bg-fog px-3 py-1 text-[13px] text-graphite transition-colors hover:bg-chip hover:text-ink">#Hexo</a><a href="/tags/%E5%8D%9A%E5%AE%A2/" class="rounded-full bg-fog px-3 py-1 text-[13px] text-graphite transition-colors hover:bg-chip hover:text-ink">#博客</a><a href="/tags/%E5%BB%BA%E7%AB%99/" class="rounded-full bg-fog px-3 py-1 text-[13px] text-graphite transition-colors hover:bg-chip hover:text-ink">#建站</a></div></div></header><!-- 头图 --><div class="shell"><figure class="overflow-hidden rounded-[20px] sm:rounded-[28px]"><img src="/assets/banner.YlAo4e7j.png" width="1920" height="1080" alt="「技术」使用 Hexo 搭建静态博客" class="w-full object-cover" loading="eager"></figure></div><div class="shell pb-12 sm:pb-16 pt-12 sm:pt-16"><div class="mx-auto max-w-[700px]"><div class="prose-newsroom"><h2 id="前言">前言</h2>
+<p>想到年，我曾经写过「<a href="/2022/hugo-blog/">使用 Hugo 搭建个人博客</a>」一文，现在又来转投 Hexo 的怀抱了。</p>
+<h2 id="hexo-是什么">Hexo 是什么</h2>
+<p>Hexo 是一款基于 Node.js 的静态博客框架，它具有轻量、快速、简洁且高效的特点。它可以将 Markdown 语法转换为 HTML，方便用户编写博客文档。Hexo 支持使用 node 命令进行一键部署到 GitHub Pages、Heroku 或其他平台，非常适合个人博客的搭建。此外，Hexo 还具有丰富的插件和主题，可以满足用户的不同需求。</p>
+<h2 id="安装-hexo">安装 Hexo</h2>
+<h3 id="安装-nodejs">安装 Node.js</h3>
+<p>Hexo 依赖于 Node.js 环境，因此确保你的计算机已经安装了 Node.js 和 npm (同时你也可以使用 yarn 来管理你的 Node.js 包)</p>
+<h3 id="安装-hexo-命令行工具">安装 Hexo 命令行工具</h3>
+<p>hexo-cli 是 Hexo 官方的命令行管理工具，它提供了快速新建、发布、部署博客等功能。</p>
 <p>你可以通过 npm（或 yarn，下文不再赘述）安装 hexo-cli</p>
 <p>在终端中执行以下命令来安装 hexo-cli</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## npm</span></span><br><span class="line">npm install hexo-cli -g</span><br><span class="line"></span><br><span class="line"><span class="comment">## yarn</span></span><br><span class="line">yarn global add hexo-cli</span><br></pre></td></tr></table></figure>
-
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D">## npm</span></span>
+<span class="line"><span style="color:#B392F0">npm</span><span style="color:#9ECBFF"> install</span><span style="color:#9ECBFF"> hexo-cli</span><span style="color:#79B8FF"> -g</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">## yarn</span></span>
+<span class="line"><span style="color:#B392F0">yarn</span><span style="color:#9ECBFF"> global</span><span style="color:#9ECBFF"> add</span><span style="color:#9ECBFF"> hexo-cli</span></span></code></pre>
 <blockquote>
-<p>我们将提供 npm 和 yarn 的命令，请根据你的情况选择<br>下同</p>
+<p>我们将提供 npm 和 yarn 的命令，请根据你的情况选择
+下同</p>
 </blockquote>
-<h2 id="初始化-Hexo"><a href="#初始化-Hexo" class="headerlink" title="初始化 Hexo"></a>初始化 Hexo</h2><h3 id="生成站点目录"><a href="#生成站点目录" class="headerlink" title="生成站点目录"></a>生成站点目录</h3><p>接下来，你需要创建一个新的 Hexo 博客项目。在终端或命令提示符中，导航到你想要创建博客的目录，然后运行以下命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init folder</span><br></pre></td></tr></table></figure>
-
+<h2 id="初始化-hexo">初始化 Hexo</h2>
+<h3 id="生成站点目录">生成站点目录</h3>
+<p>接下来，你需要创建一个新的 Hexo 博客项目。在终端或命令提示符中，导航到你想要创建博客的目录，然后运行以下命令：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">hexo</span><span style="color:#9ECBFF"> init</span><span style="color:#9ECBFF"> folder</span></span></code></pre>
 <p>其中 folder 改为目标文件夹名称（下同），如果在当前文件夹初始化的话就执行以下命令:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init .</span><br></pre></td></tr></table></figure>
-
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">hexo</span><span style="color:#9ECBFF"> init</span><span style="color:#9ECBFF"> .</span></span></code></pre>
 <p>此时目标文件夹中会生成以下文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">│  .gitignore              ## git提交时的省略文件</span><br><span class="line">│  package.json            ## Node.js项目描述和依赖管理文件</span><br><span class="line">│  _config.landscape.yml   ## Hexo 初始主题 Landscape 的配置文件</span><br><span class="line">│  _config.yml             ## Hexo 站点配置文件</span><br><span class="line">│</span><br><span class="line">├─scaffolds                ## Hexo生成文章时的结构模板</span><br><span class="line">│      draft.md</span><br><span class="line">│      page.md</span><br><span class="line">│      post.md</span><br><span class="line">├─source                   ## Hexo站点源文件</span><br><span class="line">│  └─_posts                ## 博文文件夹</span><br><span class="line">│          hello-world.md</span><br><span class="line">├─themes                   ## 主题文件夹</span><br><span class="line">│       .gitkeep           ## 告诉git要保留这个空文件夹</span><br><span class="line">│</span><br><span class="line">├─node_modules             ## Node.js 依赖包存放</span><br><span class="line">│</span><br><span class="line">└─.github                  ## 使用Github来自动部署Hexo的配置文件</span><br></pre></td></tr></table></figure>
-
-<h3 id="安装依赖包"><a href="#安装依赖包" class="headerlink" title="安装依赖包"></a>安装依赖包</h3><h4 id="进入站点文件夹"><a href="#进入站点文件夹" class="headerlink" title="进入站点文件夹"></a>进入站点文件夹</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> folder</span><br></pre></td></tr></table></figure>
-
-<h4 id="使用包管理器安装-Node-js-依赖包"><a href="#使用包管理器安装-Node-js-依赖包" class="headerlink" title="使用包管理器安装 Node.js 依赖包"></a>使用包管理器安装 Node.js 依赖包</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## npm</span></span><br><span class="line">npm i</span><br><span class="line"></span><br><span class="line"><span class="comment">#yarn</span></span><br><span class="line">yarn</span><br></pre></td></tr></table></figure>
-
-<h2 id="配置-Hexo"><a href="#配置-Hexo" class="headerlink" title="配置 Hexo"></a>配置 Hexo</h2><h3 id="config-yml-配置"><a href="#config-yml-配置" class="headerlink" title="_config.yml 配置"></a>_config.yml 配置</h3><p>进入你创建的博客文件夹，你将看到一个名为_config.yml 的文件，这是 Hexo 的配置文件。你可以根据自己的需求修改该文件，例如设置博客标题、域名、文章路径等。</p>
-<p>参数详解请参考<a target="_blank" rel="noopener" href="//hexo.io/zh-cn/docs/configuration">Hexo 官方文档</a></p>
-<h3 id="package-json-配置"><a href="#package-json-配置" class="headerlink" title="package.json 配置"></a>package.json 配置</h3><p><code>package.json</code> 是 Node.js 项目描述和依赖管理文件，你可以在 <code>package.json</code> 中添加以下内容</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;g&quot;</span><span class="punctuation">:</span> <span class="string">&quot;hexo cl &amp;&amp; hexo g&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;cl&quot;</span><span class="punctuation">:</span> <span class="string">&quot;hexo clean&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;d&quot;</span><span class="punctuation">:</span> <span class="string">&quot;hexo deploy&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;s&quot;</span><span class="punctuation">:</span> <span class="string">&quot;hexo cl &amp;&amp; hexo g &amp;&amp; hexo s&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
-
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>.</span></span>
+<span class="line"><span>│  .gitignore              ## git提交时的省略文件</span></span>
+<span class="line"><span>│  package.json            ## Node.js项目描述和依赖管理文件</span></span>
+<span class="line"><span>│  _config.landscape.yml   ## Hexo 初始主题 Landscape 的配置文件</span></span>
+<span class="line"><span>│  _config.yml             ## Hexo 站点配置文件</span></span>
+<span class="line"><span>│</span></span>
+<span class="line"><span>├─scaffolds                ## Hexo生成文章时的结构模板</span></span>
+<span class="line"><span>│      draft.md</span></span>
+<span class="line"><span>│      page.md</span></span>
+<span class="line"><span>│      post.md</span></span>
+<span class="line"><span>├─source                   ## Hexo站点源文件</span></span>
+<span class="line"><span>│  └─_posts                ## 博文文件夹</span></span>
+<span class="line"><span>│          hello-world.md</span></span>
+<span class="line"><span>├─themes                   ## 主题文件夹</span></span>
+<span class="line"><span>│       .gitkeep           ## 告诉git要保留这个空文件夹</span></span>
+<span class="line"><span>│</span></span>
+<span class="line"><span>├─node_modules             ## Node.js 依赖包存放</span></span>
+<span class="line"><span>│</span></span>
+<span class="line"><span>└─.github                  ## 使用Github来自动部署Hexo的配置文件</span></span></code></pre>
+<h3 id="安装依赖包">安装依赖包</h3>
+<h4 id="进入站点文件夹">进入站点文件夹</h4>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#79B8FF">cd</span><span style="color:#9ECBFF"> folder</span></span></code></pre>
+<h4 id="使用包管理器安装-nodejs-依赖包">使用包管理器安装 Node.js 依赖包</h4>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#6A737D">## npm</span></span>
+<span class="line"><span style="color:#B392F0">npm</span><span style="color:#9ECBFF"> i</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">#yarn</span></span>
+<span class="line"><span style="color:#B392F0">yarn</span></span></code></pre>
+<h2 id="配置-hexo">配置 Hexo</h2>
+<h3 id="_configyml-配置">_config.yml 配置</h3>
+<p>进入你创建的博客文件夹，你将看到一个名为_config.yml 的文件，这是 Hexo 的配置文件。你可以根据自己的需求修改该文件，例如设置博客标题、域名、文章路径等。</p>
+<p>参数详解请参考<a href="//hexo.io/zh-cn/docs/configuration">Hexo 官方文档</a></p>
+<h3 id="packagejson-配置">package.json 配置</h3>
+<p><code>package.json</code> 是 Node.js 项目描述和依赖管理文件，你可以在 <code>package.json</code> 中添加以下内容</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="json"><code><span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#79B8FF">  "scripts"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#79B8FF">    "g"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"hexo cl &amp;&amp; hexo g"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">    "cl"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"hexo clean"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">    "d"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"hexo deploy"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#79B8FF">    "s"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"hexo cl &amp;&amp; hexo g &amp;&amp; hexo s"</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
 <p>这样使用以下语句就可以逐条执行 <code>清理静态文件-&gt;生成静态文件-&gt;部署开发服务器</code>三个过程</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># npm</span></span></span><br><span class="line">npm run s</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># yarn</span></span></span><br><span class="line">yarn s</span><br></pre></td></tr></table></figure>
-
-<h2 id="创建文章"><a href="#创建文章" class="headerlink" title="创建文章"></a>创建文章</h2><p>在站点根目录使用终端，执行以下命令:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new post &lt;your-post-name&gt;</span><br></pre></td></tr></table></figure>
-
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#6A737D">## npm</span></span>
+<span class="line"><span style="color:#B392F0">npm</span><span style="color:#9ECBFF"> run</span><span style="color:#9ECBFF"> s</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">## yarn</span></span>
+<span class="line"><span style="color:#B392F0">yarn</span><span style="color:#9ECBFF"> s</span></span></code></pre>
+<h2 id="创建文章">创建文章</h2>
+<p>在站点根目录使用终端，执行以下命令:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#B392F0">hexo</span><span style="color:#9ECBFF"> new</span><span style="color:#9ECBFF"> post</span><span style="color:#F97583"> &lt;</span><span style="color:#9ECBFF">your-post-nam</span><span style="color:#E1E4E8">e</span><span style="color:#F97583">&gt;</span></span></code></pre>
 <p>其中 <code>&lt;your-post-name&gt;</code>修改为你的文章名称（英文）</p>
 <p>之后在<code>source\_posts\&lt;你的自定义路径&gt;\</code>中将会生成<code>&lt;your-post-name&gt;.md</code>文件，使用 Markdown 语法编辑即可开始写作</p>
-<h2 id="渲染-HTML-文档"><a href="#渲染-HTML-文档" class="headerlink" title="渲染 HTML 文档"></a>渲染 HTML 文档</h2><p>若你已经按照<a href="#package-json-%E9%85%8D%E7%BD%AE">上文</a>配置了<code>package.json</code>文件，你可以执行以下命令来生成静态 HTML 文档</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># npm</span></span></span><br><span class="line">npm run g</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># yarn</span></span></span><br><span class="line">yarn g</span><br></pre></td></tr></table></figure>
-
+<h2 id="渲染-html-文档">渲染 HTML 文档</h2>
+<p>若你已经按照<a href="#package-json-%E9%85%8D%E7%BD%AE">上文</a>配置了<code>package.json</code>文件，你可以执行以下命令来生成静态 HTML 文档</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#6A737D">## npm</span></span>
+<span class="line"><span style="color:#B392F0">npm</span><span style="color:#9ECBFF"> run</span><span style="color:#9ECBFF"> g</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">## yarn</span></span>
+<span class="line"><span style="color:#B392F0">yarn</span><span style="color:#9ECBFF"> g</span></span></code></pre>
 <p>当然你也可以手动执行 Hexo 命令来逐步生成</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 清理原public文件(必须)</span></span></span><br><span class="line">hexo clear       ## hexo cl</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment"># 生成静态文档</span></span></span><br><span class="line">hexo generate    ## hexo g</span><br></pre></td></tr></table></figure>
-
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="shell"><code><span class="line"><span style="color:#6A737D">## 清理原public文件(必须)</span></span>
+<span class="line"><span style="color:#B392F0">hexo</span><span style="color:#9ECBFF"> clear</span><span style="color:#6A737D">       ## hexo cl</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">## 生成静态文档</span></span>
+<span class="line"><span style="color:#B392F0">hexo</span><span style="color:#9ECBFF"> generate</span><span style="color:#6A737D">    ## hexo g</span></span></code></pre>
 <p>生成的静态文档将出现在目录下<code>public</code>文件夹中，你可以将它上传至你的网页服务器或者 gh-pages 等 serverless 服务中</p>
-<h2 id="推荐配置"><a href="#推荐配置" class="headerlink" title="推荐配置"></a>推荐配置</h2><h3 id="开启文章资源文件夹"><a href="#开启文章资源文件夹" class="headerlink" title="开启文章资源文件夹"></a>开启文章资源文件夹</h3><p>Hexo 默认不开启文章资源文件夹，所有的图片都直接读取<code>source</code>文件夹中的非<code>_</code>开头目录中文件，这并不方便图片管理。</p>
+<h2 id="推荐配置">推荐配置</h2>
+<h3 id="开启文章资源文件夹">开启文章资源文件夹</h3>
+<p>Hexo 默认不开启文章资源文件夹，所有的图片都直接读取<code>source</code>文件夹中的非<code>_</code>开头目录中文件，这并不方便图片管理。</p>
 <p>你可以在<code>_config.yml</code>中将<code>post_asset_folder</code>设置为<code>true</code></p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="yml"><code><span class="line"><span style="color:#85E89D">post_asset_folder</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">true</span></span></code></pre>
 <p>当在 <code>post_asset_folder</code> 为 <code>true</code> 时，Hexo 会在你创建新文章时自动生成一个与文章同名的文件夹。</p>
 <p>在 Markdown 文件中引用图片时，你可以使用相对路径来指向这个文件夹中的图片文件。例如，如果你有一张名为 <code>image.jpg</code> 的图片放在 <code>my-article</code> 文件夹中，你可以在 <code>my-article.md</code> 文件中使用 <code>![](image.jpg)</code> 的语法来引用这张图片。</p>
 <p>通过使用 <code>post_asset_folder</code> 功能，你可以更好地组织和管理 Hexo 博客中的文章和资源，提高写作和发布的效率。</p>
 <div class="alert alert-danger" role="alert">
   如果你要配置封面时不可以使用上文提及的相对路径，而是应该使用相对站点根目录的路径，如<code>/my-article/image.jpg</code>
 </div>
-
-<h3 id="配置文章存储路径"><a href="#配置文章存储路径" class="headerlink" title="配置文章存储路径"></a>配置文章存储路径</h3><p>Hexo 默认将所有文章全部存放在<code>source\_posts</code>下，这并不利于按时间管理文章</p>
+<h3 id="配置文章存储路径">配置文章存储路径</h3>
+<p>Hexo 默认将所有文章全部存放在<code>source\_posts</code>下，这并不利于按时间管理文章</p>
 <p>你可以在<code>_config.yml</code>中修改<code>new_post_name</code>设置来设置文章存放路径</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">new_post_name:</span> <span class="string">:year/:month/:title.md</span></span><br></pre></td></tr></table></figure>
-
-<p>相关变量请参考<a target="_blank" rel="noopener" href="//hexo.io/zh-cn/docs/permalinks">Hexo 官方文档</a></p>
-<h2 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h2><p>你可以为自己的 Hexo 站点安装不同的主题，具体主题配置请参考相关主题文档</p>
-<p><a target="_blank" rel="noopener" href="//hexo.io/themes/">Hexo 主题列表</a></p>
-<h2 id="Enjoy-Your-Writing"><a href="#Enjoy-Your-Writing" class="headerlink" title="Enjoy Your Writing"></a>Enjoy Your Writing</h2><p>:D</p>
-
-  </div>
-</div>
-
-
-<div class="content-container" style="padding: 0 var(--space-2xl);">
-  <nav class="article-nav" style="max-width: var(--content-width); margin-left: auto; margin-right: auto;">
-    
-    <a href="/2024/warma-shark-unity/" class="article-nav__item">
-      <span class="article-nav__label">上一篇</span>
-      <span class="article-nav__title">「游戏开发」我的小鲨鱼 By Unity</span>
-    </a>
-    
-    
-    <a href="/2024/hexo-theme-news/" class="article-nav__item article-nav__item--next">
-      <span class="article-nav__label">下一篇</span>
-      <span class="article-nav__title">「项目」Hexo 主题 News 现已上线</span>
-    </a>
-    
-  </nav>
-</div>
-
-
-  <footer class="site-footer">
-  <div class="site-footer__inner">
-    <ul class="site-footer__links">
-      
-        <li><a href="/">首页</a></li>
-      
-        <li><a href="/about/">关于我</a></li>
-      
-        <li><a href="/archives/">归档</a></li>
-      
-        <li><a href="/friends/">友链</a></li>
-      
-        <li><a target="_blank" rel="noopener" href="https://www.travellings.cn/go.html">开往</a></li>
-      
-    </ul>
-    <p class="site-footer__text"><div> © <span id="copyright-year">2026</span> 景蓝 Yurik. All Rights Reserved. / <a target="_blank" href="/feed.xml">RSS</a> / <a target="_blank" href="/sitemap.xml">Sitemap</a><br> Git Version: 4664bc4<br> <a target="_blank" href="https://beian.miit.gov.cn">桂ICP备2025057334号</a><br> <a href="https://nonbot.org/pledged/view/a2887a35-bf54-46d3-98b4-829284eff51e" target="_blank"><img style="height:128px;margin-top:10px;margin-bottom:10px;" src="https://nonbot.org/images/nonbot_pledged_logo.svg" alt="Human-made Content"></a> </div>
-</p>
-  </div>
-</footer>
-
-<button class="back-to-top" aria-label="Back to top">&uarr;</button>
-
-
-<script src="/js/main.js"></script>
-
-
-</body>
-</html>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="yml"><code><span class="line"><span style="color:#85E89D">new_post_name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">:year/:month/:title.md</span></span></code></pre>
+<p>相关变量请参考<a href="//hexo.io/zh-cn/docs/permalinks">Hexo 官方文档</a></p>
+<h2 id="主题">主题</h2>
+<p>你可以为自己的 Hexo 站点安装不同的主题，具体主题配置请参考相关主题文档</p>
+<p><a href="//hexo.io/themes/">Hexo 主题列表</a></p>
+<h2 id="enjoy-your-writing">Enjoy Your Writing</h2>
+<p>:D</p>
+</div><footer class="mt-16 border-t border-hairline pt-8"><p class="text-[13px] leading-[1.7] text-slate">作者 <span class="text-ink">景蓝 Yurik</span><span class="mx-1.5" aria-hidden="true">·</span> 2024年2月18日</p><div class="mt-4 flex flex-wrap items-center gap-2"><span class="text-[13px] text-graphite">分享:</span><!--<a
+              class="cta-pill !px-4 !py-2 !text-[13px]"
+              href={`mailto:?subject=${encodeURIComponent(data.title)}&body=${encodeURIComponent(postHref(post))}`}
+            >
+              邮件
+            </a>--><button type="button" class="cta-pill !px-4 !py-2 !text-[13px]" data-copy-link data-url="/2024/hexo-guidebook-1/">复制链接</button><a class="cta-pill !px-4 !py-2 !text-[13px]" href="/rss.xml">RSS</a></div></footer></div></div></article><section class="bg-fog py-16"><div class="shell"><h2 class="section-head mb-6">相关文章</h2><ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"><li><a href="/2026/rp2350-passkey/" class="tile group h-full tile--3up flex flex-col rounded-[24px]"><div class="tile__media"><img src="/assets/111024784_p1-min.YbhuKAji.webp" width="3240" height="2160" alt="40 元自制开源版 Yubikey (支持 FIDO2 和 OpenPGP 的安全密钥)" loading="lazy" class="size-full object-cover"></div><div class="tile__body flex flex-1 flex-col justify-between gap-4 bg-canvas p-5 sm:p-6"><div><p class="eyebrow">技术</p><h3 class="tile-headline mt-3 line-clamp-3 text-[19px] leading-[1.45] tracking-[0.012em]">40 元自制开源版 Yubikey (支持 FIDO2 和 OpenPGP 的安全密钥)</h3><p class="mt-2 line-clamp-2 text-[14px] leading-[1.6] tracking-[0.01em] text-graphite">本来想趁着假期去德国游学的机会去德亚采购一个 Yubikey 5 的，奈何全新价格确实有些高，从德亚买还不能保证是最新的固件版本，有被解密的风险，在高价格和安全性都不能保障下不如自己 DIY 一个支持 FIDO2 的密钥。查了一些资料后发现主流的方案都是使用 RP2350 来实现密钥，网上的别的文章都有些过时了，于是在踩了一些坑后决定写一篇文章来记录一下制作过程。</p></div><div class="flex items-end justify-between gap-4"><time class="tile-timestamp" datetime="2026-07-03">2026/07/03</time><span class="truncate text-[12px] tracking-[0.01em] text-slate">安全密钥</span></div></div></a></li><li><a href="/2025/steam-usage/" class="tile group h-full tile--3up flex flex-col rounded-[24px]"><div class="tile__media"><img src="/assets/cover.B3ByLsxd.webp" width="7680" height="4320" alt="Steam 上手指北" loading="lazy" class="size-full object-cover"></div><div class="tile__body flex flex-1 flex-col justify-between gap-4 bg-canvas p-5 sm:p-6"><div><p class="eyebrow">技术</p><h3 class="tile-headline mt-3 line-clamp-3 text-[19px] leading-[1.45] tracking-[0.012em]">Steam 上手指北</h3></div><div class="flex items-end justify-between gap-4"><time class="tile-timestamp" datetime="2025-06-27">2025/06/27</time><span class="truncate text-[12px] tracking-[0.01em] text-slate">Steam</span></div></div></a></li><li><a href="/2024/nas-hardware-guide/" class="tile group h-full tile--3up flex flex-col rounded-[24px]"><div class="tile__media"><img src="/assets/1.CdltsLCk.webp" width="2596" height="2160" alt="「转载」硬件篇 | NAS硬件选购DIY指南：不同价位的硬件搭配建议及心得" loading="lazy" class="size-full object-cover"></div><div class="tile__body flex flex-1 flex-col justify-between gap-4 bg-canvas p-5 sm:p-6"><div><p class="eyebrow">技术</p><h3 class="tile-headline mt-3 line-clamp-3 text-[19px] leading-[1.45] tracking-[0.012em]">「转载」硬件篇 | NAS硬件选购DIY指南：不同价位的硬件搭配建议及心得</h3></div><div class="flex items-end justify-between gap-4"><time class="tile-timestamp" datetime="2024-07-28">2024/07/28</time><span class="truncate text-[12px] tracking-[0.01em] text-slate">转载</span></div></div></a></li></ul></div></section><section class="shell py-14"><div class="flex items-center justify-between gap-4"><a href="/archive/" class="cta-pill">返回归档</a><a href="/" class="cta-link">回到首页 →</a></div></section></main><footer class="bg-fog text-ink"><div class="shell py-10"><nav class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3" aria-label="页脚"><a href="/rss.xml" class="text-[12px] tracking-[-0.01em] text-ink-72 transition-colors hover:text-link">RSS</a><a href="https://github.com/ImJingLan" class="text-[12px] tracking-[-0.01em] text-ink-72 transition-colors hover:text-link" target="_blank" rel="noopener noreferrer">GitHub</a><a href="mailto:xisyphu@gmail.com" class="text-[12px] tracking-[-0.01em] text-ink-72 transition-colors hover:text-link">邮箱</a></nav><div class="mt-6 flex flex-col gap-2 border-t border-hairline pt-4 sm:flex-row sm:items-center sm:justify-between"><p class="text-[12px] tracking-[-0.01em] text-slate">Copyright © 2026 景蓝 Yurik. All rights reserved. <a href="https://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-link">桂ICP备2025057334号</a></p><p class="text-[12px] tracking-[-0.01em] text-slate">Built with Astro | 19b7c5c</p></div></div></footer><script type="module">var e=`swup-scroll`,t=()=>{try{return JSON.parse(sessionStorage.getItem(e)||`{}`)}catch{return{}}},n=t=>sessionStorage.setItem(e,JSON.stringify(t)),r=null;document.addEventListener(`swup:history:popstate`,()=>{r=t()[location.pathname]??0}),document.addEventListener(`swup:visit:start`,()=>{if(r!==null)return;let e=t();e[location.pathname]=Math.round(window.scrollY),n(e)}),document.addEventListener(`swup:page:view`,()=>{if(r!==null){let e=r;r=null,requestAnimationFrame(()=>{requestAnimationFrame(()=>window.scrollTo({top:e,behavior:`instant`}))})}else window.scrollTo({top:0,behavior:`instant`})}),window.addEventListener(`pagehide`,()=>{let e=t();e[location.pathname]=Math.round(window.scrollY),n(e)});</script></body></html><script type="module">var e=()=>{document.querySelectorAll(`[data-copy-link]`).forEach(e=>{e.dataset.copied!==`1`&&(e.dataset.copied=`1`,e.addEventListener(`click`,async()=>{let n=new URL(e.dataset.url??``,location.origin).toString(),r=e.textContent;try{await navigator.clipboard.writeText(n),e.textContent=t.common.copied}catch{e.textContent=t.common.copyFailed}setTimeout(()=>{e.textContent=r},1600)}))})};e(),document.addEventListener(`astro:page-load`,e);</script>

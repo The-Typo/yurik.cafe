@@ -1,0 +1,22 @@
+---
+import { t } from '../i18n';
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title={t.notFound.title} description={t.notFound.description}>
+  <section class="shell flex min-h-[52vh] flex-col justify-center py-20">
+    <p class="eyebrow">404</p>
+    <h1
+      class="mt-3 max-w-[720px] font-display text-[40px] leading-[1.08] font-bold tracking-[-0.015em] text-ink sm:text-[56px] sm:leading-[1.05]"
+    >
+      {t.notFound.heading}
+    </h1>
+    <p class="mt-5 max-w-[560px] text-[19px] leading-[1.42] tracking-[-0.012em] text-graphite">
+      {t.notFound.hint}
+    </p>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a href="/" class="cta-pill">{t.common.backHome}</a>
+      <a href="/archive/" class="cta-pill">{t.notFound.browseArchive}</a>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,328 @@
+---
+/** 横向滚动画廊 */
+import { t } from '../i18n';
+import CoverArt from './CoverArt.astro';
+import { formatCardDate, formatCardDateISO } from '../lib/format';
+import { postHref, type Post } from '../lib/posts';
+import { postCover } from '../lib/covers';
+import { gallery as galleryConfig } from '../lib/site';
+
+interface Props {
+  posts: Post[];
+  title?: string;
+  viewAllHref?: string;
+  showArrows?: boolean;
+  showDots?: boolean;
+  arrowPlacement?: 'head' | 'overlay';
+}
+
+const {
+  posts,
+  title = galleryConfig.title,
+  viewAllHref,
+  showArrows = galleryConfig.showArrows,
+  showDots = galleryConfig.showDots,
+  arrowPlacement = galleryConfig.arrowPlacement,
+} = Astro.props;
+
+const arrowClass =
+  'grid size-9 flex-none place-items-center rounded-full bg-chip text-ink transition duration-300 hover:bg-chip-hover disabled:pointer-events-none disabled:opacity-30';
+const overlayArrowClass =
+  'pointer-events-auto grid size-11 place-items-center rounded-full bg-canvas/90 text-ink shadow-[0_2px_16px_-4px_rgb(0_0_0/0.28)] backdrop-blur transition duration-300 hover:bg-canvas disabled:pointer-events-none disabled:opacity-0';
+---
+
+<div
+  class="gallery"
+  data-gallery
+  data-arrow-placement={arrowPlacement}
+  data-show-arrows={showArrows ? 'true' : 'false'}
+  data-show-dots={showDots ? 'true' : 'false'}
+>
+  {
+    title ? (
+      <div class="mb-6 flex items-end justify-between gap-6">
+        <h2 class="section-head">{title}</h2>
+        <div class="flex items-center gap-2">
+          {showArrows && arrowPlacement === 'head' ? (
+            <div class="flex items-center gap-2" data-gallery-arrows>
+              <button type="button" class={arrowClass} data-gallery-arrow data-dir="-1" aria-label={t.archive.previousPage}>
+                <svg viewBox="0 0 16 16" class="size-4" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                  <path d="M10 3L5 8l5 5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+              <button type="button" class={arrowClass} data-gallery-arrow data-dir="1" aria-label={t.archive.nextPage}>
+                <svg viewBox="0 0 16 16" class="size-4" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                  <path d="M6 3l5 5-5 5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+            </div>
+          ) : null}
+          {viewAllHref ? <a href={viewAllHref} class="cta-pill hidden sm:inline-flex">{t.home.allPosts}</a> : null}
+        </div>
+      </div>
+    ) : null
+  }
+
+  <div class="relative">
+    <div
+      class="no-scrollbar -mx-[22px] flex snap-x snap-mandatory gap-6 overflow-x-auto px-[22px] pb-2 sm:mx-0 sm:px-0"
+      data-gallery-track
+      role="group"
+      aria-label={title || t.home.galleryLabel}
+    >
+      {
+        posts.map((post, index) => {
+          const cover = postCover(post);
+          return (
+          <div class="w-[300px] flex-none snap-start sm:w-[420px]">
+            <a
+              href={postHref(post)}
+              class="tile group flex h-full flex-col rounded-[24px]"
+              data-gallery-item
+              data-index={index}
+            >
+              <div class="tile__media aspect-[16/9]">
+                {cover ? (
+                  <img
+                    src={cover.src}
+                    width={cover.width}
+                    height={cover.height}
+                    alt={post.data.title}
+                    loading="lazy"
+                    class="size-full object-cover"
+                  />
+                ) : (
+                  <CoverArt
+                    seed={post.id}
+                    tone={post.data.categories[0]}
+                    scale="wide"
+                    glyph={post.data.title}
+                    alt=""
+                    class="size-full object-cover"
+                  />
+                )}
+              </div>
+              <div class="flex flex-1 flex-col justify-between gap-4 bg-canvas p-5">
+                <div>
+                  <p class="eyebrow">{post.data.categories[0] ?? t.common.post}</p>
+                  <h3 class="tile-headline mt-2.5 line-clamp-2 text-[21px] leading-[1.35] tracking-[0.011em]">
+                    {post.data.title}
+                  </h3>
+                </div>
+                <time class="tile-timestamp" datetime={formatCardDateISO(post.data.date)}>
+                  {formatCardDate(post.data.date)}
+                </time>
+              </div>
+            </a>
+          </div>
+          );
+        })
+      }
+    </div>
+
+    {
+      showArrows && arrowPlacement === 'overlay' ? (
+        <div class="pointer-events-none absolute inset-x-0 inset-y-0 flex items-center justify-between px-2" data-gallery-arrows>
+          <button type="button" class={overlayArrowClass} data-gallery-arrow data-dir="-1" aria-label={t.archive.previousPage}>
+            <svg viewBox="0 0 16 16" class="size-4" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="M10 3L5 8l5 5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+          <button type="button" class={overlayArrowClass} data-gallery-arrow data-dir="1" aria-label={t.archive.nextPage}>
+            <svg viewBox="0 0 16 16" class="size-4" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="M6 3l5 5-5 5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+        </div>
+      ) : null
+    }
+  </div>
+
+  {
+    showDots ? (
+      /** 指示器由 JS 生成 */
+      <div class="mt-4 flex items-center justify-center" data-gallery-dots />
+    ) : null
+  }
+</div>
+
+<script>
+  type GalleryRoot = HTMLElement;
+
+  const initGallery = (root: GalleryRoot) => {
+    // 跳过已初始化的画廊
+    if (root.dataset.galleryReady === '1') return;
+    root.dataset.galleryReady = '1';
+
+    const track = root.querySelector<HTMLElement>('[data-gallery-track]');
+    const dotContainer = root.querySelector<HTMLElement>('[data-gallery-dots]');
+    if (!track) return;
+
+    const arrows = [...root.querySelectorAll<HTMLButtonElement>('[data-gallery-arrow]')];
+    const arrowGroup = root.querySelector<HTMLElement>('[data-gallery-arrows]');
+    const cards = () => [...track.querySelectorAll<HTMLElement>('[data-gallery-item]')];
+
+    const offsetOf = (card: HTMLElement) =>
+      card.getBoundingClientRect().left - track.getBoundingClientRect().left + track.scrollLeft;
+
+    const maxScroll = () => Math.max(0, track.scrollWidth - track.clientWidth);
+
+    /** 首卡偏移作为基准 */
+    const startPos = () => {
+      const items = cards();
+      return items.length ? offsetOf(items[0]) : 0;
+    };
+
+    /** 可达的滚动停靠点：末尾几张卡的偏移可能超过 maxScroll，永远无法对齐左边缘， */
+    const stops = () => {
+      const items = cards();
+      const limit = maxScroll();
+      const out: { index: number; left: number }[] = [];
+      let last: number | null = null;
+
+      items.forEach((card, index) => {
+        const left = Math.min(offsetOf(card), limit);
+        if (last === null || left > last + 1) {
+          out.push({ index, left });
+          last = left;
+        }
+      });
+
+      if (out.length === 0) out.push({ index: 0, left: 0 });
+      return out;
+    };
+
+    const currentStop = () => {
+      const list = stops();
+      const left = track.scrollLeft;
+      let closest = 0;
+      let min = Infinity;
+      list.forEach((stop, i) => {
+        const distance = Math.abs(stop.left - left);
+        if (distance < min) {
+          min = distance;
+          closest = i;
+        }
+      });
+      return closest;
+    };
+
+    const renderDots = (count: number) => {
+      if (!dotContainer) return;
+      if (dotContainer.children.length === count) return;
+      dotContainer.replaceChildren();
+      for (let i = 0; i < count; i++) {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        // 按钮本身 24×24 满足触摸目标，圆点由 ::before 画成 8×8
+        dot.className = 'gallery-dot';
+        dot.dataset.galleryDot = '';
+        dot.dataset.index = String(i);
+        dot.setAttribute('aria-label', `${i + 1} / ${count}`);
+        dot.addEventListener('click', () => scrollToStop(i));
+        dotContainer.append(dot);
+      }
+    };
+
+    const scrollToStop = (stopIndex: number) => {
+      const list = stops();
+      const clamped = Math.min(Math.max(stopIndex, 0), list.length - 1);
+      track.scrollTo({ left: list[clamped].left, behavior: 'smooth' });
+    };
+
+    const syncUi = () => {
+      const list = stops();
+      renderDots(list.length);
+
+      const active = currentStop();
+      [...(dotContainer?.children ?? [])].forEach((node, i) => {
+        const dot = node as HTMLButtonElement;
+        const on = i === active;
+        dot.dataset.active = on ? 'true' : 'false';
+        dot.setAttribute('aria-current', on ? 'true' : 'false');
+      });
+
+      const scrollable = maxScroll() > 1;
+      if (arrowGroup) arrowGroup.style.display = scrollable ? '' : 'none';
+      if (scrollable) {
+        const atStart = track.scrollLeft <= startPos() + 1;
+        const atEnd = track.scrollLeft >= maxScroll() - 1;
+        arrows.forEach((arrow) => {
+          const dir = Number(arrow.dataset.dir ?? '1');
+          arrow.disabled = dir < 0 ? atStart : atEnd;
+        });
+      }
+    };
+
+    arrows.forEach((arrow) => {
+      arrow.addEventListener('click', () => {
+        scrollToStop(currentStop() + Number(arrow.dataset.dir ?? '1'));
+      });
+    });
+
+    track.addEventListener('keydown', (event) => {
+      if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+      event.preventDefault();
+      scrollToStop(currentStop() + (event.key === 'ArrowRight' ? 1 : -1));
+    });
+
+    let frame = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(syncUi);
+    };
+
+    track.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    document.fonts?.ready.then(syncUi);
+    syncUi();
+  };
+
+  const initAll = () => {
+    document.querySelectorAll<HTMLElement>('[data-gallery]').forEach(initGallery);
+  };
+
+  initAll();
+  document.addEventListener('astro:page-load', initAll);
+</script>
+
+<style>
+  /* 圆点由 JS 创建，用 :global 避免 scoped 属性选择器不匹配 */
+  :global(.gallery-dot) {
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+  }
+
+  :global(.gallery-dot::before) {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background-color: var(--color-ink);
+    opacity: 0.2;
+    transition:
+      width 0.3s var(--ease-out-soft),
+      opacity 0.3s ease;
+  }
+
+  :global(.gallery-dot:hover::before) {
+    opacity: 0.4;
+  }
+
+  :global(.gallery-dot[data-active='true']::before) {
+    width: 24px;
+    opacity: 0.8;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :global(.gallery-dot::before) {
+      transition-duration: 1ms;
+    }
+  }
+</style>

@@ -1,28 +1,27 @@
 {
-  "name": "hexo-site",
-  "version": "0.0.0",
+  "name": "astro-theme-byline",
+  "type": "module",
+  "version": "1.0.0",
   "private": true,
-  "hexo": {
-    "version": "8.1.2"
-  },
+  "license": "MIT",
+  "description": "A quiet editorial blog theme for Astro + Tailwind CSS, with a newsroom-style layout. Drop-in compatible with Hexo/Hugo posts.",
   "scripts": {
-    "clean": "hexo clean",
-    "g": "hexo clean && hexo generate",
-    "server": "hexo clean && hexo generate && hexo server"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "version:set": "node tools/update-version.mjs",
+    "snapshot:version": "node tools/weekly-snapshot.mjs",
+    "changelog": "node tools/generate-changelog.mjs",
+    "words": "bun tools/word-count.mjs"
   },
   "dependencies": {
-    "hexo": "^8.0.0",
-    "hexo-generator-archive": "^2.0.0",
-    "hexo-generator-category": "^2.0.0",
-    "hexo-generator-feed": "^4.0.0",
-    "hexo-generator-index": "^4.0.0",
-    "hexo-generator-sitemap": "^3.0.1",
-    "hexo-generator-tag": "^2.0.0",
-    "hexo-renderer-ejs": "^2.0.0",
-    "hexo-renderer-marked": "^7.0.0",
-    "hexo-renderer-stylus": "^3.0.0",
-    "hexo-server": "^3.0.0",
-    "hexo-tag-embed": "latest",
-    "js-yaml": "^4.1.1"
+    "@astrojs/rss": "^4.0.19",
+    "@fontsource-variable/inter": "^5.3.0",
+    "@fontsource-variable/inter-tight": "^5.3.0",
+    "@swup/astro": "^1.8.0",
+    "@tailwindcss/vite": "^4.3.5",
+    "astro": "^7.4.11",
+    "tailwindcss": "^4.3.5"
   }
 }

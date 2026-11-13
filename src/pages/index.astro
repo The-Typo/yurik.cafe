@@ -1,0 +1,182 @@
+---
+import { t } from '../i18n';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Tile from '../components/Tile.astro';
+import Gallery from '../components/Gallery.astro';
+import MoreFromNewsroom from '../components/MoreFromNewsroom.astro';
+import HomeStats from '../components/HomeStats.astro';
+import { site, gallery as galleryConfig, home as homeConfig, categoryHref } from '../lib/site';
+import { getAllPosts, collectCategories, collectTags } from '../lib/posts';
+import { formatCardDate } from '../lib/format';
+import { countWords, formatWordCount, formatUptime } from '../lib/stats';
+
+const posts = await getAllPosts();
+const categories = collectCategories(posts);
+const tags = collectTags(posts);
+
+// 最新文章
+const latest = posts.slice(0, Math.max(1, homeConfig.latestCount));
+const [lead, ...secondary] = latest;
+
+// 画廊与列表接在最新文章之后
+const afterLatest = posts.slice(latest.length);
+const galleryPosts = afterLatest.slice(0, galleryConfig.count);
+const more = afterLatest.slice(0, homeConfig.moreCount);
+
+const totalWords = posts.reduce((sum, post) => sum + countWords(post.body ?? ''), 0);
+const latestDate = posts.length ? formatCardDate(posts[0].data.date) : '—';
+---
+
+<BaseLayout description={site.description}>
+  <!-- 标题区 -->
+  <section class="hero-shell pt-14 pb-10 sm:pt-20">
+    <div class="hero-grid">
+      <div class="min-w-0">
+        <p class="eyebrow">{site.intro.eyebrow}</p>
+        <h1 class="hero-title">{site.intro.heading}</h1>
+        <p class="hero-lead">{site.intro.lead}</p>
+      </div>
+
+      {
+        homeConfig.showStats ? (
+          <HomeStats
+            postCount={posts.length}
+            tagCount={tags.length}
+            wordsLabel={formatWordCount(totalWords)}
+            latest={latestDate}
+            uptime={formatUptime()}
+          />
+        ) : null
+      }
+    </div>
+  </section>
+
+  <!-- Latest -->
+  <section class="bg-fog pt-13 pb-20">
+    <div class="shell">
+      <div class="mb-6 flex items-end justify-between gap-6">
+        <h2 class="section-head">{t.home.latest}</h2>
+        <a href="/archive/" class="cta-pill hidden sm:inline-flex">{t.home.allPosts}</a>
+      </div>
+
+      {
+        lead ? (
+          <ul class="tile-grid">
+            <li class="tile-item">
+              <Tile post={lead} variant="hero" />
+            </li>
+            {secondary.map((post, index) => (
+              <li class="tile-item">
+                <Tile post={post} variant={index < 2 ? '2up' : '3up'} />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p class="text-[17px] text-graphite">
+            {t.home.empty}
+          </p>
+        )
+      }
+    </div>
+  </section>
+
+  <!-- 画廊 -->
+  {
+    galleryConfig.enable && galleryPosts.length >= 2 ? (
+      <section class="bg-fog pb-20">
+        <div class="shell">
+          <Gallery posts={galleryPosts} viewAllHref="/archive/" />
+        </div>
+      </section>
+    ) : null
+  }
+
+  <!-- More posts -->
+  {
+    more.length ? (
+      <MoreFromNewsroom posts={more} title={t.home.morePosts} archiveHref="/archive/" archiveLabel={t.home.viewAllPosts} />
+    ) : null
+  }
+
+  <!-- 分类入口 -->
+  {
+    categories.length ? (
+      <section class="py-16 sm:py-20">
+        <div class="shell">
+          <h2 class="section-head mb-6">{t.taxonomy.categoriesTitle}</h2>
+          <ul class="flex flex-wrap gap-3">
+            {categories.map((category) => (
+              <li>
+                <a
+                  href={categoryHref(category.name)}
+                  class="inline-flex items-center gap-2 rounded-full bg-chip px-5 py-2.5 text-[15px] font-medium text-ink transition-colors hover:bg-chip-hover"
+                >
+                  {category.name}
+                  <span class="text-[13px] text-slate">{category.count}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    ) : null
+  }
+</BaseLayout>
+
+<style>
+  /* 标题区：左栏自适应，统计表固定 400px */
+  /* 标题区版心 1280px */
+  .hero-shell {
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: 22px;
+  }
+
+  @media (min-width: 1069px) {
+    .hero-shell {
+      padding-inline: 40px;
+    }
+  }
+
+  .hero-grid {
+    display: grid;
+    gap: 40px;
+    align-items: end;
+  }
+
+  @media (min-width: 1280px) {
+    .hero-grid {
+      grid-template-columns: minmax(0, 1fr) 400px;
+      gap: 48px;
+    }
+  }
+
+  .hero-title {
+    margin-top: 12px;
+    font-family: var(--font-display);
+    font-size: 36px;
+    line-height: 1.25;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: var(--color-ink);
+    /* 自然换行，不做均衡拆分 */
+    text-wrap: wrap;
+  }
+
+  @media (min-width: 735px) {
+    .hero-title {
+      font-size: 52px;
+      line-height: 1.2;
+    }
+  }
+
+  .hero-lead {
+    margin-top: 20px;
+    max-width: 620px;
+    font-size: 18px;
+    line-height: 1.7;
+    letter-spacing: 0.01em;
+    color: var(--color-graphite);
+  }
+</style>

@@ -1,0 +1,210 @@
+---
+import { t } from '../../i18n';
+import { getCollection, render } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Tile from '../../components/Tile.astro';
+import { site, categoryHref, tagHref } from '../../lib/site';
+import { formatDate, readingTime } from '../../lib/format';
+import { postHref } from '../../lib/posts';
+import { postDeclaredCover } from '../../lib/covers';
+
+export const getStaticPaths = (async () => {
+  const posts = await getCollection('posts', ({ data }) => !data.draft);
+  // 2026/slug → /2026/slug/
+  return posts.map((post) => {
+    const [year, slug] = post.id.split('/');
+    return { params: { year, slug }, props: { post } };
+  });
+}) satisfies GetStaticPaths;
+
+const { post } = Astro.props;
+const { data } = post;
+// 头图只用显式 cover
+const cover = postDeclaredCover(post);
+
+/* 必须传原始 entry，spread 会丢源文件路径 */
+const { Content } = await render(post);
+
+const minutes = readingTime(post.body ?? '');
+
+const related = (
+  await getCollection(
+    'posts',
+    ({ data: d, id }) => !d.draft && id !== post.id && d.categories.some((c) => data.categories.includes(c))
+  )
+)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+
+const primaryCategory = data.categories[0];
+---
+
+<BaseLayout
+  title={data.title}
+  description={data.summary || site.description}
+  keywords={data.tags?.join(',')}
+>
+  <article>
+    <header class:list={['shell pt-12 sm:pt-16', cover ? 'pb-10' : 'pb-6']}>
+      <div class="mx-auto max-w-[700px]">
+      <nav class="mb-6 flex flex-wrap items-center gap-2 text-[13px] text-slate" aria-label={t.post.breadcrumb}>
+        <a href="/" class="transition-colors hover:text-link">{t.common.backHome}</a>
+        {
+          primaryCategory ? (
+            <>
+              <span aria-hidden="true">/</span>
+              <a href={categoryHref(primaryCategory)} class="transition-colors hover:text-link">
+                {primaryCategory}
+              </a>
+            </>
+          ) : null
+        }
+      </nav>
+
+      <p class="text-[13px] font-semibold tracking-[0.02em] text-graphite">
+        <time datetime={data.date.toISOString()}>{formatDate(data.date)}</time>
+        <span class="mx-2 text-slate" aria-hidden="true">·</span>
+        <span>{minutes} {t.common.minRead}</span>
+      </p>
+
+      <h1
+        class="mt-4 font-display text-[30px] leading-[1.3] font-bold tracking-[0.01em] text-ink sm:text-[42px] sm:leading-[1.25]"
+      >
+        {data.title}
+      </h1>
+
+      {
+        data.summary ? (
+          <p class="mt-5 text-[17px] leading-[1.75] text-graphite">{data.summary}</p>
+        ) : null
+      }
+
+      {
+        data.tags.length ? (
+          <div class="mt-6 flex flex-wrap gap-2">
+            {data.tags.map((tag) => (
+              <a
+                href={tagHref(tag)}
+                class="rounded-full bg-fog px-3 py-1 text-[13px] text-graphite transition-colors hover:bg-chip hover:text-ink"
+              >
+                #{tag}
+              </a>
+            ))}
+          </div>
+        ) : null
+      }
+      </div>
+    </header>
+
+    <!-- 头图 -->
+    {
+      cover ? (
+        <div class="shell">
+          <figure class="overflow-hidden rounded-[20px] sm:rounded-[28px]">
+            <img
+              src={cover.src}
+              width={cover.width}
+              height={cover.height}
+              alt={data.coverAlt ?? data.title}
+              class="w-full object-cover"
+              loading="eager"
+            />
+          </figure>
+        </div>
+      ) : null
+    }
+
+    <div class:list={['shell pb-12 sm:pb-16', cover ? 'pt-12 sm:pt-16' : 'pt-6 sm:pt-8']}>
+      <div class="mx-auto max-w-[700px]">
+        <div class="prose-newsroom"><Content /></div>
+
+        <footer class="mt-16 border-t border-hairline pt-8">
+          <p class="text-[13px] leading-[1.7] text-slate">
+            {t.postExtra.writtenBy} <span class="text-ink">{data.author ?? site.author}</span>
+            <span class="mx-1.5" aria-hidden="true">·</span>{' '}
+            {formatDate(data.date)}
+            {
+              data.updated ? (
+                <>
+                  <span class="mx-1.5" aria-hidden="true">·</span>{' '}
+                  {t.common.lastUpdated} {formatDate(data.updated)}
+                </>
+              ) : null
+            }
+          </p>
+
+          <div class="mt-4 flex flex-wrap items-center gap-2">
+            <span class="text-[13px] text-graphite">{t.common.share}:</span>
+            <!--<a
+              class="cta-pill !px-4 !py-2 !text-[13px]"
+              href={`mailto:?subject=${encodeURIComponent(data.title)}&body=${encodeURIComponent(postHref(post))}`}
+            >
+              邮件
+            </a>-->
+            <button
+              type="button"
+              class="cta-pill !px-4 !py-2 !text-[13px]"
+              data-copy-link
+              data-url={postHref(post)}
+            >
+              {t.common.copyLink}
+            </button>
+            <a class="cta-pill !px-4 !py-2 !text-[13px]" href="/rss.xml">RSS</a>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </article>
+
+  {
+    related.length ? (
+      <section class="bg-fog py-16">
+        <div class="shell">
+          <h2 class="section-head mb-6">{t.postExtra.related}</h2>
+          <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {related.map((item) => (
+              <li>
+                <Tile post={item} variant="3up" />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    ) : null
+  }
+
+  <section class="shell py-14">
+    <div class="flex items-center justify-between gap-4">
+      <a href="/archive/" class="cta-pill">{t.post.backToArchive}</a>
+      <a href="/" class="cta-link">{t.common.backHome} →</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  /* 每次切页重绑；data-copied 防重复 */
+  const bindCopy = () => {
+    document.querySelectorAll<HTMLButtonElement>('[data-copy-link]').forEach((button) => {
+      if (button.dataset.copied === '1') return;
+      button.dataset.copied = '1';
+
+      button.addEventListener('click', async () => {
+        const url = new URL(button.dataset.url ?? '', location.origin).toString();
+        const original = button.textContent;
+        try {
+          await navigator.clipboard.writeText(url);
+          button.textContent = t.common.copied;
+        } catch {
+          button.textContent = t.common.copyFailed;
+        }
+        setTimeout(() => {
+          button.textContent = original;
+        }, 1600);
+      });
+    });
+  };
+
+  bindCopy();
+  document.addEventListener('astro:page-load', bindCopy);
+</script>

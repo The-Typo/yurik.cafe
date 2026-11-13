@@ -1,90 +1,154 @@
-# Hexo Theme Unit Test
+# Byline
 
-This is a dummy Hexo site for theme unit test. You should test your theme before release.
+A quiet editorial blog theme for Astro and Tailwind CSS.
 
-This test doesn't contain the default theme. You have to install the theme you want to test before starting.
+A byline is the line that names the writer. The layout borrows the rhythm of a
+newsroom — a wide lead story, a grid of smaller tiles, a narrow measure for
+long-form reading — without copying anyone's assets or typefaces. Everything
+visual is either open source or generated at build time.
 
-## Usage
+- **Fonts** — Inter and Inter Tight, bundled locally under the SIL Open Font
+  License. No commercial typefaces.
+- **Artwork** — abstract SVG covers drawn from a hash of each post's title, plus
+  a small set of gradient images for posts that declare no cover.
+- **No third-party requests** — fonts, icons and images are all served from
+  your own domain.
 
-1. Clone this repository
+## Requirements
 
-    ``` bash
-    $ git clone https://github.com/hexojs/hexo-theme-unit-test.git
-    ```
+- Bun 1.2+ (or npm/pnpm — only the lockfile differs)
+- Node 20+
 
-2. Install your own theme and modify `theme` setting in `_config.yml`.
-3. Run server and start testing. Make sure all styles  are displayed properly.
-4. Once test is done, you can [submit your theme](https://hexo.io/docs/themes.html#Publishing)!
+## Getting started
 
-## Checklist
+```bash
+bun install
+bun run dev
+```
 
-### `<head>`
+Open `http://localhost:4321`. The demo posts live in `src/content/posts/`;
+delete them and add your own.
 
-- Use the proper [DOCTYPE](https://en.wikipedia.org/wiki/Document_Type_Declaration).
-  If you don't know which doctype you should use, `<!DOCTYPE html>` is recommended.
-- UTF8 charset
+## Making it yours
 
-    ``` html
-    <meta charset="utf-8">
-    ```
+| What | Where |
+| --- | --- |
+| Site name, description, nav, social links, footer | `src/lib/site.ts` |
+| Domain used for canonical URLs and RSS | `astro.config.mjs` (`site`) |
+| Colours, spacing, type | `src/styles/global.css` (`@theme` block) |
+| Default cover images | `src/assets/covers/` |
+| Friend links | `src/content/_data/friends.json` |
+| Interface language, date format, `og:locale` | `src/lib/site.ts` (`lang`) |
+| Interface copy | `src/i18n/<lang>.ts` |
 
-- Proper titles for different pages
-- Favicon support
+### Writing a post
 
-    ``` html
-    <link rel="icon" href="path/of/favicon">
-    ```
+A post is a folder. The folder path becomes the URL:
 
-### Index
+```
+src/content/posts/2026/my-post/
+├── index.md
+├── cover.webp        ← optional, used as the card thumbnail
+└── diagram.webp      ← referenced from the Markdown by relative path
+```
 
-- Only display excerpts. (Better with a "Read More" link)
-- [Pagination](https://hexo.io/docs/configuration.html#Pagination)
+→ served at `/2026/my-post/`
 
-### Post
+Frontmatter:
 
-- Display post categories and tags.
-- Disqus comment support.
-- Display the post date.
-- Support `photos` in front-matter.
-- Posts without title should be accessible.
+```yaml
+---
+title: My post
+date: 2026-03-18 09:00:00 +0000
+categories: Engineering        # one category, drives the eyebrow on cards
+tags: [astro, css]
+description: One line, used for SEO and the RSS item.
+draft: false
+---
+```
 
-### Performance
+Images referenced with a relative path (`![](diagram.webp)`) are resolved
+against the post folder, hashed, converted to WebP, and given explicit
+dimensions so the layout does not shift while they load.
 
-- Use [fragment_cache](https://hexo.io/docs/helpers.html#fragment_cache)
-  It caches render result across post/pages, see [#1769](https://github.com/hexojs/hexo/issues/1769) for the impact
+### Interface language
 
-### Optional
+The interface ships in English and Chinese. A site is one language at a time;
+set `site.lang` in `src/lib/site.ts` and the matching dictionary is used:
 
-- Responsive design
-- i18n
-- Post share
-- SEO
-- RSS [Autodiscovery](https://www.rssboard.org/rss-autodiscovery) support
-  * Example:
-  ``` html
-  <link rel="alternate" href="path/of/rss" type="application/atom+xml">
-  ```
-  * Some RSS plugins (e.g. [hexo-generator-feed](https://github.com/hexojs/hexo-generator-feed) 2.1+) insert autodiscovery by default. There is a slight performance benefit if a theme inserts it, instead of the plugin. To take advantage of that, autodiscovery needs to be disabled in the plugin.
-    ``` yml
-    feed:
-      autodiscovery: false
-    ```
-  * hexo-generator-feed plugin could generate more than one type of RSS (e.g. Atom & RSS2). Here is an example EJS snippet for multi-format support by utilizing [`feed_tag`](https://hexo.io/docs/helpers#feed-tag) helper:
-    ``` js
-    <%- feed_tag() %>
-    ```
-    * If you want to support other plugins, in addition to hexo-generator-feed:
-    ``` js
-    <% if (config.feed) { %>
-      <%- feed_tag() %>
-    <% } else if (theme.rss) { %>
-      <%- feed_tag(theme.rss) %>
-    <% } %>
-    ```
-  * If you decide to support autodiscovery, we recommend checking the updates of [hexo-generator-feed](https://github.com/hexojs/hexo-generator-feed/releases) (or any other RSS plugin that your theme prefers) from time to time. The configuration and functionality of an RSS plugin may change over time.
+```ts
+export const site = {
+  lang: 'zh-CN',   // → src/i18n/zh.ts
+  // ...
+}
+```
 
-## Resources
+Dates follow the same value, via `Intl.DateTimeFormat`.
 
-- [Theme](https://hexo.io/docs/themes.html)
-- [Variables](https://hexo.io/docs/variables.html)
-- [Helpers](https://hexo.io/docs/helpers.html)
+`og:locale` is derived from it rather than configured separately: Open Graph
+wants `en_US`, with an underscore and a region, while `<html lang>` wants the
+BCP 47 form `en-US`. Writing both by hand invites them drifting apart, so
+`lang` is the only input and `ogLocale()` fills in a sensible region when you
+omit one — `ja` becomes `ja_JP`, `pt-BR` stays `pt_BR`.
+
+To add a language, copy `src/i18n/en.ts`, translate the values, and register
+it in `src/i18n/index.ts`:
+
+```ts
+import { ja } from './ja';
+
+export const dictionaries = { en, zh, ja };
+```
+
+`zh.ts` is typed as `Dictionary`, the shape of `en.ts`. Add a key to English
+and forget the other file, and the build fails — you cannot ship a half
+translated interface by accident.
+
+What lives in the dictionary is interface only: headings, buttons, empty
+states, aria labels. Site identity — name, nav labels, category descriptions —
+stays in `src/lib/site.ts`, because that is content, not chrome.
+
+### Keeping your posts out of the repo
+
+If you fork this theme and want to keep writing in place without committing
+your content, uncomment these lines in `.gitignore`:
+
+```
+src/content/posts/
+src/content/pages/
+src/content/_data/
+```
+
+The demo content that ships with the repo stays tracked; anything you add
+after uncommenting is ignored.
+
+## What is included
+
+- **Home** — lead tile, 12-column tile grid, a carousel, a list of recent
+  posts, a stats ledger, and category chips
+- **Archive** — grouped by month, paginated, with every page number shown
+- **Taxonomy** — tag and category indexes, both generated from frontmatter
+- **Post** — hero image (only when `cover` is set), breadcrumb, reading time,
+  share row, related posts
+- **Pages** — a catch-all that renders anything in `src/content/pages/`
+- **Themes** — light and dark, with a circular reveal and the choice remembered
+- **Transitions** — pages swap without a full reload (swup)
+- **Feeds** — RSS at `/rss.xml`
+
+## Commands
+
+| Command | Does |
+| --- | --- |
+| `bun run dev` | Dev server with HMR |
+| `bun run build` | Static build into `dist/` |
+| `bun run preview` | Serve the built output |
+
+## Deploying
+
+The build is a folder of static files. Any static host works — Netlify,
+Vercel, Cloudflare Pages, or a plain nginx directory.
+
+## Licence
+
+Theme code: MIT. The demo posts and generated artwork are yours to replace.
+Inter and Inter Tight are used under the SIL Open Font License 1.1.

@@ -1,0 +1,161 @@
+---
+import { site, ogImage as ogConfig, ogLocale } from '../lib/site';
+import GlobalNav from '../components/GlobalNav.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import '../styles/global.css';
+
+// 提前加载两个正文字体，避免 CSS 解析完才发请求
+import interLatin from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
+import interTightLatin from '@fontsource-variable/inter-tight/files/inter-tight-latin-wght-normal.woff2?url';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** 页面级关键词 */
+  keywords?: string;
+  /** Open Graph 图 */
+  ogImage?: string;
+}
+
+const {
+  title,
+  description = site.description,
+  keywords,
+  ogImage,
+} = Astro.props;
+
+const pageTitle = title ? `${title} - ${site.title}` : site.title;
+
+// 站点地址：site.ts 优先
+const origin = site.url || Astro.site?.toString() || 'https://example.com';
+const canonical = new URL(Astro.url.pathname, origin);
+
+// 合并并去重关键词
+const keywordList = [...new Set(
+  [site.keywords, keywords]
+    .filter(Boolean)
+    .join(',')
+    .split(',')
+    .map((k) => k.trim())
+    .filter(Boolean)
+)];
+
+// 页面图优先，其次站点默认图
+const ogImageUrl = ogImage ?? (ogConfig.enable ? `${origin}/og-default.png` : undefined);
+---
+
+<!doctype html>
+<html lang={site.lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preload" href={interLatin} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={interTightLatin} as="font" type="font/woff2" crossorigin />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    {keywordList.length ? <meta name="keywords" content={keywordList.join(',')} /> : null}
+    <link rel="canonical" href={canonical} />
+    {
+      site.favicon?.trim() ? (
+        <link rel="icon" href={site.favicon} />
+      ) : (
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+      )
+    }
+    <meta name="theme-color" content="#ffffff" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.title} />
+    <meta property="og:locale" content={ogLocale()} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    {ogImageUrl ? <meta property="og:image" content={ogImageUrl} /> : null}
+    <meta name="twitter:card" content="summary_large_image" />
+    {ogImageUrl ? <meta name="twitter:image" content={ogImageUrl} /> : null}
+
+    <link rel="alternate" type="application/rss+xml" title={site.title} href="/rss.xml" />
+
+    {/* 首屏防闪烁：样式生效前写入 data-theme，必须内联同步执行 */}
+    <script is:inline>
+      (() => {
+        const stored = localStorage.getItem('theme');
+        const theme =
+          stored === 'light' || stored === 'dark'
+            ? stored
+            : window.matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light';
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
+  </head>
+  <body class="flex min-h-dvh flex-col bg-canvas text-ink antialiased">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-ink focus:px-5 focus:py-2 focus:text-[14px] focus:text-white"
+    >
+      Skip to content
+    </a>
+
+    <GlobalNav active={Astro.url.pathname} />
+
+    {/*
+      main 是 swup 的替换容器：切换时只换这里面的内容，
+      导航与页脚原地不动。flex-1 让它吃掉剩余高度，短页面也能把页脚顶到底。
+      transition-main 是动画选择器，CSS 按 html.is-changing 等类名驱动。
+    */}
+    <main id="main" class="transition-main flex-1">
+      <slot />
+    </main>
+
+    <SiteFooter />
+
+    <script>
+      /* 记录/还原滚动位置；用 history:popstate 判断是否后退 */
+      const KEY = 'swup-scroll';
+      const readMap = () => {
+        try {
+          return JSON.parse(sessionStorage.getItem(KEY) || '{}');
+        } catch {
+          return {};
+        }
+      };
+      const writeMap = (map) => sessionStorage.setItem(KEY, JSON.stringify(map));
+
+      // 后退时要恢复的位置
+      let restoreTo = null;
+
+      document.addEventListener('swup:history:popstate', () => {
+        restoreTo = readMap()[location.pathname] ?? 0;
+      });
+
+      // 保存当前位置
+      document.addEventListener('swup:visit:start', () => {
+        if (restoreTo !== null) return;
+        const map = readMap();
+        map[location.pathname] = Math.round(window.scrollY);
+        writeMap(map);
+      });
+
+      document.addEventListener('swup:page:view', () => {
+        if (restoreTo !== null) {
+          const y = restoreTo;
+          restoreTo = null;
+          // 等布局完成再滚
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => window.scrollTo({ top: y, behavior: 'instant' }));
+          });
+        } else {
+          window.scrollTo({ top: 0, behavior: 'instant' });
+        }
+      });
+
+      window.addEventListener('pagehide', () => {
+        const map = readMap();
+        map[location.pathname] = Math.round(window.scrollY);
+        writeMap(map);
+      });
+    </script>
+  </body>
+</html>

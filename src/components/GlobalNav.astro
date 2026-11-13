@@ -1,0 +1,322 @@
+---
+/** 全局导航 */
+import { t } from '../i18n';
+import { site } from '../lib/site';
+import ThemeToggle from './ThemeToggle.astro';
+
+interface Props {
+  /** 当前路径 */
+  active?: string;
+}
+
+const { active = '/' } = Astro.props;
+
+const isActive = (href: string) =>
+  href === '/' ? active === '/' : active.startsWith(href);
+
+const logo = site.logo?.trim() ?? '';
+---
+
+<header class="site-nav sticky top-0 z-50 border-b border-hairline/60 bg-canvas/85 backdrop-blur-xl">
+  <div class="shell flex h-[56px] items-center justify-between gap-6">
+    <a
+      href="/"
+      class="flex min-w-0 items-center gap-2.5 text-ink transition-opacity hover:opacity-70"
+    >
+      {
+        logo ? (
+          <img
+            src={logo}
+            alt=""
+            width="24"
+            height="24"
+            class="size-[24px] flex-none rounded-[6px] object-cover"
+            loading="eager"
+          />
+        ) : (
+          <span aria-hidden="true" class="grid size-[22px] flex-none place-items-center rounded-[6px] bg-night">
+            <span class="block size-[8px] rounded-[2px] bg-canvas" />
+          </span>
+        )
+      }
+      <span class="truncate text-[17px] font-semibold tracking-[0.01em]">{site.name}</span>
+    </a>
+
+    {/* 宽屏：内联链接 */}
+    <div class="hidden items-center gap-5 md:flex">
+      <nav aria-label={t.nav.site}>
+        <ul class="flex items-center gap-7">
+          {
+            site.globalNav.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  class="nav-link text-[14px] tracking-[0.01em]"
+                  aria-current={isActive(item.href) ? 'page' : undefined}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <ThemeToggle />
+    </div>
+
+    {/* 窄屏：主题按钮 + 展开按钮 */}
+    <div class="flex items-center gap-2 md:hidden">
+      <ThemeToggle />
+
+      <button
+        type="button"
+        id="nav-toggle"
+        class="nav-toggle"
+        aria-label={t.nav.openMenu}
+        aria-expanded="false"
+        aria-controls="nav-panel"
+      >
+        <span class="nav-toggle-bar" />
+        <span class="nav-toggle-bar" />
+      </button>
+    </div>
+  </div>
+
+  {/* 窄屏下拉面板 */}
+  <div id="nav-panel" class="nav-panel md:hidden" hidden>
+    <nav aria-label={t.nav.site} class="shell">
+      <ul class="nav-panel-list">
+        {
+          site.globalNav.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="nav-panel-link"
+                aria-current={isActive(item.href) ? 'page' : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+
+  {/* 切换页面时沿导航底边扫过的一条进度条 */}
+  <span class="route-bar" aria-hidden="true"></span>
+</header>
+
+<script>
+  const header = document.querySelector('.site-nav');
+  const toggle = document.getElementById('nav-toggle');
+  const panel = document.getElementById('nav-panel');
+
+  if (header && toggle && panel) {
+    let open = false;
+
+    const setOpen = (next: boolean) => {
+      if (next === open) return;
+      open = next;
+
+      toggle.setAttribute('aria-expanded', String(next));
+      toggle.setAttribute('aria-label', next ? 'Close menu' : 'Open menu');
+      header.classList.toggle('is-open', next);
+
+      // 锁定背景滚动
+      document.body.style.overflow = next ? 'hidden' : '';
+
+      if (next) {
+        panel.hidden = false;
+        // 下一帧再加类，让过渡有起点
+        requestAnimationFrame(() => panel.classList.add('is-open'));
+      } else {
+        panel.classList.remove('is-open');
+        // 等过渡结束再隐藏，避免动画被截断
+        setTimeout(() => {
+          if (!open) panel.hidden = true;
+        }, 260);
+      }
+    };
+
+    toggle.addEventListener('click', () => setOpen(!open));
+
+    // 点链接后关闭；面板在 <main> 之外，swup 换页不会移除它
+    panel.addEventListener('click', (event) => {
+      if ((event.target as HTMLElement).closest('a')) setOpen(false);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && open) {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+
+    // 切到宽屏时收起，避免面板留在展开状态
+    window.matchMedia('(min-width: 768px)').addEventListener('change', (event) => {
+      if (event.matches) setOpen(false);
+    });
+  }
+
+  /*
+    导航在 <main> 外面，swup 换页不会重新渲染它，
+    所以当前页高亮要自己按新路径重算。
+  */
+  const syncActive = () => {
+    const path = location.pathname;
+
+    // 只处理导航项，站点 logo 指向 / 但不算当前页
+    for (const link of document.querySelectorAll<HTMLAnchorElement>('.site-nav nav a[href]')) {
+      const href = link.getAttribute('href');
+      if (!href || href.startsWith('http')) continue;
+
+      const isActive = href === '/' ? path === '/' : path.startsWith(href);
+      if (isActive) link.setAttribute('aria-current', 'page');
+      else link.removeAttribute('aria-current');
+    }
+  };
+
+  syncActive();
+
+  // 多个事件都触发一次，覆盖 swup 换页、后退前进、bfcache 恢复
+  document.addEventListener('astro:page-load', syncActive);
+  document.addEventListener('swup:page:view', syncActive);
+  window.addEventListener('popstate', syncActive);
+  window.addEventListener('pageshow', syncActive);
+</script>
+
+<style>
+  /* 导航栏高度，面板据此定位 */
+  .site-nav {
+    --nav-height: 57px;
+  }
+
+  /* 当前页：字重、颜色、下划线都由 aria-current 驱动 */
+  .nav-link {
+    position: relative;
+    padding-block: 4px;
+    font-weight: 400;
+    color: var(--color-graphite);
+    /* 只过渡颜色；可变字体的字重插值会触发逐帧重排 */
+    transition: color 0.2s ease;
+  }
+
+  .nav-link:hover {
+    color: var(--color-ink);
+  }
+
+  .nav-link[aria-current='page'] {
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: 1.5px;
+    border-radius: 2px;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: left center;
+  }
+
+  .nav-link[aria-current='page']::after {
+    transform: scaleX(1);
+  }
+
+  /* 展开按钮：两条线，展开后变成叉 */
+  .nav-toggle {
+    position: relative;
+    display: grid;
+    place-content: center;
+    gap: 5px;
+    width: 32px;
+    height: 32px;
+    flex: none;
+    border-radius: 50%;
+    color: var(--color-ink);
+    transition: background-color 0.2s ease;
+  }
+
+  .nav-toggle:hover {
+    background-color: var(--color-chip);
+  }
+
+  .nav-toggle-bar {
+    display: block;
+    width: 17px;
+    height: 1.5px;
+    border-radius: 2px;
+    background-color: currentColor;
+    transition:
+      transform 0.28s var(--ease-out-soft),
+      opacity 0.2s ease;
+  }
+
+  .site-nav.is-open .nav-toggle-bar:first-child {
+    transform: translateY(3.25px) rotate(45deg);
+  }
+
+  .site-nav.is-open .nav-toggle-bar:last-child {
+    transform: translateY(-3.25px) rotate(-45deg);
+  }
+
+  /* 下拉面板：从导航底边向下铺满 */
+  .nav-panel {
+    position: fixed;
+    inset-inline: 0;
+    /* 贴住 header 的实际底边，避免亚像素缝隙 */
+    top: var(--nav-height);
+    height: calc(100dvh - var(--nav-height));
+    overflow-y: auto;
+    background-color: var(--color-canvas);
+    opacity: 0;
+    transform: translateY(-8px);
+    transition:
+      opacity 0.24s var(--ease-out-soft),
+      transform 0.24s var(--ease-out-soft);
+  }
+
+  .nav-panel.is-open {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .nav-panel-list {
+    margin: 0;
+    padding: 8px 0 0;
+    list-style: none;
+  }
+
+  .nav-panel-link {
+    display: block;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--color-hairline);
+    font-family: var(--font-display);
+    font-size: 26px;
+    line-height: 1.25;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    color: var(--color-ink);
+    transition: color 0.2s ease;
+  }
+
+  .nav-panel-link:hover,
+  .nav-panel-link[aria-current='page'] {
+    color: var(--color-link);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nav-panel {
+      transition-duration: 1ms;
+    }
+
+    .nav-toggle-bar {
+      transition-duration: 1ms;
+    }
+  }
+</style>

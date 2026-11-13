@@ -1,0 +1,160 @@
+---
+import { t } from '../i18n';
+/** 生成的抽象封面 */
+interface Props {
+  seed: string;
+  /** 配色种子 */
+  tone?: string;
+  /** 构图密度 */
+  scale?: 'hero' | 'wide' | 'thumb' | 'square';
+  /** 装饰字形 */
+  glyph?: string;
+  class?: string;
+  alt?: string;
+}
+
+const { seed, tone = 'neutral', scale = 'wide', glyph, class: className = '', alt = '' } = Astro.props;
+
+// 确定性伪随机
+function hash(str: string) {
+  let h = 2166136261;
+  for (let i = 0; i < str.length; i++) {
+    h ^= str.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return h >>> 0;
+}
+
+function rng(seedValue: number) {
+  let s = seedValue || 1;
+  return () => {
+    s ^= s << 13;
+    s ^= s >>> 17;
+    s ^= s << 5;
+    s >>>= 0;
+    return s / 4294967296;
+  };
+}
+
+const rand = rng(hash(seed));
+
+// 低饱和配色
+const palettes = [
+  ['#eef2f8', '#dbe4f0', '#b9cbe4', '#7f9cc4', '#3f5a7d'],
+  ['#f7f3ee', '#efe7dc', '#e2d3c1', '#c2a98c', '#8a7357'],
+  ['#eef4f3', '#dbe8e6', '#b7d0cc', '#7ba7a1', '#3f6a66'],
+  ['#f9f0ee', '#f0ddd8', '#e4c2b9', '#c98f7f', '#8a5a4c'],
+  ['#f0f0f5', '#e2e2ea', '#c9c9d6', '#9c9cb0', '#5f5f75'],
+  ['#f5f2f8', '#e9e2f0', '#d4c8e3', '#a894c2', '#6b5686'],
+];
+
+// 哈希取模选配色
+const paletteIndex = tone && tone !== 'neutral' ? hash(tone) % palettes.length : 4;
+const [c0, c1, c2, c3, c4] = palettes[paletteIndex];
+
+const dims = {
+  hero: { w: 1200, h: 675 },
+  wide: { w: 900, h: 506 },
+  thumb: { w: 600, h: 450 },
+  square: { w: 600, h: 600 },
+} as const;
+
+const { w, h } = dims[scale] ?? dims.wide;
+const viewBox = `0 0 ${w} ${h}`;
+
+// 光斑
+const blobs = Array.from({ length: 3 }, (_, i) => {
+  const cx = Math.round(w * (0.18 + rand() * 0.64));
+  const cy = Math.round(h * (0.15 + rand() * 0.7));
+  const r = Math.round(Math.min(w, h) * (0.24 + rand() * 0.22));
+  const fill = [c2, c3, c4][i % 3];
+  const op = 0.32 + rand() * 0.3;
+  return { cx, cy, r, fill, op };
+});
+
+// 细弧线
+const arcs = Array.from({ length: 2 }, () => {
+  const cx = Math.round(w * (0.1 + rand() * 0.8));
+  const cy = Math.round(h * (0.1 + rand() * 0.8));
+  const r = Math.round(Math.min(w, h) * (0.3 + rand() * 0.35));
+  const rot = Math.round(rand() * 360);
+  return { cx, cy, r, rot };
+});
+
+// 几何块
+const plate = {
+  x: Math.round(w * (0.05 + rand() * 0.25)),
+  y: Math.round(h * (0.5 + rand() * 0.2)),
+  w: Math.round(w * (0.16 + rand() * 0.14)),
+  h: Math.round(h * (0.16 + rand() * 0.14)),
+  rot: Math.round(-18 + rand() * 36),
+};
+
+const id = `art-${hash(seed).toString(36)}-${scale}`;
+const cleaned = (glyph ?? seed).replace(/[[\]「」『』《》【】()（）：:、，,./\s]/g, '');
+const letter = (cleaned.charAt(0) || 'Y').toUpperCase();
+const fontSize = Math.round(h * (scale === 'hero' ? 0.62 : 0.56));
+---
+
+<svg
+  class={className}
+  viewBox={viewBox}
+  role="img"
+  aria-label={alt || t.a11y.decorativeCover}
+  preserveAspectRatio="xMidYMid slice"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <defs>
+    <linearGradient id={`${id}-bg`} x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color={c0} />
+      <stop offset="55%" stop-color={c1} />
+      <stop offset="100%" stop-color={c2} />
+    </linearGradient>
+    <filter id={`${id}-blur`} x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation={scale === 'hero' ? 70 : 46} />
+    </filter>
+    <linearGradient id={`${id}-fade`} x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.22" />
+    </linearGradient>
+  </defs>
+
+  <rect width={w} height={h} fill={`url(#${id}-bg)`} />
+
+  <g filter={`url(#${id}-blur)`}>
+    {blobs.map((b) => <circle cx={b.cx} cy={b.cy} r={b.r} fill={b.fill} opacity={b.op} />)}
+  </g>
+
+  <g fill="none" stroke={c4} stroke-opacity="0.28" stroke-width={scale === 'hero' ? 1.6 : 1.2}>
+    {arcs.map((a) => (
+      <circle cx={a.cx} cy={a.cy} r={a.r} stroke-dasharray={a.rot % 2 ? '4 10' : undefined} />
+    ))}
+  </g>
+
+  <g transform={`rotate(${plate.rot} ${plate.x + plate.w / 2} ${plate.y + plate.h / 2})`}>
+    <rect
+      x={plate.x}
+      y={plate.y}
+      width={plate.w}
+      height={plate.h}
+      rx={Math.round(plate.w * 0.22)}
+      fill={c3}
+      opacity="0.34"
+    />
+  </g>
+
+  <text
+    x={w * 0.5}
+    y={h * 0.5}
+    text-anchor="middle"
+    dominant-baseline="central"
+    font-family="Inter Tight Variable, Inter Variable, 'PingFang SC', 'Microsoft YaHei', Helvetica, Arial, sans-serif"
+    font-size={fontSize}
+    font-weight="700"
+    letter-spacing={-fontSize * 0.03}
+    fill={c4}
+    opacity="0.12"
+  >{letter}</text>
+
+  <rect width={w} height={h} fill={`url(#${id}-fade)`} />
+</svg>

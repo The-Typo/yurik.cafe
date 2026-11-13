@@ -1,0 +1,46 @@
+---
+import { t } from '../../i18n';
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { tagHref } from '../../lib/site';
+import { getAllPosts, collectTags } from '../../lib/posts';
+
+const posts = await getAllPosts();
+const tags = collectTags(posts);
+---
+
+<BaseLayout title={t.taxonomy.tagsTitle} description={t.taxonomy.tagsDescription}>
+  <section class="shell pt-14 pb-12 sm:pt-20">
+    <p class="eyebrow">{t.taxonomy.tagsTitle}</p>
+    <h1
+      class="mt-3 font-display text-[36px] leading-[1.25] font-bold tracking-[0.01em] text-ink sm:text-[52px] sm:leading-[1.2]"
+    >
+      {t.taxonomy.tagsTitle}
+    </h1>
+    <p class="mt-5 text-[18px] leading-[1.7] text-graphite">
+      {t.taxonomy.postCount(tags.length)}
+    </p>
+  </section>
+
+  <section class="shell pb-24">
+    {
+      tags.length ? (
+        <ul class="flex flex-wrap gap-3">
+          {tags.map((tag) => (
+            <li>
+              <a
+                href={tagHref(tag.name)}
+                class="inline-flex items-center gap-2 rounded-full bg-fog px-4 py-2 text-[15px] text-ink transition-colors hover:bg-chip"
+              >
+                #{tag.name}
+                <span class="text-[13px] text-slate">{tag.count}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="text-[17px] text-graphite">{t.taxonomy.emptyTags}</p>
+      )
+    }
+  </section>
+</BaseLayout>

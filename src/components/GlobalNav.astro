@@ -1,5 +1,7 @@
 ---
 /** 全局导航 */
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import { t } from '../i18n';
 import { site } from '../lib/site';
 import ThemeToggle from './ThemeToggle.astro';
@@ -15,6 +17,18 @@ const isActive = (href: string) =>
   href === '/' ? active === '/' : active.startsWith(href);
 
 const logo = site.logo?.trim() ?? '';
+
+// 本地图片交给 <Image> 缩到 24/48，避免 512px 原图直接下载
+const localLogos = import.meta.glob<ImageMetadata>('/src/content/pages/**/*.{png,jpg,jpeg,webp,avif,svg}', {
+  eager: true,
+  import: 'default',
+});
+
+const logoMeta = (() => {
+  if (!logo || /^[a-z]+:\/\//i.test(logo)) return undefined;
+  const hit = Object.keys(localLogos).find((key) => key.endsWith(logo));
+  return hit ? localLogos[hit] : undefined;
+})();
 ---
 
 <header class="site-nav sticky top-0 z-50 border-b border-hairline/60 bg-canvas/85 backdrop-blur-xl">
@@ -24,7 +38,20 @@ const logo = site.logo?.trim() ?? '';
       class="flex min-w-0 items-center gap-2.5 text-ink transition-opacity hover:opacity-70"
     >
       {
-        logo ? (
+        logoMeta ? (
+          <Image
+            src={logoMeta}
+            alt=""
+            width={48}
+            height={48}
+            widths={[24, 48]}
+            sizes="24px"
+            format="webp"
+            quality={85}
+            class="size-[24px] flex-none rounded-[6px] object-cover"
+            loading="eager"
+          />
+        ) : logo ? (
           <img
             src={logo}
             alt=""

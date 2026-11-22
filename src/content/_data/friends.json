@@ -3,31 +3,36 @@
     "title": "Azure Zeng's Blog",
     "description": "Azure Zeng 的小窝",
     "link": "https://blog.azurezeng.com/",
-    "avatar": "https://azurezeng.com/friendly-link-image.png"
+    "avatar": "https://azurezeng.com/friendly-link-image.png",
+    "feed": "https://blog.azurezeng.com/feed"
   },
   {
     "title": "Nero978 的日记",
     "description": "Brave yourself, brave the world.",
     "link": "https://nero978.top",
-    "avatar": "https://nero978.top/wp-content/uploads/2023/07/logo.jpg"
+    "avatar": "https://nero978.top/wp-content/uploads/2023/07/logo.jpg",
+    "feed": "https://nero978.top/feed"
   },
   {
     "title": "Kyomu's Blog",
     "description": "What is mind? No matter. What is matter? Never mind.",
     "link": "https://kyomu.me/",
-    "avatar": "https://kyomu.me/wp-content/uploads/2024/09/1725636741-pfp.png"
+    "avatar": "https://kyomu.me/wp-content/uploads/2024/09/1725636741-pfp.png",
+    "feed": "https://kyomu.me/feed"
   },
   {
     "title": "極客死亡計劃",
     "description": "这里没有零散的学习笔记和生活琐事，而是专注编写有价值的文章。",
     "link": "https://www.geedea.pro/",
-    "avatar": "https://www.geedea.pro/favicon.svg"
+    "avatar": "https://www.geedea.pro/favicon.svg",
+    "feed": "https://www.geedea.pro/index.xml"
   },
   {
     "title": "初之音",
     "description": "聆听心中最初的声音",
     "link": "https://www.himiku.com/",
-    "avatar": "https://gravatar.loli.net/avatar/2fc4cf3560ff5a1cc64ea029896ab235?s=400"
+    "avatar": "https://gravatar.loli.net/avatar/2fc4cf3560ff5a1cc64ea029896ab235?s=400",
+    "feed": "https://www.himiku.com/feed"
   },
   {
     "title": "Watermelonabc的Blog",
@@ -39,6 +44,7 @@
     "title": "IcyBlog",
     "description": "IcyBlog Share My Life",
     "link": "https://blog.icybit.cn/",
-    "avatar": "https://blog.icybit.cn/avatar.webp"
+    "avatar": "https://blog.icybit.cn/avatar.webp",
+    "feed": "https://blog.icybit.cn/rss.xml"
   }
 ]

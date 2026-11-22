@@ -6,7 +6,7 @@ import type { GetStaticPaths } from 'astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { site, navDescription } from '../lib/site';
 import { formatDate } from '../lib/format';
-import { getFriends } from '../lib/friends';
+import { getFriendsWithPosts } from '../lib/friends';
 
 export const getStaticPaths = (async () => {
   // getStaticPaths 被提升，辅助函数须定义在内部
@@ -32,7 +32,8 @@ const { entry } = Astro.props;
 const { data } = entry;
 const { Content } = await render(entry);
 
-const friends = data.friends?.show ? await getFriends() : [];
+// 只有声明了 friends.show 的页面才抓订阅，其余页面不受影响
+const friends = data.friends?.show ? await getFriendsWithPosts(data.friends?.postCount ?? 3) : [];
 
 const isRoot = !data.path || data.path === '/';
 ---
@@ -43,121 +44,307 @@ const isRoot = !data.path || data.path === '/';
   keywords={data.tags?.join(',')}
 >
   <section class="shell pt-14 pb-16 sm:pt-20">
-    <div class="mx-auto max-w-[700px]">
-    <p class="eyebrow">{isRoot ? t.page.about : t.page.page}</p>
-    <h1
-      class="mt-3 font-display text-[32px] leading-[1.3] font-bold tracking-[0.01em] text-ink sm:text-[44px] sm:leading-[1.25]"
-    >
-      {data.title}
-    </h1>
+    <div class="mx-auto max-w-[900px]">
+      <p class="eyebrow">{isRoot ? t.page.about : t.page.page}</p>
+      <h1
+        class="mt-3 font-display text-[32px] leading-[1.3] font-bold tracking-[0.01em] text-ink sm:text-[44px] sm:leading-[1.25]"
+      >
+        {data.title}
+      </h1>
 
-    {
-      data.date ? (
-        <p class="mt-3 text-[13px] text-slate">
-          <time datetime={data.date.toISOString()}>{formatDate(data.date)}</time>
-        </p>
-      ) : null
-    }
+      {
+        data.date ? (
+          <p class="mt-3 text-[13px] text-slate">
+            <time datetime={data.date.toISOString()}>{formatDate(data.date)}</time>
+          </p>
+        ) : null
+      }
 
-    {
-      friends.length ? (
-        <div class="mt-10">
-          <h2 class="mb-4 text-[19px] font-semibold tracking-[0.01em] text-ink">
-            {data.friends?.listTitle ?? 'Friends'}
-          </h2>
-          <ul class="friend-list">
-            {friends.map((friend) => (
-              <li>
-                <a
-                  href={friend.link}
-                  class="friend-card"
-                  target="_blank"
-                  rel="noopener noreferrer nofollow"
-                >
-                  <img
+      {
+        friends.length ? (
+          <div class="mt-10">
+            <h2 class="mb-4 text-[19px] font-semibold tracking-[0.01em] text-ink">
+              {data.friends?.listTitle ?? 'Friends'}
+            </h2>
+
+            <ul class="friend-grid">
+              {friends.map((friend) => (
+                <li class="friend-card">
+                  <a
                     class="friend-avatar"
-                    src={friend.avatar}
-                    alt=""
-                    loading="lazy"
-                    width="48"
-                    height="48"
-                    referrerpolicy="no-referrer"
-                  />
-                  <span class="min-w-0">
-                    <span class="friend-title">{friend.title}</span>
-                    <span class="friend-desc">{friend.description}</span>
-                  </span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ) : null
-    }
+                    href={friend.link}
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                    tabindex="-1"
+                    aria-hidden="true"
+                  >
+                    {friend.avatar ? (
+                      <img
+                        src={friend.avatar}
+                        alt=""
+                        loading="lazy"
+                        width="64"
+                        height="64"
+                        referrerpolicy="no-referrer"
+                      />
+                    ) : (
+                      <span class="friend-avatar-fallback">{friend.title.slice(0, 1)}</span>
+                    )}
+                  </a>
 
-    <div class="prose-newsroom mt-10">
-      <Content />
-    </div>
+                  <div class="friend-body">
+                    <a
+                      class="friend-title"
+                      href={friend.link}
+                      target="_blank"
+                      rel="noopener noreferrer nofollow"
+                    >
+                      <span class="friend-name">{friend.title}</span>
+                      <svg
+                        class="friend-arrow"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path d="M12 6h-6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6" />
+                        <path d="M11 13l9-9" />
+                        <path d="M15 4h5v5" />
+                      </svg>
+                    </a>
+
+                    {friend.description ? (
+                      <p class="friend-desc" title={friend.description}>
+                        {friend.description}
+                      </p>
+                    ) : null}
+
+                    {friend.posts.length ? (
+                      <ul class="friend-posts">
+                        {friend.posts.map((post) => (
+                          <li>
+                            <a
+                              href={post.link}
+                              target="_blank"
+                              rel="noopener noreferrer nofollow"
+                              title={post.title}
+                            >
+                              <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                aria-hidden="true"
+                              >
+                                <path d="M3 4m0 2a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-14a2 2 0 0 1-2-2z" />
+                                <path d="M7 8h10M7 12h10M7 16h10" />
+                              </svg>
+                              <span>{post.title}</span>
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : null}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null
+      }
+
+      <div class="prose-newsroom mt-10">
+        <Content />
+      </div>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .friend-list {
+  .friend-grid {
     display: grid;
     gap: 12px;
     grid-template-columns: minmax(0, 1fr);
     list-style: none;
+    margin: 0;
     padding: 0;
   }
 
   @media (min-width: 735px) {
-    .friend-list {
+    .friend-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
+  /* 卡片：悬停时边框与底色一起变，右侧留出箭头的空间 */
   .friend-card {
+    position: relative;
     display: flex;
     align-items: center;
-    gap: 14px;
-    padding: 14px 16px;
-    border-radius: 16px;
-    background-color: var(--color-fog);
-    text-decoration: none;
-    transition: background-color 0.2s ease;
-    height: 100%;
+    gap: 12px;
+    padding: 10px;
+    border: 1px solid var(--color-hairline);
+    border-radius: 14px;
+    background-color: var(--color-canvas);
+    transition:
+      border-color 0.3s ease,
+      background-color 0.3s ease,
+      box-shadow 0.3s ease;
   }
 
   .friend-card:hover {
-    background-color: var(--color-chip);
+    border-color: var(--color-link);
+    background-color: var(--color-fog);
+    box-shadow: 0 8px 24px rgb(0 0 0 / 0.06);
+  }
+
+  /* 没有订阅的卡片不渲染文章列表，靠这个保持与有列表的等高 */
+  .friend-card {
+    min-height: 131px;
   }
 
   .friend-avatar {
     flex: 0 0 auto;
-    width: 48px;
-    height: 48px;
+    width: 64px;
+    height: 64px;
+    overflow: hidden;
     border-radius: 12px;
-    object-fit: cover;
     background-color: var(--color-chip);
+    transition: transform 0.3s var(--ease-out-soft, ease);
+  }
+
+  .friend-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .friend-card:hover .friend-avatar {
+    transform: scale(1.04);
+  }
+
+  .friend-avatar-fallback {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--color-graphite);
+  }
+
+  .friend-body {
+    min-width: 0;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
   }
 
   .friend-title {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    min-width: 0;
     font-size: 16px;
     font-weight: 600;
-    color: var(--color-ink);
     line-height: 1.4;
+    color: var(--color-ink);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .friend-card:hover .friend-title {
+    color: var(--color-link);
+  }
+
+  .friend-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* 箭头默认藏在名字右侧，悬停滑入 */
+  .friend-arrow {
+    flex: none;
+    width: 14px;
+    height: 14px;
+    opacity: 0;
+    transform: translateX(-6px);
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  .friend-card:hover .friend-arrow {
+    opacity: 1;
+    transform: translateX(0);
   }
 
   .friend-desc {
-    display: block;
-    margin-top: 2px;
+    margin: 0;
     font-size: 13px;
     line-height: 1.5;
     color: var(--color-graphite);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  /* 最近文章：固定高度，没有订阅的卡片不会因此变矮 */
+  .friend-posts {
+    margin: 6px 0 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .friend-posts li {
+    min-width: 0;
+  }
+
+  .friend-posts a {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--color-slate);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .friend-posts a:hover {
+    color: var(--color-link);
+  }
+
+  .friend-posts svg {
+    flex: none;
+    width: 12px;
+    height: 12px;
+  }
+
+  .friend-posts span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .friend-card,
+    .friend-avatar,
+    .friend-title,
+    .friend-arrow,
+    .friend-posts a {
+      transition-duration: 1ms;
+    }
   }
 </style>

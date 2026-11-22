@@ -68,6 +68,8 @@ const pages = defineCollection({
           show: z.boolean().optional().default(false),
           siteTitle: z.string().optional().default('This site'),
           listTitle: z.string().optional().default('Friends'),
+          /** 每站展示几条最近文章 */
+          postCount: z.number().int().min(1).max(10).optional().default(3),
         })
         .nullish(),
       draft: z.boolean().default(false),

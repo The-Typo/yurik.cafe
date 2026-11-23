@@ -2,8 +2,9 @@ name: Render & Push
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+  schedule:
+    - cron: '0 16 * * *'    # UTC+8 00:00
   workflow_dispatch:
 
 jobs:

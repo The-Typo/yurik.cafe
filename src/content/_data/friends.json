@@ -21,11 +21,17 @@
     "feed": "https://kyomu.me/feed"
   },
   {
-    "title": "極客死亡計劃",
-    "description": "这里没有零散的学习笔记和生活琐事，而是专注编写有价值的文章。",
-    "link": "https://www.geedea.pro/",
-    "avatar": "https://www.geedea.pro/favicon.svg",
-    "feed": "https://www.geedea.pro/index.xml"
+    "title": "IcyBlog",
+    "description": "IcyBlog Share My Life",
+    "link": "https://blog.icybit.cn/",
+    "avatar": "https://blog.icybit.cn/avatar.webp",
+    "feed": "https://blog.icybit.cn/rss.xml"
+  },
+  {
+    "title": "BQDJS",
+    "description": "A personal homepage with live status of devices, apps, music, media and AI coding.",
+    "link": "https://lyjw.me/",
+    "avatar": "data:image/webp;base64,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"
   },
   {
     "title": "初之音",
@@ -38,13 +44,14 @@
     "title": "Watermelonabc的Blog",
     "description": "IDA，嘿嘿，IDA 🤤",
     "link": "https://watermelonabc.top/",
-    "avatar": "https://blog.watermelonabc.top/assets/icon/Avatar.webp"
+    "avatar": "https://blog.watermelonabc.top/assets/icon/Avatar.webp",
+    "feed": "https://blog.watermelonabc.top/rss.xml"
   },
   {
-    "title": "IcyBlog",
-    "description": "IcyBlog Share My Life",
-    "link": "https://blog.icybit.cn/",
-    "avatar": "https://blog.icybit.cn/avatar.webp",
-    "feed": "https://blog.icybit.cn/rss.xml"
+    "title": "極客死亡計劃",
+    "description": "这里没有零散的学习笔记和生活琐事，而是专注编写有价值的文章。",
+    "link": "https://www.geedea.pro/",
+    "avatar": "https://www.geedea.pro/favicon.svg",
+    "feed": "https://www.geedea.pro/index.xml"
   }
 ]

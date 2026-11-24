@@ -7,6 +7,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { site, navDescription } from '../lib/site';
 import { formatDate } from '../lib/format';
 import { getFriendsWithPosts } from '../lib/friends';
+import { withRef } from '../lib/links';
 
 export const getStaticPaths = (async () => {
   // getStaticPaths 被提升，辅助函数须定义在内部
@@ -72,9 +73,9 @@ const isRoot = !data.path || data.path === '/';
                 <li class="friend-card">
                   <a
                     class="friend-avatar"
-                    href={friend.link}
+                    href={withRef(friend.link)}
                     target="_blank"
-                    rel="noopener noreferrer nofollow"
+                    rel="noopener"
                     tabindex="-1"
                     aria-hidden="true"
                   >
@@ -85,7 +86,6 @@ const isRoot = !data.path || data.path === '/';
                         loading="lazy"
                         width="64"
                         height="64"
-                        referrerpolicy="no-referrer"
                       />
                     ) : (
                       <span class="friend-avatar-fallback">{friend.title.slice(0, 1)}</span>
@@ -95,9 +95,9 @@ const isRoot = !data.path || data.path === '/';
                   <div class="friend-body">
                     <a
                       class="friend-title"
-                      href={friend.link}
+                      href={withRef(friend.link)}
                       target="_blank"
-                      rel="noopener noreferrer nofollow"
+                      rel="noopener"
                     >
                       <span class="friend-name">{friend.title}</span>
                       <svg
@@ -127,9 +127,9 @@ const isRoot = !data.path || data.path === '/';
                         {friend.posts.map((post) => (
                           <li>
                             <a
-                              href={post.link}
+                              href={withRef(post.link)}
                               target="_blank"
-                              rel="noopener noreferrer nofollow"
+                              rel="noopener"
                               title={post.title}
                             >
                               <svg

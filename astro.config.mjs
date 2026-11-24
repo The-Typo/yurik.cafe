@@ -3,6 +3,7 @@ import tailwindcss from '@tailwindcss/vite';
 import swup from '@swup/astro';
 import contentAssets from './src/plugins/content-assets.mjs';
 import responsiveImages from './src/plugins/responsive-images.mjs';
+import contentRefLinks from './src/plugins/content-ref-links.mjs';
 
 // https://astro.build/config
 export default defineConfig({
@@ -18,6 +19,8 @@ export default defineConfig({
   integrations: [
     // 正文图片按显示宽度生成 srcset（需在资源落盘后跑）
     responsiveImages(),
+    // 正文外链加 ?ref=，与友链、页脚用同一套规则
+    contentRefLinks({ site: 'https://yurik.cafe' }),
     swup({
       // 不用内置主题，动画全部写在 global.css 里
       theme: false,

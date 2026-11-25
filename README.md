@@ -145,8 +145,30 @@ after uncommenting is ignored.
 
 ## Deploying
 
-The build is a folder of static files. Any static host works — Netlify,
-Vercel, Cloudflare Pages, or a plain nginx directory.
+`.github/workflows/Render-und-Push.yml` builds on every push to `main` and
+at 00:00 UTC+8, then rsyncs `dist` to the server behind Cloudflare. It needs
+these repository secrets:
+
+| Secret | Purpose |
+| --- | --- |
+| `PRIVATE_KEY` | SSH key for the server |
+| `REMOTE_HOST`, `REMOTE_USER`, `REMOTE_PORT`, `SITE_ADDR` | Where to copy the files |
+| `CLOUDFLARE_API_TOKEN` | Purges the edge cache after a deploy |
+| `CLOUDFLARE_ZONE_ID` | The zone the cache belongs to |
+| `CLOUDFLARE_SITE_URL` | Base URL, e.g. `https://yurik.cafe` |
+
+The rsync call passes `-c` so it compares content rather than timestamps;
+Astro rewrites the whole of `dist` each build, so every file has a fresh
+mtime and the default check would upload all of it.
+
+Pages carry `s-maxage=3600`, so without a purge a visitor can see the previous
+deploy for up to an hour. `scripts/purge-cloudflare.mjs` clears the entry
+points plus the timeline's JSON chunks after the upload. It exits successfully
+when the Cloudflare variables are absent, so the deploy still works on a fork
+or before the secrets are set. Set the repository variable
+`CLOUDFLARE_ENABLED` to `false` to skip the step entirely.
+
+The token needs `Zone → Cache Purge` for this zone. Nothing else.
 
 ## Licence
 

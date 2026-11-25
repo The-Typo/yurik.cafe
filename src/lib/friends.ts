@@ -227,14 +227,18 @@ export async function resolveFeed(friend: Friend): Promise<ResolvedFeed | null> 
   return null;
 }
 
-/** 取友链各自的最近文章；dynamic 与 none 模式不在构建期抓取 */
+/**
+ * 取友链各自的最近文章。
+ *
+ * build 与 dynamic 都在构建期抓一次：前者就是最终内容，后者作为首屏内容，
+ * 之后由浏览器按间隔刷新。none 从一开始就不显示列表。
+ */
 export async function getFriendsWithPosts(limit = 3): Promise<FriendWithPosts[]> {
   const friends = await getFriends();
 
   return Promise.all(
     friends.map(async (friend) => {
-      // 交给浏览器拉的，构建期留空
-      if (friend.mode !== 'build') return { ...friend, posts: [] };
+      if (friend.mode === 'none') return { ...friend, posts: [] };
 
       const resolved = await resolveFeed(friend);
       if (!resolved) return { ...friend, posts: [] };

@@ -73,8 +73,8 @@ export async function getTimeline(options: TimelineOptions = {}): Promise<Timeli
     const friends = await getFriendsWithPosts(friendPosts);
 
     for (const friend of friends) {
-      // dynamic 模式构建期没有文章，跳过
-      if (friend.mode !== 'build') continue;
+      // none 模式没有文章可放
+      if (friend.mode === 'none') continue;
 
       const origin = {
         title: friend.title || site.name,

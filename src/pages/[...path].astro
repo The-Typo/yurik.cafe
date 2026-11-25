@@ -85,7 +85,7 @@ const isRoot = !data.path || data.path === '/';
                   class="friend-card"
                   data-friend-mode={friend.mode}
                   data-feed={friend.mode === 'dynamic' ? (friend.feed ?? '') : undefined}
-                  data-friend-feed={friend.liveFeed}
+                  data-friend-feed={friend.mode === 'dynamic' ? friend.liveFeed : undefined}
                   data-link={friend.link}
                   data-limit={data.friends?.postCount ?? 3}
                 >
@@ -141,12 +141,12 @@ const isRoot = !data.path || data.path === '/';
                     ) : null}
 
                     {/*
-                      构建期就把文章写进 HTML；dynamic 的那条由脚本补。
+                      构建期把文章写进 HTML；dynamic 之后由浏览器刷新这一份，
+                      所以首屏和禁用 JS 时都有内容。
                     */}
                     {friend.mode === 'none' ? null : (
                       <ul class="friend-posts" data-friend-posts>
-                        {friend.mode === 'build'
-                          ? friend.posts.map((post) => (
+                        {friend.posts.map((post) => (
                               <li>
                                 <a
                                   href={withRef(post.link)}
@@ -169,8 +169,7 @@ const isRoot = !data.path || data.path === '/';
                                   <span>{post.title}</span>
                                 </a>
                               </li>
-                            ))
-                          : null}
+                            ))}
                       </ul>
                     )}
                   </div>
@@ -230,7 +229,6 @@ const isRoot = !data.path || data.path === '/';
 
 <script>
   import '../scripts/friends-dynamic';
-  import '../scripts/friends-hydrate';
 </script>
 
 <style>

@@ -1,11 +1,12 @@
 /**
- * 友链文章的前端拉取（dynamic 模式）。
+ * 友链文章的客户端刷新（dynamic 模式）。
  *
- * 静态渲染的友链在 HTML 里已有文章列表；标记为 dynamic 的留空，
- * 由这里按站点配置的间隔去拉。拉取失败就保持空白，不影响页面其它部分。
+ * dynamic 的卡片在构建期已经写好一份文章列表，这里负责让它跟上：
+ * 打开页面时取一次，之后按 refreshMinutes 再取，
+ * 只有内容真的变了才替换 DOM，所以不会闪。
  *
- * 浏览器直接取订阅需要对方站点允许跨域（Access-Control-Allow-Origin），
- * 否则会被 CORS 拦下 —— 这种情况下只是安静地不显示，不报错。
+ * 只有构建期探测到对方允许跨域（有 data-friend-feed）才会走到这里；
+ * 其余卡片纯静态，脚本不碰，也不会留下跨域报错。
  */
 import { extractFeedPosts } from '../lib/feed-parser';
 import { appendRef } from '../lib/ref-link';
@@ -14,6 +15,11 @@ interface FriendConfig {
   refreshMinutes: number;
   retries: number;
   timeoutMs: number;
+}
+
+interface Post {
+  title: string;
+  link: string;
 }
 
 /** 带超时的请求 */
@@ -42,20 +48,33 @@ async function fetchWithTimeout(url: string, ms: number): Promise<string | null>
   }
 }
 
-/** 拉一个友链的订阅，失败按配置重试 */
-async function loadFriend(
+/** 现有列表是否已经就是这批文章 */
+function samePosts(list: Element | null, posts: Post[], ref: string): boolean {
+  if (!list) return false;
+
+  const links = [...list.querySelectorAll<HTMLAnchorElement>('a')];
+  if (links.length !== posts.length) return false;
+
+  return links.every(
+    (a, i) => a.title === posts[i].title && a.getAttribute('href') === appendRef(posts[i].link, ref)
+  );
+}
+
+/** 刷新一个卡片的文章列表 */
+async function refreshCard(
   card: HTMLElement,
   tpl: HTMLTemplateElement,
   cfg: FriendConfig,
   ref: string
 ): Promise<void> {
-  const feed = card.dataset.feed;
+  const feed = card.dataset.friendFeed;
   const base = card.dataset.link ?? '';
   const limit = Number(card.dataset.limit ?? '3');
   if (!feed) return;
 
+  const body = card.querySelector('.friend-body');
   const list = card.querySelector<HTMLElement>('[data-friend-posts]');
-  if (!list) return;
+  if (!body) return;
 
   const attempts = Math.max(1, cfg.retries + 1);
 
@@ -66,7 +85,13 @@ async function loadFriend(
     const posts = extractFeedPosts(xml, base, limit);
     if (posts.length === 0) return;
 
-    // 从服务端渲染的模板克隆，节点带着 scoped 属性，样式与 build 模式一致
+    // 内容没变就别动 DOM
+    if (samePosts(list, posts, ref)) {
+      card.dataset.loaded = 'true';
+      return;
+    }
+
+    // 节点从服务端模板克隆，带着 scoped 属性，样式与首屏一致
     const items: HTMLElement[] = [];
     for (const post of posts) {
       const li = tpl.content.firstElementChild?.cloneNode(true) as HTMLElement | undefined;
@@ -83,13 +108,23 @@ async function loadFriend(
     }
 
     if (items.length === 0) return;
-    list.replaceChildren(...items);
+
+    if (list) {
+      list.replaceChildren(...items);
+    } else {
+      const created = document.createElement('ul');
+      created.className = 'friend-posts';
+      created.dataset.friendPosts = '';
+      created.append(...items);
+      body.append(created);
+    }
+
     card.dataset.loaded = 'true';
     return;
   }
 }
 
-/** 拉取所有 dynamic 友链 */
+/** 刷新所有可水合的 dynamic 卡片 */
 async function loadAll(): Promise<void> {
   const root = document.querySelector<HTMLElement>('[data-friends-root]');
   const grid = document.querySelector<HTMLElement>('.friend-grid');
@@ -103,10 +138,12 @@ async function loadAll(): Promise<void> {
   };
   const ref = grid.dataset.friendRef ?? '';
 
-  const cards = [...grid.querySelectorAll<HTMLElement>('[data-friend-mode="dynamic"]')];
+  const cards = [
+    ...grid.querySelectorAll<HTMLElement>('[data-friend-mode="dynamic"][data-friend-feed]'),
+  ];
   if (cards.length === 0) return;
 
-  await Promise.all(cards.map((card) => loadFriend(card, tpl, cfg, ref)));
+  await Promise.all(cards.map((card) => refreshCard(card, tpl, cfg, ref)));
 }
 
 let timer: number | null = null;

@@ -106,6 +106,15 @@ export default {
     page: 'Page',
   },
 
+  timeline: {
+    eyebrow: 'Timeline',
+    self: 'This site',
+    empty: 'No entries yet.',
+    loadMore: 'Load more',
+    loading: 'Loading…',
+    loadFailed: 'Could not load more.',
+  },
+
   // —— 404 ——
   notFound: {
     title: 'Page not found',

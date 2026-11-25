@@ -8,6 +8,7 @@ import { site, friends as friendsConfig, navDescription } from '../lib/site';
 import { formatDate } from '../lib/format';
 import { getFriendsWithPosts } from '../lib/friends';
 import { withRef } from '../lib/links';
+import Timeline from '../components/Timeline.astro';
 
 export const getStaticPaths = (async () => {
   // getStaticPaths 被提升，辅助函数须定义在内部
@@ -200,9 +201,25 @@ const isRoot = !data.path || data.path === '/';
         ) : null
       }
 
-      <div class="prose-newsroom mt-10">
-        <Content />
-      </div>
+      {
+        data.timeline?.show ? (
+          <Timeline
+            limit={data.timeline?.limit ?? 50}
+            includeSelf={data.timeline?.includeSelf ?? true}
+            includeFriends={data.timeline?.includeFriends ?? true}
+            friendPosts={data.timeline?.friendPosts ?? 3}
+            pageSize={data.timeline?.pageSize ?? 10}
+          />
+        ) : null
+      }
+
+      {
+        entry.body?.trim() ? (
+          <div class="prose-newsroom mt-10">
+            <Content />
+          </div>
+        ) : null
+      }
     </div>
   </section>
 </BaseLayout>

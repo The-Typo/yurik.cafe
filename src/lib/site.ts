@@ -68,6 +68,7 @@ export const site = {
     { label: '归档', href: '/archive/', description: '按时间翻文章的地方，想找旧教程可以从这里慢慢往回看。' },
     { label: '标签', href: '/tags/', description: '按标签整理文章，技术、设备、游戏和日常内容都可以从这里分类浏览。' },
     { label: '友链', href: '/friends/', description: '这里放着一些朋友的博客和个人站点。' },
+    { label: '朋友圈', href: '/timeline/', description: '本站与友链的文章按时间排成一条流。' },
     { label: '关于', href: '/about/', description: '关于景蓝 / Yurik 的个人介绍、设备清单与版权说明。' },
     { label: '开往', href: 'https://www.travellings.cn/go.html' },
   ],

@@ -1,0 +1,371 @@
+---
+/** 时间轴：首屏静态渲染，其余按月分块按需取 */
+import { t } from '../i18n';
+import { formatDate } from '../lib/format';
+import { withRef } from '../lib/links';
+import {
+  getTimeline,
+  groupByMonth,
+  chunkGroups,
+  splitChunks,
+  chunksToGroups,
+  monthLabel,
+  thumbFor,
+} from '../lib/timeline';
+
+interface Props {
+  limit?: number;
+  includeSelf?: boolean;
+  includeFriends?: boolean;
+  friendPosts?: number;
+  /** 每块多少条；块不切开月份，所以首屏可能略多 */
+  pageSize?: number;
+}
+
+const {
+  limit = 50,
+  includeSelf = true,
+  includeFriends = true,
+  friendPosts = 3,
+  pageSize = 10,
+} = Astro.props;
+
+const entries = await getTimeline({ limit, includeSelf, includeFriends, friendPosts });
+const chunks = chunkGroups(groupByMonth(entries), pageSize);
+
+// 首屏凑够 pageSize 条，可能吃掉好几块；剩下的把名字交给脚本
+const { inline, rest } = splitChunks(chunks, pageSize);
+const groups = chunksToGroups(inline);
+
+// 每块带条目数，脚本才能一次点击凑够一屏
+const restKeys = rest.map((chunk) => `${chunk.key}:${chunk.items.length}`).join(',');
+---
+
+{
+  groups.length ? (
+    <div
+      class="timeline"
+      data-timeline
+      data-chunks={restKeys}
+      data-page-size={pageSize}
+      data-self-label={t.timeline.self}
+    >
+      <div data-timeline-groups>
+        {groups.map((group) => (
+          <section class="tl-group" data-month-key={group.key}>
+            <h3 class="tl-heading">{monthLabel(group.year, group.month)}</h3>
+
+            <ol class="tl-list">
+              {group.items.map((item) => (
+              <li
+                class:list={['tl-item', `tl-item--${item.kind}`]}
+                data-timeline-month={group.key}
+              >
+                <span class="tl-dot" aria-hidden="true" />
+
+                <div class="tl-card">
+                  {thumbFor(item) ? (
+                    <a
+                      class="tl-thumb"
+                      href={withRef(item.link)}
+                      target={item.kind === 'friend' ? '_blank' : undefined}
+                      rel={item.kind === 'friend' ? 'noopener' : undefined}
+                      tabindex="-1"
+                      aria-hidden="true"
+                    >
+                      <img src={thumbFor(item)} alt="" loading="lazy" width="56" height="56" />
+                    </a>
+                  ) : (
+                    <span class="tl-thumb tl-thumb--empty" aria-hidden="true" />
+                  )}
+
+                  <div class="tl-body">
+                    <p class="tl-meta">
+                      {item.kind === 'self' ? (
+                        <span class="tl-badge tl-badge--self">{t.timeline.self}</span>
+                      ) : (
+                        <a
+                          class="tl-badge tl-badge--friend"
+                          href={withRef(item.site?.link ?? '')}
+                          target="_blank"
+                          rel="noopener"
+                        >
+                          {item.site?.title}
+                        </a>
+                      )}
+                      <time datetime={item.date.toISOString()}>{formatDate(item.date)}</time>
+                    </p>
+
+                    <a
+                      class="tl-title"
+                      href={withRef(item.link)}
+                      target={item.kind === 'friend' ? '_blank' : undefined}
+                      rel={item.kind === 'friend' ? 'noopener' : undefined}
+                    >
+                      {item.title}
+                    </a>
+                  </div>
+                </div>
+              </li>
+              ))}
+            </ol>
+          </section>
+        ))}
+      </div>
+
+      {restKeys.length ? (
+        <div class="tl-more">
+          <button
+            type="button"
+            class="tl-more-btn"
+            data-timeline-more
+            data-loading-label={t.timeline.loading}
+            data-failed-label={t.timeline.loadFailed}
+          >
+            {t.timeline.loadMore}
+          </button>
+          <p class="tl-more-note" data-timeline-note hidden></p>
+        </div>
+      ) : null}
+
+      {/*
+        后续分块由脚本克隆这里的节点生成，样式才会跟首屏一致
+        （scoped CSS 编译成带 data-astro-cid 的选择器）。
+      */}
+      <template data-timeline-group-tpl>
+        <section class="tl-group">
+          <h3 class="tl-heading" />
+          <ol class="tl-list" />
+        </section>
+      </template>
+
+      <template data-timeline-item-tpl>
+        <li class="tl-item">
+          <span class="tl-dot" aria-hidden="true" />
+          <div class="tl-card">
+            <a class="tl-thumb" tabindex="-1" aria-hidden="true">
+              <img src="" alt="" loading="lazy" width="56" height="56" />
+            </a>
+            <div class="tl-body">
+              <p class="tl-meta">
+                <span class="tl-badge" />
+                <time datetime="" />
+              </p>
+              <a class="tl-title" />
+            </div>
+          </div>
+        </li>
+      </template>
+    </div>
+  ) : (
+    <p class="text-[15px] text-graphite">{t.timeline.empty}</p>
+  )
+}
+
+<script>
+  import '../scripts/timeline-more';
+</script>
+
+<style>
+  .timeline {
+    margin-top: 32px;
+  }
+
+  .tl-group + .tl-group {
+    margin-top: 40px;
+  }
+
+  .tl-heading {
+    margin: 0 0 16px;
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--color-slate);
+  }
+
+  /* 竖线画在列表左侧，条目用负边距压上去 */
+  .tl-list {
+    position: relative;
+    margin: 0;
+    padding: 0 0 0 28px;
+    list-style: none;
+  }
+
+  .tl-list::before {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 6px;
+    bottom: 6px;
+    width: 1px;
+    background-color: var(--color-hairline);
+  }
+
+  .tl-item {
+    position: relative;
+  }
+
+  .tl-item + .tl-item {
+    margin-top: 14px;
+  }
+
+  /* 圆点压在竖线上 */
+  .tl-dot {
+    position: absolute;
+    left: -26px;
+    top: 18px;
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background-color: var(--color-canvas);
+    border: 1.5px solid var(--color-hairline);
+  }
+
+  .tl-item--self .tl-dot {
+    border-color: var(--color-link);
+    background-color: var(--color-link);
+  }
+
+  .tl-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px;
+    border: 1px solid var(--color-hairline);
+    border-radius: 12px;
+    background-color: var(--color-canvas);
+    transition:
+      border-color 0.25s ease,
+      background-color 0.25s ease;
+  }
+
+  .tl-card:hover {
+    border-color: var(--color-link);
+    background-color: var(--color-fog);
+  }
+
+  .tl-thumb {
+    flex: none;
+    width: 56px;
+    height: 56px;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--color-chip);
+  }
+
+  .tl-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .tl-thumb--empty {
+    display: block;
+  }
+
+  .tl-body {
+    min-width: 0;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .tl-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--color-slate);
+  }
+
+  /* 来源标记：本站蓝、友链灰 */
+  .tl-badge {
+    flex: none;
+    padding: 1px 7px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 500;
+    text-decoration: none;
+    background-color: var(--color-chip);
+    color: var(--color-graphite);
+    transition: background-color 0.2s ease;
+  }
+
+  .tl-badge--self {
+    background-color: rgb(0 102 204 / 0.1);
+    color: var(--color-link);
+  }
+
+  .tl-badge--friend:hover {
+    background-color: var(--color-chip-hover);
+    color: var(--color-ink);
+  }
+
+  .tl-title {
+    font-size: 15px;
+    line-height: 1.45;
+    font-weight: 500;
+    color: var(--color-ink);
+    text-decoration: none;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    transition: color 0.2s ease;
+  }
+
+  .tl-card:hover .tl-title {
+    color: var(--color-link);
+  }
+
+  .tl-more {
+    margin-top: 24px;
+    padding-left: 28px;
+    text-align: center;
+  }
+
+  .tl-more-btn {
+    padding: 9px 22px;
+    border: 1px solid var(--color-hairline);
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-ink);
+    background-color: var(--color-canvas);
+    cursor: pointer;
+    transition:
+      border-color 0.2s ease,
+      background-color 0.2s ease;
+  }
+
+  .tl-more-btn:hover:not(:disabled) {
+    border-color: var(--color-link);
+    color: var(--color-link);
+    background-color: var(--color-fog);
+  }
+
+  .tl-more-btn:disabled {
+    cursor: default;
+    color: var(--color-slate);
+  }
+
+  .tl-more-note {
+    margin: 10px 0 0;
+    font-size: 12px;
+    color: var(--color-slate);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tl-card,
+    .tl-title,
+    .tl-badge,
+    .tl-more-btn {
+      transition-duration: 1ms;
+    }
+  }
+</style>

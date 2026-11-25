@@ -170,7 +170,7 @@ const isRoot = !data.path || data.path === '/';
                         </ul>
 
                         {friend.mode === 'dynamic' ? (
-                          <template data-friend-template>
+                          <template data-friend-template aria-hidden=true>
                             <li>
                               <a target="_blank" rel="noopener">
                                 <svg
@@ -292,8 +292,12 @@ const isRoot = !data.path || data.path === '/';
   }
 
   /* none 模式没有文章列表，补上同样的高度 */
+  /*
+    没有列表时补上列表占的那块：6px 上间距 + 58px 高度 = 64px。
+    body 是 flex + gap，padding 前还会多一个 2px 的 gap，一并算进来。
+  */
   .friend-card[data-friend-mode='none'] .friend-body {
-    padding-bottom: calc(3 * 1.5em + 8px);
+    padding-bottom: 66px;
   }
 
   .friend-title {
@@ -347,6 +351,11 @@ const isRoot = !data.path || data.path === '/';
   }
 
   /* 最近文章：固定高度，没有订阅的卡片不会因此变矮 */
+  /* 模板只作克隆源，不占布局 */
+  .friend-card :global(template) {
+    display: none;
+  }
+
   .friend-posts {
     margin: 6px 0 0;
     padding: 0;
@@ -354,8 +363,12 @@ const isRoot = !data.path || data.path === '/';
     display: flex;
     flex-direction: column;
     gap: 2px;
-    /* 固定 3 行，有无文章列表的卡片高度一致 */
-    min-height: calc(3 * 1.5em + 2 * 2px);
+    /*
+      固定 3 行，有无列表的卡片高度一致。
+      用 px 而不是 em：em 取的是这里继承的 17px 字号，
+      而每行实际由 a 的 12px / 1.5 决定（18px 高），两者对不上会多出空白。
+    */
+    min-height: calc(3 * 18px + 2 * 2px);
   }
 
   .friend-posts li {

@@ -61,6 +61,6 @@
     "link": "https://www.geedea.pro/",
     "avatar": "https://www.geedea.pro/favicon.svg",
     "feed": "https://www.geedea.pro/index.xml",
-    "mode": "build"
+    "mode": "none"
   }
 ]

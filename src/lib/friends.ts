@@ -1,6 +1,10 @@
 /** 友链数据与站点订阅解析 */
 import fs from 'node:fs';
 import path from 'node:path';
+import { extractFeedPosts, parseFeed, type FriendPost } from './feed-parser';
+import { site } from './site';
+
+export { parseFeed, type FriendPost };
 
 /** 文章列表的取法 */
 export type FriendMode = 'build' | 'dynamic' | 'none';
@@ -20,21 +24,22 @@ export interface Friend {
   mode: FriendMode;
 }
 
-export interface FriendPost {
-  title: string;
-  link: string;
-  /** 发布时间；feed 没给就留空 */
-  date?: Date;
-  /** 所属站点，时间轴用来区分来源 */
-  site?: {
-    title: string;
-    link: string;
-    avatar: string;
-  };
-}
-
 export interface FriendWithPosts extends Friend {
   posts: FriendPost[];
+  /**
+   * 允许本站跨源读取的订阅地址。
+   *
+   * 只有对方回了 Access-Control-Allow-Origin 才有值；有值说明浏览器
+   * 也能直接取，构建出来的静态列表可以随后续更新。
+   */
+  liveFeed?: string;
+}
+
+/** 抓到的订阅，附带对方是否允许浏览器跨源读取 */
+export interface ResolvedFeed {
+  url: string;
+  xml: string;
+  cors: boolean;
 }
 
 const DATA_DIR = path.resolve(process.cwd(), 'src/content/_data');
@@ -61,11 +66,20 @@ const FETCH_TIMEOUT = 20000;
 /** 失败后再试的次数；一次抖动不该让整站文章消失 */
 const FETCH_ATTEMPTS = 2;
 
+/** 本站 origin，用于判断对方是否允许我们跨源读取 */
+const SITE_ORIGIN = (() => {
+  try {
+    return new URL(site.url).origin;
+  } catch {
+    return site.url.replace(/\/+$/, '');
+  }
+})();
+
 /** 构建期同一地址只拉一次：页面和分页 JSON 会各算一遍时间轴 */
-const feedCache = new Map<string, string | null>();
+const feedCache = new Map<string, ResolvedFeed | null>();
 
 /** 正在进行的请求，避免并发时对同一地址重复下载 */
-const inflight = new Map<string, Promise<string | null>>();
+const inflight = new Map<string, Promise<ResolvedFeed | null>>();
 
 let cache: Friend[] | null = null;
 
@@ -108,13 +122,20 @@ export async function getFriends(): Promise<Friend[]> {
   }
 }
 
+/** 响应头是否允许本站浏览器跨源拉取 */
+export function allowsBrowserCors(allowOrigin: string | null, siteOrigin = SITE_ORIGIN): boolean {
+  if (!allowOrigin) return false;
+  const trimmed = allowOrigin.trim();
+  return trimmed === '*' || trimmed === siteOrigin;
+}
+
 /**
  * 取一次。
  *
  * 明确拿不到东西（非 2xx、回的是 HTML）返回 null，不必重试；
  * 网络错误和超时则抛出去，交给上层决定是否再试。
  */
-async function fetchOnce(url: string): Promise<string | null> {
+async function fetchOnce(url: string): Promise<ResolvedFeed | null> {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), FETCH_TIMEOUT);
 
@@ -122,8 +143,10 @@ async function fetchOnce(url: string): Promise<string | null> {
     const res = await fetch(url, {
       signal: controller.signal,
       headers: {
+        // 带 Origin 才能看出对方愿不愿意让浏览器跨源读取
         'user-agent': 'Mozilla/5.0 (compatible; BylineBot/1.0)',
         accept: 'application/atom+xml, application/rss+xml, application/xml, text/xml, */*',
+        origin: SITE_ORIGIN,
       },
       redirect: 'follow',
     });
@@ -135,14 +158,16 @@ async function fetchOnce(url: string): Promise<string | null> {
     const type = res.headers.get('content-type') ?? '';
     if (/text\/html/i.test(type)) return null;
 
-    return await res.text();
+    const xml = await res.text();
+    const cors = allowsBrowserCors(res.headers.get('access-control-allow-origin'));
+    return { url: res.url || url, xml, cors };
   } finally {
     clearTimeout(timer);
   }
 }
 
 /** 带超时与重试的抓取，全部失败才返回 null */
-async function tryFetch(url: string): Promise<string | null> {
+async function tryFetch(url: string): Promise<ResolvedFeed | null> {
   if (feedCache.has(url)) return feedCache.get(url) ?? null;
 
   // 并发调用共用同一个请求
@@ -152,11 +177,11 @@ async function tryFetch(url: string): Promise<string | null> {
   const task = (async () => {
     for (let attempt = 1; attempt <= FETCH_ATTEMPTS; attempt++) {
       try {
-        const body = await fetchOnce(url);
+        const resolved = await fetchOnce(url);
         // 明确的失败（404 / HTML）不重试
-        if (body !== null) {
-          feedCache.set(url, body);
-          return body;
+        if (resolved !== null) {
+          feedCache.set(url, resolved);
+          return resolved;
         }
         return null;
       } catch (error) {
@@ -183,131 +208,20 @@ async function tryFetch(url: string): Promise<string | null> {
   }
 }
 
-/** 取标签内的纯文本 */
-function pick(block: string, tag: string): string {
-  const m = block.match(new RegExp(`<${tag}\\b[^>]*>([\\s\\S]*?)</${tag}>`, 'i'));
-  if (!m) return '';
-
-  return decodeEntities(
-    m[1]
-      .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1')
-      .replace(/<[^>]+>/g, '')
-      .trim()
-  );
-}
-
-/** 解 HTML 实体；数字实体也要处理，标题里常见 &#038; &#124; */
-function decodeEntities(text: string): string {
-  const named: Record<string, string> = {
-    amp: '&',
-    lt: '<',
-    gt: '>',
-    quot: '"',
-    apos: "'",
-    nbsp: ' ',
-    hellip: '…',
-    mdash: '—',
-    ndash: '–',
-    lsquo: '‘',
-    rsquo: '’',
-    ldquo: '“',
-    rdquo: '”',
-  };
-
-  return text.replace(/&(#x?[0-9a-f]+|[a-z]+);/gi, (whole, body: string) => {
-    if (body.startsWith('#')) {
-      const code = body[1].toLowerCase() === 'x'
-        ? parseInt(body.slice(2), 16)
-        : parseInt(body.slice(1), 10);
-      return Number.isFinite(code) ? String.fromCodePoint(code) : whole;
-    }
-
-    return named[body.toLowerCase()] ?? whole;
-  });
-}
-
-/** Atom 的 link 带 rel，优先 alternate */
-function atomLink(block: string): string {
-  let fallback = '';
-
-  for (const [, attrs] of block.matchAll(/<link\b([^>]*)\/?>/gi)) {
-    const href = attrs.match(/href="([^"]+)"/i)?.[1];
-    if (!href) continue;
-
-    const rel = attrs.match(/rel="([^"]+)"/i)?.[1] ?? 'alternate';
-    if (rel === 'alternate') return href;
-    if (!fallback) fallback = href;
-  }
-
-  return fallback;
-}
-
-/**
- * 解析 feed 里的时间。
- *
- * Atom 用 ISO 8601，RSS 用 RFC 822，两种 Date 都能认。少数站点写
- * "2026-03-10 16:17:46" 这种缺时区的格式，浏览器会按本地时区理解，
- * 这里补成 UTC 以免不同机器构建出不同结果。
- */
-function parseDate(raw: string | undefined): Date | undefined {
-  const text = raw?.trim();
-  if (!text) return undefined;
-
-  // 先处理缺时区的写法：Date 会按本地时区理解它，构建机不同就得出不同时刻
-  const naive = text.match(/^(\d{4}-\d{2}-\d{2})[ T](\d{2}:\d{2}(?::\d{2})?)$/);
-  if (naive) {
-    const fixed = new Date(`${naive[1]}T${naive[2]}Z`);
-    return Number.isNaN(fixed.getTime()) ? undefined : fixed;
-  }
-
-  const direct = new Date(text);
-  return Number.isNaN(direct.getTime()) ? undefined : direct;
-}
-
-/** 从 Atom 或 RSS 文本里抽最近条目 */
-export function parseFeed(xml: string, limit = 3): FriendPost[] {
-  const posts: FriendPost[] = [];
-
-  for (const m of xml.matchAll(/<entry\b[^>]*>([\s\S]*?)<\/entry>/gi)) {
-    const title = pick(m[1], 'title');
-    const link = atomLink(m[1]);
-    if (!title || !link) continue;
-
-    // Atom 优先 published，没有再退回 updated
-    const date = parseDate(pick(m[1], 'published') || pick(m[1], 'updated'));
-    posts.push({ title, link, date });
-    if (posts.length >= limit) return posts;
-  }
-
-  if (posts.length) return posts;
-
-  for (const m of xml.matchAll(/<item\b[^>]*>([\s\S]*?)<\/item>/gi)) {
-    const title = pick(m[1], 'title');
-    const link = pick(m[1], 'link') || m[1].match(/<link\b[^>]*href="([^"]+)"/i)?.[1] || '';
-    if (!title || !link) continue;
-
-    const date = parseDate(pick(m[1], 'pubDate') || pick(m[1], 'date') || pick(m[1], 'dc:date'));
-    posts.push({ title, link, date });
-    if (posts.length >= limit) return posts;
-  }
-
-  return posts;
-}
-
 /** 找订阅地址：先看配置，再按常见路径探测 */
-export async function resolveFeed(friend: Friend): Promise<string | null> {
-  const looksLikeFeed = (xml: string | null): xml is string =>
-    !!xml && /<(feed|rss)\b/i.test(xml);
+export async function resolveFeed(friend: Friend): Promise<ResolvedFeed | null> {
+  const looksLikeFeed = (fetched: ResolvedFeed | null): fetched is ResolvedFeed =>
+    !!fetched && /<(feed|rss)\b/i.test(fetched.xml);
 
   if (friend.feed) {
-    const xml = await tryFetch(friend.feed);
-    return looksLikeFeed(xml) ? xml : null;
+    const fetched = await tryFetch(friend.feed);
+    return looksLikeFeed(fetched) ? fetched : null;
   }
 
   const base = friend.link.replace(/\/+$/, '');
   for (const guess of FEED_GUESSES) {
-    const xml = await tryFetch(base + guess);
-    if (looksLikeFeed(xml)) return xml;
+    const fetched = await tryFetch(base + guess);
+    if (looksLikeFeed(fetched)) return fetched;
   }
 
   return null;
@@ -322,18 +236,17 @@ export async function getFriendsWithPosts(limit = 3): Promise<FriendWithPosts[]>
       // 交给浏览器拉的，构建期留空
       if (friend.mode !== 'build') return { ...friend, posts: [] };
 
-      const xml = await resolveFeed(friend);
-      if (!xml) return { ...friend, posts: [] };
+      const resolved = await resolveFeed(friend);
+      if (!resolved) return { ...friend, posts: [] };
 
-      const posts = parseFeed(xml, limit).map((post) => ({
-        ...post,
-        // 相对链接补成绝对
-        link: /^https?:/i.test(post.link)
-          ? post.link
-          : friend.link.replace(/\/+$/, '') + (post.link.startsWith('/') ? '' : '/') + post.link,
-      }));
+      const posts = extractFeedPosts(resolved.xml, friend.link, limit);
 
-      return { ...friend, posts };
+      return {
+        ...friend,
+        posts,
+        // 对方允许跨源读取时，把地址交给前端做增量刷新
+        ...(resolved.cors ? { liveFeed: resolved.url } : {}),
+      };
     })
   );
 }

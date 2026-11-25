@@ -4,7 +4,7 @@ import { t } from '../i18n';
 import { getCollection, render } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { site, navDescription } from '../lib/site';
+import { site, friends as friendsConfig, navDescription } from '../lib/site';
 import { formatDate } from '../lib/format';
 import { getFriendsWithPosts } from '../lib/friends';
 import { withRef } from '../lib/links';
@@ -63,14 +63,26 @@ const isRoot = !data.path || data.path === '/';
 
       {
         friends.length ? (
-          <div class="mt-10">
+          <div
+            class="mt-10"
+            data-friends-root
+            data-refresh-minutes={friendsConfig.refreshMinutes}
+            data-retries={friendsConfig.retries}
+            data-timeout-ms={friendsConfig.timeoutMs}
+          >
             <h2 class="mb-4 text-[19px] font-semibold tracking-[0.01em] text-ink">
               {data.friends?.listTitle ?? 'Friends'}
             </h2>
 
             <ul class="friend-grid">
               {friends.map((friend) => (
-                <li class="friend-card">
+                <li
+                  class="friend-card"
+                  data-friend-mode={friend.mode}
+                  data-feed={friend.mode === 'dynamic' ? (friend.feed ?? '') : undefined}
+                  data-link={friend.link}
+                  data-limit={data.friends?.postCount ?? 3}
+                >
                   <a
                     class="friend-avatar"
                     href={withRef(friend.link)}
@@ -122,34 +134,64 @@ const isRoot = !data.path || data.path === '/';
                       </p>
                     ) : null}
 
-                    {friend.posts.length ? (
-                      <ul class="friend-posts">
-                        {friend.posts.map((post) => (
-                          <li>
-                            <a
-                              href={withRef(post.link)}
-                              target="_blank"
-                              rel="noopener"
-                              title={post.title}
-                            >
-                              <svg
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                aria-hidden="true"
-                              >
-                                <path d="M3 4m0 2a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-14a2 2 0 0 1-2-2z" />
-                                <path d="M7 8h10M7 12h10M7 16h10" />
-                              </svg>
-                              <span>{post.title}</span>
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    ) : null}
+                    {/*
+                      三种模式共用同一套结构。dynamic 的条目由脚本从 <template>
+                      clone 出来，这样节点带着服务端的 scoped 属性，样式不会跑偏。
+                    */}
+                    {friend.mode === 'none' ? null : (
+                      <>
+                        <ul class="friend-posts" data-friend-posts>
+                          {friend.mode === 'build'
+                            ? friend.posts.map((post) => (
+                                <li>
+                                  <a
+                                    href={withRef(post.link)}
+                                    target="_blank"
+                                    rel="noopener"
+                                    title={post.title}
+                                  >
+                                    <svg
+                                      viewBox="0 0 24 24"
+                                      fill="none"
+                                      stroke="currentColor"
+                                      stroke-width="2"
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                      aria-hidden="true"
+                                    >
+                                      <path d="M3 4m0 2a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-14a2 2 0 0 1-2-2z" />
+                                      <path d="M7 8h10M7 12h10M7 16h10" />
+                                    </svg>
+                                    <span>{post.title}</span>
+                                  </a>
+                                </li>
+                              ))
+                            : null}
+                        </ul>
+
+                        {friend.mode === 'dynamic' ? (
+                          <template data-friend-template>
+                            <li>
+                              <a target="_blank" rel="noopener">
+                                <svg
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  aria-hidden="true"
+                                >
+                                  <path d="M3 4m0 2a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-14a2 2 0 0 1-2-2z" />
+                                  <path d="M7 8h10M7 12h10M7 16h10" />
+                                </svg>
+                                <span />
+                              </a>
+                            </li>
+                          </template>
+                        ) : null}
+                      </>
+                    )}
                   </div>
                 </li>
               ))}
@@ -165,11 +207,17 @@ const isRoot = !data.path || data.path === '/';
   </section>
 </BaseLayout>
 
+<script>
+  import '../scripts/friends-dynamic';
+</script>
+
 <style>
   .friend-grid {
     display: grid;
     gap: 12px;
     grid-template-columns: minmax(0, 1fr);
+    /* 每张卡片按自己的内容高度排，不互相拉伸 */
+    align-items: start;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -203,10 +251,6 @@ const isRoot = !data.path || data.path === '/';
     box-shadow: 0 8px 24px rgb(0 0 0 / 0.06);
   }
 
-  /* 没有订阅的卡片不渲染文章列表，靠这个保持与有列表的等高 */
-  .friend-card {
-    min-height: 131px;
-  }
 
   .friend-avatar {
     flex: 0 0 auto;
@@ -245,6 +289,11 @@ const isRoot = !data.path || data.path === '/';
     display: flex;
     flex-direction: column;
     gap: 2px;
+  }
+
+  /* none 模式没有文章列表，补上同样的高度 */
+  .friend-card[data-friend-mode='none'] .friend-body {
+    padding-bottom: calc(3 * 1.5em + 8px);
   }
 
   .friend-title {
@@ -305,6 +354,8 @@ const isRoot = !data.path || data.path === '/';
     display: flex;
     flex-direction: column;
     gap: 2px;
+    /* 固定 3 行，有无文章列表的卡片高度一致 */
+    min-height: calc(3 * 1.5em + 2 * 2px);
   }
 
   .friend-posts li {

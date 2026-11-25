@@ -155,6 +155,19 @@ export const gallery = {
 } as const;
 
 /** 「最新文章」区块 */
+/** 友链 */
+export const friends = {
+  /**
+   * mode 为 dynamic 的友链，浏览器多久重新拉一次订阅（分钟）。
+   * 设为 0 则只在页面加载时拉一次。
+   */
+  refreshMinutes: 30,
+  /** 前端拉取失败时最多重试几次 */
+  retries: 1,
+  /** 单次请求超时（毫秒） */
+  timeoutMs: 8000,
+} as const;
+
 export const home = {
   /**
    * 展示几篇。

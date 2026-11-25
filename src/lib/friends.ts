@@ -2,6 +2,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
+/** 文章列表的取法 */
+export type FriendMode = 'build' | 'dynamic' | 'none';
+
 export interface Friend {
   title: string;
   description: string;
@@ -9,6 +12,12 @@ export interface Friend {
   avatar: string;
   /** 订阅地址；留空则按常见路径探测 */
   feed?: string;
+  /**
+   * build   构建时抓取，写进 HTML（默认）
+   * dynamic 访问时由浏览器拉取，按间隔刷新
+   * none    不显示文章列表
+   */
+  mode: FriendMode;
 }
 
 export interface FriendPost {
@@ -21,6 +30,14 @@ export interface FriendWithPosts extends Friend {
 }
 
 const DATA_DIR = path.resolve(process.cwd(), 'src/content/_data');
+
+/** 把配置值收成三个合法值之一 */
+function normalizeMode(value: unknown): FriendMode {
+  const v = String(value ?? '').trim().toLowerCase();
+  if (v === 'dynamic') return 'dynamic';
+  if (v === 'none' || v === 'off') return 'none';
+  return 'build';
+}
 
 /** 站点没写 feed 时按这个顺序试 */
 const FEED_GUESSES = ['/atom.xml', '/rss.xml', '/feed.xml', '/feed', '/index.xml', '/rss'];
@@ -56,6 +73,7 @@ export async function getFriends(): Promise<Friend[]> {
         link: String(item.link ?? '').trim(),
         avatar: String(item.avatar ?? '').trim(),
         feed: String(item.feed ?? '').trim() || undefined,
+        mode: normalizeMode(item.mode),
       }))
       .filter((item) => item.title && item.link);
 
@@ -197,12 +215,15 @@ export async function resolveFeed(friend: Friend): Promise<string | null> {
   return null;
 }
 
-/** 取友链各自的最近文章；没有订阅的站点留空 */
+/** 取友链各自的最近文章；dynamic 与 none 模式不在构建期抓取 */
 export async function getFriendsWithPosts(limit = 3): Promise<FriendWithPosts[]> {
   const friends = await getFriends();
 
   return Promise.all(
     friends.map(async (friend) => {
+      // 交给浏览器拉的，构建期留空
+      if (friend.mode !== 'build') return { ...friend, posts: [] };
+
       const xml = await resolveFeed(friend);
       if (!xml) return { ...friend, posts: [] };
 

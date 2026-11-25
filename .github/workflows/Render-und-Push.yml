@@ -46,7 +46,9 @@ jobs:
         uses: easingthemes/ssh-deploy@main
         env:
           SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
-          ARGS: "-rltgoDzvO --delete"
+          # -c 用内容校验和决定是否传输：构建会重写整个 dist，
+          # 所有文件的 mtime 都是新的，不加 -c 每次都会全量上传。
+          ARGS: "-rltgoDzvOc --delete"
           EXCLUDE: /.git/, /.github/, /README.md, /LICENSE, /html_files.txt
           SOURCE: "dist"
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}

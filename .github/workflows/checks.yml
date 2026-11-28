@@ -16,13 +16,25 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # 只改草稿不会影响产物，没必要再跑一遍构建；PR 上没有 before，照常构建。
+      - name: 判断是否只有草稿变动
+        id: draft
+        env:
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.event.after }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/draft-only.mjs
+
       - name: 安装 Bun
+        if: steps.draft.outputs.skip != 'true'
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
 
       - name: 安装依赖
+        if: steps.draft.outputs.skip != 'true'
         run: bun install --frozen-lockfile
 
       - name: 构建
+        if: steps.draft.outputs.skip != 'true'
         run: bun run build
